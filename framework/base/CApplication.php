@@ -87,7 +87,7 @@ abstract class CApplication extends CModule
 	/**
 	 * @var string the application name. Defaults to 'My Application'.
 	 */
-	public $name='My Application';
+	public $name='PlaVi-Soft';
 	/**
 	 * @var string the charset currently used for the application. Defaults to 'UTF-8'.
 	 */
@@ -96,7 +96,7 @@ abstract class CApplication extends CModule
 	 * @var string the language that the application is written in. This mainly refers to
 	 * the language that the messages and view files are in. Defaults to 'en_us' (US English).
 	 */
-	public $sourceLanguage='en_us';
+	public $sourceLanguage='es_es';
 
 	private $_id;
 	private $_basePath;
