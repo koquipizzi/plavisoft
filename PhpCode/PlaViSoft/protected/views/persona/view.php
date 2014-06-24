@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	//array('label'=>'List Persona','url'=>array('index')),
-	//array('label'=>'Create Persona','url'=>array('create')),
+		array('label'=>'Nueva Persona','url'=>array('create')),
 	//array('label'=>'Update Persona','url'=>array('update','id'=>$model->id)),
 	//array('label'=>'Delete Persona','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Administrar Persona','url'=>array('admin')),
@@ -36,8 +36,8 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
                             'value' => Yii::app()->dateFormatter->format("dd-MM-yyyy", strtotime('$data->FechaAlta')),
                     ),
         array(
-                            'name' => 'IngresosMensules',
-                            'value' => $model->getValoresNulos($model->IngresosMensules),
+                            'name' => 'IngresosMensuales',
+                            'value' => $model->getValoresNulos($model->IngresosMensuales),
                     ),
         array( 
                             'name' => 'tipo_persona_id',

@@ -15,7 +15,7 @@
 
 	<?php echo $form->textFieldRow($model,'Mail',array('class'=>'span5','maxlength'=>45)); ?>
 
-	<?php echo $form->textFieldRow($model,'IngresosMensules',array('class'=>'span5')); ?>
+	<?php echo $form->textFieldRow($model,'IngresosMensuales',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'CantHijos',array('class'=>'span5')); ?>
 

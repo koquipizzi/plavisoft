@@ -21,8 +21,12 @@ $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	<?php echo $form->textFieldRow($model,'DNI',array('class'=>'span5','maxlength'=>10)); ?>
 
 	<?php echo $form->textFieldRow($model,'Mail',array('class'=>'span5','maxlength'=>45, 'prepend'=>'@')); ?>
+	
+	<?php echo $form->textFieldRow($model,'Telefono',array('class'=>'span5','maxlength'=>45, 'prepend'=>'@')); ?>
+	
+	<?php echo $form->textFieldRow($model,'TelefonoCelular',array('class'=>'span5','maxlength'=>45, 'prepend'=>'@')); ?>
 
-	<?php echo $form->textFieldRow($model,'IngresosMensules',array('class'=>'span5', 'prepend'=>'$')); ?>
+	<?php echo $form->textFieldRow($model,'IngresosMensuales',array('class'=>'span5', 'prepend'=>'$')); ?>
 
 	<?php echo $form->textFieldRow($model,'CantHijos',array('class'=>'span5')); ?>
 
@@ -36,7 +40,12 @@ $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 			<?php echo $form->labelEx($model,'tipo_persona_id'); ?>
 		</div>
 		<div class="controls">
-		<?php	 echo CHtml::activeDropDownList($model,'tipo_persona_id', CHtml::listData(TipoPersona::model()->findAll(), 'id', 'Descripcion'), array('empty' => '--- Elegir Persona ---'))
+			
+		<?php	
+				if ($model->isNewRecord)				
+					echo CHtml::activeDropDownList($model,'tipo_persona_id', CHtml::listData(TipoPersona::model()->findAll(), 'id', 'Descripcion'), array('empty' => '--- Elegir Tipo ---'));
+				else {echo CHtml::activeDropDownList($model,'tipo_persona_id', CHtml::listData(TipoPersona::model()->findAll(), 'id', 'Descripcion'), array('empty' => '--- Elegir Tipo ---', 'selected'=>$model->tipo_persona_id));
+				}
 	 ?>	
 	 	</div>
 	 </div>
@@ -62,11 +71,17 @@ $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 
 <script>
 	$('#Persona_IdSocio').closest('.control-group').hide();
-	$('#Persona_tipo_persona_id').change(function() {debugger;
+	$('#Persona_tipo_persona_id').change(function() {
 		var a = $(this).closest('.control-group').next();
 		if (this.selectedIndex == 1)
 			$(a).show();
 		else $(a).hide();
 	});
 	
+	<?php 
+		if ($model->isNewRecord == FALSE)
+			{ ?>	<script>
+				$('#Persona_IdSocio').closest('.control-group').show();
+				</script>		
+	<?php	} ?>
 </script>

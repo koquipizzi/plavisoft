@@ -31,12 +31,11 @@ $('.search-form form').submit(function(){
 	  'columns'=>array(
 		'id',
 		'Apellido',
-		'Nombre',
-		'Domicilio',
+		'Nombre',	'Telefono',
+		'TelefonoCelular',
 		'DNI',
-		'Mail',
 		/*
-		'IngresosMensules',
+		'IngresosMensuales',
 		'CantHijos',
 		'FechaAlta',
 		'Borrado',

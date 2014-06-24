@@ -10,7 +10,9 @@
  * @property string $Domicilio
  * @property string $DNI
  * @property string $Mail
- * @property integer $IngresosMensules
+ * @property string $Telefono
+ * @property string $TelefonoCelular
+ * @property integer $IngresosMensuales
  * @property integer $CantHijos
  * @property string $FechaAlta
  * @property string $Borrado
@@ -41,9 +43,9 @@ class Persona extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('tipo_persona_id', 'required'),
-			array('IngresosMensules, CantHijos, IdSocio, tipo_persona_id', 'numerical', 'integerOnly'=>true),
+			array('IngresosMensuales, CantHijos, IdSocio, tipo_persona_id', 'numerical', 'integerOnly'=>true),
 			array('Apellido, Domicilio', 'length', 'max'=>100),
-			array('Nombre, Mail, Borrado', 'length', 'max'=>45),
+			array('Nombre, Mail, Borrado, Telefono, TelefonoCelular', 'length', 'max'=>45),
 			array('DNI', 'length', 'max'=>10),
 			array('Nota', 'length', 'max'=>255),
 			array('FechaAlta','default',
@@ -51,7 +53,7 @@ class Persona extends CActiveRecord
               'setOnEmpty'=>false,'on'=>'insert'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, Apellido, Nombre, Domicilio, DNI, Mail, IngresosMensules, CantHijos, FechaAlta, Borrado, Nota, IdSocio, tipo_persona_id', 'safe', 'on'=>'search'),
+			array('id, Apellido, Nombre, Domicilio, DNI, Mail, Telefono, TelefonoCelular, IngresosMensuales, CantHijos, FechaAlta, Borrado, Nota, IdSocio, tipo_persona_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -80,7 +82,9 @@ class Persona extends CActiveRecord
 			'Domicilio' => 'Domicilio',
 			'DNI' => 'Dni',
 			'Mail' => 'Mail',
-			'IngresosMensules' => 'Ingresos Mensules',
+			'Telefono' => 'Teléfono',
+			'TelefonoCelular' => 'Teléfono Celular',
+			'IngresosMensuales' => 'Ingresos Mensuales',
 			'CantHijos' => 'Cant Hijos',
 			'FechaAlta' => 'Fecha Alta',
 			'Borrado' => 'Borrado',
@@ -114,7 +118,9 @@ class Persona extends CActiveRecord
 		$criteria->compare('Domicilio',$this->Domicilio,true);
 		$criteria->compare('DNI',$this->DNI,true);
 		$criteria->compare('Mail',$this->Mail,true);
-		$criteria->compare('IngresosMensules',$this->IngresosMensules);
+		$criteria->compare('Telefono',$this->Telefono,true);
+		$criteria->compare('TelefonoCelular',$this->TelefonoCelular,true);
+		$criteria->compare('IngresosMensuales',$this->IngresosMensules);
 		$criteria->compare('CantHijos',$this->CantHijos);
 		$criteria->compare('FechaAlta',$this->FechaAlta,true);
 		$criteria->compare('Borrado',$this->Borrado,true);

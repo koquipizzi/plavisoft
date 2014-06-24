@@ -23,9 +23,17 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('Mail')); ?>:</b>
 	<?php echo CHtml::encode($data->Mail); ?>
 	<br />
+	
+	<b><?php echo CHtml::encode($data->getAttributeLabel('Telefono')); ?>:</b>
+	<?php echo CHtml::encode($data->Telefono); ?>
+	<br />
+	
+	<b><?php echo CHtml::encode($data->getAttributeLabel('TelefonoCelular')); ?>:</b>
+	<?php echo CHtml::encode($data->TelefonoCelular); ?>
+	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('IngresosMensules')); ?>:</b>
-	<?php echo CHtml::encode($data->IngresosMensules); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('IngresosMensuales')); ?>:</b>
+	<?php echo CHtml::encode($data->IngresosMensuales); ?>
 	<br />
 
 	<?php /*
