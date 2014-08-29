@@ -5,7 +5,7 @@
     'type'=>'list',
     'items'=>array(
         array('label'=>'PLAVISOFT - Entidades',  'active'=>true),
-        array('label'=>'Viviendas', 'icon'=>'home', 'url'=>'index.php?r=tipovivienda/admin'),
+        array('label'=>'Viviendas', 'icon'=>'home', 'url'=>'index.php?r=tipoVivienda/admin'),
         array('label'=>'Suscripciones', 'icon'=>'book', 'url'=>'index.php?r=suscripcion/admin'),
         //array('label'=>'ANOTHER LIST HEADER'),
         array('label'=>'Usuario', 'icon'=>'user', 'url'=>'index.php?r=persona/admin'),
