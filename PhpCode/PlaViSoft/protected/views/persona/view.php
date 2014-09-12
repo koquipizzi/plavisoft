@@ -35,15 +35,19 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
                             'name' => 'FechaAlta',
                             'value' => Yii::app()->dateFormatter->format("dd-MM-yyyy", strtotime('$data->FechaAlta')),
                     ),
-        array(
+                array(
                             'name' => 'IngresosMensuales',
                             'value' => $model->getValoresNulos($model->IngresosMensuales),
                     ),
-        array( 
+                array( 
                             'name' => 'tipo_persona_id',
-                            'value' => $model->getTipoPersona($model->tipo_persona_id),
+                            'value' => $model->tipoPersona->Descripcion//$model->getTipoPersona($model->tipo_persona_id),
                     ),
-        'IdSocio',
+                array(
+                    'name'=>'IdSocio',
+                    'value'=>$model->IdSocio,
+                    'visible'=> $model->IdSocio!=Null,
+                ),
         'Nota', 
         
 	),

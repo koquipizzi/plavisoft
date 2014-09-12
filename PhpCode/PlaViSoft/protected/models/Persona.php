@@ -163,20 +163,4 @@ class Persona extends CActiveRecord
 	    }
 	}
 	
-	public function getTipoPersona($valor)
-	{   
-	    switch($valor)
-	    {
-	        case '1':
-	            return 'SOCIO';
-	            break;
-			case '2':
-	            return 'ADHERENTE';
-	            break;			
-	        default:
-	            return ($valor);
-	            break;
-	    }
-	}
-
 }
