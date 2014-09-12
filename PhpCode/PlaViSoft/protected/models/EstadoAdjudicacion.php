@@ -44,7 +44,6 @@ class EstadoAdjudicacion extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'financiacions' => array(self::HAS_MANY, 'Financiacion', 'estado_adjudicacion_id'),
 			'suscripcions' => array(self::HAS_MANY, 'Suscripcion', 'estado_adjudicacion_id'),
 		);
 	}

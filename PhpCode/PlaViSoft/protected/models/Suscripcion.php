@@ -55,7 +55,7 @@ class Suscripcion extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'pagos' => array(self::HAS_MANY, 'Pago', 'suscripcion_id'),
+			//'pagos' => array(self::HAS_MANY, 'Pago', 'suscripcion_id'),
 			'persona' => array(self::BELONGS_TO, 'Persona', 'persona_id'),
 			'financiacion' => array(self::BELONGS_TO, 'Financiacion', 'financiacion_id'),
 			'estadoAdjudicacion' => array(self::BELONGS_TO, 'EstadoAdjudicacion', 'estado_adjudicacion_id'),

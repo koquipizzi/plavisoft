@@ -26,21 +26,23 @@ $('.search-form form').submit(function(){
 <h1>Administrar Suscripciones</h1>
 
 
-<?php	$this->widget('application.extensions.tablesorter.Sorter', array(
-	  'data'=>$records,
-	  'columns'=>array(
-		'persona.Apellido',
-		'persona.Nombre',
-		'financiacion.Descripcion',
-		'estadoAdjudicacion.Descripcion',	
+<?php	
 
-	//'financiacion_id',
-		/*
-		'Nota',
-		'Adjudicado',
-		*/
-	/*	array(
-			'class'=>'bootstrap.widgets.TbButtonColumn',
-		),*/
-	),
-)); ?>
+    if(count($records)==0){
+        echo "No existen suscripciones registradas";
+    }
+    else{
+        $this->widget('application.extensions.tablesorter.Sorter', array(
+                  'data'=>$records,
+                  'columns'=>array(
+                       'persona.Apellido',
+                       'persona.Nombre',
+                       'financiacion.Descripcion',
+                       'estadoAdjudicacion.Descripcion',	
+                /*	array(
+                                'class'=>'bootstrap.widgets.TbButtonColumn',
+                        ),*/
+                ),
+        ));         
+    }
+?>

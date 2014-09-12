@@ -53,6 +53,7 @@
 						'items'=>array(
 							array('label'=>'Inicio', 'url'=>array('/site/index')),
 							array('label'=>'Personas', 'url'=>array('/persona/admin')),
+                                                        array('label'=>'Suscripción', 'url'=>array('/suscripcion/admin')),
 							array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 							array('label'=>'Contact', 'url'=>array('/site/contact')),
 							array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
