@@ -886,3 +886,107 @@ Stack trace:
 REQUEST_URI=/plavisoft/index.php?r=persona/admin
 HTTP_REFERER=http://localhost/plavisoft/index.php?r=financiacion/admin
 ---
+2014/09/11 19:51:09 [error] [exception.CException] exception 'CException' with message 'CAssetManager.basePath "/home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/assets" es inválido. Asegúrese que el directorio exista y tenga permisos de escritura por el proceso que corre el servidor Web.' in /home/diego/Proyectos/plavisoft/framework/web/CAssetManager.php:138
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/web/CAssetManager.php(123): CAssetManager->setBasePath('/home/diego/Pro...')
+#1 /home/diego/Proyectos/plavisoft/framework/web/CAssetManager.php(217): CAssetManager->getBasePath()
+#2 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/bootstrap/components/Bootstrap.php(407): CAssetManager->publish('/home/diego/Pro...', false, -1, false)
+#3 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/bootstrap/components/packages.php(14): Bootstrap->getAssetsUrl()
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/bootstrap/components/Bootstrap.php(252): require('/home/diego/Pro...')
+#5 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/bootstrap/components/Bootstrap.php(238): Bootstrap->appendUserSuppliedPackagesToOurs()
+#6 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/bootstrap/components/Bootstrap.php(206): Bootstrap->includeAssets()
+#7 /home/diego/Proyectos/plavisoft/framework/base/CModule.php(387): Bootstrap->init()
+#8 /home/diego/Proyectos/plavisoft/framework/base/CModule.php(523): CModule->getComponent('bootstrap')
+#9 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(163): CModule->preloadComponents()
+#10 /home/diego/Proyectos/plavisoft/framework/YiiBase.php(125): CApplication->__construct('/home/diego/Pro...')
+#11 /home/diego/Proyectos/plavisoft/framework/YiiBase.php(98): YiiBase::createApplication('CWebApplication', '/home/diego/Pro...')
+#12 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): YiiBase::createWebApplication('/home/diego/Pro...')
+#13 {main}
+REQUEST_URI=/index.php
+---
+2014/09/11 19:52:39 [error] [exception.CException] exception 'CException' with message 'El asset "/home/diego/Proyectos/plavisoft/framework/zii/widgets/assets a ser publicado no existe.' in /home/diego/Proyectos/plavisoft/framework/web/CAssetManager.php:257
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/zii/widgets/CDetailView.php(155): CAssetManager->publish('/home/diego/Pro...')
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/bootstrap/widgets/TbDetailView.php(44): CDetailView->init()
+#2 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(147): TbDetailView->init()
+#3 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(172): CBaseController->createWidget('bootstrap.widge...', Array)
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/persona/view.php(50): CBaseController->widget('bootstrap.widge...', Array)
+#5 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#6 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#7 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#9 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PersonaController.php(56): CController->render('view', Array)
+#10 [internal function]: PersonaController->actionView('6')
+#11 /home/diego/Proyectos/plavisoft/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PersonaController), Array)
+#12 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PersonaController), Object(ReflectionMethod), Array)
+#13 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#15 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#16 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#17 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#18 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#19 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#20 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#21 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('view')
+#22 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('persona/view')
+#23 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#24 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#25 {main}
+REQUEST_URI=/index.php?r=persona/view&id=6
+HTTP_REFERER=http://plavisoft/index.php?r=persona/admin
+---
+2014/09/12 09:45:45 [error] [exception.CException] exception 'CException' with message 'La propiedad "TipoPersona"."descripcion" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('descripcion')
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(105): CActiveRecord->__get('descripcion')
+#2 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(160): Sorter->genTable()
+#3 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/persona/admin.php(53): CBaseController->widget('application.ext...', Array)
+#5 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#6 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#7 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('admin', Array, true)
+#9 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PersonaController.php(172): CController->render('admin', Array)
+#10 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): PersonaController->actionAdmin()
+#11 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#12 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#13 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#14 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#15 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#17 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#18 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('admin')
+#20 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('persona/admin')
+#21 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/index.php?r=persona/admin
+HTTP_REFERER=http://plavisoft/index.php
+---
+2014/09/12 09:48:18 [error] [php] explode() expects parameter 2 to be string, array given (/home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php:82)
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/persona/admin.php(57): PersonaController->widget()
+#2 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require()
+#3 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): PersonaController->renderInternal()
+#4 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): PersonaController->renderFile()
+#5 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): PersonaController->renderPartial()
+#6 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PersonaController.php(172): PersonaController->render()
+#7 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): PersonaController->actionAdmin()
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams()
+#9 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): PersonaController->runAction()
+#10 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#12 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): PersonaController->filterAccessControl()
+#13 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#14 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#15 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): PersonaController->runActionWithFilters()
+#16 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): PersonaController->run()
+#17 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#18 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=persona/admin
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php (82)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php (160)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/persona/admin.php (57)

@@ -27,13 +27,19 @@ $('.search-form form').submit(function(){
 
 
 <?php	$this->widget('application.extensions.tablesorter.Sorter', array(
-	  'data'=>$records,
-	  'columns'=>array(
-		'id',
+	'data'=>$records,
+	'columns'=>array(
+		//'id',
+                array(
+                    'header' => 'Tipo',
+                    'value' => 'tipoPersona.Descripcion',
+                ),                
 		'Apellido',
-		'Nombre',	'Telefono',
+		'Nombre',	
+                'Telefono',
 		'TelefonoCelular',
 		'DNI',
+              
 		/*
 		'IngresosMensuales',
 		'CantHijos',
@@ -47,4 +53,12 @@ $('.search-form form').submit(function(){
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),*/
 	),
+        'filters'=>array(
+            'filter-select', // filter as select box
+            '',
+            '',
+            '',
+            '', 
+            '', 
+        ),
 )); ?>
