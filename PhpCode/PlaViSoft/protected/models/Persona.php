@@ -144,10 +144,9 @@ class Persona extends CActiveRecord
 		return parent::model($className);
 	}
 	
-	public function getConcate()
+	public function getNombreDNI()
 	{
-	return $this->Apellido.", ".$this->Nombre." (".$this->DNI.")";
-	
+            return $this->Apellido.", ".$this->Nombre.($this->DNI!=NULL?" (DNI: ".$this->DNI.")":"");
 	} 
 	
 	public function getValoresNulos($valor)

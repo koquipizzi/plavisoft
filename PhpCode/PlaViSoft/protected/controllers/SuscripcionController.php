@@ -73,13 +73,37 @@ class SuscripcionController extends Controller
 	public function actionCreate()
 	{
 		$model=new Suscripcion;
+                
+                
+                // Validaciones de Suscripciones
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Suscripcion']))
 		{
-			$model->attributes=$_POST['Suscripcion'];
+                    $model->attributes = $_POST['Suscripcion'];
+                    $persona = Persona::model()->findByPk($model->persona_id);
+                    
+                    
+                    $transaction = Yii::app()->db->beginTransaction();
+                    try{
+
+                            if(!$model->save()){
+                                throw new CHttpException(null, "Error al guardar Suscripción");
+                            }
+
+
+                            $transaction->commit();
+                    }
+                    catch(Exception $e){
+                            $transaction->rollBack();
+                            throw new CHttpException(null,"catch transaction, ".$e->getMessage());
+                    }
+                    
+/*                    
+                    
+			
 			$financiacion = $_POST['Suscripcion']['financiacion_id'];
 			//die($financiacion);
 			$financiacionDetalle = Financiacion:: model()->findAllByAttributes(array('Tipo_Financiacion' => (int)$financiacion));
@@ -119,7 +143,11 @@ class SuscripcionController extends Controller
 		//	die();
 			//if($pago->save())
 				$this->redirect(array('view','id'=>$model->id));
+ */
 		}
+                else{
+                    $model->FechaAlta = date('d/m/Y');
+                }
 
 		$this->render('create',array(
 			'model'=>$model,
