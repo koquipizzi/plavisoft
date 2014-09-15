@@ -22,8 +22,6 @@ $this->menu=array(
 		'Descripcion',
 		'tipo_vivienda_id',
 		'Tipo_Financiacion',
-		'Importe',
-		'ImporteLetras',
 		'cant_cuotas',
 		'posicion',
 	),

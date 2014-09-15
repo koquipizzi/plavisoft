@@ -11,10 +11,6 @@
 
 	<?php echo $form->textFieldRow($model,'Tipo_Financiacion',array('class'=>'span5')); ?>
 
-	<?php echo $form->textFieldRow($model,'Importe',array('class'=>'span5','maxlength'=>10)); ?>
-
-	<?php echo $form->textFieldRow($model,'ImporteLetras',array('class'=>'span5','maxlength'=>255)); ?>
-
 	<?php echo $form->textFieldRow($model,'cant_cuotas',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'posicion',array('class'=>'span5')); ?>

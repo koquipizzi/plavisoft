@@ -16,14 +16,6 @@
 	<?php echo CHtml::encode($data->Tipo_Financiacion); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('Importe')); ?>:</b>
-	<?php echo CHtml::encode($data->Importe); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('ImporteLetras')); ?>:</b>
-	<?php echo CHtml::encode($data->ImporteLetras); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('cant_cuotas')); ?>:</b>
 	<?php echo CHtml::encode($data->cant_cuotas); ?>
 	<br />

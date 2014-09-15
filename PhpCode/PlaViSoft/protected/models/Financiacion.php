@@ -8,8 +8,6 @@
  * @property string $Descripcion
  * @property integer $tipo_vivienda_id
  * @property integer $Tipo_Financiacion
- * @property string $Importe
- * @property string $ImporteLetras
  * @property integer $cant_cuotas
  * @property integer $posicion
  *
@@ -37,14 +35,12 @@ class Financiacion extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('tipo_vivienda_id, Tipo_Financiacion, ImporteLetras', 'required'),
+			array('tipo_vivienda_id, Tipo_Financiacion', 'required'),
 			array('tipo_vivienda_id, Tipo_Financiacion, cant_cuotas, posicion', 'numerical', 'integerOnly'=>true),
 			array('Descripcion', 'length', 'max'=>100),
-			array('Importe', 'length', 'max'=>10),
-			array('ImporteLetras', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, Descripcion, tipo_vivienda_id, Tipo_Financiacion, Importe, ImporteLetras, cant_cuotas, posicion', 'safe', 'on'=>'search'),
+			array('id, Descripcion, tipo_vivienda_id, Tipo_Financiacion, cant_cuotas, posicion', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,8 +69,6 @@ class Financiacion extends CActiveRecord
 			'Descripcion' => 'Descripcion',
 			'tipo_vivienda_id' => 'Tipo Vivienda',
 			'Tipo_Financiacion' => 'Tipo Financiacion',
-			'Importe' => 'Importe',
-			'ImporteLetras' => 'Importe Letras',
 			'cant_cuotas' => 'Cant Cuotas',
 			'posicion' => 'Posicion',
 		);
@@ -102,8 +96,6 @@ class Financiacion extends CActiveRecord
 		$criteria->compare('Descripcion',$this->Descripcion,true);
 		$criteria->compare('tipo_vivienda_id',$this->tipo_vivienda_id);
 		$criteria->compare('Tipo_Financiacion',$this->Tipo_Financiacion);
-		$criteria->compare('Importe',$this->Importe,true);
-		$criteria->compare('ImporteLetras',$this->ImporteLetras,true);
 		$criteria->compare('cant_cuotas',$this->cant_cuotas);
 		$criteria->compare('posicion',$this->posicion);
 

@@ -33,10 +33,8 @@ $('.search-form form').submit(function(){
 		'Descripcion',
 		'tipoVivienda.Descripcion',
 		'Tipo_Financiacion',
-		'Importe',
-		'ImporteLetras',
-		/*
 		'cant_cuotas',
+                /*
 		'posicion',
 		*/
 	/*	array(
