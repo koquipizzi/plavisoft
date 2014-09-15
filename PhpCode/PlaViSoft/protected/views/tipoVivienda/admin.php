@@ -29,10 +29,10 @@ $('.search-form form').submit(function(){
 <?php	$this->widget('application.extensions.tablesorter.Sorter', array(
 	  'data'=>$records,
 	  'columns'=>array(
-		'id',
-		'Descripcion',
-		'Valor',
+		//'id',
 		'Nombre',
+		'Valor',
+		'Descripcion',
 		'MtrosCubiertos',
 		'MtrosDescubiertos',
 		/*

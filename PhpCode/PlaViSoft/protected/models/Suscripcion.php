@@ -135,7 +135,7 @@ class Suscripcion extends CActiveRecord
 		return true;
 	}
 
-	 public function afterFind()
+	public function afterFind()
 	{
 		//PHP dates are displayed as dd/mm/yyyy
 		//MYSQL dates are stored as yyyy-mm-dd
@@ -143,7 +143,8 @@ class Suscripcion extends CActiveRecord
 		//$this->$fecha=date_format($fecha, 'Y-m-d');
 				
 		$this->FechaAlta = strtotime ($this->FechaAlta);
-        $this->FechaAlta = date ('d/m/Y', $this->FechaAlta);
+                $this->FechaAlta = date ('d/m/Y', $this->FechaAlta);
+		
 		
 		parent::afterFind();
 		return true;

@@ -18,7 +18,7 @@
  * The followings are the available model relations:
  * @property Financiacion[] $financiacions
  */
-class TipoVivienda extends CActiveRecord
+class TipoVivienda extends ActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -36,7 +36,8 @@ class TipoVivienda extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('Valor, MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle', 'numerical', 'integerOnly'=>true),
+			array('MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle', 'numerical', 'integerOnly'=>true),
+                        array('Valor', 'length', 'max'=>20),
 			array('Descripcion, Nombre, Fotos', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -119,4 +120,11 @@ class TipoVivienda extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+	public function afterFind()
+	{
+		$this->Valor = Yii::app() -> format -> number($this -> Valor);
+		
+		return parent::afterFind();
+	}        
 }

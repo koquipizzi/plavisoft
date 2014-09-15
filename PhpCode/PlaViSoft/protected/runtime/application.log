@@ -1245,3 +1245,114 @@ REQUEST_URI=/index.php?r=suscripcion/create
 in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/suscripcion/_form.php (43)
 in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/suscripcion/create.php (15)
 in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/SuscripcionController.php (155)
+2014/09/14 23:04:09 [error] [exception.CException] exception 'CException' with message 'El asset "/home/diego/Proyectos/plavisoft/framework/gii/assets a ser publicado no existe.' in /home/diego/Proyectos/plavisoft/framework/web/CAssetManager.php:257
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/gii/GiiModule.php(143): CAssetManager->publish('/home/diego/Pro...')
+#1 /home/diego/Proyectos/plavisoft/framework/base/CComponent.php(111): GiiModule->getAssetsUrl()
+#2 /home/diego/Proyectos/plavisoft/framework/base/CModule.php(105): CComponent->__get('assetsUrl')
+#3 /home/diego/Proyectos/plavisoft/framework/gii/views/layouts/main.php(5): CModule->__get('assetsUrl')
+#4 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#5 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#6 /home/diego/Proyectos/plavisoft/framework/web/widgets/CContentDecorator.php(76): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#7 /home/diego/Proyectos/plavisoft/framework/web/widgets/CContentDecorator.php(54): CContentDecorator->decorate('<div class="con...')
+#8 /home/diego/Proyectos/plavisoft/framework/web/widgets/COutputProcessor.php(44): CContentDecorator->processOutput('<div class="con...')
+#9 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(206): COutputProcessor->run()
+#10 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(300): CBaseController->endWidget('CContentDecorat...')
+#11 /home/diego/Proyectos/plavisoft/framework/gii/views/layouts/column1.php(7): CBaseController->endContent()
+#12 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#13 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#14 /home/diego/Proyectos/plavisoft/framework/web/CController.php(784): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#15 /home/diego/Proyectos/plavisoft/framework/gii/controllers/DefaultController.php(47): CController->render('login', Array)
+#16 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): DefaultController->actionLogin()
+#17 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#18 /home/diego/Proyectos/plavisoft/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#19 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('login')
+#21 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('gii/default/log...')
+#22 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#23 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/index.php?r=gii/default/login
+---
+2014/09/14 23:15:39 [error] [system.db.CDbCommand] CDbCommand::fetchAll() falló: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'plavisoft.adelanto' doesn't exist. La sentencia SQL ejecutada fue: SHOW FULL COLUMNS FROM `adelanto`.
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/AdelantoController.php (150)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php (13)
+2014/09/14 23:15:39 [error] [exception.CDbException] exception 'CDbException' with message 'La tabla "adelanto" definida en la clase active record "Adelanto" no se ha podido encontrar en la base de datos.' in /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php:2362
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(411): CActiveRecordMetaData->__construct(Object(Adelanto))
+#1 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(658): CActiveRecord->getMetaData()
+#2 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(1350): CActiveRecord->getTableSchema()
+#3 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/AdelantoController.php(150): CActiveRecord->findAll()
+#5 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): AdelantoController->actionAdmin()
+#6 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#8 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#9 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#10 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#11 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#13 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('admin')
+#15 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('adelanto/admin')
+#16 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#17 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#18 {main}
+REQUEST_URI=/index.php?r=adelanto/admin
+HTTP_REFERER=http://plavisoft/index.php?r=Persona/view&id=6
+---
+2014/09/15 10:57:29 [error] [exception.CException] exception 'CException' with message 'La propiedad "TipoVivienda"."FechaAlta" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('FechaAlta')
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/models/TipoVivienda.php(126): CActiveRecord->__get('FechaAlta')
+#2 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(1866): TipoVivienda->afterFind()
+#3 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(1887): CActiveRecord->populateRecord(Array, true)
+#4 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(1351): CActiveRecord->populateRecords(Array, true, NULL)
+#5 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#6 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/TipoViviendaController.php(141): CActiveRecord->findAll()
+#7 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): TipoViviendaController->actionAdmin()
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#10 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#11 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#12 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#13 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#14 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#15 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#16 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('admin')
+#17 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('tipoVivienda/ad...')
+#18 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#19 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#20 {main}
+REQUEST_URI=/index.php?r=tipoVivienda/admin
+HTTP_REFERER=http://plavisoft/index.php?r=tipoVivienda/view&id=3
+---
+2014/09/15 15:22:32 [error] [exception.CException] exception 'CException' with message 'La propiedad "Financiacion"."Importe" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('Importe')
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(127): CActiveRecord->__get('Importe')
+#2 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(174): Sorter->genTable()
+#3 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/financiacion/admin.php(46): CBaseController->widget('application.ext...', Array)
+#5 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#6 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#7 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('admin', Array, true)
+#9 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/FinanciacionController.php(144): CController->render('admin', Array)
+#10 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): FinanciacionController->actionAdmin()
+#11 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#12 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#13 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#14 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#15 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#17 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#18 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#19 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('admin')
+#20 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('financiacion/ad...')
+#21 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#22 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#23 {main}
+REQUEST_URI=/index.php?r=financiacion/admin
+HTTP_REFERER=http://plavisoft/index.php?r=tipoVivienda/admin
+---
