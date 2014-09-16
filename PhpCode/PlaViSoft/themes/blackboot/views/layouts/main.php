@@ -67,9 +67,41 @@
 	</div>
 	
 	<div class="cont">
+		<div style="margin-left: 20px; float: left; margin-right: 10px;">
+			<?php 
+				
+				$this->widget(
+					'bootstrap.widgets.TbButton',
+					array(
+					'url'=>'index.php?r=pago/create&financiacion='.$model->financiacion_id.'&suscripcion='.$model->id,
+					'type' => 'primary',
+					'label' => 'Registrar Pago'
+					)
+				); 
+				     
+		     ?>
+		</div>
+		
+		<div style="margin-left: 20px;">
+			<?php 
+				
+				$this->widget(
+					'bootstrap.widgets.TbButton',
+					array(
+					'url'=>'index.php?r=pago/create&financiacion='.$model->financiacion_id.'&suscripcion='.$model->id,
+					'type' => 'primary',
+					'label' => 'Registrar Pago'
+					)
+				); 
+				echo "</br></br>";
+		     
+		     ?>
+		</div>
+		
 	<div class="container-fluid">
+		
 	  <?php if(isset($this->breadcrumbs)):?>
-			<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+			<?php /* $this->widget('zii.widgets.CBreadcrumbs', array(
 				'links'=>$this->breadcrumbs,
 				'homeLink'=>false,
 				'tagName'=>'ul',
@@ -77,10 +109,9 @@
 				'activeLinkTemplate'=>'<li><a href="{url}">{label}</a> <span class="divider">/</span></li>',
 				'inactiveLinkTemplate'=>'<li><span>{label}</span></li>',
 				'htmlOptions'=>array ('class'=>'breadcrumb')
-			)); ?>
+			)); */ ?>
 		<!-- breadcrumbs -->
 	  <?php endif?>
-	
 	<?php echo $content ?>
 	
 	
@@ -140,7 +171,7 @@
 				About us | Contact us | Terms & Conditions
 			</div> <!-- /span6 -->
 			<div id="footer-terms" class="col-md-6">
-				© 2012-13 Black Bootstrap. <a href="http://nachi.me.pn" target="_blank">Nachi</a>.
+				© 2014 Todos los derechos reservados. <a href="http://www.qwavee.com" target="_blank">QWavee</a>.
 			</div> <!-- /.span6 -->
 		 </div> <!-- /row -->
 	  </div> <!-- /container -->

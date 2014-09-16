@@ -16,7 +16,7 @@
     ),
 )); ?>
 <br>
-
+	
          <?php
 			$this->beginWidget('zii.widgets.CPortlet', array(
 				'title'=>'Operaciones',
