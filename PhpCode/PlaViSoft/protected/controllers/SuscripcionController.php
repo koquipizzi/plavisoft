@@ -72,7 +72,7 @@ class SuscripcionController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Suscripcion;
+		$suscripcion=new Suscripcion;
                 
                 
                 // Validaciones de Suscripciones
@@ -82,15 +82,21 @@ class SuscripcionController extends Controller
 
 		if(isset($_POST['Suscripcion']))
 		{
-                    $model->attributes = $_POST['Suscripcion'];
-                    $persona = Persona::model()->findByPk($model->persona_id);
+                    $suscripcion->attributes = $_POST['Suscripcion'];
+                    $persona = Persona::model()->findByPk($suscripcion->persona_id);
+                    $financiacion = Financiacion::model()->findByPk($suscripcion->financiacion_id);
                     
+                    var_dump($financiacion);
+                    die();
                     
                     $transaction = Yii::app()->db->beginTransaction();
                     try{
 
-                            if(!$model->save()){
+                            if(!$suscripcion->save()){
                                 throw new CHttpException(null, "Error al guardar Suscripción");
+                            }
+                            for($i=0;$i<$financiacion->cant_cuotas;$i++){
+                                
                             }
 
 
@@ -146,11 +152,11 @@ class SuscripcionController extends Controller
  */
 		}
                 else{
-                    $model->FechaAlta = date('d/m/Y');
+                    $suscripcion->FechaAlta = date('d/m/Y');
                 }
 
 		$this->render('create',array(
-			'model'=>$model,
+			'model'=>$suscripcion,
 		));
 	}
 
