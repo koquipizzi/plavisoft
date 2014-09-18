@@ -74,6 +74,19 @@ class SuscripcionController extends Controller
 	{
 		$suscripcion=new Suscripcion;
                 
+                $persona = null;
+                if (array_key_exists('idpersona',$_GET)&& isset($_GET['idpersona'])) { 
+                    $persona = Persona::model()->findByPk($_GET['idpersona']);
+                    if (isset($persona)) 
+                        $suscripcion->persona_id = $persona->id;                            
+                }
+                
+                // No se permite crear suscripciones sin haber creado personas
+                if(!isset($persona)){
+                    Yii::log('Se intenta crear una suscripcion sin Persona','warning');
+                    throw new CHttpException(null,"Se intenta crear una suscripcion sin Persona");
+                }
+                
                 
                 // Validaciones de Suscripciones
 
@@ -83,6 +96,8 @@ class SuscripcionController extends Controller
 		if(isset($_POST['Suscripcion']))
 		{
                     $suscripcion->attributes = $_POST['Suscripcion'];
+                    $suscripcion->estado_adjudicacion_id = EstadoAdjudicacion::NO_ADJUDICADO; 
+                    
                     $persona = Persona::model()->findByPk($suscripcion->persona_id);
                     $financiacion = Financiacion::model()->findByPk($suscripcion->financiacion_id);
                     $precio = 0;
@@ -160,11 +175,19 @@ class SuscripcionController extends Controller
 
 		}
                 else{
+                    $financiacion = Financiacion::model()->getFinanciacionByPersona($suscripcion->persona_id);
+                    if ((count($financiacion)==0)||!isset($financiacion)){
+                        Yii::log("No existe financiación disponible para la persona",'warning');
+                        throw new CHttpException(null,"No existe financiación disponible para la persona");
+                    }
                     $suscripcion->FechaAlta = date('d/m/Y');
+                    $suscripcion->estado_adjudicacion_id = EstadoAdjudicacion::NO_ADJUDICADO;
                 }
 
 		$this->render('create',array(
 			'model'=>$suscripcion,
+                        'persona'=>$persona,
+                        'financiacion'=>$financiacion,
 		));
 	}
 

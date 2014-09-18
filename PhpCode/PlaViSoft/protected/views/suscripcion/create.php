@@ -10,6 +10,11 @@ $this->menu=array(
 );
 ?>
 
-<h1>Nueva Suscripcion</h1>
+<h1>Nueva Suscripcion
+    <?php 
+        if(isset($persona)){
+            echo ' para '.$persona->Apellido.", ".$persona->Nombre;
+        }
+    ?></h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model,'persona'=>$persona,'financiacion'=>$financiacion,)); ?>
