@@ -73,7 +73,7 @@
 				$this->widget(
 					'bootstrap.widgets.TbButton',
 					array(
-					'url'=>'index.php?r=pago/create&financiacion='.$model->financiacion_id.'&suscripcion='.$model->id,
+					'url'=>'index.php?r=pago/create&financiacion=7&suscripcion=1',
 					'type' => 'primary',
 					'label' => 'Registrar Pago'
 					)
@@ -88,7 +88,8 @@
 				$this->widget(
 					'bootstrap.widgets.TbButton',
 					array(
-					'url'=>'index.php?r=pago/create&financiacion='.$model->financiacion_id.'&suscripcion='.$model->id,
+					//'url'=>'index.php?r=pago/create&financiacion='.$model->financiacion_id.'&suscripcion='.$model->id,
+                                        'url'=>'index.php?r=pago/create&financiacion=1&suscripcion=1',    
 					'type' => 'primary',
 					'label' => 'Registrar Pago'
 					)

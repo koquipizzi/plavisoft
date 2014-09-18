@@ -85,9 +85,24 @@ class SuscripcionController extends Controller
                     $suscripcion->attributes = $_POST['Suscripcion'];
                     $persona = Persona::model()->findByPk($suscripcion->persona_id);
                     $financiacion = Financiacion::model()->findByPk($suscripcion->financiacion_id);
-                    
-                    var_dump($financiacion);
-                    die();
+                    $precio = 0;
+                    if ($financiacion != NULL){
+                        $tipo = TipoCuota::model()->find(
+                                'financiacion_id=:financiacion_id AND tipo_cuota=:tipo_cuota',
+                                array(
+                                    ':financiacion_id' => $financiacion->id,
+                                    ':tipo_cuota' => 'MENSUAL', 
+                                ));
+                        if($tipo != NULL){
+                            $precio = $tipo->valor;
+                        }
+                        else{
+                            Yii::log('No se encontro Tipo_Cuota MENSUAL para id='.$financiacion->id,'error');
+                        }                                
+                    }
+                    else{
+                        Yii::log('No se encontro Financiación para id='.$suscripcion->financiacion_id,'error');
+                    }
                     
                     $transaction = Yii::app()->db->beginTransaction();
                     try{
@@ -95,61 +110,54 @@ class SuscripcionController extends Controller
                             if(!$suscripcion->save()){
                                 throw new CHttpException(null, "Error al guardar Suscripción");
                             }
+                            
+                            $mes = 1;
+                            $anio = 2014;
+                            
                             for($i=0;$i<$financiacion->cant_cuotas;$i++){
+                                $cuota = new Cuota();
+                                $cuota->suscripcion_id = $suscripcion->id;
+                                $cuota->nro_cuota = $i;
                                 
+                                // Importe
+                                $cuota->valor = $precio;// aca depende del tipo financiacion elegido
+                                $conv = Yii::app()->nombre2text;
+                                $cuota->valorLetras = $conv->toText($cuota->valor).' pesos';
+
+                                // Mes y Año
+                                $cuota->mes_id = $mes;
+                                $mes = $mes+1;
+                                if($mes == 13){
+                                    $mes = 1;
+                                }                                    
+                                $cuota->anio = $anio;
+                                if($mes == 1){
+                                    $anio++;
+                                }
+                                
+                                // Saldada
+                                $cuota->saldada = 'No';
+
+                                if(!$cuota->save()){
+                                    Yii::log($cuota->getErrors(),'error');
+                                    throw new CHttpException(null, "Error al guardar cuota");
+                                }
+
                             }
 
-
                             $transaction->commit();
+                            $this->redirect(array('Persona/view','id'=>$persona->id));
+                    }
+                    catch(CDbException $e){
+                            $transaction->rollBack();
+                            throw new CHttpException(null,$e->errorInfo[2]);
                     }
                     catch(Exception $e){
                             $transaction->rollBack();
                             throw new CHttpException(null,"catch transaction, ".$e->getMessage());
                     }
                     
-/*                    
-                    
-			
-			$financiacion = $_POST['Suscripcion']['financiacion_id'];
-			//die($financiacion);
-			$financiacionDetalle = Financiacion:: model()->findAllByAttributes(array('Tipo_Financiacion' => (int)$financiacion));
-			var_dump($financiacionDetalle);
-			echo count($financiacionDetalle);
-			$model->save();
-			$i = 0;
-			while ($i < count($financiacionDetalle))
-			{
-				$cant_cuotas =  $financiacionDetalle[$i]['cant_coutas'];
-				$importe = $financiacionDetalle[$i]['Importe'];
-				$importeLetras = $financiacionDetalle[$i]['ImporteLetras'];
-				$posic = $financiacionDetalle[$i]['posicion'];
-				$j = 1;
-		
-				while ($j <= $cant_cuotas)
-				{
-					$pago =new Pago;
-					$pago['suscripcion_id'] =$model['id'];
-					$pago['Importe'] =$importe;
-					$pago['ImporteLetras'] =$importeLetras;
-					if ($posic != 1)
-						if ($j % 12 == 0)
-							$pago['NroCuota'] =12;
-						else  $pago['NroCuota'] =$j % 12;
-					else $pago['NroCuota'] = 1;
-					$pago['forma_pago_id'] = 1;
-					$pago['financiacion_id'] = $model['financiacion_id'];
-					//var_dump($pago);
-					$pago->save();
-					$j++;
-				}
-				$i++;
-			//	die();
-			}
 
-		//	die();
-			//if($pago->save())
-				$this->redirect(array('view','id'=>$model->id));
- */
 		}
                 else{
                     $suscripcion->FechaAlta = date('d/m/Y');
@@ -237,6 +245,7 @@ class SuscripcionController extends Controller
 	        'records'=>$records,
 	    )); 
 	}
+        
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

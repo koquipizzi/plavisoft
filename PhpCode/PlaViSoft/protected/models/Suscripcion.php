@@ -127,10 +127,16 @@ class Suscripcion extends CActiveRecord
 	{
 		//PHP dates are displayed as dd/mm/yyyy
 		//MYSQL dates are stored as yyyy-mm-dd
+                //var_dump($this->FechaAlta);die();
 		$fecha=DateTime::createFromFormat('d/m/Y',$this->FechaAlta);
-		//var_dump($this->fecha);
-	//	var_dump($from->format('yyyy-mm-dd')); die();
-		$this->FechaAlta=$fecha->format('y-m-d');		 
+                if(!$fecha){
+                    throw new CHttpException(null, "Error al convertir Fecha de Suscripcion");
+                }
+                    
+                
+//		var_dump($fecha);die();
+//		var_dump($from->format('yyyy-mm-dd')); die();
+		$this->FechaAlta=$fecha->format('Y-m-d');		 
 		parent::beforeSave();
 		return true;
 	}

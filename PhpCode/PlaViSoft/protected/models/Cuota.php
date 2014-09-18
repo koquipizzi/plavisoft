@@ -1,27 +1,31 @@
 <?php
 
 /**
- * This is the model class for table "tipo_cuota".
+ * This is the model class for table "cuota".
  *
- * The followings are the available columns in table 'tipo_cuota':
- * @property integer $id
- * @property string $Descripcion
+ * The followings are the available columns in table 'cuota':
+ * @property string $id
+ * @property integer $suscripcion_id
+ * @property integer $nro_cuota
  * @property string $valor
- * @property string $ImporteLetras
- * @property integer $financiacion_id
- * @property string $tipo_cuota
+ * @property string $valorLetras
+ * @property integer $mes_id
+ * @property integer $anio
+ * @property string $saldada
  *
  * The followings are the available model relations:
- * @property Financiacion $financiacion
+ * @property Mes $mes
+ * @property Suscripcion $suscripcion
+ * @property Imputacion[] $imputacions
  */
-class TipoCuota extends CActiveRecord
+class Cuota extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'tipo_cuota';
+		return 'cuota';
 	}
 
 	/**
@@ -32,14 +36,14 @@ class TipoCuota extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('valor, ImporteLetras', 'required'),
-			array('financiacion_id', 'numerical', 'integerOnly'=>true),
-			array('Descripcion, tipo_cuota', 'length', 'max'=>45),
+			array('suscripcion_id, mes_id', 'required'),
+			array('suscripcion_id, nro_cuota, mes_id, anio', 'numerical', 'integerOnly'=>true),
 			array('valor', 'length', 'max'=>15),
-			array('ImporteLetras', 'length', 'max'=>255),
+			array('valorLetras', 'length', 'max'=>255),
+			array('saldada', 'length', 'max'=>2),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, Descripcion, valor, ImporteLetras, financiacion_id, tipo_cuota', 'safe', 'on'=>'search'),
+			array('id, suscripcion_id, nro_cuota, valor, valorLetras, mes_id, anio, saldada', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,7 +55,9 @@ class TipoCuota extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'financiacion' => array(self::BELONGS_TO, 'Financiacion', 'financiacion_id'),
+			'mes' => array(self::BELONGS_TO, 'Mes', 'mes_id'),
+			'suscripcion' => array(self::BELONGS_TO, 'Suscripcion', 'suscripcion_id'),
+			'imputacions' => array(self::HAS_MANY, 'Imputacion', 'cuota_id'),
 		);
 	}
 
@@ -62,11 +68,13 @@ class TipoCuota extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'Descripcion' => 'Descripcion',
+			'suscripcion_id' => 'Suscripcion',
+			'nro_cuota' => 'Nro Cuota',
 			'valor' => 'Valor',
-			'ImporteLetras' => 'Importe Letras',
-			'financiacion_id' => 'Financiacion',
-			'tipo_cuota' => 'Tipo Cuota',
+			'valorLetras' => 'Valor Letras',
+			'mes_id' => 'Mes',
+			'anio' => 'Anio',
+			'saldada' => 'Saldada',
 		);
 	}
 
@@ -88,12 +96,14 @@ class TipoCuota extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('Descripcion',$this->Descripcion,true);
+		$criteria->compare('id',$this->id,true);
+		$criteria->compare('suscripcion_id',$this->suscripcion_id);
+		$criteria->compare('nro_cuota',$this->nro_cuota);
 		$criteria->compare('valor',$this->valor,true);
-		$criteria->compare('ImporteLetras',$this->ImporteLetras,true);
-		$criteria->compare('financiacion_id',$this->financiacion_id);
-		$criteria->compare('tipo_cuota',$this->tipo_cuota,true);
+		$criteria->compare('valorLetras',$this->valorLetras,true);
+		$criteria->compare('mes_id',$this->mes_id);
+		$criteria->compare('anio',$this->anio);
+		$criteria->compare('saldada',$this->saldada,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -104,7 +114,7 @@ class TipoCuota extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return TipoCuota the static model class
+	 * @return Cuota the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
