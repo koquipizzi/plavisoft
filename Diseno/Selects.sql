@@ -50,8 +50,10 @@ join plavisoft.financiacion as f on t.id = f.tipo_persona_id
 order by p.id;
 
 
-# Consulta que reune 
+# Consulta de suscripcion completa cuotas pagas e impagas
 SELECT 
+	p.Apellido, p.Nombre,
+	s.id,
 	f.descripcion,
 	m.mes, c.anio, c.valor, c.saldada
 FROM persona as p 

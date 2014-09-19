@@ -120,4 +120,13 @@ class Cuota extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function getCuotaBySuscripcion($suscripcion_id){
+            $sql = 
+                'SELECT * 
+                FROM cuota c
+                WHERE 
+                    c.suscripcion_id = :suscripcion_id';
+            return Cuota::model()->findAllBySql($sql,array(':suscripcion_id'=>$suscripcion_id));
+        }        
 }

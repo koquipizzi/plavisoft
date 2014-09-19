@@ -82,34 +82,24 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		); 
 		
 		echo "</span><br><br>";
-  ?>
-	<?php foreach($model->suscripcions as $susc) {
-		
-		$this->widget(
-			'bootstrap.widgets.TbButton',
-			array(
-			'url'=>'index.php?r=suscripcion/view&id='.$susc->id,
-			'type' => 'primary',
-			'label' => 'Suscripcion: '.$susc->financiacion->Descripcion
-			)
-		); 
-		echo "</br></br>";
 
-                          //      printf('<li>%s</li>', CHtml::link($susc->id, array('suscripcions/view', 'id' => $susc->id)));
-     } 
-     
-     ?>
-                                
-<?php /*} else  { 
-		$this->widget(
-			'bootstrap.widgets.TbButton',
-			array(
-			'url'=>'index.php?r=suscripcion/create',
-			'type' => 'info',
-			'label' => 'Crear Suscripción'
-			)
-		); 
- }*/ ?>
+                foreach($model->suscripcions as $susc) {
+
+                    $this->widget(
+                            'bootstrap.widgets.TbButton',
+                            array(
+                            'url'=>'index.php?r=cuota/admin&suscripcion_id='.$susc->id,
+                            'type' => 'primary',
+                            'label' => 'Suscripcion: '.$susc->financiacion->Descripcion
+                            )
+                    ); 
+
+                    echo "</br></br>";
+
+                  //      printf('<li>%s</li>', CHtml::link($susc->id, array('suscripcions/view', 'id' => $susc->id)));
+                } 
+
+?>
  
  
  	

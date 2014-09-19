@@ -133,14 +133,26 @@ class CuotaController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Cuota('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Cuota']))
-			$model->attributes=$_GET['Cuota'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
+            $suscripcion = null;
+            
+            if (array_key_exists('suscripcion_id',$_GET)&& isset($_GET['suscripcion_id'])) { 
+                $suscripcion = Suscripcion::model()->findByPk($_GET['suscripcion_id']);
+                if (!isset($suscripcion)){
+                    Yii::log('No se encuentra Suscripción','warning');
+                    throw new CHttpException(null,'No se encuentra Suscripción');
+                }
+                                              
+            }
+            else{
+                Yii::log('Listado de cuotas sin suscripcion_id','warning');
+                throw new CHttpException(null,'Listado de cuotas sin suscripcion_id');
+            }
+            
+	    $records=Cuota::model()->getCuotaBySuscripcion($suscripcion->id);
+	    $this->render('admin',array(
+	        'records'=>$records,
+                'suscripcion'=>$suscripcion,
+	    )); 
 	}
 
 	/**
