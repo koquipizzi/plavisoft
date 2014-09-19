@@ -143,7 +143,7 @@ return array(
                 ),
                 array(
                     'class'=>'CYiiMailerLogRoute',
-                    'levels'=>'error, warning',
+                    'levels'=>'error',
                     'emails'=>'diegorodriguez.tandil@gmail.com',
                 ),
                 

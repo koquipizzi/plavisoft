@@ -26,7 +26,8 @@ $('.search-form form').submit(function(){
 <h1>Personas - Socios y Adherentes</h1>
 
 
-<?php	$this->widget('application.extensions.tablesorter.Sorter', array(
+<?php	$this->widget('application.extensions.tablesorter.SorterPersona', array(
+        'id'=>'idPersonaTableSorter',
 	'data'=>$records,
 	'columns'=>array(
 		//'id',
@@ -53,6 +54,7 @@ $('.search-form form').submit(function(){
 			'class'=>'bootstrap.widgets.TbButtonColumn',
 		),*/
 	),
+        
         'filters'=>array(
             'filter-select', // filter as select box
             '',

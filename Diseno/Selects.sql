@@ -60,3 +60,22 @@ JOIN financiacion as f ON s.financiacion_id = f.id
 JOIN cuota as c ON s.id = c.suscripcion_id
 JOIN mes as m ON c.mes_id = m.id
 ORDER BY s.id, c.anio, c.mes_id;
+
+
+
+
+
+
+# Todas las financiaciones disponibles para una persona que tienen el mismo tipo de persona
+SELECT * 
+FROM financiacion f
+where 
+not exists(
+	Select 1 from suscripcion
+	where financiacion_id = f.id and persona_id = 10
+)
+and 
+exists(
+	Select 1 from persona p 
+	where p.id = 10 and f.tipo_persona_id = p.tipo_persona_id  
+);

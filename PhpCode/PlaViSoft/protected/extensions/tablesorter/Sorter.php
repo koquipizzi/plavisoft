@@ -127,20 +127,10 @@ class Sorter extends CWidget
 					echo "<td>".$data->$column."</td>";
 				}
 			}
-			//View, Edit and Delete Urls
-			$view_url=Yii::app()->createAbsoluteUrl($class.'/view',array('id'=>$data->id));
-			$edit_url=Yii::app()->createAbsoluteUrl($class.'/update',array('id'=>$data->id));
-			$delete_url='"'.Yii::app()->createAbsoluteUrl($class.'/delete',array('id'=>$data->id)).'"';
-			$asentar_cuota_url=Yii::app()->createAbsoluteUrl($class.'/update',array('id'=>$data->id));
-			$del_data='"'.$data->id.'"';
-			//View, Edit, Delete Icons (bootstrap)
-			echo "<td>   <a class='btn btn-small' href='".$view_url."'><i class='icon-search'></i></a>
-				  &nbsp; <a class='btn btn-small' href='".$edit_url."'><i class='icon-edit'></i></a>				 
-				  &nbsp; <a class='btn btn-small' href='javascript:void(0);' onclick='del_data(".$delete_url.");'><i class='icon-trash'></i></a>
-				  ";
-			if ($class == "Persona")
-				echo  " &nbsp; <a class='btn btn-small' href='".$edit_url."'><i class='icon-shopping-cart'></i></a>";
-			echo "</td></tr>\n";
+                        // Agregado por Diego
+                        echo $this->buttons($class, $data);
+                        
+                        echo "</tr>\n";
 		}
 		echo "</tbody>\n";
 		//Table body end
@@ -176,6 +166,25 @@ class Sorter extends CWidget
 		$this->registerClientScript();
 		$this->genTable();
 	}
+        
+        public function buttons($class, $data){
+            $r = '';
+            //View, Edit and Delete Urls
+            $view_url=Yii::app()->createAbsoluteUrl($class.'/view',array('id'=>$data->id));
+            $edit_url=Yii::app()->createAbsoluteUrl($class.'/update',array('id'=>$data->id));
+            $delete_url='"'.Yii::app()->createAbsoluteUrl($class.'/delete',array('id'=>$data->id)).'"';
+            $del_data='"'.$data->id.'"';
+            //View, Edit, Delete Icons (bootstrap)
+            $r .= "
+                <td>  
+                    <a class='btn btn-small' href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
+                    <a class='btn btn-small' href='".$edit_url."'><i class='icon-edit'></i></a>&nbsp; 
+                    <a class='btn btn-small' href='javascript:void(0);' onclick='del_data(".$delete_url.");'><i class='icon-trash'></i></a>
+                </td>
+            ";
+            
+            return $r;
+        }
 
 }
 ?>
