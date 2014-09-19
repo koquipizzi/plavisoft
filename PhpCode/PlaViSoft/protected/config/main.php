@@ -26,6 +26,7 @@ return array(
         'application.components.*',
         //	     'tablesorter' => 'application.extensions.tablesorter'
         'application.extensions.*',
+        'application.extensions.YiiMailer.YiiMailer',
     ),
     'modules' => array(
         // uncomment the following to enable the Gii tool
@@ -40,6 +41,9 @@ return array(
     ),
     // application components
     'components' => array(
+        'nombre2text' => array(
+            'class'=>'application.extensions.number_text.NumberToText',
+        ),
         // formateo de numeros reales
         'format' => array(
             'class'=>'application.components.Formatter',
@@ -48,7 +52,6 @@ return array(
             'datetimeFormat' => 'd/m/Y H:i:s',
             'dateFormat' => 'd/m/Y',
         ),
-        
         'user' => array(
             // enable cookie-based authentication
             'allowAutoLogin' => true,
@@ -114,7 +117,7 @@ return array(
             'connectionString' => 'mysql:host=localhost;dbname=plavisoft',
             'emulatePrepare' => true,
             'username' => 'root',
-            'password' => '', //'mysqlpass',
+            'password' => 'mysqlpass',
             'charset' => 'utf8',
         ),
         // uncomment the following to use a MySQL database
@@ -138,6 +141,12 @@ return array(
                     'class' => 'CFileLogRoute',
                     'levels' => 'error, warning',
                 ),
+                array(
+                    'class'=>'CYiiMailerLogRoute',
+                    'levels'=>'error',
+                    'emails'=>'diegorodriguez.tandil@gmail.com',
+                ),
+                
             // uncomment the following to show log messages on web pages
             /*
               array(
@@ -151,6 +160,6 @@ return array(
     // using Yii::app()->params['paramName']
     'params' => array(
         // this is used in contact page
-        'adminEmail' => 'webmaster@example.com',
+        'adminEmail' => 'diego@qwavee.com',
     ),
 );

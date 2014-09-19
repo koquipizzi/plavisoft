@@ -6,10 +6,10 @@
  * The followings are the available columns in table 'tipo_cuota':
  * @property integer $id
  * @property string $Descripcion
- * @property integer $Importe
+ * @property string $valor
  * @property string $ImporteLetras
  * @property integer $financiacion_id
- * @property integer $Adjudicado
+ * @property string $tipo_cuota
  *
  * The followings are the available model relations:
  * @property Financiacion $financiacion
@@ -32,13 +32,14 @@ class TipoCuota extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('Importe, ImporteLetras', 'required'),
-			array('Importe, financiacion_id, Adjudicado', 'numerical', 'integerOnly'=>true),
-			array('Descripcion', 'length', 'max'=>45),
+			array('valor, ImporteLetras', 'required'),
+			array('financiacion_id', 'numerical', 'integerOnly'=>true),
+			array('Descripcion, tipo_cuota', 'length', 'max'=>45),
+			array('valor', 'length', 'max'=>15),
 			array('ImporteLetras', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, Descripcion, Importe, ImporteLetras, financiacion_id, Adjudicado', 'safe', 'on'=>'search'),
+			array('id, Descripcion, valor, ImporteLetras, financiacion_id, tipo_cuota', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,10 +63,10 @@ class TipoCuota extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'Descripcion' => 'Descripcion',
-			'Importe' => 'Importe',
+			'valor' => 'Valor',
 			'ImporteLetras' => 'Importe Letras',
 			'financiacion_id' => 'Financiacion',
-			'Adjudicado' => 'Adjudicado',
+			'tipo_cuota' => 'Tipo Cuota',
 		);
 	}
 
@@ -89,10 +90,10 @@ class TipoCuota extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('Descripcion',$this->Descripcion,true);
-		$criteria->compare('Importe',$this->Importe);
+		$criteria->compare('valor',$this->valor,true);
 		$criteria->compare('ImporteLetras',$this->ImporteLetras,true);
 		$criteria->compare('financiacion_id',$this->financiacion_id);
-		$criteria->compare('Adjudicado',$this->Adjudicado);
+		$criteria->compare('tipo_cuota',$this->tipo_cuota,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -8,12 +8,14 @@
  * @property string $Descripcion
  *
  * The followings are the available model relations:
- * @property Financiacion[] $financiacions
  * @property Suscripcion[] $suscripcions
  */
 class EstadoAdjudicacion extends CActiveRecord
 {
-	/**
+        const NO_ADJUDICADO = 1;
+        const ADJUDICADO = 2;
+
+        /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()

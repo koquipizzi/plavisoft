@@ -8,7 +8,9 @@ return array(
 
 	// preloading 'log' component
 	'preload'=>array('log'),
-
+        'import' => array(
+            'application.extensions.YiiMailer.YiiMailer',
+        ),
 	// application components
 	'components'=>array(
 		'db'=>array(

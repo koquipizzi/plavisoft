@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 <h1>Administrar Tipos de Viviendas</h1>
 
 
-<?php	$this->widget('application.extensions.tablesorter.Sorter', array(
+<?php	$this->widget('application.extensions.tablesorter.SorterVivienda', array(
 	  'data'=>$records,
 	  'columns'=>array(
 		//'id',
