@@ -36,7 +36,7 @@ class CuotaController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','saldar','agregarCheque', 'borrarCheque'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -94,6 +94,8 @@ class CuotaController extends Controller
 		if(isset($_POST['Cuota']))
 		{
 			$model->attributes=$_POST['Cuota'];
+//                        var_dump($model);
+//                        die();
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -128,6 +130,134 @@ class CuotaController extends Controller
 		));
 	}
 
+	/**
+	 * Lists all models.
+	 */
+	public function actionSaldar()
+	{
+                $pago = new Pago;
+                $imputacion = new Imputacion;
+                
+//print_r($_POST);
+//die();
+
+                if(isset($_POST['Pago'])){
+                    
+                    $transaction = Yii::app()->db->beginTransaction();
+                    try{
+                            $pago->attributes = $_POST['Pago'];
+                            $pago->save();
+
+                            $imputacion->attributes = $_POST['Imputacion'];
+                            $imputacion->pago_id = $pago->id;
+                            $imputacion->save();
+
+                            $cuota = Cuota::model()->findByPk($imputacion->cuota_id);
+
+                            $transaction->commit();
+                            $this->redirect(array('cuota/admin&suscripcion_id='.$cuota->suscripcion->id));
+                    }
+                    catch(CDbException $e){
+                            $transaction->rollBack();
+                            throw new CHttpException(null,$e->errorInfo[2]);
+                    }
+                    catch(Exception $e){
+                            $transaction->rollBack();
+                            throw new CHttpException(null,"catch transaction, ".$e->getMessage());
+                    }                    
+                    
+                }
+                
+                // Toma el ID de la cuota a ser saldada
+                if (array_key_exists('id',$_GET)&& isset($_GET['id'])) { 
+                    $cuota = Cuota::model()->findByPk($_GET['id']);
+                    if (!isset($cuota)){
+                        Yii::log('No se encuentra Cuota a Saldar','warning');
+                        throw new CHttpException(null,'No se encuentra Cuota a Saldar');
+                    }
+                    $pago->FechaPago = date('d/m/Y');
+                }else{
+                    Yii::log('No se encuentra Clave de Cuota a Saldar','warning');
+                    throw new CHttpException(null,'No se encuentra Clave de Cuota a Saldar');
+                }
+                
+                $forma_pago_pago = new FormaPagoPago;
+
+                $forma_pago_contado = new FormaPagoContado;
+                $forma_pago_cheque = new FormaPagoCheque;
+                $forma_pago_deposito = new FormaPagoDeposito;
+                
+                $cheque = new Cheque;
+                
+		$this->render('saldar',array(
+			'pago'=>$pago,
+                        'cuota'=>$cuota,
+                        'imputacion'=>$imputacion,
+                        'forma_pago_pago'=>$forma_pago_pago,
+                        'forma_pago_contado'=>$forma_pago_contado,
+                        'forma_pago_cheque'=>$forma_pago_cheque,
+                        'cheque'=>$cheque,
+                        'forma_pago_deposito'=>$forma_pago_deposito,
+		));
+	}
+        
+        public function actionAgregarCheque(){
+            $cheque = new ChequeRuntime();
+            $cheque->Nro_cheque = $_POST['Nro_cheque'];
+            $cheque->Cta_cte = $_POST['Cta_cte'];
+            $cheque->valor = $_POST['valor'];
+            $cheque->NombreTitular = $_POST['NombreTitular'];
+            $cheque->banco_id = $_POST['banco_id'];
+            
+            if($cheque->save()){
+                if(trim($_POST['cheques_agregados'])!=''){
+                    $cheques_id = explode('_', $_POST['cheques_agregados']);
+                    $cheques_id[]=$cheque->id;
+                }else{
+                    $cheques_id=array($cheque->id);
+                }
+                
+                $criteria = new CDbCriteria;
+                foreach ($cheques_id as $id){
+                    $criteria->addSearchCondition('id', $id, true, 'OR');
+                }
+                $cheques = ChequeRuntime::model()->findAll($criteria);
+            }
+            
+            $this->renderPartial(
+                    'listaChequesEdicion',
+                    array(
+                        'cheques'=>$cheques,
+                        'cheques_agregados'=>implode('_',$cheques_id),
+                    )
+            );            
+            Yii::app()->end();
+        }
+        
+        public function actionBorrarCheque(){
+            $cheque = ChequeRuntime::model()->findByPk($_POST['id']);
+
+            if($cheque->delete()){
+                if(trim($_POST['cheques_agregados'])!=''){
+                    $cheques_id = explode('_', $_POST['cheques_agregados']);
+                    $criteria = new CDbCriteria;
+                    foreach ($cheques_id as $id){
+                        $criteria->addSearchCondition('id', $id, true, 'OR');
+                    }
+                    $cheques = ChequeRuntime::model()->findAll($criteria);
+                }                
+            }
+            
+            $this->renderPartial(
+                    'listaChequesEdicion',
+                    array(
+                        'cheques'=>$cheques,
+                        'cheques_agregados'=>implode('_',$cheques_id),
+                    )
+            );            
+            Yii::app()->end();
+        }        
+        
 	/**
 	 * Manages all models.
 	 */

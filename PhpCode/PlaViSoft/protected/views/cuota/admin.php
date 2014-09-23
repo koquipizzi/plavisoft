@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 
 <?php echo $suscripcion->persona->Apellido; ?>
 
-<?php $this->widget('application.extensions.tablesorter.Sorter', array(
+<?php $this->widget('application.extensions.tablesorter.SorterCuota', array(
 	'id'=>'cuota-grid',
 	'data'=>$records,
 	'columns'=>array(

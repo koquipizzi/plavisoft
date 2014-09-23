@@ -1,33 +1,29 @@
 <?php
 
 /**
- * This is the model class for table "pago".
+ * This is the model class for table "cheque".
  *
- * The followings are the available columns in table 'pago':
+ * The followings are the available columns in table 'cheque':
  * @property integer $id
- * @property string $FechaPago
+ * @property string $Nro_cheque
+ * @property string $Cta_cte
  * @property string $valor
- * @property string $ImporteLetras
- * @property string $Descripcion
- * @property string $NroDeposito
- * @property integer $persona_id
- * @property string $talonario
- * @property string $nro_formulario
+ * @property integer $pago_id
+ * @property string $NombreTitular
+ * @property integer $banco_id
  *
  * The followings are the available model relations:
- * @property Cheque[] $cheques
- * @property FormaPago[] $formaPagos
- * @property Imputacion $imputacion
- * @property Persona $persona
+ * @property Banco $banco
+ * @property Pago $pago
  */
-class Pago extends CActiveRecord
+class Cheque extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'pago';
+		return 'cheque';
 	}
 
 	/**
@@ -38,17 +34,14 @@ class Pago extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('ImporteLetras, persona_id', 'required'),
-			array('persona_id', 'numerical', 'integerOnly'=>true),
+			array('pago_id, banco_id', 'required'),
+			array('pago_id, banco_id', 'numerical', 'integerOnly'=>true),
+			array('Nro_cheque, Cta_cte', 'length', 'max'=>45),
 			array('valor', 'length', 'max'=>15),
-			array('ImporteLetras, Descripcion', 'length', 'max'=>255),
-			array('NroDeposito', 'length', 'max'=>20),
-			array('talonario', 'length', 'max'=>4),
-			array('nro_formulario', 'length', 'max'=>8),
-			array('FechaPago', 'safe'),
+			array('NombreTitular', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, FechaPago, valor, ImporteLetras, Descripcion, NroDeposito, persona_id, talonario, nro_formulario', 'safe', 'on'=>'search'),
+			array('id, Nro_cheque, Cta_cte, valor, pago_id, NombreTitular, banco_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,10 +53,8 @@ class Pago extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cheques' => array(self::HAS_MANY, 'Cheque', 'pago_id'),
-			'formaPagos' => array(self::MANY_MANY, 'FormaPago', 'forma_pago_pago(pago_id, forma_pago_id)'),
-			'imputacion' => array(self::HAS_ONE, 'Imputacion', 'pago_id'),
-			'persona' => array(self::BELONGS_TO, 'Persona', 'persona_id'),
+			'banco' => array(self::BELONGS_TO, 'Banco', 'banco_id'),
+			'pago' => array(self::BELONGS_TO, 'Pago', 'pago_id'),
 		);
 	}
 
@@ -74,14 +65,12 @@ class Pago extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'FechaPago' => 'Fecha Pago',
+			'Nro_cheque' => 'Nro Cheque',
+			'Cta_cte' => 'Cta Cte',
 			'valor' => 'Valor',
-			'ImporteLetras' => 'Importe Letras',
-			'Descripcion' => 'Descripcion',
-			'NroDeposito' => 'Nro Deposito',
-			'persona_id' => 'Persona',
-			'talonario' => 'Talonario',
-			'nro_formulario' => 'Nro Formulario',
+			'pago_id' => 'Pago',
+			'NombreTitular' => 'Nombre Titular',
+			'banco_id' => 'Banco',
 		);
 	}
 
@@ -104,14 +93,12 @@ class Pago extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('FechaPago',$this->FechaPago,true);
+		$criteria->compare('Nro_cheque',$this->Nro_cheque,true);
+		$criteria->compare('Cta_cte',$this->Cta_cte,true);
 		$criteria->compare('valor',$this->valor,true);
-		$criteria->compare('ImporteLetras',$this->ImporteLetras,true);
-		$criteria->compare('Descripcion',$this->Descripcion,true);
-		$criteria->compare('NroDeposito',$this->NroDeposito,true);
-		$criteria->compare('persona_id',$this->persona_id);
-		$criteria->compare('talonario',$this->talonario,true);
-		$criteria->compare('nro_formulario',$this->nro_formulario,true);
+		$criteria->compare('pago_id',$this->pago_id);
+		$criteria->compare('NombreTitular',$this->NombreTitular,true);
+		$criteria->compare('banco_id',$this->banco_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -122,7 +109,7 @@ class Pago extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Pago the static model class
+	 * @return Cheque the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

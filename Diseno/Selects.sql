@@ -32,9 +32,12 @@ Select * from plavisoft.forma_pago;
 Select * from plavisoft.tipo_vivienda;
 
 # Cuota
-Select * from plavisoft.cuota;
+Select * from plavisoft.pago;
+Select * from plavisoft.imputacion;
+Select * from plavisoft.cuota where id=301;
+
 insert into plavisoft.cuota(suscripcion_id,nro_cuota,valor,valorLetras,mes_id,anio,saldada) values(21,1,2500,'dsad',1,2014,0); 
-delete from plavisoft.cuota where id<100;
+delete from plavisoft.cuota where id=306;
 
 Select * from plavisoft.mes;
 
@@ -81,3 +84,6 @@ exists(
 	Select 1 from persona p 
 	where p.id = 10 and f.tipo_persona_id = p.tipo_persona_id  
 );
+
+
+Select * from plavisoft.cheque_runtime where id in (40,41,42);

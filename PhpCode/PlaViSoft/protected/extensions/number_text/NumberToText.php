@@ -87,6 +87,8 @@ class NumberToText{
         $res = $number - $ent;
         $res = floor($res * pow(10,$decimals));
         
+        $r = '';
+
         if($res != 0){
             if($decimalsToText){
                 $r = $this->toText((int)$ent) . " con " . $this->toText((int)$res);
@@ -94,6 +96,9 @@ class NumberToText{
             else{
                 $r = $this->toText((int)$ent) . " / " . $res;
             }
+        }
+        else{
+            $r = $this->toText((int)$ent);
         }
 
         return $r;

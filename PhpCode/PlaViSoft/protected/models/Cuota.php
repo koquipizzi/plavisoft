@@ -18,7 +18,7 @@
  * @property Suscripcion $suscripcion
  * @property Imputacion[] $imputacions
  */
-class Cuota extends CActiveRecord
+class Cuota extends ActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -36,7 +36,7 @@ class Cuota extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('suscripcion_id, mes_id', 'required'),
+			array('valor', 'required'),
 			array('suscripcion_id, nro_cuota, mes_id, anio', 'numerical', 'integerOnly'=>true),
 			array('valor', 'length', 'max'=>15),
 			array('valorLetras', 'length', 'max'=>255),
@@ -129,4 +129,21 @@ class Cuota extends CActiveRecord
                     c.suscripcion_id = :suscripcion_id';
             return Cuota::model()->findAllBySql($sql,array(':suscripcion_id'=>$suscripcion_id));
         }        
+        
+        
+	public function afterFind()
+	{
+		$this->valor = Yii::app() -> format -> number($this -> valor);
+
+		return parent::afterFind();
+	}        
+        
+        public function beforeSave() {
+
+                $conv = Yii::app()->nombre2text;
+                $this->valorLetras = $conv->toText($this->valor).' pesos';
+
+                return parent::beforeSave();
+        }        
+        
 }

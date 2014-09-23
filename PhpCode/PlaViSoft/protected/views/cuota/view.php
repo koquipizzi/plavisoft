@@ -21,12 +21,9 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
-		'suscripcion_id',
 		'nro_cuota',
 		'valor',
-		'valorLetras',
-		'mes_id',
+		'mes.mes',
 		'anio',
 		'saldada',
 	),

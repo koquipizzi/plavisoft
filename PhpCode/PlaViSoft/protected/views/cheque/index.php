@@ -1,18 +1,18 @@
 <?php
-/* @var $this PagoController */
+/* @var $this ChequeController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Pagos',
+	'Cheques',
 );
 
 $this->menu=array(
-	array('label'=>'Create Pago', 'url'=>array('create')),
-	array('label'=>'Manage Pago', 'url'=>array('admin')),
+	array('label'=>'Create Cheque', 'url'=>array('create')),
+	array('label'=>'Manage Cheque', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Pagos</h1>
+<h1>Cheques</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
