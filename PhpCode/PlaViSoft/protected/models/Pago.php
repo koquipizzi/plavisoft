@@ -20,7 +20,7 @@
  * @property Imputacion $imputacion
  * @property Persona $persona
  */
-class Pago extends CActiveRecord
+class Pago extends ActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -128,4 +128,20 @@ class Pago extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+	public function afterFind()
+	{
+		$this->valor = Yii::app() -> format -> number($this -> valor);
+
+		return parent::afterFind();
+	}        
+
+	public function getFechaPago()
+	{
+//		$fecha=DateTime::createFromFormat('y-m-d',$this->FechaPago);
+//		return $fecha->format('d/m/Y');		 
+            
+                return Yii::app()->format->formatDate($this->fechaPago);
+	}        
+        
 }

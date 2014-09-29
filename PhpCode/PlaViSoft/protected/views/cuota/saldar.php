@@ -45,7 +45,11 @@ $this->menu=array(
         jQuery.ajax({
             'type':'POST',
             'success':function( data ) {
-                $("#agregarChequesDiv").html(data);
+                data = jQuery.parseJSON( data );
+
+                $("#agregarChequesDiv").html(data.html);
+                $("#cheques_agregados").val(data.cheques_agregados);
+                
             },
             'data':{
                 'id':id,
@@ -73,6 +77,9 @@ $this->menu=array(
             echo $form->hiddenField($imputacion, 'cuota_id', array('hidden'=>true,'value'=>$cuota->id)); 
             echo $form->hiddenField($imputacion, 'valor', array('hidden'=>true,'value'=>$cuota->valor));  
         ?>
+
+        <?php echo $form->textFieldRow($pago,'talonario',array('class'=>'span5','maxlength'=>10)); ?>
+        <?php echo $form->textFieldRow($pago,'nro_formulario',array('class'=>'span5','maxlength'=>10)); ?>
 
 	<div class="control-group">
 		<div class="control-label">
@@ -167,7 +174,16 @@ $this->menu=array(
                         'ajaxOptions'=>array(
                             'type' => 'POST',
                             'success' => 'function( data ) {
-                                $("#agregarChequesDiv").html(data);
+                                data = jQuery.parseJSON( data );
+                                
+                                $("#agregarChequesDiv").html(data.html);
+                                $("#cheques_agregados").val(data.cheques_agregados);
+                                
+                                $("#Nro_cheque").val("");
+                                $("#Cta_cte").val("");
+                                $("#valor").val("");
+                                $("#NombreTitular").val("")
+                                $("#banco_id").val("");
                               }'
                             ,
                             'data' => array( 
@@ -181,9 +197,9 @@ $this->menu=array(
                         ),            
                     ));                 
                 ?>
-                
+                <input type="hidden" id="cheques_agregados" name="cheques_agregados" value="">
                 <div id='agregarChequesDiv'>
-                    <input type="hidden" id="cheques_agregados" value="">
+                    
                 </div>
 	</div>
 

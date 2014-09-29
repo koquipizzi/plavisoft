@@ -23,7 +23,7 @@
  * @property FormaPago $formaPago
  * @property Suscripcion $suscripcion
  */
-class Pago extends CActiveRecord
+class Pago2 extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

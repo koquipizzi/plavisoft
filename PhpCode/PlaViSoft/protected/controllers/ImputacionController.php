@@ -36,7 +36,7 @@ class ImputacionController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','verImputacion'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -143,6 +143,33 @@ class ImputacionController extends Controller
 		));
 	}
 
+	/**
+	 * Manages all models.
+	 */
+	public function actionVerImputacion()
+	{       
+                if(!array_key_exists('id', $_GET) || !isset($_GET['id'])){
+                    throw new CHttpException(null,"No se ha determinado Cuota");
+                }
+                $cuota_id = $_GET['id'];
+                
+                $criteria = new CDbCriteria;
+                $criteria->addSearchCondition('cuota_id', $cuota_id);
+                $imputaciones = Imputacion::model()->findAll($criteria);            
+                
+//                var_dump($cuota_id);
+//                die();
+//		$model=new Imputacion('search');
+//		$model->unsetAttributes();  // clear any default values
+//		if(isset($_GET['Imputacion']))
+//			$model->attributes=$_GET['Imputacion'];
+
+		$this->render('verImputacion',array(
+			'imputaciones'=>$imputaciones,
+		));
+	}
+
+        
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

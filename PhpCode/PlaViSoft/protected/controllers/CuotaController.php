@@ -28,7 +28,7 @@ class CuotaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','agregarCheque', 'borrarCheque'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -36,7 +36,7 @@ class CuotaController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','saldar','agregarCheque', 'borrarCheque'),
+				'actions'=>array('admin','delete','saldar'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -130,29 +130,116 @@ class CuotaController extends Controller
 		));
 	}
 
-	/**
+        
+        public function copyChequeRuntime($cheques_agregados, $pago_id){
+            $total = 0;
+            
+            if(trim($_POST['cheques_agregados'])!=''){
+                $cheques_id = explode('_', $_POST['cheques_agregados']);
+                
+                $criteria = new CDbCriteria;
+                foreach ($cheques_id as $id){
+                    $criteria->addSearchCondition('id', $id, true, 'OR');
+                }
+                $cheques_runtime = ChequeRuntime::model()->findAll($criteria);            
+                
+                foreach ($cheques_runtime as $cheque_runtime){
+                    $cheque = New Cheque;
+                        $cheque->Cta_cte = $cheque_runtime->Cta_cte;
+                        $cheque->NombreTitular = $cheque_runtime->NombreTitular;
+                        $cheque->Nro_cheque = $cheque_runtime->Nro_cheque;
+                        $cheque->banco_id = $cheque_runtime->banco_id;
+                        $cheque->valor = $cheque_runtime->valor;
+                        $cheque->pago_id = $pago_id;
+                    $cheque->save();    
+                    $total = $total + $cheque->valor;
+                }
+
+            }
+
+            
+            return $total;
+        }
+
+        /**
 	 * Lists all models.
 	 */
 	public function actionSaldar()
 	{
+
                 $pago = new Pago;
                 $imputacion = new Imputacion;
+                $forma_pago_pago = new FormaPagoPago;
+                $forma_pago_contado = new FormaPagoContado;
+                $forma_pago_cheque = new FormaPagoCheque;
+                $forma_pago_deposito = new FormaPagoDeposito;
+                $cheque = new Cheque;
                 
-//print_r($_POST);
-//die();
-
                 if(isset($_POST['Pago'])){
                     
                     $transaction = Yii::app()->db->beginTransaction();
                     try{
                             $pago->attributes = $_POST['Pago'];
+                            $pago->valor = Yii::app()->format->unformatNumber($_POST['Pago']['valor']);
                             $pago->save();
 
                             $imputacion->attributes = $_POST['Imputacion'];
                             $imputacion->pago_id = $pago->id;
+                            $imputacion->valor = Yii::app()->format->unformatNumber($_POST['Imputacion']['valor']);
                             $imputacion->save();
+                            
+                            if(
+                                    array_key_exists('forma_pago_id', $_POST['FormaPagoPago'])
+                                    &&(is_array($_POST['FormaPagoPago']['forma_pago_id']))                                    
+                                    &&(count($_POST['FormaPagoPago']['forma_pago_id'])>0)
+                            ){
+                                // Contado
+                                if(array_key_exists('0', $_POST['FormaPagoPago']['forma_pago_id']) ){
+                                    $forma_pago_contado->attributes = $_POST['FormaPagoContado'];
+                                    $forma_pago_contado->pago_id = $pago->id;
+                                    $forma_pago_contado->save();
+                                }
+
+                                // Cheque
+                                if(array_key_exists('1', $_POST['FormaPagoPago']['forma_pago_id']) ){
+                                    $forma_pago_cheque->attributes = $_POST['FormaPagoCheque'];
+                                    $forma_pago_cheque->pago_id = $pago->id;
+                                    $forma_pago_cheque->save();
+
+                                    $total = 0;
+                                    if(trim($_POST['cheques_agregados'])!=''){
+                                        $total = $this->copyChequeRuntime($_POST['cheques_agregados'], $pago->id);
+                                    }
+
+                                    if(trim($_POST['Cheque']['valor'])!=''){
+                                        $cheque->attributes = $_POST['Cheque'];
+                                        $cheque->pago_id = $pago->id;
+                                        $cheque->save();
+                                        $total = $total + $cheque->valor;
+                                    }
+
+                                    $forma_pago_cheque->valor = $total;   
+                                    $forma_pago_cheque->save();
+
+                                }
+
+                                // Deposito
+                                if(array_key_exists('2', $_POST['FormaPagoPago']['forma_pago_id']) ){
+                                    $forma_pago_deposito->attributes = $_POST['FormaPagoDeposito'];
+                                    $forma_pago_deposito->pago_id = $pago->id;
+                                    $forma_pago_deposito->save();
+                                }                                
+                                
+                            }
+                            else{
+                                $forma_pago_contado->pago_id = $pago->id;
+                                $forma_pago_contado->valor = $pago->valor;
+                                $forma_pago_contado->save();
+                            }
 
                             $cuota = Cuota::model()->findByPk($imputacion->cuota_id);
+                            $cuota->saldada = Cuota::SALDADA;
+                            $cuota->save();
 
                             $transaction->commit();
                             $this->redirect(array('cuota/admin&suscripcion_id='.$cuota->suscripcion->id));
@@ -181,13 +268,7 @@ class CuotaController extends Controller
                     throw new CHttpException(null,'No se encuentra Clave de Cuota a Saldar');
                 }
                 
-                $forma_pago_pago = new FormaPagoPago;
-
-                $forma_pago_contado = new FormaPagoContado;
-                $forma_pago_cheque = new FormaPagoCheque;
-                $forma_pago_deposito = new FormaPagoDeposito;
                 
-                $cheque = new Cheque;
                 
 		$this->render('saldar',array(
 			'pago'=>$pago,
@@ -224,13 +305,22 @@ class CuotaController extends Controller
                 $cheques = ChequeRuntime::model()->findAll($criteria);
             }
             
-            $this->renderPartial(
+            $cheques_agregados = implode('_',$cheques_id);
+            $html = $this->renderPartial(
                     'listaChequesEdicion',
                     array(
                         'cheques'=>$cheques,
-                        'cheques_agregados'=>implode('_',$cheques_id),
-                    )
+                        'cheques_agregados'=>$cheques_agregados,
+                    ),
+                    true
             );            
+            
+            echo json_encode(
+                    array(
+                        'html'=>$html,
+                        'cheques_agregados'=>$cheques_agregados,
+                    )
+            );
             Yii::app()->end();
         }
         
@@ -248,11 +338,20 @@ class CuotaController extends Controller
                 }                
             }
             
-            $this->renderPartial(
+            $cheques_agregados = implode('_',$cheques_id);
+            $html = $this->renderPartial(
                     'listaChequesEdicion',
                     array(
                         'cheques'=>$cheques,
-                        'cheques_agregados'=>implode('_',$cheques_id),
+                        'cheques_agregados'=>$cheques_agregados,
+                    ),
+                    true
+            );            
+            
+            echo json_encode(
+                    array(
+                        'html'=>$html,
+                        'cheques_agregados'=>$cheques_agregados,
                     )
             );            
             Yii::app()->end();

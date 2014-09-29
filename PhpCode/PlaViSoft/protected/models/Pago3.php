@@ -24,7 +24,7 @@
  * @property Financiacion $financiacion
  * @property Suscripcion $suscripcion
  */
-class Pago extends CActiveRecord
+class Pago3 extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name

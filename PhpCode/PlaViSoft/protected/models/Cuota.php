@@ -20,6 +20,9 @@
  */
 class Cuota extends ActiveRecord
 {
+        
+        const SALDADA = "Si";
+        const NO_SALDADA = "No";
 	/**
 	 * @return string the associated database table name
 	 */
@@ -140,7 +143,8 @@ class Cuota extends ActiveRecord
         
         public function beforeSave() {
 
-                $conv = Yii::app()->nombre2text;
+                $conv  = Yii::app()->nombre2text;
+                $this->valor = Yii::app()->format->unformatNumber($this->valor); 
                 $this->valorLetras = $conv->toText($this->valor).' pesos';
 
                 return parent::beforeSave();

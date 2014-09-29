@@ -34,7 +34,7 @@ Select * from plavisoft.tipo_vivienda;
 # Cuota
 Select * from plavisoft.pago;
 Select * from plavisoft.imputacion;
-Select * from plavisoft.cuota where id=301;
+Select * from plavisoft.cuota where id=300;
 
 insert into plavisoft.cuota(suscripcion_id,nro_cuota,valor,valorLetras,mes_id,anio,saldada) values(21,1,2500,'dsad',1,2014,0); 
 delete from plavisoft.cuota where id=306;
@@ -86,4 +86,22 @@ exists(
 );
 
 
-Select * from plavisoft.cheque_runtime where id in (40,41,42);
+Select * from plavisoft.cheque_runtime;
+
+Select * from plavisoft.imputacion;
+
+
+
+
+
+/*
+delete from plavisoft.cheque_runtime where id>0;
+delete from plavisoft.imputacion where pago_id>0;
+delete from plavisoft.cheque where id>0;
+delete from plavisoft.cheque_runtime where id>0;
+delete from plavisoft.forma_pago_pago where pago_imputacion_AINSid>0;
+delete from plavisoft.pago where id>0;
+*/
+Select SUM(valor) From imputacion group by cuota_id ;
+
+Select * from plavisoft.Log;
