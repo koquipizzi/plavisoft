@@ -1,23 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "forma_pago".
+ * This is the model class for table "cheque_runtime".
  *
- * The followings are the available columns in table 'forma_pago':
+ * The followings are the available columns in table 'cheque_runtime':
  * @property integer $id
- * @property string $Descripcion
+ * @property string $Nro_cheque
+ * @property string $Cta_cte
+ * @property string $valor
+ * @property string $NombreTitular
+ * @property integer $banco_id
+ * @property string $ins_time
  *
  * The followings are the available model relations:
- * @property Pago[] $pagos
+ * @property Banco $banco
  */
-class FormaPago extends CActiveRecord
+class ChequeRuntime extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'forma_pago';
+		return 'cheque_runtime';
 	}
 
 	/**
@@ -28,10 +33,15 @@ class FormaPago extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('Descripcion', 'length', 'max'=>45),
+			array('banco_id', 'required'),
+			array('banco_id', 'numerical', 'integerOnly'=>true),
+			array('Nro_cheque, Cta_cte', 'length', 'max'=>45),
+			array('valor', 'length', 'max'=>15),
+			array('NombreTitular', 'length', 'max'=>100),
+			array('ins_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, Descripcion', 'safe', 'on'=>'search'),
+			array('id, Nro_cheque, Cta_cte, valor, NombreTitular, banco_id, ins_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -43,7 +53,7 @@ class FormaPago extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'pagos' => array(self::MANY_MANY, 'Pago', 'forma_pago_pago(forma_pago_id, pago_id)'),
+			'banco' => array(self::BELONGS_TO, 'Banco', 'banco_id'),
 		);
 	}
 
@@ -54,7 +64,12 @@ class FormaPago extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'Descripcion' => 'Descripcion',
+			'Nro_cheque' => 'Nro Cheque',
+			'Cta_cte' => 'Cta Cte',
+			'valor' => 'Valor',
+			'NombreTitular' => 'Nombre Titular',
+			'banco_id' => 'Banco',
+			'ins_time' => 'Ins Time',
 		);
 	}
 
@@ -77,7 +92,12 @@ class FormaPago extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('Descripcion',$this->Descripcion,true);
+		$criteria->compare('Nro_cheque',$this->Nro_cheque,true);
+		$criteria->compare('Cta_cte',$this->Cta_cte,true);
+		$criteria->compare('valor',$this->valor,true);
+		$criteria->compare('NombreTitular',$this->NombreTitular,true);
+		$criteria->compare('banco_id',$this->banco_id);
+		$criteria->compare('ins_time',$this->ins_time,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -88,7 +108,7 @@ class FormaPago extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return FormaPago the static model class
+	 * @return ChequeRuntime the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

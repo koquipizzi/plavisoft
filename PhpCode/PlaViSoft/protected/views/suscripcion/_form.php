@@ -13,7 +13,8 @@
             if (isset($model->persona_id)) { 
                 echo $form->hiddenField($model, 'persona_id', array('hidden'=>true,'value'=>$model->persona_id)); 
             }	
-            else { ?>
+            else { 
+        ?>
 	<div class="control-group">
 		<div class="control-label">
                     <?php echo $form->labelEx($model,'persona_id'); ?>
@@ -22,7 +23,9 @@
                     <?php echo CHtml::activeDropDownList($model,'persona_id', CHtml::listData(Persona::model()->findAll(), 'id', 'nombreDNI'), array('empty' => '--- Elegir Persona---')); ?>	
 	 	</div>
 	 </div>
-        <?php } ?>
+        <?php 
+            } 
+        ?>
         
 
 	<div class="control-group">

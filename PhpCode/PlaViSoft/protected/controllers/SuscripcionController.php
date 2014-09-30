@@ -129,7 +129,7 @@ class SuscripcionController extends Controller
                             $mes = 1;
                             $anio = 2014;
                             
-                            for($i=0;$i<$financiacion->cant_cuotas;$i++){
+                            for($i=1;$i<=$financiacion->cant_cuotas;$i++){
                                 $cuota = new Cuota();
                                 $cuota->suscripcion_id = $suscripcion->id;
                                 $cuota->nro_cuota = $i;
@@ -249,18 +249,6 @@ class SuscripcionController extends Controller
 	/**
 	 * Manages all models.
 	 */
-/*	public function actionAdmin()
-	{
-		$model=new Suscripcion('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Suscripcion']))
-			$model->attributes=$_GET['Suscripcion'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
-*/
 	public function actionAdmin()
 	{
 	    $records=Suscripcion::model()->findAll();
@@ -269,6 +257,8 @@ class SuscripcionController extends Controller
 	    )); 
 	}
         
+
+       
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

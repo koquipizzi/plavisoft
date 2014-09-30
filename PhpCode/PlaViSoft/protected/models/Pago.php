@@ -6,25 +6,21 @@
  * The followings are the available columns in table 'pago':
  * @property integer $id
  * @property string $FechaPago
- * @property string $FormaPago
- * @property integer $suscripcion_id
- * @property integer $financiacion_id
- * @property integer $NroDeposito
- * @property integer $NroCuota
- * @property integer $forma_pago_id
- * @property integer $Importe
+ * @property string $valor
  * @property string $ImporteLetras
  * @property string $Descripcion
- * @property integer $Anio
- * @property integer $Mes
- * @property integer $planpago_id
+ * @property string $NroDeposito
+ * @property integer $persona_id
+ * @property string $talonario
+ * @property string $nro_formulario
  *
  * The followings are the available model relations:
- * @property Planpago $planpago
- * @property Financiacion $financiacion
- * @property Suscripcion $suscripcion
+ * @property Cheque[] $cheques
+ * @property FormaPago[] $formaPagos
+ * @property Imputacion $imputacion
+ * @property Persona $persona
  */
-class Pago extends CActiveRecord
+class Pago extends ActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -42,14 +38,17 @@ class Pago extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('suscripcion_id, financiacion_id, NroCuota, forma_pago_id, ImporteLetras, planpago_id', 'required'),
-			array('suscripcion_id, financiacion_id, NroDeposito, forma_pago_id, Importe, Anio, planpago_id', 'numerical', 'integerOnly'=>true),
-			array('ImporteLetras', 'length', 'max'=>255),
-			array('Descripcion', 'length', 'max'=>100),
+			array('ImporteLetras, persona_id', 'required'),
+			array('persona_id', 'numerical', 'integerOnly'=>true),
+			array('valor', 'length', 'max'=>15),
+			array('ImporteLetras, Descripcion', 'length', 'max'=>255),
+			array('NroDeposito', 'length', 'max'=>20),
+			array('talonario', 'length', 'max'=>4),
+			array('nro_formulario', 'length', 'max'=>8),
 			array('FechaPago', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, FechaPago, suscripcion_id, NroCuota, financiacion_id, NroDeposito, forma_pago_id, Importe, ImporteLetras, Descripcion, Anio, Mes, planpago_id', 'safe', 'on'=>'search'),
+			array('id, FechaPago, valor, ImporteLetras, Descripcion, NroDeposito, persona_id, talonario, nro_formulario', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,10 +60,10 @@ class Pago extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'planpago' => array(self::BELONGS_TO, 'Planpago', 'planpago_id'),
-			'financiacion' => array(self::BELONGS_TO, 'Financiacion', 'financiacion_id'),
-			'formaPago' => array(self::BELONGS_TO, 'FormaPago', 'forma_pago_id'),
-			'suscripcion' => array(self::BELONGS_TO, 'Suscripcion', 'suscripcion_id'),
+			'cheques' => array(self::HAS_MANY, 'Cheque', 'pago_id'),
+			'formaPagos' => array(self::MANY_MANY, 'FormaPago', 'forma_pago_pago(pago_id, forma_pago_id)'),
+			'imputacion' => array(self::HAS_ONE, 'Imputacion', 'pago_id'),
+			'persona' => array(self::BELONGS_TO, 'Persona', 'persona_id'),
 		);
 	}
 
@@ -76,16 +75,13 @@ class Pago extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'FechaPago' => 'Fecha Pago',
-			'suscripcion_id' => 'Suscripcion',
-			'financiacion_id' => 'Financiacion',
-			'NroDeposito' => 'Nro Deposito',
-			'forma_pago_id' => 'Forma Pago',
-			'Importe' => 'Importe',
+			'valor' => 'Valor',
 			'ImporteLetras' => 'Importe Letras',
 			'Descripcion' => 'Descripcion',
-			'Anio' => 'Año',
-			'Mes' => 'Mes',
-			'planpago_id' => 'Planpago',
+			'NroDeposito' => 'Nro Deposito',
+			'persona_id' => 'Persona',
+			'talonario' => 'Talonario',
+			'nro_formulario' => 'Nro Formulario',
 		);
 	}
 
@@ -109,16 +105,13 @@ class Pago extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('FechaPago',$this->FechaPago,true);
-		$criteria->compare('suscripcion_id',$this->suscripcion_id);
-		$criteria->compare('financiacion_id',$this->financiacion_id);
-		$criteria->compare('NroDeposito',$this->NroDeposito);
-		$criteria->compare('forma_pago_id',$this->forma_pago_id);
-		$criteria->compare('Importe',$this->Importe);
+		$criteria->compare('valor',$this->valor,true);
 		$criteria->compare('ImporteLetras',$this->ImporteLetras,true);
 		$criteria->compare('Descripcion',$this->Descripcion,true);
-		$criteria->compare('Anio',$this->Anio);
-		$criteria->compare('Mes',$this->Mes);
-		$criteria->compare('planpago_id',$this->planpago_id);
+		$criteria->compare('NroDeposito',$this->NroDeposito,true);
+		$criteria->compare('persona_id',$this->persona_id);
+		$criteria->compare('talonario',$this->talonario,true);
+		$criteria->compare('nro_formulario',$this->nro_formulario,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -135,89 +128,20 @@ class Pago extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-	
-	function getCuotas($f, $s){
-		
-		$sql='select id, CONCAT(Mes, " ", Anio) as mess from planpago where not exists 
-		(select * from (SELECT planpago_id from pago where suscripcion_id ='.$s.' and financiacion_id ='.$f.') as ttt 
-		where planpago.id = ttt.planpago_id) and financiacion_id ='.$f.' LIMIT 1';
-	//	echo $sql; die();
-		$connection=Yii::app()->db;
-		$command=$connection->createCommand($sql);
-		$results=$command->queryAll(); 
-	//	var_dump($results); die();
-		
-	//	foreach($results AS $result){
-		 //  echo $result['month'];
-		//   echo $result['m'];
-	//	}
-					
-
-	//	var_dump($dataProvider); die();
-        $cuotas = $results;//Planpago::model()->findAll(array('condition' => $condition));
-		
-		return $cuotas;
-	}
-	
-	 protected function afterFind ()
-    {
-            // convert to display format
-        $this->FechaPago = strtotime ($this->FechaPago);
-        $this->FechaPago = date ('d/m/Y', $this->FechaPago);
-
-        parent::afterFind ();
-    }
-
-    protected function beforeValidate ()
-    {
-            // convert to storage format
-        $this->FechaPago = strtotime ($this->FechaPago);
-        $this->FechaPago = date ('d/m/Y', $this->FechaPago);
-
-        return parent::beforeValidate ();
-    }
-	
-	function getCuotaDesc(){
-		return $this->Mes." ".$this->Anio;
-	}
-	
-	public function getConcate()
+        
+	public function afterFind()
 	{
-		return $this->Mes." ".$this->Anio;	
-	} 
-	
-	public function adelantos()
-	{
-		return  $rawData=Yii::app()->db->createCommand('SELECT * FROM adelanto where persona_id ='.$this->suscripcion->persona->id.' and pago_id is null')->queryAll();
-		
+		$this->valor = Yii::app() -> format -> number($this -> valor);
 
-	
-		var_dump($rawData); die();
-	} 
-	
-		public function beforeSave()
-	{
-		//PHP dates are displayed as dd/mm/yyyy
-		//MYSQL dates are stored as yyyy-mm-dd
-		$fecha=DateTime::createFromFormat('d/m/Y',$this->FechaPago);
-		//var_dump($this->fecha);
-	//	var_dump($from->format('yyyy-mm-dd')); die();
-		$this->FechaPago=$fecha->format('y-m-d');		 
-		parent::beforeSave();
-		return true;
-	}
+		return parent::afterFind();
+	}        
 
-	/* public function afterFind()
+	public function getFechaPago()
 	{
-		//PHP dates are displayed as dd/mm/yyyy
-		//MYSQL dates are stored as yyyy-mm-dd
-		//$fecha=DateTime::createFromFormat('Y-m-d',$this->fecha);
-		//$this->$fecha=date_format($fecha, 'Y-m-d');
-				
-		$this->FechaPago = strtotime ($this->FechaPago);
-        $this->FechaPago = date ('d/m/Y', $this->FechaPago);
-		
-		parent::afterFind();
-		return true;
-	}*/
+//		$fecha=DateTime::createFromFormat('y-m-d',$this->FechaPago);
+//		return $fecha->format('d/m/Y');		 
+            
+                return Yii::app()->format->formatDate($this->fechaPago);
+	}        
+        
 }

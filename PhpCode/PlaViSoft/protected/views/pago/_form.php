@@ -1,144 +1,70 @@
-<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+<?php
+/* @var $this PagoController */
+/* @var $model Pago */
+/* @var $form CActiveForm */
+?>
+
+<div class="form">
+
+<?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'pago-form',
-	'type'=>'horizontal',
-	'htmlOptions'=>array('class'=>'well'),
+	// Please note: When you enable ajax validation, make sure the corresponding
+	// controller action is handling ajax validation correctly.
+	// There is a call to performAjaxValidation() commented in generated controller code.
+	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="help-block">Los campos con <span class="required">*</span> son requeridos.</p>
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); 
-	
-	$model->financiacion_id= $_GET['financiacion'];
-	$model->suscripcion_id= $_GET['suscripcion'];
-	
-    echo $form->hiddenField($model,'financiacion_id',array('type'=>"hidden"));
-	echo $form->hiddenField($model,'suscripcion_id',array('type'=>"hidden"));	
-	
-	
-//	var_dump($model->suscripcion_id); die();
-	$f = $_GET['financiacion'];
-	$s = $_GET['suscripcion'];
-	
-	?>
+	<?php echo $form->errorSummary($model); ?>
 
-	<div class="control-group">
-		<div class="control-label">
-			<?php echo $form->labelEx($model,'Fecha Pago'); ?>
-		</div>
-		<div class="controls">
-		
-		<?php 
-			$this->widget('zii.widgets.jui.CJuiDatePicker',array(
-				'model' => $model,
-				'attribute' => 'FechaPago',
-			    'name'=>'Fecha Pago',
-			    'language' => 'es',
-			    // additional javascript options for the date picker plugin
-			    'options'=>array(
-			        'showAnim'=>'fold',
-			        'dateFormat'=>'dd/mm/yy',
-			    ),
-			    'htmlOptions'=>array(
-			        'style'=>'height:20px;'
-			    ),				
-			));
-		?>
-		</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'FechaPago'); ?>
+		<?php echo $form->textField($model,'FechaPago'); ?>
+		<?php echo $form->error($model,'FechaPago'); ?>
 	</div>
 
-
-	
-	<div class="control-group">
-		<div class="control-label">
-			<?php echo $form->labelEx($model,'planpago_id'); ?>
-		</div>
-		<div class="controls">
-		<?php //var_dump( $model->getCuotas($f,$s)); die();	 
-		echo CHtml::activeDropDownList($model,'planpago_id', CHtml::listData($model->getCuotas($f,$s), 'id', 'mess'));
-
-	 ?>	
-	 	</div>
-	 </div>
-
-	<?php echo $form->textFieldRow($model,'NroDeposito',array('class'=>'span5')); ?>
-
-	<?php //echo $form->textFieldRow($model,'forma_pago_id',array('class'=>'span5')); ?>
-	
-	<div class="control-group">
-		<div class="control-label">
-			<?php echo $form->labelEx($model,'forma_pago_id'); ?>
-		</div>
-		<div class="controls">
-		<?php	 echo CHtml::activeDropDownList($model,'forma_pago_id', CHtml::listData(FormaPago::model()->findAll(), 'id', 'Descripcion'), array('empty' => '--- Elegir Forma de Pago ---'))
-	 ?>	
-	 	</div>
+	<div class="row">
+		<?php echo $form->labelEx($model,'valor'); ?>
+		<?php echo $form->textField($model,'valor',array('size'=>15,'maxlength'=>15)); ?>
+		<?php echo $form->error($model,'valor'); ?>
 	</div>
 
-	<?php //echo $form->textFieldRow($model,'Importe',array('class'=>'span5')); ?>
-
-	<?php echo $form->textFieldRow($model,'Descripcion',array('class'=>'span5','maxlength'=>100)); ?>
-
-	<?php //echo $form->textFieldRow($model,'Anio',array('class'=>'span5')); ?>
-
-	<?php //echo $form->textFieldRow($model,'Mes',array('class'=>'span5')); ?>
-	
-	<?php  
-
-//$rawData=Yii::app()->db->createCommand('SELECT * FROM adelanto where persona_id ')->queryAll();
-// or using: $rawData=User::model()->findAll();
-$rawData = $model->adelantos();
-if (count($rawData) <> 0 ){
-$dataProvider=new CArrayDataProvider($rawData, array(
-    'id'=>'id',
-    'sort'=>array(
-        'attributes'=>array(
-             'id', 'perosna_id', 'importe','importe_imputado'
-        ),
-    ),
-    'pagination'=>array(
-        'pageSize'=>10,
-    ),
-)); 	
-//var_dump($dataProvider->data[0]["id"]);
-	//var_dump($dataProvider);
-	//die();
-	$this->widget('bootstrap.widgets.TbGridView',array(
-            'type'=>'striped bordered condensed',
-            'id'=>'user-grid',            
-            'dataProvider'=> $dataProvider,
-        //    'template'=>"{items}\n{pager}",
-       
-            'columns'=>array(array(
-            'class'=>'CCheckBoxColumn', // И ЭТО ВСЕ ТОЖЕ ВАЖНО
-            'id'=>'adelantos', // И ЭТО ВСЕ ТОЖЕ ВАЖНО
-        ),        
-              //  'id',
-           	   'fecha',
-           	   'importe',
-                'id',
-            ),
-       ));
-	   
-	//   $this->endWidget();
-	    
-}   
-	    ?>
-
-
-	
-	<div class="form-actions">
-		<?php $this->widget('bootstrap.widgets.TbButton', array(
-			'url'=>'index.php?r=suscripcion/view&id='.$model->suscripcion->id,
-			'buttonType'=>'submit',
-			'type'=>'primary',
-			'label'=>$model->isNewRecord ? 'Guardar' : 'Guardar',
-		)); ?>
-		<?php $this->widget('bootstrap.widgets.TbButton', array(
-			'buttonType'=>'reset',
-			'type'=>'primary',
-			'label'=>'Limpiar',
-		)); ?>
+	<div class="row">
+		<?php echo $form->labelEx($model,'ImporteLetras'); ?>
+		<?php echo $form->textField($model,'ImporteLetras',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'ImporteLetras'); ?>
 	</div>
 
-<?php    $this->endWidget(); ?>
+	<div class="row">
+		<?php echo $form->labelEx($model,'Descripcion'); ?>
+		<?php echo $form->textField($model,'Descripcion',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->error($model,'Descripcion'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'forma_pago_id'); ?>
+		<?php echo $form->textField($model,'forma_pago_id'); ?>
+		<?php echo $form->error($model,'forma_pago_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'NroDeposito'); ?>
+		<?php echo $form->textField($model,'NroDeposito',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->error($model,'NroDeposito'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'persona_id'); ?>
+		<?php echo $form->textField($model,'persona_id'); ?>
+		<?php echo $form->error($model,'persona_id'); ?>
+	</div>
+
+	<div class="row buttons">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	</div>
+
+<?php $this->endWidget(); ?>
+
+</div><!-- form -->

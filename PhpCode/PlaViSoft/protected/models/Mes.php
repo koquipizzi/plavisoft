@@ -1,23 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "forma_pago".
+ * This is the model class for table "mes".
  *
- * The followings are the available columns in table 'forma_pago':
+ * The followings are the available columns in table 'mes':
  * @property integer $id
- * @property string $Descripcion
+ * @property string $mes
  *
  * The followings are the available model relations:
- * @property Pago[] $pagos
+ * @property Cuota[] $cuotas
  */
-class FormaPago extends CActiveRecord
+class Mes extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'forma_pago';
+		return 'mes';
 	}
 
 	/**
@@ -28,10 +28,12 @@ class FormaPago extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('Descripcion', 'length', 'max'=>45),
+			array('id', 'required'),
+			array('id', 'numerical', 'integerOnly'=>true),
+			array('mes', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, Descripcion', 'safe', 'on'=>'search'),
+			array('id, mes', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -43,7 +45,7 @@ class FormaPago extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'pagos' => array(self::MANY_MANY, 'Pago', 'forma_pago_pago(forma_pago_id, pago_id)'),
+			'cuotas' => array(self::HAS_MANY, 'Cuota', 'mes_id'),
 		);
 	}
 
@@ -54,7 +56,7 @@ class FormaPago extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'Descripcion' => 'Descripcion',
+			'mes' => 'Mes',
 		);
 	}
 
@@ -77,7 +79,7 @@ class FormaPago extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('Descripcion',$this->Descripcion,true);
+		$criteria->compare('mes',$this->mes,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -88,7 +90,7 @@ class FormaPago extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return FormaPago the static model class
+	 * @return Mes the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

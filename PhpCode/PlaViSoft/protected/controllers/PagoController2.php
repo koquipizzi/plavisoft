@@ -1,5 +1,7 @@
 <?php
 
+
+
 class PagoController extends Controller
 {
 	/**
@@ -15,7 +17,6 @@ class PagoController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -36,7 +37,7 @@ class PagoController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','print'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -66,18 +67,62 @@ class PagoController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+		
+		Yii::import('application.controllers.AdelantoController'); 
+	//	$total = AdelantoController::sumaAdelantos($_POST['adelantos']);
+				
+		$suscripcion = Suscripcion::model()->findByPk($_GET['suscripcion']);
+		$id_persona = $suscripcion['persona_id']; 	
 
 		if(isset($_POST['Pago']))
 		{
 			$model->attributes=$_POST['Pago'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			//var_dump($model); die();
+			$condition = 'id = "'.$_POST['Pago']['planpago_id'].'"';			
+			$planpago = Planpago::model()->findAll(array('condition' => $condition));
+			
+			$ea =$suscripcion['estado_adjudicacion_id']; 			
+			$condition = 'Adjudicado = "'.$ea.'" and financiacion_id = "'.$model->financiacion_id.'"';			
+			$tipoCuota = TipoCuota::model()->findAll(array('condition' => $condition));
+			
+			$model->Importe = $tipoCuota[0]['Importe']; 
+						
+			$model->ImporteLetras = $tipoCuota[0]['ImporteLetras']; 
+			$model->Mes = $planpago[0]['mes']; 
+			$model->Anio = $planpago[0]['anio']; 
+			$model->NroCuota = $planpago[0]['nro_cuota']; 
+			//var_dump($tipoCuota); die();
+		//	$model[''] = 
+				
+			
+			$importe = $tipoCuota[0]['Importe'];
+			
+			if($model->save()){
+				AdelantoController::registrarAdelantos($_POST['adelantos'], $model->id, $importe);
+				//$this->redirect(array('view','id'=>$model->id));
+			    //	$this->redirect(array('print','id'=>$model->id));
+			    $this->redirect(array('suscripcion/view','id'=>$model->suscripcion->id));
+			}
 		}
 
+		$condition = 'persona_id = "'.$id_persona.'" and pago_id IS NULL';		
+		$records = Adelanto::model()->findAll(array('condition' => $condition));
+		//var_dump($records); die();
+
+
+	    
+	//    $records = Adelanto::model()->findByAttributes(array('persona_id'=>$id_persona));
+		
+	//		var_dump($records); die();
+		Yii::app()->user->setFlash('success', '<strong>Well done!</strong> You successfully read this important alert message.');
 		$this->render('create',array(
-			'model'=>$model,
+			'model'=>$model,'records'=>$records,
 		));
+	//	$this->redirect(array('print','id'=>$model->id));
+
 	}
+
+	
 
 	/**
 	 * Updates a particular model.
@@ -110,11 +155,17 @@ class PagoController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow deletion via POST request
+			$this->loadModel($id)->delete();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	/**
@@ -130,7 +181,7 @@ class PagoController extends Controller
 
 	/**
 	 * Manages all models.
-	 */
+	 
 	public function actionAdmin()
 	{
 		$model=new Pago('search');
@@ -142,13 +193,20 @@ class PagoController extends Controller
 			'model'=>$model,
 		));
 	}
+	*/
+	
+	public function actionAdmin()
+	{
+	    $records=Pago::model()->findAll();
+	    $this->render('admin',array(
+	        'records'=>$records,
+	    )); 
+	}
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer $id the ID of the model to be loaded
-	 * @return Pago the loaded model
-	 * @throws CHttpException
+	 * @param integer the ID of the model to be loaded
 	 */
 	public function loadModel($id)
 	{
@@ -160,7 +218,7 @@ class PagoController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Pago $model the model to be validated
+	 * @param CModel the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
@@ -170,4 +228,14 @@ class PagoController extends Controller
 			Yii::app()->end();
 		}
 	}
+	
+		
+	public function actionPrint($id) {
+        $model = $this->loadModel($id);
+        $html2pdf = Yii::app()->ePdf->HTML2PDF('P', 'A4', 'es');
+		$stylesheet = file_get_contents('css/print.css'); /// here call you external css file 
+        $html2pdf->WriteHTML($this->renderPartial('print', array('model'=>$model, 'persona'=>$model->suscripcion->persona), true));
+        $html2pdf->Output($model->suscripcion->persona->Apellido."-".$model->suscripcion->persona->Nombre.'-Cuota'.$model->NroCuota.'.pdf');
+
+}
 }

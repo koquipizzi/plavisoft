@@ -4,11 +4,16 @@
  * This is the model class for table "imputacion".
  *
  * The followings are the available columns in table 'imputacion':
+ * @property integer $id
  * @property integer $pago_id
  * @property string $valor
  * @property string $cuota_id
+ *
+ * The followings are the available model relations:
+ * @property Pago $pago
+ * @property Cuota $cuota
  */
-class Imputacion extends CActiveRecord
+class Imputacion extends ActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -28,11 +33,11 @@ class Imputacion extends CActiveRecord
 		return array(
 			array('pago_id, cuota_id', 'required'),
 			array('pago_id', 'numerical', 'integerOnly'=>true),
-			array('valor', 'length', 'max'=>45),
+			array('valor', 'length', 'max'=>15),
 			array('cuota_id', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('pago_id, valor, cuota_id', 'safe', 'on'=>'search'),
+			array('id, pago_id, valor, cuota_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -44,6 +49,8 @@ class Imputacion extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'pago' => array(self::BELONGS_TO, 'Pago', 'pago_id'),
+			'cuota' => array(self::BELONGS_TO, 'Cuota', 'cuota_id'),
 		);
 	}
 
@@ -53,6 +60,7 @@ class Imputacion extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+			'id' => 'ID',
 			'pago_id' => 'Pago',
 			'valor' => 'Valor',
 			'cuota_id' => 'Cuota',
@@ -77,6 +85,7 @@ class Imputacion extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('id',$this->id);
 		$criteria->compare('pago_id',$this->pago_id);
 		$criteria->compare('valor',$this->valor,true);
 		$criteria->compare('cuota_id',$this->cuota_id,true);
@@ -96,4 +105,28 @@ class Imputacion extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        
+	public function afterFind()
+	{
+		$this->valor = Yii::app() -> format -> number($this -> valor);
+
+		return parent::afterFind();
+	}        
+        
+        public function getPago_field(){
+            return 
+                '<a href="index.php?r=pago/view&id='.$this->pago->id.'">'.
+                $this->pago->talonario." - ".$this->pago->nro_formulario." (".$this->pago->FechaPago.") ".
+                '</a>';
+        }
+        
+        public function getCuota_field(){
+            return 
+                '<a href="index.php?r=cuota/view&id='.$this->cuota->id.'">'.
+                $this->cuota->mes->mes." - ".$this->cuota->anio." (".($this->cuota->saldada=='Si'?'Saldada':'No Saldada').") ".
+                '</a>';
+        }
+        
+        
 }

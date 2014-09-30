@@ -33,16 +33,16 @@ class TipoVivienda extends ActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle', 'numerical', 'integerOnly'=>true),
+                // NOTE: you should only define rules for those attributes that
+                // will receive user inputs.
+                return array(
+                        array('MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle', 'numerical', 'integerOnly'=>true),
                         array('Valor', 'length', 'max'=>20),
-			array('Descripcion, Nombre, Fotos', 'length', 'max'=>45),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('id, Descripcion, Valor, Nombre, MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle, Fotos', 'safe', 'on'=>'search'),
-		);
+                        array('Descripcion, Nombre, Fotos', 'length', 'max'=>45),
+                        // The following rule is used by search().
+                        // @todo Please remove those attributes that should not be searched.
+                        array('id, Descripcion, Valor, Nombre, MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle, Fotos', 'safe', 'on'=>'search'),
+                );
 	}
 
 	/**
@@ -120,6 +120,7 @@ class TipoVivienda extends ActiveRecord
 	{
 		return parent::model($className);
 	}
+        
         
 	public function afterFind()
 	{

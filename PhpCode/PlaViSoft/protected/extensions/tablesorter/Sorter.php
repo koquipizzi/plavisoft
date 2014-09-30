@@ -45,9 +45,9 @@ class Sorter extends CWidget
 	public function registerClientScript()
 	{
 		$bu = Yii::app()->assetManager->publish(dirname(__FILE__) . '/assets/');
-        $cs = Yii::app()->clientScript;
-        //Intialize CSS
-        $cs->registerCssFile($bu . '/css/tablesorter.css');
+                $cs = Yii::app()->clientScript;
+                //Intialize CSS
+                $cs->registerCssFile($bu . '/css/tablesorter.css');
 		$cs->registerCssFile($bu . '/css/tablesorter.pager.css');
 		$cs->registerCssFile($bu . '/css/bootstrap.css');
 		//Intialize Jquery
@@ -110,51 +110,13 @@ class Sorter extends CWidget
 		echo "<tbody>\n";
 		foreach($datas as $data)
 		{
-			echo "<tr>\n";
-			foreach($this->columns as $column)
-			{
-				//checking whether the column name is customized
-				if(is_array($column))
-				{
-					$column=$column['value'];	
-				}
-				
-				$find = explode(".", $column);
-				if(count($find)>1) {
-					echo "<td>".$data->$find[0]->$find[1]."</td>";	
-				}
-				else {	
-					echo "<td>".$data->$column."</td>";
-				}
-			}
-                        // Agregado por Diego
-                        echo $this->buttons($class, $data);
-                        
-                        echo "</tr>\n";
+                        $this->print_row($data,$class);
 		}
 		echo "</tbody>\n";
 		//Table body end
 		
-		//Table footer start
-		echo "<tfoot>\n";
-		echo '<tr>
-				<th colspan="7" class="pager form-horizontal">
-					<button type="button" class="btn first"><i class="icon-step-backward"></i></button>
-					<button type="button" class="btn prev"><i class="icon-arrow-left"></i></button>
-					<span class="pagedisplay"></span> <!-- this can be any element, including an input -->
-					<button type="button" class="btn next"><i class="icon-arrow-right"></i></button>
-					<button type="button" class="btn last"><i class="icon-step-forward"></i></button>
-					<select class="pagesize input-mini" title="Select page size">
-						<option selected="selected" value="10">10</option>
-						<option value="20">20</option>
-						<option value="30">30</option>
-						<option value="40">40</option>
-					</select>
-					<select class="pagenum input-mini" title="Select page number"></select>
-				</th>
-			  </tr>';
-		echo "</tfoot>\n";
-		//Table footer end
+		//Table footer 
+                echo $this->footer();
 		
 		echo "</table>\n";
 		//Table end
@@ -185,6 +147,73 @@ class Sorter extends CWidget
             
             return $r;
         }
+        
+        
+        public function footer(){
+            $r =  ' 
+                <tfoot>\n
+                    <tr>
+                        <th colspan="7" class="pager form-horizontal">
+                                <button type="button" class="btn first"><i class="icon-step-backward"></i></button>
+                                <button type="button" class="btn prev"><i class="icon-arrow-left"></i></button>
+                                <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
+                                <button type="button" class="btn next"><i class="icon-arrow-right"></i></button>
+                                <button type="button" class="btn last"><i class="icon-step-forward"></i></button>
+                                <select class="pagesize input-mini" title="Select page size">
+                                        <option selected="selected" value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="40">40</option>
+                                </select>
+                                <select class="pagenum input-mini" title="Select page number"></select>
+                        </th>
+                    </tr>
+                </tfoot>\n';
+            return $r;
+        }
+        
+        public function print_row($data,$class){
+                $row_style = $this->getRowStyle($data);
+                echo "<tr $row_style>\n";
+                foreach($this->columns as $column)
+                {
+                        //checking whether the column name is customized
+                        $col_style = $this->getColStyle($column);                    
+                        if(is_array($column))
+                        {
+                                $column=$column['value'];	
+                        }
+
+                        $find = explode(".", $column);
+                        if(count($find)>1) {
+                                echo "<td $col_style >".$data->$find[0]->$find[1]."</td>";	
+                        }
+                        else {	
+                                echo "<td $col_style >".$data->$column."</td>";
+                        }
+                }
+                // Agregado por Diego
+                echo $this->buttons($class, $data);
+
+                echo "</tr>\n";            
+        }
+        
+        
+        public function getRowStyle($data){
+                return '';
+        }
+        
+        
+        public function getColStyle($column){
+                if(is_array($column) &&  array_key_exists('style', $column))
+                {
+                        return 'style="'.$column['style'].'"';	
+                }            
+                return '';
+        }
+        
+        
+        
 
 }
 ?>

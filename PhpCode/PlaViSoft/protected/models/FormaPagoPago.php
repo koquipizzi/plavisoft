@@ -1,23 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "forma_pago".
+ * This is the model class for table "forma_pago_pago".
  *
- * The followings are the available columns in table 'forma_pago':
- * @property integer $id
- * @property string $Descripcion
- *
- * The followings are the available model relations:
- * @property Pago[] $pagos
+ * The followings are the available columns in table 'forma_pago_pago':
+ * @property integer $forma_pago_id
+ * @property integer $pago_id
+ * @property string $valor
  */
-class FormaPago extends CActiveRecord
+class FormaPagoPago extends CActiveRecord
 {
+    
+        const ID_CONTADO = 1;
+        const ID_CHEQUE = 2;
+        const ID_DEPOSITO = 3;
+        
+        
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'forma_pago';
+		return 'forma_pago_pago';
 	}
 
 	/**
@@ -28,10 +32,12 @@ class FormaPago extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('Descripcion', 'length', 'max'=>45),
+			array('forma_pago_id, pago_id', 'required'),
+			array('forma_pago_id, pago_id', 'numerical', 'integerOnly'=>true),
+			array('valor', 'length', 'max'=>15),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, Descripcion', 'safe', 'on'=>'search'),
+			array('forma_pago_id, pago_id, valor', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -43,7 +49,6 @@ class FormaPago extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'pagos' => array(self::MANY_MANY, 'Pago', 'forma_pago_pago(forma_pago_id, pago_id)'),
 		);
 	}
 
@@ -53,8 +58,9 @@ class FormaPago extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'Descripcion' => 'Descripcion',
+			'forma_pago_id' => 'Forma Pago',
+			'pago_id' => 'Pago',
+			'valor' => 'Valor',
 		);
 	}
 
@@ -76,8 +82,9 @@ class FormaPago extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('Descripcion',$this->Descripcion,true);
+		$criteria->compare('forma_pago_id',$this->forma_pago_id);
+		$criteria->compare('pago_id',$this->pago_id);
+		$criteria->compare('valor',$this->valor,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -88,10 +95,51 @@ class FormaPago extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return FormaPago the static model class
+	 * @return FormaPagoPago the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
+}
+
+abstract class FormaPagoEspecifico extends FormaPagoPago
+{
+    abstract protected function getIDType();
+    
+    public function __construct($scenario='insert') {
+        parent::__construct($scenario);
+        $this->forma_pago_id = $this->getIDType();
+    }
+    
+    public function beforesave(){
+        if(parent::beforeSave())
+        {
+             $this->forma_pago_id = $this->getIDType();
+             return true;
+        }
+        return false;
+    }
+}
+
+
+class FormaPagoContado extends FormaPagoEspecifico
+{
+    protected function getIDType(){
+        return self::ID_CONTADO;
+    }
+}
+
+class FormaPagoCheque extends FormaPagoEspecifico
+{
+    protected function getIDType(){
+        return self::ID_CHEQUE;
+    }
+}
+
+class FormaPagoDeposito extends FormaPagoEspecifico
+{
+    protected function getIDType(){
+        return self::ID_DEPOSITO;
+    }    
 }
