@@ -132,16 +132,11 @@ class Pago extends ActiveRecord
 	public function afterFind()
 	{
 		$this->valor = Yii::app() -> format -> number($this -> valor);
+                $this->FechaPago = Yii::app()->format->date($this->FechaPago);
 
 		return parent::afterFind();
 	}        
 
-	public function getFechaPago()
-	{
-//		$fecha=DateTime::createFromFormat('y-m-d',$this->FechaPago);
-//		return $fecha->format('d/m/Y');		 
-            
-                return Yii::app()->format->formatDate($this->fechaPago);
-	}        
+  
         
 }

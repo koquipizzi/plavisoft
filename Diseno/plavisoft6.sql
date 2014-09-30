@@ -164,30 +164,6 @@ LOCK TABLES `cuota` WRITE;
 INSERT INTO `cuota` VALUES (29,34,0,2500.00,'dos mil quinientos  pesos',1,2014,'No'),(30,34,1,2500.00,'dos mil quinientos  pesos',2,2014,'No'),(31,34,2,2500.00,'dos mil quinientos  pesos',3,2014,'No'),(32,34,3,2500.00,'dos mil quinientos  pesos',4,2014,'No'),(33,34,4,2500.00,'dos mil quinientos  pesos',5,2014,'No'),(34,34,5,2500.00,'dos mil quinientos  pesos',6,2014,'No'),(35,34,6,2500.00,'dos mil quinientos  pesos',7,2014,'No'),(36,34,7,2500.00,'dos mil quinientos  pesos',8,2014,'No'),(37,34,8,2500.00,'dos mil quinientos  pesos',9,2014,'No'),(38,34,9,2500.00,'dos mil quinientos  pesos',10,2014,'No'),(39,34,10,2500.00,'dos mil quinientos  pesos',11,2014,'No'),(40,34,11,2500.00,'dos mil quinientos  pesos',12,2014,'No'),(41,34,12,2500.00,'dos mil quinientos  pesos',1,2015,'No'),(42,34,13,2500.00,'dos mil quinientos  pesos',2,2015,'No'),(43,34,14,2500.00,'dos mil quinientos  pesos',3,2015,'No'),(44,34,15,2500.00,'dos mil quinientos  pesos',4,2015,'No'),(45,34,16,2500.00,'dos mil quinientos  pesos',5,2015,'No'),(46,34,17,2500.00,'dos mil quinientos  pesos',6,2015,'No'),(47,34,18,2500.00,'dos mil quinientos  pesos',7,2015,'No'),(48,34,19,2500.00,'dos mil quinientos  pesos',8,2015,'No'),(49,34,20,2500.00,'dos mil quinientos  pesos',9,2015,'No'),(50,34,21,2500.00,'dos mil quinientos  pesos',10,2015,'No'),(51,34,22,2500.00,'dos mil quinientos  pesos',11,2015,'No'),(52,34,23,2500.00,'dos mil quinientos  pesos',12,2015,'No'),(59,43,0,1500.00,'mil quinientos  pesos',1,2014,'No'),(60,43,1,1500.00,'mil quinientos  pesos',2,2014,'No'),(61,43,2,1500.00,'mil quinientos  pesos',3,2014,'No'),(62,43,3,1500.00,'mil quinientos  pesos',4,2014,'No'),(63,43,4,1500.00,'mil quinientos  pesos',5,2014,'No'),(64,43,5,1500.00,'mil quinientos  pesos',6,2014,'No'),(65,43,6,1500.00,'mil quinientos  pesos',7,2014,'No'),(66,43,7,1500.00,'mil quinientos  pesos',8,2014,'No'),(67,43,8,1500.00,'mil quinientos  pesos',9,2014,'No'),(68,43,9,1500.00,'mil quinientos  pesos',10,2014,'No'),(69,43,10,1500.00,'mil quinientos  pesos',11,2014,'No'),(70,43,11,1500.00,'mil quinientos  pesos',12,2014,'No'),(71,43,12,1500.00,'mil quinientos  pesos',1,2015,'No'),(72,43,13,1500.00,'mil quinientos  pesos',2,2015,'No'),(73,43,14,1500.00,'mil quinientos  pesos',3,2015,'No'),(74,43,15,1500.00,'mil quinientos  pesos',4,2015,'No'),(75,43,16,1500.00,'mil quinientos  pesos',5,2015,'No'),(76,43,17,1500.00,'mil quinientos  pesos',6,2015,'No'),(77,43,18,1500.00,'mil quinientos  pesos',7,2015,'No'),(78,43,19,1500.00,'mil quinientos  pesos',8,2015,'No'),(79,43,20,1500.00,'mil quinientos  pesos',9,2015,'No'),(80,43,21,1500.00,'mil quinientos  pesos',10,2015,'No'),(81,43,22,1500.00,'mil quinientos  pesos',11,2015,'No'),(82,43,23,1500.00,'mil quinientos  pesos',12,2015,'No'),(83,44,0,1.70,'mil setecientos  pesos',1,2014,'Si'),(84,44,1,1.70,'mil setecientos  pesos',2,2014,'Si'),(85,44,2,1700.00,'mil setecientos  pesos',3,2014,'No'),(86,44,3,1700.00,'mil setecientos  pesos',4,2014,'No'),(87,44,4,1700.00,'mil setecientos  pesos',5,2014,'No'),(88,44,5,1700.00,'mil setecientos  pesos',6,2014,'No'),(89,44,6,1700.00,'mil setecientos  pesos',7,2014,'No'),(90,44,7,1700.00,'mil setecientos  pesos',8,2014,'No'),(91,44,8,1700.00,'mil setecientos  pesos',9,2014,'No'),(92,44,9,1700.00,'mil setecientos  pesos',10,2014,'No'),(93,44,10,1700.00,'mil setecientos  pesos',11,2014,'No'),(94,44,11,1700.00,'mil setecientos  pesos',12,2014,'No'),(95,44,12,1700.00,'mil setecientos  pesos',1,2015,'No'),(96,44,13,1700.00,'mil setecientos  pesos',2,2015,'No'),(97,44,14,1700.00,'mil setecientos  pesos',3,2015,'No'),(98,44,15,1700.00,'mil setecientos  pesos',4,2015,'No'),(99,44,16,1700.00,'mil setecientos  pesos',5,2015,'No'),(100,44,17,1700.00,'mil setecientos  pesos',6,2015,'No'),(101,44,18,1700.00,'mil setecientos  pesos',7,2015,'No'),(102,44,19,1700.00,'mil setecientos  pesos',8,2015,'No'),(103,44,20,1700.00,'mil setecientos  pesos',9,2015,'No'),(104,44,21,1700.00,'mil setecientos  pesos',10,2015,'No'),(105,44,22,1700.00,'mil setecientos  pesos',11,2015,'No'),(106,44,23,1700.00,'mil setecientos  pesos',12,2015,'No'),(107,45,0,1500.00,'mil quinientos  pesos',1,2014,'No'),(108,45,1,1500.00,'mil quinientos  pesos',2,2014,'No'),(109,45,2,1500.00,'mil quinientos  pesos',3,2014,'No'),(110,45,3,1500.00,'mil quinientos  pesos',4,2014,'No'),(111,45,4,1500.00,'mil quinientos  pesos',5,2014,'No'),(112,45,5,1500.00,'mil quinientos  pesos',6,2014,'No'),(113,45,6,1500.00,'mil quinientos  pesos',7,2014,'No'),(114,45,7,1500.00,'mil quinientos  pesos',8,2014,'No'),(115,45,8,1500.00,'mil quinientos  pesos',9,2014,'No'),(116,45,9,1500.00,'mil quinientos  pesos',10,2014,'No'),(117,45,10,1500.00,'mil quinientos  pesos',11,2014,'No'),(118,45,11,1500.00,'mil quinientos  pesos',12,2014,'No'),(119,45,12,1500.00,'mil quinientos  pesos',1,2015,'No'),(120,45,13,1500.00,'mil quinientos  pesos',2,2015,'No'),(121,45,14,1500.00,'mil quinientos  pesos',3,2015,'No'),(122,45,15,1500.00,'mil quinientos  pesos',4,2015,'No'),(123,45,16,1500.00,'mil quinientos  pesos',5,2015,'No'),(124,45,17,1500.00,'mil quinientos  pesos',6,2015,'No'),(125,45,18,1500.00,'mil quinientos  pesos',7,2015,'No'),(126,45,19,1500.00,'mil quinientos  pesos',8,2015,'No'),(127,45,20,1500.00,'mil quinientos  pesos',9,2015,'No'),(128,45,21,1500.00,'mil quinientos  pesos',10,2015,'No'),(129,45,22,1500.00,'mil quinientos  pesos',11,2015,'No'),(130,45,23,1500.00,'mil quinientos  pesos',12,2015,'No'),(131,46,0,1500.00,'mil quinientos  pesos',1,2014,'No'),(132,46,1,1500.00,'mil quinientos  pesos',2,2014,'No'),(133,46,2,1500.00,'mil quinientos  pesos',3,2014,'No'),(134,46,3,1500.00,'mil quinientos  pesos',4,2014,'No'),(135,46,4,1500.00,'mil quinientos  pesos',5,2014,'No'),(136,46,5,1500.00,'mil quinientos  pesos',6,2014,'No'),(137,46,6,1500.00,'mil quinientos  pesos',7,2014,'No'),(138,46,7,1500.00,'mil quinientos  pesos',8,2014,'No'),(139,46,8,1500.00,'mil quinientos  pesos',9,2014,'No'),(140,46,9,1500.00,'mil quinientos  pesos',10,2014,'No'),(141,46,10,1500.00,'mil quinientos  pesos',11,2014,'No'),(142,46,11,1500.00,'mil quinientos  pesos',12,2014,'No'),(143,46,12,1500.00,'mil quinientos  pesos',1,2015,'No'),(144,46,13,1500.00,'mil quinientos  pesos',2,2015,'No'),(145,46,14,1500.00,'mil quinientos  pesos',3,2015,'No'),(146,46,15,1500.00,'mil quinientos  pesos',4,2015,'No'),(147,46,16,1500.00,'mil quinientos  pesos',5,2015,'No'),(148,46,17,1500.00,'mil quinientos  pesos',6,2015,'No'),(149,46,18,1500.00,'mil quinientos  pesos',7,2015,'No'),(150,46,19,1500.00,'mil quinientos  pesos',8,2015,'No'),(151,46,20,1500.00,'mil quinientos  pesos',9,2015,'No'),(152,46,21,1500.00,'mil quinientos  pesos',10,2015,'No'),(153,46,22,1500.00,'mil quinientos  pesos',11,2015,'No'),(154,46,23,1500.00,'mil quinientos  pesos',12,2015,'No'),(155,47,0,1500.00,'mil quinientos  pesos',1,2014,'Si'),(156,47,1,1500.00,'mil quinientos  pesos',2,2014,'No'),(157,47,2,1500.00,'mil quinientos  pesos',3,2014,'No'),(158,47,3,1500.00,'mil quinientos  pesos',4,2014,'No'),(159,47,4,1500.00,'mil quinientos  pesos',5,2014,'No'),(160,47,5,1500.00,'mil quinientos  pesos',6,2014,'No'),(161,47,6,1500.00,'mil quinientos  pesos',7,2014,'No'),(162,47,7,1500.00,'mil quinientos  pesos',8,2014,'No'),(163,47,8,1500.00,'mil quinientos  pesos',9,2014,'No'),(164,47,9,1500.00,'mil quinientos  pesos',10,2014,'No'),(165,47,10,1500.00,'mil quinientos  pesos',11,2014,'No'),(166,47,11,1500.00,'mil quinientos  pesos',12,2014,'No'),(167,47,12,1500.00,'mil quinientos  pesos',1,2015,'No'),(168,47,13,1500.00,'mil quinientos  pesos',2,2015,'No'),(169,47,14,1500.00,'mil quinientos  pesos',3,2015,'No'),(170,47,15,1500.00,'mil quinientos  pesos',4,2015,'No'),(171,47,16,1500.00,'mil quinientos  pesos',5,2015,'No'),(172,47,17,1500.00,'mil quinientos  pesos',6,2015,'No'),(173,47,18,1500.00,'mil quinientos  pesos',7,2015,'No'),(174,47,19,1500.00,'mil quinientos  pesos',8,2015,'No'),(175,47,20,1500.00,'mil quinientos  pesos',9,2015,'No'),(176,47,21,1500.00,'mil quinientos  pesos',10,2015,'No'),(177,47,22,1500.00,'mil quinientos  pesos',11,2015,'No'),(178,47,23,1500.00,'mil quinientos  pesos',12,2015,'No'),(179,48,0,2500.00,'dos mil quinientos  pesos',1,2014,'No'),(180,48,1,2500.00,'dos mil quinientos  pesos',2,2014,'No'),(181,48,2,2500.00,'dos mil quinientos  pesos',3,2014,'No'),(182,48,3,2500.00,'dos mil quinientos  pesos',4,2014,'No'),(183,48,4,2500.00,'dos mil quinientos  pesos',5,2014,'No'),(184,48,5,2500.00,'dos mil quinientos  pesos',6,2014,'No'),(185,48,6,2500.00,'dos mil quinientos  pesos',7,2014,'No'),(186,48,7,2500.00,'dos mil quinientos  pesos',8,2014,'No'),(187,48,8,2500.00,'dos mil quinientos  pesos',9,2014,'No'),(188,48,9,2500.00,'dos mil quinientos  pesos',10,2014,'No'),(189,48,10,2500.00,'dos mil quinientos  pesos',11,2014,'No'),(190,48,11,2500.00,'dos mil quinientos  pesos',12,2014,'No'),(191,48,12,2500.00,'dos mil quinientos  pesos',1,2015,'No'),(192,48,13,2500.00,'dos mil quinientos  pesos',2,2015,'No'),(193,48,14,2500.00,'dos mil quinientos  pesos',3,2015,'No'),(194,48,15,2500.00,'dos mil quinientos  pesos',4,2015,'No'),(195,48,16,2500.00,'dos mil quinientos  pesos',5,2015,'No'),(196,48,17,2500.00,'dos mil quinientos  pesos',6,2015,'No'),(197,48,18,2500.00,'dos mil quinientos  pesos',7,2015,'No'),(198,48,19,2500.00,'dos mil quinientos  pesos',8,2015,'No'),(199,48,20,2500.00,'dos mil quinientos  pesos',9,2015,'No'),(200,48,21,2500.00,'dos mil quinientos  pesos',10,2015,'No'),(201,48,22,2500.00,'dos mil quinientos  pesos',11,2015,'No'),(202,48,23,2500.00,'dos mil quinientos  pesos',12,2015,'No'),(203,49,0,1500.00,'mil quinientos  pesos',1,2014,'No'),(204,49,1,1500.00,'mil quinientos  pesos',2,2014,'No'),(205,49,2,1500.00,'mil quinientos  pesos',3,2014,'No'),(206,49,3,1500.00,'mil quinientos  pesos',4,2014,'No'),(207,49,4,1500.00,'mil quinientos  pesos',5,2014,'No'),(208,49,5,1500.00,'mil quinientos  pesos',6,2014,'No'),(209,49,6,1500.00,'mil quinientos  pesos',7,2014,'No'),(210,49,7,1500.00,'mil quinientos  pesos',8,2014,'No'),(211,49,8,1500.00,'mil quinientos  pesos',9,2014,'No'),(212,49,9,1500.00,'mil quinientos  pesos',10,2014,'No'),(213,49,10,1500.00,'mil quinientos  pesos',11,2014,'No'),(214,49,11,1500.00,'mil quinientos  pesos',12,2014,'No'),(215,49,12,1500.00,'mil quinientos  pesos',1,2015,'No'),(216,49,13,1500.00,'mil quinientos  pesos',2,2015,'No'),(217,49,14,1500.00,'mil quinientos  pesos',3,2015,'No'),(218,49,15,1500.00,'mil quinientos  pesos',4,2015,'No'),(219,49,16,1500.00,'mil quinientos  pesos',5,2015,'No'),(220,49,17,1500.00,'mil quinientos  pesos',6,2015,'No'),(221,49,18,1500.00,'mil quinientos  pesos',7,2015,'No'),(222,49,19,1500.00,'mil quinientos  pesos',8,2015,'No'),(223,49,20,1500.00,'mil quinientos  pesos',9,2015,'No'),(224,49,21,1500.00,'mil quinientos  pesos',10,2015,'No'),(225,49,22,1500.00,'mil quinientos  pesos',11,2015,'No'),(226,49,23,1500.00,'mil quinientos  pesos',12,2015,'No'),(227,50,0,1700.00,'mil setecientos  pesos',1,2014,'No'),(228,50,1,1700.00,'mil setecientos  pesos',2,2014,'No'),(229,50,2,1700.00,'mil setecientos  pesos',3,2014,'No'),(230,50,3,1700.00,'mil setecientos  pesos',4,2014,'No'),(231,50,4,1700.00,'mil setecientos  pesos',5,2014,'No'),(232,50,5,1700.00,'mil setecientos  pesos',6,2014,'No'),(233,50,6,1700.00,'mil setecientos  pesos',7,2014,'No'),(234,50,7,1700.00,'mil setecientos  pesos',8,2014,'No'),(235,50,8,1700.00,'mil setecientos  pesos',9,2014,'No'),(236,50,9,1700.00,'mil setecientos  pesos',10,2014,'No'),(237,50,10,1700.00,'mil setecientos  pesos',11,2014,'No'),(238,50,11,1700.00,'mil setecientos  pesos',12,2014,'No'),(239,50,12,1700.00,'mil setecientos  pesos',1,2015,'No'),(240,50,13,1700.00,'mil setecientos  pesos',2,2015,'No'),(241,50,14,1700.00,'mil setecientos  pesos',3,2015,'No'),(242,50,15,1700.00,'mil setecientos  pesos',4,2015,'No'),(243,50,16,1700.00,'mil setecientos  pesos',5,2015,'No'),(244,50,17,1700.00,'mil setecientos  pesos',6,2015,'No'),(245,50,18,1700.00,'mil setecientos  pesos',7,2015,'No'),(246,50,19,1700.00,'mil setecientos  pesos',8,2015,'No'),(247,50,20,1700.00,'mil setecientos  pesos',9,2015,'No'),(248,50,21,1700.00,'mil setecientos  pesos',10,2015,'No'),(249,50,22,1700.00,'mil setecientos  pesos',11,2015,'No'),(250,50,23,1700.00,'mil setecientos  pesos',12,2015,'No'),(251,51,0,1500.00,'mil quinientos  pesos',1,2014,'No'),(252,51,1,1500.00,'mil quinientos  pesos',2,2014,'No'),(253,51,2,1500.00,'mil quinientos  pesos',3,2014,'No'),(254,51,3,1500.00,'mil quinientos  pesos',4,2014,'No'),(255,51,4,1500.00,'mil quinientos  pesos',5,2014,'No'),(256,51,5,1500.00,'mil quinientos  pesos',6,2014,'No'),(257,51,6,1500.00,'mil quinientos  pesos',7,2014,'No'),(258,51,7,1500.00,'mil quinientos  pesos',8,2014,'No'),(259,51,8,1500.00,'mil quinientos  pesos',9,2014,'No'),(260,51,9,1500.00,'mil quinientos  pesos',10,2014,'No'),(261,51,10,1500.00,'mil quinientos  pesos',11,2014,'No'),(262,51,11,1500.00,'mil quinientos  pesos',12,2014,'No'),(263,51,12,1500.00,'mil quinientos  pesos',1,2015,'No'),(264,51,13,1500.00,'mil quinientos  pesos',2,2015,'No'),(265,51,14,1500.00,'mil quinientos  pesos',3,2015,'No'),(266,51,15,1500.00,'mil quinientos  pesos',4,2015,'No'),(267,51,16,1500.00,'mil quinientos  pesos',5,2015,'No'),(268,51,17,1500.00,'mil quinientos  pesos',6,2015,'No'),(269,51,18,1500.00,'mil quinientos  pesos',7,2015,'No'),(270,51,19,1500.00,'mil quinientos  pesos',8,2015,'No'),(271,51,20,1500.00,'mil quinientos  pesos',9,2015,'No'),(272,51,21,1500.00,'mil quinientos  pesos',10,2015,'No'),(273,51,22,1500.00,'mil quinientos  pesos',11,2015,'No'),(274,51,23,1500.00,'mil quinientos  pesos',12,2015,'No'),(275,52,0,2500.00,'dos mil quinientos  pesos',1,2014,'No'),(276,52,1,2500.00,'dos mil quinientos  pesos',2,2014,'No'),(277,52,2,2500.00,'dos mil quinientos  pesos',3,2014,'No'),(278,52,3,2500.00,'dos mil quinientos  pesos',4,2014,'No'),(279,52,4,2500.00,'dos mil quinientos  pesos',5,2014,'No'),(280,52,5,2500.00,'dos mil quinientos  pesos',6,2014,'No'),(281,52,6,2500.00,'dos mil quinientos  pesos',7,2014,'No'),(282,52,7,2500.00,'dos mil quinientos  pesos',8,2014,'No'),(283,52,8,2500.00,'dos mil quinientos  pesos',9,2014,'No'),(284,52,9,2500.00,'dos mil quinientos  pesos',10,2014,'No'),(285,52,10,2500.00,'dos mil quinientos  pesos',11,2014,'No'),(286,52,11,2500.00,'dos mil quinientos  pesos',12,2014,'No'),(287,52,12,2500.00,'dos mil quinientos  pesos',1,2015,'No'),(288,52,13,2500.00,'dos mil quinientos  pesos',2,2015,'No'),(289,52,14,2500.00,'dos mil quinientos  pesos',3,2015,'No'),(290,52,15,2500.00,'dos mil quinientos  pesos',4,2015,'No'),(291,52,16,2500.00,'dos mil quinientos  pesos',5,2015,'No'),(292,52,17,2500.00,'dos mil quinientos  pesos',6,2015,'No'),(293,52,18,2500.00,'dos mil quinientos  pesos',7,2015,'No'),(294,52,19,2500.00,'dos mil quinientos  pesos',8,2015,'No'),(295,52,20,2500.00,'dos mil quinientos  pesos',9,2015,'No'),(296,52,21,2500.00,'dos mil quinientos  pesos',10,2015,'No'),(297,52,22,2500.00,'dos mil quinientos  pesos',11,2015,'No'),(298,52,23,2500.00,'dos mil quinientos  pesos',12,2015,'No'),(300,53,2,1.50,'mil quinientos  pesos',2,2014,'Si'),(301,53,3,1.50,'mil quinientos  pesos',3,2014,'Si'),(302,53,4,1500.00,'mil quinientos  pesos',4,2014,'Si'),(303,53,5,1.50,'mil quinientos  pesos',5,2014,'Si'),(304,53,6,1.50,'mil quinientos  pesos',6,2014,'Si'),(305,53,7,1.50,'mil quinientos  pesos',7,2014,'Si'),(306,53,8,2500.00,'dos mil quinientos  pesos',8,2014,'Si'),(307,53,9,1500.00,'mil quinientos  pesos',9,2014,'Si'),(308,53,10,1500.00,'mil quinientos  pesos',10,2014,'Si'),(309,53,11,1500.00,'mil quinientos  pesos',11,2014,'Si'),(310,53,12,1500.00,'mil quinientos  pesos',12,2014,'Si'),(311,53,13,1500.00,'mil quinientos  pesos',1,2015,'Si'),(312,53,14,1500.00,'mil quinientos  pesos',2,2015,'No'),(313,53,15,1500.00,'mil quinientos  pesos',3,2015,'No'),(314,53,16,1500.00,'mil quinientos  pesos',4,2015,'No'),(315,53,17,1500.00,'mil quinientos  pesos',5,2015,'No'),(316,53,18,1500.00,'mil quinientos  pesos',6,2015,'No'),(317,53,19,1500.00,'mil quinientos  pesos',7,2015,'No'),(318,53,20,1500.00,'mil quinientos  pesos',8,2015,'No'),(319,53,21,1500.00,'mil quinientos  pesos',9,2015,'No'),(320,53,22,1500.00,'mil quinientos  pesos',10,2015,'No'),(321,53,23,1500.00,'mil quinientos  pesos',11,2015,'No'),(322,53,24,1500.00,'mil quinientos  pesos',12,2015,'No');
 /*!40000 ALTER TABLE `cuota` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `cuota_BUPD` BEFORE UPDATE ON `cuota` FOR EACH ROW
-BEGIN
-/*
- IF (Select SUM(valor) From imputacion where cuota_id = NEW.id) = new.valor THEN
-	SET new.saldada = 'Si';
- else
-	SET new.saldada = 'No';
- END IF;
-*/
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `estado_adjudicacion`
@@ -328,102 +304,6 @@ LOCK TABLES `imputacion` WRITE;
 INSERT INTO `imputacion` VALUES (1,12,1.50,300),(2,14,1.50,300),(3,15,1500.00,302),(4,16,2500.00,306),(5,21,1500.00,300),(6,22,1500.00,300),(7,23,1500.00,300),(8,24,1500.00,300),(9,25,1500.00,300),(10,26,1500.00,300),(11,27,1500.00,300),(12,28,1500.00,300),(13,29,1500.00,300),(14,30,1500.00,301),(15,31,1500.00,300),(16,35,1500.00,300),(17,36,1500.00,301),(18,37,1700.00,83),(19,38,1700.00,84),(20,39,1500.00,303),(21,40,1500.00,304),(22,41,1500.00,305),(23,43,1500.00,307),(24,44,1500.00,308),(25,45,1500.00,309),(26,46,1500.00,310),(27,47,1500.00,311),(28,48,1500.00,155);
 /*!40000 ALTER TABLE `imputacion` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `imputacion_AINS` AFTER INSERT ON `imputacion` FOR EACH ROW
-BEGIN
-/*
-INSERT INTO Log(descripcion,user) values ('imputacion_AINS INICIO',user());
- IF 
-	(Select SUM(valor) From imputacion where cuota_id = NEW.cuota_id) 
-	= 
-	(Select valor From cuota where id = NEW.cuota_id) 
-THEN
-	update cuota set saldada = 'Si' where id = NEW.cuota_id;
-INSERT INTO Log(descripcion,user) values ('imputacion_AINS si',user());
- else
-	update cuota set saldada = 'No' where id = NEW.cuota_id;
-INSERT INTO Log(descripcion,user) values ('imputacion_AINS no',user());
- END IF;
-INSERT INTO Log(descripcion,user) values ('imputacion_AINS fin',user());
-*/
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `imputacion_AUPD` AFTER UPDATE ON `imputacion` FOR EACH ROW
-BEGIN
-/*
-INSERT INTO Log(descripcion,user) values ('imputacion_AUPD INICIO',user());
- IF 
-	(Select SUM(valor) From imputacion where cuota_id = NEW.cuota_id) 
-	= 
-	(Select valor From cuota where id = NEW.cuota_id) 
-THEN
-	update cuota set saldada = 'Si' where id = NEW.cuota_id;
-INSERT INTO Log(descripcion,user) values ('imputacion_AUPD si',user());
-ELSE
-	update cuota set saldada = 'No' where id = NEW.cuota_id;
-INSERT INTO Log(descripcion,user) values ('imputacion_AUPD no',user());
- END IF;
-INSERT INTO Log(descripcion,user) values ('imputacion_AUPD fin',user());
-*/
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ALLOW_INVALID_DATES,ERROR_FOR_DIVISION_BY_ZERO,TRADITIONAL,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `imputacion_ADEL` AFTER DELETE ON `imputacion` FOR EACH ROW
-BEGIN
-/*
-INSERT INTO Log(descripcion,user) values ('imputacion_ADEL INICIO',user());
-IF 
-	(Select SUM(valor) From imputacion where cuota_id = OLD.cuota_id) 
-	= 
-	(Select valor From cuota where id = OLD.cuota_id) 
-THEN
-	update cuota set saldada = 'Si' where id = OLD.cuota_id;
-	INSERT INTO Log(descripcion,user) values ('imputacion_ADEL SI',user());
-ELSE
-	update cuota set saldada = 'No' where id = OLD.cuota_id;
-	INSERT INTO Log(descripcion,user) values ('imputacion_ADEL NO',user());
- END IF;
-	INSERT INTO Log(descripcion,user) values ('imputacion_ADEL FIN',user());
-*/
-END */;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `mes`
@@ -686,4 +566,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-09-29 20:19:23
+-- Dump completed on 2014-09-29 22:21:44
