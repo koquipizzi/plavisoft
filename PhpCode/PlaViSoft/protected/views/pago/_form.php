@@ -44,12 +44,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'forma_pago_id'); ?>
-		<?php echo $form->textField($model,'forma_pago_id'); ?>
-		<?php echo $form->error($model,'forma_pago_id'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'NroDeposito'); ?>
 		<?php echo $form->textField($model,'NroDeposito',array('size'=>20,'maxlength'=>20)); ?>
 		<?php echo $form->error($model,'NroDeposito'); ?>
@@ -59,6 +53,18 @@
 		<?php echo $form->labelEx($model,'persona_id'); ?>
 		<?php echo $form->textField($model,'persona_id'); ?>
 		<?php echo $form->error($model,'persona_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'talonario'); ?>
+		<?php echo $form->textField($model,'talonario',array('size'=>4,'maxlength'=>4)); ?>
+		<?php echo $form->error($model,'talonario'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'nro_formulario'); ?>
+		<?php echo $form->textField($model,'nro_formulario',array('size'=>8,'maxlength'=>8)); ?>
+		<?php echo $form->error($model,'nro_formulario'); ?>
 	</div>
 
 	<div class="row buttons">

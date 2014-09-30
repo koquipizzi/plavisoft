@@ -16,23 +16,32 @@ $this->menu=array(
 
 <h1>Imputaciones</h1>
 
-<?php $this->widget('application.extensions.tablesorter.Sorter', array(
-	'id'=>'imputacion-grid',
-	'data'=>$imputaciones,
-	'columns'=>array(
-            array(
-                'header' => 'Pago',
-                'value' => 'pago_field',
-            ),
-            array(
-                'header' => 'Cuota',
-                'value' => 'cuota_field',
-            ),
-            array(
-                'header' => 'Valor',
-                'value' => 'valor',
-                'style'=>'text-align: right;',
-            ),
+<?php 
+    
+    if(count($imputaciones)==0){
+        echo "No existen imputaciones";
+    }
+    else{
+        $this->widget('application.extensions.tablesorter.SorterImputacion', array(
+            'id'=>'imputacion-grid',
+            'data'=>$imputaciones,
+            'columns'=>array(
+                array(
+                    'header' => 'Pago',
+                    'value' => 'pago_field',
+                ),
+                array(
+                    'header' => 'Cuota',
+                    'value' => 'cuota_field',
+                ),
+                array(
+                    'header' => 'Valor',
+                    'value' => 'valorStr',
+                    'style'=>'text-align: right;',
+                ),
 
-	),
-)); ?>
+            ),
+        ));        
+    }
+
+?>

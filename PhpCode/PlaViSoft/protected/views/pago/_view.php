@@ -25,17 +25,21 @@
 	<?php echo CHtml::encode($data->Descripcion); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('forma_pago_id')); ?>:</b>
-	<?php echo CHtml::encode($data->forma_pago_id); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('NroDeposito')); ?>:</b>
 	<?php echo CHtml::encode($data->NroDeposito); ?>
 	<br />
 
-	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('persona_id')); ?>:</b>
 	<?php echo CHtml::encode($data->persona_id); ?>
+	<br />
+
+	<?php /*
+	<b><?php echo CHtml::encode($data->getAttributeLabel('talonario')); ?>:</b>
+	<?php echo CHtml::encode($data->talonario); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('nro_formulario')); ?>:</b>
+	<?php echo CHtml::encode($data->nro_formulario); ?>
 	<br />
 
 	*/ ?>

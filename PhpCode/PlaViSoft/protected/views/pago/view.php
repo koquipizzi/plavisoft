@@ -26,8 +26,9 @@ $this->menu=array(
 		'valor',
 		'ImporteLetras',
 		'Descripcion',
-		'forma_pago_id',
 		'NroDeposito',
 		'persona_id',
+		'talonario',
+		'nro_formulario',
 	),
 )); ?>

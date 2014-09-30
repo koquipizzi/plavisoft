@@ -134,12 +134,12 @@ class Cuota extends ActiveRecord
         }        
         
         
-	public function afterFind()
-	{
-		$this->valor = Yii::app() -> format -> number($this -> valor);
-
-		return parent::afterFind();
-	}        
+//	public function afterFind()
+//	{
+//		//$this->valor = Yii::app() -> format -> number($this -> valor);
+//
+//		return parent::afterFind();
+//	}        
         
         public function beforeSave() {
 
@@ -149,5 +149,10 @@ class Cuota extends ActiveRecord
 
                 return parent::beforeSave();
         }        
+        
+        public function getValorStr(){
+            return "$ ".$this -> valor;
+        }
+        
         
 }

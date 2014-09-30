@@ -166,6 +166,8 @@ class CuotaController extends Controller
 	 */
 	public function actionSaldar()
 	{
+error_reporting(E_ALL);
+ini_set("display_errors", 1);            
 
                 $pago = new Pago;
                 $imputacion = new Imputacion;
@@ -180,6 +182,9 @@ class CuotaController extends Controller
                     $transaction = Yii::app()->db->beginTransaction();
                     try{
                             $pago->attributes = $_POST['Pago'];
+                            if(trim($pago->nro_formulario)=='')
+                                throw new Exception("Nro. Formulario no puede ser vacio");
+                            
                             $pago->valor = Yii::app()->format->unformatNumber($_POST['Pago']['valor']);
                             $pago->save();
 

@@ -127,6 +127,10 @@ class Imputacion extends ActiveRecord
                 $this->cuota->mes->mes." - ".$this->cuota->anio." (".($this->cuota->saldada=='Si'?'Saldada':'No Saldada').") ".
                 '</a>';
         }
+
+        public function getValorStr(){
+                return "$ ".$this -> valor;
+        }
         
         
 }
