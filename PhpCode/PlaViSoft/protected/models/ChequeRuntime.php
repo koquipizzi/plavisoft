@@ -11,6 +11,7 @@
  * @property string $NombreTitular
  * @property integer $banco_id
  * @property string $ins_time
+ * @property string $FechaVencimiento
  *
  * The followings are the available model relations:
  * @property Banco $banco
@@ -39,9 +40,10 @@ class ChequeRuntime extends CActiveRecord
 			array('valor', 'length', 'max'=>15),
 			array('NombreTitular', 'length', 'max'=>100),
 			array('ins_time', 'safe'),
+			array('FechaVencimiento', 'safe'),                    
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, Nro_cheque, Cta_cte, valor, NombreTitular, banco_id, ins_time', 'safe', 'on'=>'search'),
+			array('id, Nro_cheque, Cta_cte, valor, NombreTitular, banco_id, ins_time, FechaVencimiento', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,6 +72,7 @@ class ChequeRuntime extends CActiveRecord
 			'NombreTitular' => 'Nombre Titular',
 			'banco_id' => 'Banco',
 			'ins_time' => 'Ins Time',
+			'FechaVencimiento' => 'Fecha Vencimiento',                    
 		);
 	}
 
@@ -98,6 +101,7 @@ class ChequeRuntime extends CActiveRecord
 		$criteria->compare('NombreTitular',$this->NombreTitular,true);
 		$criteria->compare('banco_id',$this->banco_id);
 		$criteria->compare('ins_time',$this->ins_time,true);
+		$criteria->compare('FechaVencimiento',$this->FechaVencimiento,true);                
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

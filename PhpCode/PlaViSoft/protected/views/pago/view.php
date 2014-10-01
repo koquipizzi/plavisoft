@@ -61,14 +61,13 @@ $this->menu=array(
     
     if(isset($formaPagoDeposito)){
         echo "<h1>Depósito</h1>";
-
-        $this->renderPartial(
-            'listaChequesEdicion', 
-            array(
-                'cheques'=>$cheques,
-                'borrarEnabled'=>false
-            )
-        );
+        $this->widget('zii.widgets.CDetailView', array(
+            'data'=>$formaPagoDeposito,
+            'attributes'=>array(
+                    'valorStr',
+                    'nroDepositoStr'
+            ),
+        ));        
     }    
 
  ?>

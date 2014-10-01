@@ -86,7 +86,6 @@ $this->menu=array(
 			<?php echo $form->labelEx($pago,'Fecha Pago'); ?>
 		</div>
 		<div class="controls">
-		
 		<?php 
 			$this->widget('zii.widgets.jui.CJuiDatePicker',array(
                             'model' => $pago,
@@ -105,6 +104,10 @@ $this->menu=array(
 		?>
 		</div>
 	</div>
+
+        <div class="control-group">
+                <?php echo $form->textAreaRow($pago,'Descripcion',array('class'=>'span5','col'=>3)); ?>
+        </div>    
 
         <div class="control-group">
                 <div class="control-label">
@@ -142,6 +145,31 @@ $this->menu=array(
 
                     echo $form->textFieldRow($cheque,'Nro_cheque',array('id'=>'Nro_cheque','size'=>45,'maxlength'=>45));
                     echo $form->error($cheque,'Nro_cheque');
+                ?>
+                <div class="control-group">
+                    <div class="control-label">
+                        <?php echo $form->labelEx($cheque,'FechaVencimiento'); ?>
+                    </div>
+                    <div class="controls">
+                        <?php 
+                            $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+                                'model' => $cheque,
+                                'attribute' => 'FechaVencimiento',
+                                'name'=>'Fecha Vencimiento',
+                                'language' => 'es',
+                                // additional javascript options for the date picker plugin
+                                'options'=>array(
+                                    'showAnim'=>'fold',
+                                    'dateFormat'=>'dd/mm/yy',
+                                ),
+                                'htmlOptions'=>array(
+                                    'style'=>'height:20px;'
+                                ),				
+                            ));
+                        ?>
+                    </div>
+                </div>                
+                <?php
 
                     echo $form->textFieldRow($cheque,'Cta_cte',array('id'=>'Cta_cte', 'size'=>45,'maxlength'=>45));
                     echo $form->error($cheque,'Cta_cte');
@@ -218,12 +246,6 @@ $this->menu=array(
                         array('class'=>'span5','maxlength'=>45)
                     );?>
 	</div>
-            
-
-        <div class="control-group">
-                <?php echo $form->textAreaRow($pago,'Descripcion',array('class'=>'span5','col'=>3)); ?>
-        </div>    
-
 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
