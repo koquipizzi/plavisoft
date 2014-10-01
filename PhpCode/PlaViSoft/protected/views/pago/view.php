@@ -8,26 +8,58 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Pago', 'url'=>array('index')),
-	array('label'=>'Create Pago', 'url'=>array('create')),
-	array('label'=>'Update Pago', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Pago', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Pago', 'url'=>array('admin')),
+	array('label'=>'Listar Pagos', 'url'=>array('index')),
+	array('label'=>'Crear Nuevo Pago', 'url'=>array('create')),
+	array('label'=>'Borrar Pago', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Esta seguro en borrar este pago?')),
 );
 ?>
 
-<h1>View Pago #<?php echo $model->id; ?></h1>
+<h1>Pago: <?php echo $model->talonario." - ".$model->nro_formulario; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
 		'FechaPago',
-		'valor',
+		'valorStr',
 		'ImporteLetras',
 		'Descripcion',
-		'forma_pago_id',
-		'NroDeposito',
-		'persona_id',
+                array(
+                    'name'=>'Persona',
+                    'type'=>'raw',
+                    'value'=>CHtml::link($model->personaStr, array('Persona/view&id='.$model->persona->id)),
+                ),            
+
 	),
 )); ?>
+
+
+<?php 
+
+    if(isset($formaPagoContado)){
+        echo "<h1>Contado</h1>";
+        $this->widget('zii.widgets.CDetailView', array(
+            'data'=>$formaPagoContado,
+            'attributes'=>array(
+                    'valorStr',
+            ),
+        ));        
+    }
+
+ ?>
+
+
+<?php 
+
+    if(isset($formaPagoCheque)){
+        echo "<h1>Cheques</h1>";
+        $this->widget('application.extensions.tablesorter.Sorter', array(
+            'id'=>'cheques-grid',
+            'data'=>$formaPagoCheque,
+            'columns'=>array(
+                'valorStr',
+            ),
+        ));         
+    }
+
+ ?>
+

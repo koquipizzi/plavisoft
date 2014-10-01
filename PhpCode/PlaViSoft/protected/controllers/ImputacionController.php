@@ -104,13 +104,40 @@ class ImputacionController extends Controller
 	}
 
 	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
+	 * Borra la imputacion y actualiza la cuota
+	 * @param integer $id Clave de Imputacion
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+                // Imputacion a borrar
+		$imputacion = $this->loadModel($id);
+
+                // Suma otras imputaciones para evaluar si la Cuota queda saldada o no.
+                $results = Yii::app()->db->createCommand()->
+                    select('IFNULL(SUM(valor),0) as total')->
+                    from('imputacion')->
+                    where('cuota_id=:cuota_id and id<>:id',
+                            array(
+                                ':cuota_id'=>$imputacion->cuota_id,
+                                ':id'=>$id                        
+                            )
+                    )->
+                    queryAll();
+                
+                // Recupera cuota desde la imputacion
+                $cuota = Cuota::model()->findByPk($imputacion->cuota_id);
+		if($cuota===null){
+                    throw new CHttpException(404,'La imputación se encuentra relacionada con una cuota no válida');
+                }
+
+                // Actualiza el Valor de la cuota
+                if( $results[0]['total'] < $cuota->valor ){
+                    $cuota->saldada = 'No';
+                    $cuota->save();
+                }
+                
+                // Borrado de la imputacion
+                $imputacion->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))

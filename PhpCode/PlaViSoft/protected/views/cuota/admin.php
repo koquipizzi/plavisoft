@@ -14,8 +14,15 @@ $this->breadcrumbs=array(
 	'id'=>'cuota-grid',
 	'data'=>$records,
 	'columns'=>array(
-            'nro_cuota',
-            'valor',
+            array(
+                'header'=>'Nro Cuota',
+                'value'=>'nro_cuota',
+            ),
+            array(
+                'header'=>'Valor',
+                'value'=>'valorStr',
+                'style'=>'text-align: right;',
+            ),
             'mes.mes',
             'anio',
             'saldada',

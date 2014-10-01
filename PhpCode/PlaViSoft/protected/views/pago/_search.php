@@ -37,11 +37,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'forma_pago_id'); ?>
-		<?php echo $form->textField($model,'forma_pago_id'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'NroDeposito'); ?>
 		<?php echo $form->textField($model,'NroDeposito',array('size'=>20,'maxlength'=>20)); ?>
 	</div>
@@ -49,6 +44,16 @@
 	<div class="row">
 		<?php echo $form->label($model,'persona_id'); ?>
 		<?php echo $form->textField($model,'persona_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'talonario'); ?>
+		<?php echo $form->textField($model,'talonario',array('size'=>4,'maxlength'=>4)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'nro_formulario'); ?>
+		<?php echo $form->textField($model,'nro_formulario',array('size'=>8,'maxlength'=>8)); ?>
 	</div>
 
 	<div class="row buttons">

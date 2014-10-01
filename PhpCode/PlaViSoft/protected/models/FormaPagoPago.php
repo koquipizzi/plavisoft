@@ -61,6 +61,7 @@ class FormaPagoPago extends CActiveRecord
 			'forma_pago_id' => 'Forma Pago',
 			'pago_id' => 'Pago',
 			'valor' => 'Valor',
+                        'valorStr' => 'Valor',
 		);
 	}
 
@@ -101,11 +102,18 @@ class FormaPagoPago extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        
+        public function getValorStr(){
+                return "$ ".Yii::app() -> format -> number($this -> valor);
+        }
+
+        
 }
 
 abstract class FormaPagoEspecifico extends FormaPagoPago
 {
-    abstract protected function getIDType();
+    abstract public static function getIDType();
     
     public function __construct($scenario='insert') {
         parent::__construct($scenario);
@@ -120,26 +128,27 @@ abstract class FormaPagoEspecifico extends FormaPagoPago
         }
         return false;
     }
+    
 }
 
 
 class FormaPagoContado extends FormaPagoEspecifico
 {
-    protected function getIDType(){
+    public static function getIDType(){
         return self::ID_CONTADO;
     }
 }
 
 class FormaPagoCheque extends FormaPagoEspecifico
 {
-    protected function getIDType(){
+    public static function getIDType(){
         return self::ID_CHEQUE;
     }
 }
 
 class FormaPagoDeposito extends FormaPagoEspecifico
 {
-    protected function getIDType(){
+    public static function getIDType(){
         return self::ID_DEPOSITO;
     }    
 }

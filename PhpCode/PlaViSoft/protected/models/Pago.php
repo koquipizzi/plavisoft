@@ -82,6 +82,8 @@ class Pago extends ActiveRecord
 			'persona_id' => 'Persona',
 			'talonario' => 'Talonario',
 			'nro_formulario' => 'Nro Formulario',
+                        'valorStr' => 'Valor',
+                        'personaStr' => 'Persona',
 		);
 	}
 
@@ -131,12 +133,26 @@ class Pago extends ActiveRecord
         
 	public function afterFind()
 	{
-		$this->valor = Yii::app() -> format -> number($this -> valor);
                 $this->FechaPago = Yii::app()->format->date($this->FechaPago);
-
 		return parent::afterFind();
-	}        
+	}       
+        
+        public function getValorStr(){
+                return "$ ".Yii::app() -> format -> number($this -> valor);
+        }
 
+	public function beforeSave()
+	{
+		$fecha=DateTime::createFromFormat('d/m/Y',$this->FechaPago);
+		$this->FechaPago=$fecha->format('y-m-d');		 
+		parent::beforeSave();
+                
+		return true;
+	}
+        
+        public function getPersonaStr(){
+            return $this->persona->Apellido.", ".$this->persona->Nombre;
+        }
   
         
 }
