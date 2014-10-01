@@ -108,3 +108,11 @@ Select * from plavisoft.Log;
 
 update cuota set saldada='No' where id>0;
 update cuota set valor=1500 where id>0;
+
+SELECT SUM(valor) as total FROM `imputacion` WHERE cuota_id=10;
+
+
+Select * from plavisoft.pago p join plavisoft.forma_pago_pago f on p.id = f.pago_id
+where f.forma_pago_id = 2;
+
+Select * from plavisoft.pago p join plavisoft.cheque c on p.id = c.pago_id;

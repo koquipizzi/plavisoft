@@ -82,6 +82,8 @@ class Pago extends ActiveRecord
 			'persona_id' => 'Persona',
 			'talonario' => 'Talonario',
 			'nro_formulario' => 'Nro Formulario',
+                        'valorStr' => 'Valor',
+                        'personaStr' => 'Persona',
 		);
 	}
 
@@ -148,6 +150,9 @@ class Pago extends ActiveRecord
 		return true;
 	}
         
+        public function getPersonaStr(){
+            return $this->persona->Apellido.", ".$this->persona->Nombre;
+        }
   
         
 }

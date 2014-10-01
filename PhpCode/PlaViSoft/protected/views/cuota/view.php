@@ -8,11 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Cuota', 'url'=>array('index')),
-	array('label'=>'Create Cuota', 'url'=>array('create')),
-	array('label'=>'Update Cuota', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Cuota', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Cuota', 'url'=>array('admin')),
+	array('label'=>'Suscripción', 'url'=>array('cuota/admin&suscripcion_id='.$model->suscripcion->id)),
 );
 ?>
 
@@ -26,5 +22,35 @@ $this->menu=array(
 		'mes.mes',
 		'anio',
 		'saldada',
+                array(
+                    'name'=>'Persona',
+                    'type'=>'raw',
+                    'value'=>CHtml::link($model->personaStr, array('Persona/view&id='.$model->suscripcion->persona->id)),
+                ),            
+                            
 	),
 )); ?>
+
+<?php 
+    if($model->saldada == 'No'){
+        $this->widget(
+                'bootstrap.widgets.TbButton',
+                array(
+                'url'=>'index.php?r=Cuota/saldar&id='.$model->id,
+                'type' => 'info',
+                'label' => 'Saldar Cuota'
+                )
+        ); 
+    }
+    echo " ";
+    $this->widget(
+            'bootstrap.widgets.TbButton',
+            array(
+            'url'=>'index.php?r=cuota/admin&suscripcion_id='.$model->suscripcion->id,
+            'type' => 'info',
+            'label' => 'Suscripción'
+            )
+    ); 
+
+
+?>

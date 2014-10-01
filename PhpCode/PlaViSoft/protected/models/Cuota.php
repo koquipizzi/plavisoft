@@ -78,6 +78,7 @@ class Cuota extends ActiveRecord
 			'mes_id' => 'Mes',
 			'anio' => 'Anio',
 			'saldada' => 'Saldada',
+                        'personaStr' => 'Persona',
 		);
 	}
 
@@ -152,6 +153,10 @@ class Cuota extends ActiveRecord
         
         public function getValorStr(){
             return "$ ".$this -> valor;
+        }
+        
+        public function getPersonaStr(){
+            return $this->suscripcion->persona->Apellido.", ".$this->suscripcion->persona->Nombre;
         }
         
         
