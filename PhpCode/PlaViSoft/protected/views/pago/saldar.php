@@ -55,7 +55,7 @@ $this->menu=array(
                 'id':id,
                 'cheques_agregados':$("#cheques_agregados").val()
             },
-            'url':'/index.php?r=Cuota/borrarCheque',
+            'url':'/index.php?r=Pago/borrarCheque',
             'cache':false
         });
     }
@@ -170,7 +170,7 @@ $this->menu=array(
                         'buttonType'=>'ajaxButton',
                         'type'=>'primary',
                         'label'=>'Agregar Cheque',
-                        'url'=>$this->createUrl('Cuota/agregarCheque'),
+                        'url'=>$this->createUrl('Pago/agregarCheque'),
                         'ajaxOptions'=>array(
                             'type' => 'POST',
                             'success' => 'function( data ) {

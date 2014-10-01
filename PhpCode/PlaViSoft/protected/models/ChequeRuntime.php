@@ -114,4 +114,11 @@ class ChequeRuntime extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        
+        public function getValorStr(){
+            return "$ ".Yii::app()->format->number($this->valor);
+        }
+        
+        
 }
