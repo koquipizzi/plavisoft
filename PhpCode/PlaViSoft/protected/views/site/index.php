@@ -28,7 +28,7 @@ should you have any questions.</p-->
     	'url'=>'index.php?r=site/login',
         'type'=>'primary',
         'size'=>'large',
-        'label'=>'Ver más',
+        'label'=>'Acceso',
     )); ?></p>
  
 <?php $this->endWidget(); ?>

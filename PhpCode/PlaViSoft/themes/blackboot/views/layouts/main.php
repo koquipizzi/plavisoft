@@ -69,37 +69,6 @@
 	</div>
 	
 	<div class="cont">
-		<div style="margin-left: 20px; float: left; margin-right: 10px;">
-			<?php 
-				
-				$this->widget(
-					'bootstrap.widgets.TbButton',
-					array(
-					'url'=>'index.php?r=pago/create&financiacion=7&suscripcion=1',
-					'type' => 'primary',
-					'label' => 'Registrar Pago'
-					)
-				); 
-				     
-		     ?>
-		</div>
-		
-		<div style="margin-left: 20px;">
-			<?php 
-				
-				$this->widget(
-					'bootstrap.widgets.TbButton',
-					array(
-					//'url'=>'index.php?r=pago/create&financiacion='.$model->financiacion_id.'&suscripcion='.$model->id,
-                                        'url'=>'index.php?r=pago/create&financiacion=1&suscripcion=1',    
-					'type' => 'primary',
-					'label' => 'Registrar Pago'
-					)
-				); 
-				echo "</br></br>";
-		     
-		     ?>
-		</div>
 		
 	<div class="container-fluid">
 		
@@ -125,26 +94,24 @@
 	  <div class="container">
 		<div class="row">
 			<div class="col-md-3">
-				<h4>Heading 1</h4>
+				<h4>Personas</h4>
 				<ul>
-					<li><a href="#">Subheading 1.1</a></li>
-					<li><a href="#">Subheading 1.2</a></li>
-					<li><a href="#">Subheading 1.3</a></li>
-					<li><a href="#">Subheading 1.4</a></li>
+					<li><a href="/plavisoft/index.php?r=persona/admin">Listado</a></li>
+					<li><a href="/plavisoft/index.php?r=persona/create">Agregar Persona</a></li>
 				</ul>
 			</div> <!-- /span3 -->
 			
 			<div class="col-md-3">
-				<h4>Heading 2</h4>
+				<h4>Viviendas</h4>
 				<ul>
-					<li><a href="#">Subheading 2.1</a></li>
-					<li><a href="#">Subheading 2.2</a></li>
+					<li><a href="/plavisoft/index.php?r=TipoVivienda/create">Listado</a></li>
+					<!--li><a href="#">Subheading 2.2</a></li>
 					<li><a href="#">Subheading 2.3</a></li>
-					<li><a href="#">Subheading 2.4</a></li>
+					<li><a href="#">Subheading 2.4</a></li-->
 				</ul>
 			</div> <!-- /span3 -->
 			
-			<div class="col-md-3">
+			<!--div class="col-md-3">
 				<h4>Heading 3</h4>	
 				<ul>
 					<li><a href="#">Subheading 3.1</a></li>
@@ -155,8 +122,8 @@
 			</div> <!-- /span3 -->
 			
 			<div class="col-md-3">
-				<h4>Heading 4</h4>
-				<ul>
+				<h4>SICHOCA TANDIL</h4>
+				<!--ul>
 					<li><a href="#">Subheading 4.1</a></li>
 					<li><a href="#">Subheading 4.2</a></li>
 					<li><a href="#">Subheading 4.3</a></li>
@@ -171,7 +138,7 @@
 	  <div class="container">
 		<div class="row">
 			<div id="footer-copyright" class="col-md-6">
-				About us | Contact us | Terms & Conditions
+				QWavee | Contact us: 442-9877 
 			</div> <!-- /span6 -->
 			<div id="footer-terms" class="col-md-6">
 				© 2014 Todos los derechos reservados. <a href="http://www.qwavee.com" target="_blank">QWavee</a>.

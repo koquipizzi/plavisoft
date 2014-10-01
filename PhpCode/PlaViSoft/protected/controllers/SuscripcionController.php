@@ -54,11 +54,8 @@ class SuscripcionController extends Controller
 	//		'model'=>$this->loadModel($id),
 	//	));
 		
-	    $records=Pago::model()->findAllBySql('Select PERSON.Nombre as Nombre, PERSON.Apellido as Apellido, PAGO_SUS.* from persona as person join ((SELECT P.*,S.persona_id
-												FROM pago AS p
-												JOIN suscripcion AS s ON p.suscripcion_id = s.id
-												WHERE p.suscripcion_id ='.$id.') as PAGO_SUS) on	 person.id = PAGO_SUS.persona_id ');
-	    
+	    $records=Persona::model()->findAllBySql('Select p.Nombre as Nombre, p.Apellido as Apellido from persona p join suscripcion s where s.persona_id = p.id and s.id ='.$id);
+	  //  var_dump($records); die();
 	    $pagosTotales = $this->sumaPagos($id);
 	    $this->render('view',array(
 	        'records'=>$records, /*'model'=>$records,*/'model'=>$this->loadModel($id),
@@ -287,14 +284,19 @@ class SuscripcionController extends Controller
 	
 	public function sumaPagos($suscripcionId)
 	{
-		$pagos = Pago:: model()->findAllByAttributes(array('suscripcion_id' => (int)$suscripcionId));
+		$pagos = Cuota:: model()->findAllByAttributes(array('suscripcion_id' => (int)$suscripcionId));
+		//var_dump($pagos);die();
 		$total = 0;
 		for($i=0; $i < count($pagos); $i++){
 		//	$model=Adelanto::model()->findByPk($arreglo[$i]);
 		//	var_dump($model);
-			
-		    $total = $total + $pagos[$i]->Importe;
+			if ($pagos[$i]->saldada == "Si")
+		    	{
+		    		$total = $total + $pagos[$i]->valor;
+					echo $total. "----";
+				}
 		}		
+		echo $total; die();
 		return $total;
 	}
 }

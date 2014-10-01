@@ -31,7 +31,7 @@ $('.search-form form').submit(function(){
 	  'columns'=>array(
 		'id',
 		'Descripcion',
-		'Importe',
+		'valor',
 		'ImporteLetras',
 		'financiacion.Descripcion',
 	//	'Adjudicado',

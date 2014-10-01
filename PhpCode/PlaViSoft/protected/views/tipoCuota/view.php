@@ -20,7 +20,7 @@ $this->menu=array(
 	'attributes'=>array(
 		'id',
 		'Descripcion',
-		'Importe',
+		'Valor',
 		'ImporteLetras',
 		'financiacion.Descripcion',
 		'Adjudicado',

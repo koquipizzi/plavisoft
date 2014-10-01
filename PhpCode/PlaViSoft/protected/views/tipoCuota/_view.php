@@ -8,7 +8,7 @@
 	<?php echo CHtml::encode($data->Descripcion); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('Importe')); ?>:</b>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('valor')); ?>:</b>
 	<?php echo CHtml::encode($data->Importe); ?>
 	<br />
 

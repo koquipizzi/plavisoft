@@ -64,12 +64,12 @@ class Sorter extends CWidget
 		$object=$datas[0];
 		$class=get_class($object);
 		$count=count($datas);
-		echo "Totaly ".$count." results have been found";
+		echo "Total: ".$count." resultados encontrados";
 		
-		echo '//delete by using post method
-		     <script>
+		//delete by using post method
+		echo '<script>
 			 function del_data(url,data) {
-				var result = confirm("Are you sure want to delete?");
+				var result = confirm("¿Está seguro de querer borrar el registro?");
 				if (result==true) {
 					$.post( url );
 					location.reload();
@@ -78,10 +78,10 @@ class Sorter extends CWidget
 			 </script>';
 		
 		//Table start
-		echo "<table class='tablesorter-bootstrap'>\n";
+		echo "<table class='tablesorter-bootstrap'>";
 		//Table head start
-		echo "<thead>\n";
-		echo "<tr>\n";
+		echo "<thead>";
+		echo "<tr>";
 		$filters=$this->filters;
 		$i=0;
 		foreach($this->columns as $column)
@@ -101,7 +101,7 @@ class Sorter extends CWidget
 			
 			$i++;
 		}
-		echo "<th class='filter-false'>Actions</th>";
+		echo "<th class='filter-false'>Acciones</th>";
 		echo "</tr>\n";
 		echo "</thead>\n";
 		//Table head end
@@ -159,13 +159,13 @@ class Sorter extends CWidget
                                 <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
                                 <button type="button" class="btn next"><i class="icon-arrow-right"></i></button>
                                 <button type="button" class="btn last"><i class="icon-step-forward"></i></button>
-                                <select class="pagesize input-mini" title="Select page size">
+                                <select class="pagesize input-mini" title="Seleccione tamaño de página">
                                         <option selected="selected" value="10">10</option>
                                         <option value="20">20</option>
                                         <option value="30">30</option>
                                         <option value="40">40</option>
                                 </select>
-                                <select class="pagenum input-mini" title="Select page number"></select>
+                                <select class="pagenum input-mini" title="Seleccione número de página"></select>
                         </th>
                     </tr>
                 </tfoot>\n';
