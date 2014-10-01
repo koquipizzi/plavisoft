@@ -125,5 +125,20 @@ class Cheque extends CActiveRecord
             return "$ ".Yii::app()->format->number($this->valor);
         }
         
+	public function afterFind()
+	{
+                $this->FechaVencimiento = Yii::app()->format->date($this->FechaVencimiento);
+		return parent::afterFind();
+	}       
+        
+	public function beforeSave()
+	{
+		$fecha = DateTime::createFromFormat('d/m/Y',$this->FechaVencimiento);
+		$this->FechaVencimiento = $fecha->format('y-m-d');		 
+		parent::beforeSave();
+                
+		return true;
+	}
+        
         
 }

@@ -3,6 +3,7 @@
         <tr>
             <td>Nro Cheque</td>
             <td>Cta Cte</td>
+            <td>Fecha Vencimiento</td>
             <td>Valor</td>
             <td>Nombre Titular</td>
             <td>Banco</td>
@@ -20,6 +21,7 @@
             <tr>
                 <td>".$cheque->Nro_cheque."</td>
                 <td>".$cheque->Cta_cte."</td>
+                <td>".$cheque->FechaVencimiento."</td>    
                 <td style=\"text-align: right;\" >".$cheque->valorStr."</td>
                 <td>".$cheque->NombreTitular."</td>
                 <td>".$cheque->banco->Banco."</td>

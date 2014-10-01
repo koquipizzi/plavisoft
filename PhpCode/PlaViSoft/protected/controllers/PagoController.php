@@ -223,6 +223,7 @@ class PagoController extends Controller
                         $cheque->banco_id = $cheque_runtime->banco_id;
                         $cheque->valor = $cheque_runtime->valor;
                         $cheque->pago_id = $pago_id;
+                        $cheque->FechaVencimiento = $cheque_runtime->FechaVencimiento;
                     $cheque->save();    
                     $total = $total + $cheque->valor;
                 }
@@ -364,6 +365,7 @@ class PagoController extends Controller
             $cheque->valor = $_POST['valor'];
             $cheque->NombreTitular = $_POST['NombreTitular'];
             $cheque->banco_id = $_POST['banco_id'];
+            $cheque->FechaVencimiento = $_POST['FechaVencimiento'];
             
             if($cheque->save()){
                 if(trim($_POST['cheques_agregados'])!=''){

@@ -212,6 +212,7 @@ $this->menu=array(
                                 $("#valor").val("");
                                 $("#NombreTitular").val("")
                                 $("#banco_id").val("");
+                                $("#FechaVencimiento").val("");
                               }'
                             ,
                             'data' => array( 
@@ -221,6 +222,7 @@ $this->menu=array(
                                 'NombreTitular' => 'js:$("#NombreTitular").val()',    
                                 'banco_id' => 'js:$("#banco_id").val()',  
                                 'cheques_agregados' => 'js:$("#cheques_agregados").val()',  
+                                'FechaVencimiento' => 'js:$("#FechaVencimiento").val()',  
                             )
                         ),            
                     ));                 
