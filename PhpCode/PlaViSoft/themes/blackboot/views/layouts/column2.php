@@ -27,6 +27,11 @@
 			));
 			$this->endWidget();
 		?>
+		<br>
+		<?php 
+				if(isset($this->susc)) 		
+		 			$this->widget('stats', array('item'=>$this->susc)); 
+		 ?>
 		</div><!-- sidebar span3 -->
 
 	<div class="span9">

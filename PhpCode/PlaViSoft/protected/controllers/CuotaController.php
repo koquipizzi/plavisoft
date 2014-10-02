@@ -7,6 +7,7 @@ class CuotaController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	public $susc = '';
 
 	/**
 	 * @return array action filters
@@ -151,9 +152,10 @@ class CuotaController extends Controller
             }
             
 	    $records=Cuota::model()->getCuotaBySuscripcion($suscripcion->id);
+		$this->susc = $suscripcion->id;
 	    $this->render('admin',array(
 	        'records'=>$records,
-                'suscripcion'=>$suscripcion,
+                'suscripcion'=>$suscripcion
 	    )); 
 	}
 

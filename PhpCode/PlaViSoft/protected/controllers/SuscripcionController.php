@@ -56,10 +56,11 @@ class SuscripcionController extends Controller
 		
 	    $records=Persona::model()->findAllBySql('Select p.Nombre as Nombre, p.Apellido as Apellido from persona p join suscripcion s where s.persona_id = p.id and s.id ='.$id);
 	  //  var_dump($records); die();
-	    $pagosTotales = $this->sumaPagos($id);
+	    $pagos = $this->sumaPagos($id);
+		$total = $this->sumaTotales($id);
 	    $this->render('view',array(
 	        'records'=>$records, /*'model'=>$records,*/'model'=>$this->loadModel($id),
-	        'pagosTotales'=> $pagosTotales 
+	        'pagos'=> $pagos, 'total'=> $total
 	    )); 
 	}
 
@@ -285,18 +286,23 @@ class SuscripcionController extends Controller
 	public function sumaPagos($suscripcionId)
 	{
 		$pagos = Cuota:: model()->findAllByAttributes(array('suscripcion_id' => (int)$suscripcionId));
-		//var_dump($pagos);die();
 		$total = 0;
 		for($i=0; $i < count($pagos); $i++){
-		//	$model=Adelanto::model()->findByPk($arreglo[$i]);
-		//	var_dump($model);
 			if ($pagos[$i]->saldada == "Si")
 		    	{
 		    		$total = $total + $pagos[$i]->valor;
-					echo $total. "----";
 				}
 		}		
-		echo $total; die();
+		return $total;
+	}
+	
+	public function sumaTotales($suscripcionId)
+	{
+		$pagos = Cuota:: model()->findAllByAttributes(array('suscripcion_id' => (int)$suscripcionId));
+		$total = 0;
+		for($i=0; $i < count($pagos); $i++){
+		    $total = $total + $pagos[$i]->valor;
+		}		
 		return $total;
 	}
 }

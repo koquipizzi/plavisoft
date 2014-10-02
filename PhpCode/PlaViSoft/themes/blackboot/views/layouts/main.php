@@ -57,8 +57,8 @@
                                                         array('label'=>'Suscripción', 'url'=>array('/suscripcion/admin')),
                                                         array('label'=>'Financiación', 'url'=>array('/financiacion/admin')),
                                                         array('label'=>'Viviendas', 'url'=>array('/tipoVivienda/admin')),
-							array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-							array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+							array('label'=>'Acceso', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+							array('label'=>'Salir ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 						),
 					));   
                                             ?>
