@@ -54,7 +54,7 @@
 						'items'=>array(
 							array('label'=>'Inicio', 'url'=>array('/site/index')),
 							array('label'=>'Personas', 'url'=>array('/persona/admin')),
-                                                        array('label'=>'Suscripción', 'url'=>array('/suscripcion/admin')),
+                                               //         array('label'=>'Suscripción', 'url'=>array('/suscripcion/admin')),
                                                         array('label'=>'Financiación', 'url'=>array('/financiacion/admin')),
                                                         array('label'=>'Viviendas', 'url'=>array('/tipoVivienda/admin')),
 							array('label'=>'Acceso', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),

@@ -37,7 +37,7 @@ class CuotaController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','print'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -185,5 +185,19 @@ class CuotaController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	public function actionPrint($id) 
+	{
+		$model = $this->loadModel($id);
+	    $html2pdf = Yii::app()->ePdf->HTML2PDF('P', 'A4', 'es');
+		//$stylesheet = file_get_contents('css/print.css'); /// here call you external css file 
+		$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/print.css');
+	//	echo $stylesheet;
+        //$html2pdf->WriteHTML($stylesheet, 1);
+        var_dump($model->imputacions); die();
+	    $html2pdf->WriteHTML($this->renderPartial('print', array('model'=>$model, 'persona'=>$model->suscripcion->persona), true));
+
+	    $html2pdf->Output($model->suscripcion->persona->Apellido."-".$model->suscripcion->persona->Nombre.'-Cuota'.$model->nro_cuota.'.pdf');
 	}
 }
