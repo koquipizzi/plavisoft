@@ -1492,3 +1492,14 @@ REQUEST_URI=/index.php?r=suscripcion/admin
 in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/suscripcion/admin.php (46)
 in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/SuscripcionController.php (254)
 in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php (13)
+2014/10/05 16:01:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'El sistema no ha podido encontrar la acción "listarCuotas" solicitada.' in /home/diego/Proyectos/plavisoft/framework/web/CController.php:483
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/web/CController.php(270): CController->missingAction('listarCuotas')
+#1 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('listarCuotas')
+#2 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('Pago/listarCuot...')
+#3 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=Pago/listarCuotas
+HTTP_REFERER=http://plavisoft/index.php?r=pago/create&suscripcion_id=34
+---
