@@ -6,7 +6,7 @@
     'items'=>array(
         array('label'=>'PLAVISOFT - Entidades',  'active'=>true),
         array('label'=>'Viviendas', 'icon'=>'home', 'url'=>'index.php?r=tipoVivienda/admin'),
-   //     array('label'=>'Suscripciones BORRAR', 'icon'=>'book', 'url'=>'index.php?r=suscripcion/admin'),
+        array('label'=>'Suscripciones', 'icon'=>'book', 'url'=>'index.php?r=suscripcion/admin'),
         //array('label'=>'ANOTHER LIST HEADER'),
         array('label'=>'Personas', 'icon'=>'user', 'url'=>'index.php?r=persona/admin'),
         array('label'=>'Financiaciones', 'icon'=>'cog', 'url'=>'index.php?r=financiacion/admin'),

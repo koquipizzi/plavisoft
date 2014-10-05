@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Imputacion', 'url'=>array('index')),
-	array('label'=>'Create Imputacion', 'url'=>array('create')),
+	array('label'=>'Listar Imputaciones', 'url'=>array('index')),
+	//array('label'=>'Create Imputacion', 'url'=>array('create')),
 );
 
 ?>
