@@ -155,4 +155,8 @@ class Suscripcion extends CActiveRecord
 		parent::afterFind();
 		return true;
 	}
+        
+        public function getDescripcionStr(){
+            return $this->financiacion->Descripcion;
+        }
 }

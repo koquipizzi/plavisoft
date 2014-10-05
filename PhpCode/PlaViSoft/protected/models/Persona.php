@@ -161,5 +161,13 @@ class Persona extends CActiveRecord
 	            break;
 	    }
 	}
+        
+        public function getNombreCompleto(){
+            return $this->Apellido.", ".$this->Nombre;            
+        }
+        
+        public function getSuscripcionesCantidad(){
+            return count($this->suscripcions);
+        }
 	
 }

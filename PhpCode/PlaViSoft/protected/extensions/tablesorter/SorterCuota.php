@@ -9,7 +9,8 @@ class SorterCuota extends Sorter
             //View, Edit and Delete Urls
             $view_url=Yii::app()->createAbsoluteUrl($class.'/view',array('id'=>$data->id));
             $edit_url=Yii::app()->createAbsoluteUrl($class.'/update',array('id'=>$data->id));
-            $asentar_cuota_url=Yii::app()->createAbsoluteUrl('pago/saldar',array('cuota_id'=>$data->id));
+            $asentar_pago_url=Yii::app()->createAbsoluteUrl('pago/saldar',array('cuota_id'=>$data->id));
+            $asentar_pago_url=Yii::app()->createAbsoluteUrl('pago/create',array('cuota_id'=>$data->id));
             $ver_imputacion_url=Yii::app()->createAbsoluteUrl('imputacion/verImputacion',array('id'=>$data->id));    
             //View, Edit, Delete Icons (bootstrap)
             $r = "
@@ -19,7 +20,7 @@ class SorterCuota extends Sorter
             if($data->saldada!='Si'){
                 $r .= "
                     <a class='btn btn-small' title='Modificar Cuota' href='".$edit_url."'><i class='icon-edit'></i></a>&nbsp; 
-                    <a class='btn btn-small' title='Saldar Cuota' href='".$asentar_cuota_url."'><i class='icon-shopping-cart'></i></a>
+                    <a class='btn btn-small' title='Saldar Cuota' href='".$asentar_pago_url."'><i class='icon-shopping-cart'></i></a>
                 ";                
             }
             else{
