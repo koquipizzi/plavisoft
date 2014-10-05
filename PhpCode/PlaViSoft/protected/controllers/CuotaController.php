@@ -7,6 +7,7 @@ class CuotaController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	public $susc = '';
 
 	/**
 	 * @return array action filters
@@ -36,7 +37,7 @@ class CuotaController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','print'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -151,9 +152,10 @@ class CuotaController extends Controller
             }
             
 	    $records=Cuota::model()->getCuotaBySuscripcion($suscripcion->id);
+		$this->susc = $suscripcion->id;
 	    $this->render('admin',array(
 	        'records'=>$records,
-                'suscripcion'=>$suscripcion,
+                'suscripcion'=>$suscripcion
 	    )); 
 	}
 
@@ -184,4 +186,5 @@ class CuotaController extends Controller
 			Yii::app()->end();
 		}
 	}
+
 }

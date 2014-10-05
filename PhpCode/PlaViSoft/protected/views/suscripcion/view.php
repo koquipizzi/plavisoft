@@ -18,9 +18,9 @@ $this->menu=array(
 
 <?php
 	//var_dump($records); //die();
-	echo "<strong>TOTAL: ".$model->financiacion->Importe;
-	$resto = $model->financiacion->Importe - $pagosTotales;
-	echo " - <span style:'color:green;'>CANCELADO: ".$pagosTotales."</span>";
+	echo "<strong>TOTAL: ".$total;
+	$resto = $total - $pagos;
+	echo " - <span style:'color:green;'>CANCELADO: ".$pagos."</span>";
 	echo " - <span style:'color:red;'>RESTANTE: ".$resto."</span></strong>";
 	
 	
@@ -34,10 +34,10 @@ $this->widget('ext.highcharts.HighchartsWidget', array(
 			        'width' => 400,
 			      ),
                 'series' => array(array(
-                        'type' => 'pie',
+                        'type' => 'pie', 'name' => 'Total',
                         'data' => array(
                                 array('RESTO: $'.$resto, $resto),
-                                array('CANCELADO: $'.$pagosTotales, $pagosTotales)
+                                array('CANCELADO: $'.$pagos, $pagos)
                         )
                 ))
         )
@@ -51,40 +51,10 @@ $this->widget('ext.highcharts.HighchartsWidget', array(
 	//	'persona.Nombre', 
 	//	'Apellido',
 	//'persona.Apellido',
-	    'financiacion.Importe',
-		'Nota',
+	//    'financiacion.Importe',
+	//	'Nota',
 		'Adjudicado',
 	),
 )); ?>
 
-<?php 
-		
-		$this->widget(
-			'bootstrap.widgets.TbButton',
-			array(
-			'url'=>'index.php?r=pago/create&financiacion='.$model->financiacion_id.'&suscripcion='.$model->id,
-			'type' => 'primary',
-			'label' => 'Registrar Pago'
-			)
-		); 
-		echo "</br></br>";
 
-                          //      printf('<li>%s</li>', CHtml::link($susc->id, array('suscripcions/view', 'id' => $susc->id)));
-    
-     
-     ?>
-
-<h1>Administrar Pagos</h1>
-
-
-<?php	$this->widget('application.extensions.tablesorter.Sorter', array(
-	  'data'=>$records,
-	  'columns'=>array(
-	    'NroCuota',
-	    'Mes',
-		'Anio',
-		'Importe',
-		'FechaPago',
-		'formaPago.Descripcion'
-	),
-)); ?>

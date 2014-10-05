@@ -36,7 +36,7 @@ class PagoController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','saldar'),
+				'actions'=>array('admin','delete','saldar','print'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -545,6 +545,17 @@ class PagoController extends Controller
             Yii::app()->end();
         }        
         
-        
-        
+       
+	   		   	
+	public function actionPrint($id) 
+	{ 
+		$model = $this->loadModel($id);
+		
+	    $html2pdf = Yii::app()->ePdf->HTML2PDF('P', 'A4', 'es');
+		//$stylesheet = file_get_contents('css/print.css'); /// here call you external css file 
+	//	$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/print.css');
+    
+	    $html2pdf->WriteHTML($this->renderPartial('print', array('model'=>$model, 'persona'=>$model->persona), true));
+	    $html2pdf->Output($model->persona->Apellido."-".'-Formuario:'.$model->nro_formulario.'.pdf');
+	}  
 }

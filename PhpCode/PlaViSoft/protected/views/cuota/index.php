@@ -6,6 +6,7 @@ $this->breadcrumbs=array(
 	'Cuotas',
 );
 
+
 $this->menu=array(
 	array('label'=>'Create Cuota', 'url'=>array('create')),
 	array('label'=>'Manage Cuota', 'url'=>array('admin')),
