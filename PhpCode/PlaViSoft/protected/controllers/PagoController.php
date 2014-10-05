@@ -36,7 +36,7 @@ class PagoController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','saldar'),
+				'actions'=>array('admin','delete','saldar','print'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -52,16 +52,27 @@ class PagoController extends Controller
 	public function actionView($id)
         {
                 $model = $this->loadModel($id);
+                
+                $formaPagoCheque = FormaPagoPago::model()->findByAttributes(array(
+                                    'pago_id'=>$model->id,
+                                    'forma_pago_id'=>FormaPagoCheque::getIDType(),
+                                ));
+                
+                $cheques = NULL;
+                if(isset($formaPagoCheque)){
+                    $criteria = new CDbCriteria;
+                    $criteria->addSearchCondition('pago_id', $formaPagoCheque->pago_id);
+                    $cheques = Cheque::model()->findAll($criteria);
+                }
+                
 		$this->render('view',array(
 			'model'=>$model,
                         'formaPagoContado' => FormaPagoPago::model()->findByAttributes(array(
                             'pago_id'=>$model->id,
                             'forma_pago_id'=>FormaPagoContado::getIDType(),
                         )),
-                        'formaPagoCheque'  => FormaPagoPago::model()->findByAttributes(array(
-                            'pago_id'=>$model->id,
-                            'forma_pago_id'=>FormaPagoCheque::getIDType(),
-                        )),
+                        'formaPagoCheque'  => $formaPagoCheque,
+                        'cheques' => $cheques,
                         'formaPagoDeposito'=> FormaPagoPago::model()->findByAttributes(array(
                             'pago_id'=>$model->id,
                             'forma_pago_id'=>FormaPagoDeposito::getIDType(),
@@ -212,6 +223,7 @@ class PagoController extends Controller
                         $cheque->banco_id = $cheque_runtime->banco_id;
                         $cheque->valor = $cheque_runtime->valor;
                         $cheque->pago_id = $pago_id;
+                        $cheque->FechaVencimiento = $cheque_runtime->FechaVencimiento;
                     $cheque->save();    
                     $total = $total + $cheque->valor;
                 }
@@ -256,43 +268,44 @@ class PagoController extends Controller
                                     &&(is_array($_POST['FormaPagoPago']['forma_pago_id']))                                    
                                     &&(count($_POST['FormaPagoPago']['forma_pago_id'])>0)
                             ){
-                                // Contado
-                                if(array_key_exists('0', $_POST['FormaPagoPago']['forma_pago_id']) ){
-                                    $forma_pago_contado->attributes = $_POST['FormaPagoContado'];
-                                    $forma_pago_contado->pago_id = $pago->id;
-                                    $forma_pago_contado->save();
-                                }
+                                if(array_key_exists('forma_pago_id', $_POST['FormaPagoPago']) ){
+                                    foreach ($_POST['FormaPagoPago']['forma_pago_id'] as $k => $FormaPagoID){
+                                        
+                                        // Contado
+                                        if($FormaPagoID == FormaPagoContado::getIDType()){
+                                            $forma_pago_contado->attributes = $_POST['FormaPagoContado'];
+                                            $forma_pago_contado->pago_id = $pago->id;
+                                            $forma_pago_contado->save();
+                                        }
+                                        // Cheque
+                                        else if($FormaPagoID == FormaPagoCheque::getIDType()){
+                                            $forma_pago_cheque->attributes = $_POST['FormaPagoCheque'];
+                                            $forma_pago_cheque->pago_id = $pago->id;
+                                            $forma_pago_cheque->save();
 
-                                // Cheque
-                                if(array_key_exists('1', $_POST['FormaPagoPago']['forma_pago_id']) ){
-                                    $forma_pago_cheque->attributes = $_POST['FormaPagoCheque'];
-                                    $forma_pago_cheque->pago_id = $pago->id;
-                                    $forma_pago_cheque->save();
+                                            $total = 0;
+                                            if(trim($_POST['cheques_agregados'])!=''){
+                                                $total = $this->copyChequeRuntime($_POST['cheques_agregados'], $pago->id);
+                                            }
 
-                                    $total = 0;
-                                    if(trim($_POST['cheques_agregados'])!=''){
-                                        $total = $this->copyChequeRuntime($_POST['cheques_agregados'], $pago->id);
+                                            if(trim($_POST['Cheque']['valor'])!=''){
+                                                $cheque->attributes = $_POST['Cheque'];
+                                                $cheque->pago_id = $pago->id;
+                                                $cheque->save();
+                                                $total = $total + $cheque->valor;
+                                            }
+
+                                            $forma_pago_cheque->valor = $total;   
+                                            $forma_pago_cheque->save();
+                                        }
+                                        // Deposito
+                                        else if($FormaPagoID == FormaPagoDeposito::getIDType()){
+                                            $forma_pago_deposito->attributes = $_POST['FormaPagoDeposito'];
+                                            $forma_pago_deposito->pago_id = $pago->id;
+                                            $forma_pago_deposito->save();
+                                        }
                                     }
-
-                                    if(trim($_POST['Cheque']['valor'])!=''){
-                                        $cheque->attributes = $_POST['Cheque'];
-                                        $cheque->pago_id = $pago->id;
-                                        $cheque->save();
-                                        $total = $total + $cheque->valor;
-                                    }
-
-                                    $forma_pago_cheque->valor = $total;   
-                                    $forma_pago_cheque->save();
-
-                                }
-
-                                // Deposito
-                                if(array_key_exists('2', $_POST['FormaPagoPago']['forma_pago_id']) ){
-                                    $forma_pago_deposito->attributes = $_POST['FormaPagoDeposito'];
-                                    $forma_pago_deposito->pago_id = $pago->id;
-                                    $forma_pago_deposito->save();
-                                }                                
-                                
+                                }// if Forma de Pago
                             }
                             else{
                                 $forma_pago_contado->pago_id = $pago->id;
@@ -352,6 +365,7 @@ class PagoController extends Controller
             $cheque->valor = $_POST['valor'];
             $cheque->NombreTitular = $_POST['NombreTitular'];
             $cheque->banco_id = $_POST['banco_id'];
+            $cheque->FechaVencimiento = $_POST['FechaVencimiento'];
             
             if($cheque->save()){
                 if(trim($_POST['cheques_agregados'])!=''){
@@ -420,6 +434,17 @@ class PagoController extends Controller
             Yii::app()->end();
         }        
         
-        
-        
+       
+	   		   	
+	public function actionPrint($id) 
+	{ 
+		$model = $this->loadModel($id);
+		
+	    $html2pdf = Yii::app()->ePdf->HTML2PDF('P', 'A4', 'es');
+		//$stylesheet = file_get_contents('css/print.css'); /// here call you external css file 
+	//	$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/print.css');
+    
+	    $html2pdf->WriteHTML($this->renderPartial('print', array('model'=>$model, 'persona'=>$model->persona), true));
+	    $html2pdf->Output($model->persona->Apellido."-".'-Formuario:'.$model->nro_formulario.'.pdf');
+	}  
 }

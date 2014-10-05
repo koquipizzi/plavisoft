@@ -45,21 +45,30 @@ $this->menu=array(
         ));        
     }
 
- ?>
-
-
-<?php 
-
-    if(isset($formaPagoCheque)){
+    if(isset($formaPagoCheque)&&isset($cheques)&&(count($cheques)>0)){
         echo "<h1>Cheques</h1>";
-        $this->widget('application.extensions.tablesorter.Sorter', array(
-            'id'=>'cheques-grid',
-            'data'=>$formaPagoCheque,
-            'columns'=>array(
-                'valorStr',
-            ),
-        ));         
+        if(!is_array($cheques)){
+            $cheques = array($cheques);
+        }
+        $this->renderPartial(
+            'listaChequesEdicion', 
+            array(
+                'cheques'=>$cheques,
+                'borrarEnabled'=>false
+            )
+        );
     }
+    
+    if(isset($formaPagoDeposito)){
+        echo "<h1>Depósito</h1>";
+        $this->widget('zii.widgets.CDetailView', array(
+            'data'=>$formaPagoDeposito,
+            'attributes'=>array(
+                    'valorStr',
+                    'nroDepositoStr'
+            ),
+        ));        
+    }    
 
  ?>
 

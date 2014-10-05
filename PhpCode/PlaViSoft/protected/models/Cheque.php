@@ -11,6 +11,7 @@
  * @property integer $pago_id
  * @property string $NombreTitular
  * @property integer $banco_id
+ * @property string $FechaVencimiento
  *
  * The followings are the available model relations:
  * @property Banco $banco
@@ -39,9 +40,10 @@ class Cheque extends CActiveRecord
 			array('Nro_cheque, Cta_cte', 'length', 'max'=>45),
 			array('valor', 'length', 'max'=>15),
 			array('NombreTitular', 'length', 'max'=>100),
+			array('FechaVencimiento', 'safe'),                    
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, Nro_cheque, Cta_cte, valor, pago_id, NombreTitular, banco_id', 'safe', 'on'=>'search'),
+			array('id, Nro_cheque, Cta_cte, valor, pago_id, NombreTitular, banco_id, FechaVencimiento', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,6 +73,7 @@ class Cheque extends CActiveRecord
 			'pago_id' => 'Pago',
 			'NombreTitular' => 'Nombre Titular',
 			'banco_id' => 'Banco',
+			'FechaVencimiento' => 'Fecha Vencimiento',                    
 		);
 	}
 
@@ -99,6 +102,7 @@ class Cheque extends CActiveRecord
 		$criteria->compare('pago_id',$this->pago_id);
 		$criteria->compare('NombreTitular',$this->NombreTitular,true);
 		$criteria->compare('banco_id',$this->banco_id);
+		$criteria->compare('FechaVencimiento',$this->FechaVencimiento,true);                
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -115,4 +119,26 @@ class Cheque extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        
+        public function getValorStr(){
+            return "$ ".Yii::app()->format->number($this->valor);
+        }
+        
+	public function afterFind()
+	{
+                $this->FechaVencimiento = Yii::app()->format->date($this->FechaVencimiento);
+		return parent::afterFind();
+	}       
+        
+	public function beforeSave()
+	{
+		$fecha = DateTime::createFromFormat('d/m/Y',$this->FechaVencimiento);
+		$this->FechaVencimiento = $fecha->format('y-m-d');		 
+		parent::beforeSave();
+                
+		return true;
+	}
+        
+        
 }

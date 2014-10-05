@@ -685,6 +685,7 @@ Stack trace:
 #18 {main}
 REQUEST_URI=/plavisoft/index.php?r=Suscripcion/view&id=34
 ---
+<<<<<<< HEAD
 2014/10/01 16:21:23 [error] [exception.CException] exception 'CException' with message 'La propiedad "Financiacion"."Importe" no se encuentra definida.' in C:\Proyectos\Workspace\plavisoft\framework\base\CComponent.php:130
 Stack trace:
 #0 C:\Proyectos\Workspace\plavisoft\framework\db\ar\CActiveRecord.php(145): CComponent->__get('Importe')
@@ -1866,4 +1867,790 @@ Stack trace:
 #20 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
 #21 {main}
 REQUEST_URI=/plavisoft/index.php?r=cuota/print&id=82
+=======
+2014/10/01 11:28:42 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /home/diego/Proyectos/plavisoft/framework/db/CDbConnection.php:382
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/CDbConnection.php(330): CDbConnection->open()
+#1 /home/diego/Proyectos/plavisoft/framework/db/CDbConnection.php(308): CDbConnection->setActive(true)
+#2 /home/diego/Proyectos/plavisoft/framework/base/CModule.php(387): CDbConnection->init()
+#3 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(450): CModule->getComponent('db')
+#4 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(634): CApplication->getDb()
+#5 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(1428): CActiveRecord->getDbConnection()
+#6 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(1484): CActiveRecord->getTableAlias(true)
+#7 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/CuotaController.php(141): CActiveRecord->findByPk('44')
+#8 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): CuotaController->actionAdmin()
+#9 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#12 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#16 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('admin')
+#18 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('cuota/admin')
+#19 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/index.php?r=cuota/admin&suscripcion_id=44
+HTTP_REFERER=http://plavisoft/index.php?r=site/login
+---
+2014/10/01 14:08:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'El sistema no ha podido encontrar la acción "agregarCheque" solicitada.' in /home/diego/Proyectos/plavisoft/framework/web/CController.php:483
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/web/CController.php(270): CController->missingAction('agregarCheque')
+#1 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('agregarCheque')
+#2 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('Cuota/agregarCh...')
+#3 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=Cuota/agregarCheque
+HTTP_REFERER=http://plavisoft/index.php?r=pago/saldar&cuota_id=86
+---
+2014/10/01 14:08:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'El sistema no ha podido encontrar la acción "agregarCheque" solicitada.' in /home/diego/Proyectos/plavisoft/framework/web/CController.php:483
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/web/CController.php(270): CController->missingAction('agregarCheque')
+#1 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('agregarCheque')
+#2 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('Cuota/agregarCh...')
+#3 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=Cuota/agregarCheque
+HTTP_REFERER=http://plavisoft/index.php?r=pago/saldar&cuota_id=86
+---
+2014/10/01 14:08:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'El sistema no ha podido encontrar la acción "agregarCheque" solicitada.' in /home/diego/Proyectos/plavisoft/framework/web/CController.php:483
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/web/CController.php(270): CController->missingAction('agregarCheque')
+#1 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('agregarCheque')
+#2 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('Cuota/agregarCh...')
+#3 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=Cuota/agregarCheque
+HTTP_REFERER=http://plavisoft/index.php?r=pago/saldar&cuota_id=86
+---
+2014/10/01 14:12:12 [error] [exception.CException] exception 'CException' with message 'La propiedad "FormaPagoPago"."0" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('0')
+#1 /home/diego/Proyectos/plavisoft/framework/base/CModel.php(596): CActiveRecord->__get('0')
+#2 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(64): CModel->offsetGet(0)
+#3 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#4 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#5 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/pago/view.php(61): CBaseController->widget('application.ext...', Array)
+#6 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#7 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#9 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#10 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php(69): CController->render('view', Array)
+#11 [internal function]: PagoController->actionView('62')
+#12 /home/diego/Proyectos/plavisoft/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#13 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#17 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#18 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#19 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#20 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#21 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('view')
+#23 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('pago/view')
+#24 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/index.php?r=pago/view&id=62
+HTTP_REFERER=http://plavisoft/index.php?r=imputacion/verImputacion&id=87
+---
+2014/10/01 14:15:42 [error] [exception.CException] exception 'CException' with message 'La propiedad "FormaPagoPago"."0" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('0')
+#1 /home/diego/Proyectos/plavisoft/framework/base/CModel.php(596): CActiveRecord->__get('0')
+#2 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(64): CModel->offsetGet(0)
+#3 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#4 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#5 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/pago/view.php(56): CBaseController->widget('application.ext...', Array)
+#6 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#7 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#9 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#10 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php(69): CController->render('view', Array)
+#11 [internal function]: PagoController->actionView('62')
+#12 /home/diego/Proyectos/plavisoft/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#13 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#17 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#18 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#19 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#20 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#21 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('view')
+#23 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('pago/view')
+#24 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/index.php?r=pago/view&id=62
+HTTP_REFERER=http://plavisoft/index.php?r=imputacion/verImputacion&id=87
+---
+2014/10/01 14:16:54 [error] [exception.CException] exception 'CException' with message 'La propiedad "FormaPagoPago"."0" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('0')
+#1 /home/diego/Proyectos/plavisoft/framework/base/CModel.php(596): CActiveRecord->__get('0')
+#2 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(64): CModel->offsetGet(0)
+#3 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#4 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#5 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/pago/view.php(56): CBaseController->widget('application.ext...', Array)
+#6 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#7 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#9 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#10 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php(69): CController->render('view', Array)
+#11 [internal function]: PagoController->actionView('62')
+#12 /home/diego/Proyectos/plavisoft/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#13 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#17 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#18 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#19 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#20 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#21 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('view')
+#23 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('pago/view')
+#24 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/index.php?r=pago/view&id=62
+HTTP_REFERER=http://plavisoft/index.php?r=imputacion/verImputacion&id=87
+---
+2014/10/01 14:18:30 [error] [exception.CException] exception 'CException' with message 'La propiedad "FormaPagoPago"."0" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('0')
+#1 /home/diego/Proyectos/plavisoft/framework/base/CModel.php(596): CActiveRecord->__get('0')
+#2 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(64): CModel->offsetGet(0)
+#3 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#4 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#5 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/pago/view.php(56): CBaseController->widget('application.ext...', Array)
+#6 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#7 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#9 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#10 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php(69): CController->render('view', Array)
+#11 [internal function]: PagoController->actionView('62')
+#12 /home/diego/Proyectos/plavisoft/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#13 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#17 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#18 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#19 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#20 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#21 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('view')
+#23 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('pago/view')
+#24 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/index.php?r=pago/view&id=62
+HTTP_REFERER=http://plavisoft/index.php?r=imputacion/verImputacion&id=87
+---
+2014/10/01 14:20:38 [error] [exception.CException] exception 'CException' with message 'La propiedad "FormaPagoPago"."id" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('id')
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(135): CActiveRecord->__get('id')
+#2 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(196): Sorter->buttons('FormaPagoPago', Object(FormaPagoPago))
+#3 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(113): Sorter->print_row(Object(FormaPagoPago), 'FormaPagoPago')
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#5 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#6 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/pago/view.php(61): CBaseController->widget('application.ext...', Array)
+#7 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#8 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#9 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#10 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#11 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php(69): CController->render('view', Array)
+#12 [internal function]: PagoController->actionView('62')
+#13 /home/diego/Proyectos/plavisoft/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#15 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#17 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#18 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#19 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#20 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#21 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#22 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#23 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('view')
+#24 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('pago/view')
+#25 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#26 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#27 {main}
+REQUEST_URI=/index.php?r=pago/view&id=62
+HTTP_REFERER=http://plavisoft/index.php?r=imputacion/verImputacion&id=87
+---
+2014/10/01 14:26:22 [error] [exception.CException] exception 'CException' with message 'La propiedad "FormaPagoPago"."id" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('id')
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(135): CActiveRecord->__get('id')
+#2 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(196): Sorter->buttons('FormaPagoPago', Object(FormaPagoPago))
+#3 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(113): Sorter->print_row(Object(FormaPagoPago), 'FormaPagoPago')
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#5 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#6 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/pago/view.php(61): CBaseController->widget('application.ext...', Array)
+#7 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#8 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#9 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#10 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#11 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php(69): CController->render('view', Array)
+#12 [internal function]: PagoController->actionView('62')
+#13 /home/diego/Proyectos/plavisoft/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#15 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#17 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#18 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#19 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#20 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#21 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#22 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#23 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('view')
+#24 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('pago/view')
+#25 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#26 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#27 {main}
+REQUEST_URI=/index.php?r=pago/view&id=62
+HTTP_REFERER=http://plavisoft/index.php?r=imputacion/verImputacion&id=87
+---
+2014/10/01 14:26:40 [error] [exception.CException] exception 'CException' with message 'La propiedad "Cheque"."0" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('0')
+#1 /home/diego/Proyectos/plavisoft/framework/base/CModel.php(596): CActiveRecord->__get('0')
+#2 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(64): CModel->offsetGet(0)
+#3 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#4 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#5 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/pago/view.php(56): CBaseController->widget('application.ext...', Array)
+#6 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#7 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#9 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#10 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php(80): CController->render('view', Array)
+#11 [internal function]: PagoController->actionView('62')
+#12 /home/diego/Proyectos/plavisoft/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#13 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#17 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#18 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#19 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#20 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#21 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('view')
+#23 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('pago/view')
+#24 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/index.php?r=pago/view&id=62
+HTTP_REFERER=http://plavisoft/index.php?r=imputacion/verImputacion&id=87
+---
+2014/10/01 14:29:46 [error] [exception.CException] exception 'CException' with message 'La propiedad "Cheque"."0" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('0')
+#1 /home/diego/Proyectos/plavisoft/framework/base/CModel.php(596): CActiveRecord->__get('0')
+#2 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(64): CModel->offsetGet(0)
+#3 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#4 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#5 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/pago/view.php(56): CBaseController->widget('application.ext...', Array)
+#6 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#7 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#9 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#10 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php(80): CController->render('view', Array)
+#11 [internal function]: PagoController->actionView('62')
+#12 /home/diego/Proyectos/plavisoft/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#13 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#17 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#18 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#19 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#20 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#21 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('view')
+#23 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('pago/view')
+#24 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/index.php?r=pago/view&id=62
+HTTP_REFERER=http://plavisoft/index.php?r=imputacion/verImputacion&id=87
+---
+2014/10/01 14:30:11 [error] [exception.CException] exception 'CException' with message 'La propiedad "Cheque"."valorStr" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('valorStr')
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(192): CActiveRecord->__get('valorStr')
+#2 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(113): Sorter->print_row(Object(Cheque), 'Cheque')
+#3 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#4 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#5 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/pago/view.php(59): CBaseController->widget('application.ext...', Array)
+#6 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#7 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#9 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('view', Array, true)
+#10 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php(80): CController->render('view', Array)
+#11 [internal function]: PagoController->actionView('62')
+#12 /home/diego/Proyectos/plavisoft/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#13 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#17 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#18 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#19 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#20 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#21 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('view')
+#23 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('pago/view')
+#24 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#25 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#26 {main}
+REQUEST_URI=/index.php?r=pago/view&id=62
+HTTP_REFERER=http://plavisoft/index.php?r=imputacion/verImputacion&id=87
+>>>>>>> 41ae99dd8010b037cb8dbbdf226a943e5c626610
+---
+2014/10/03 23:41:13 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in C:\Proyectos\Workspace\plavisoft\framework\db\CDbConnection.php:382
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\framework\db\CDbConnection.php(330): CDbConnection->open()
+#1 C:\Proyectos\Workspace\plavisoft\framework\db\CDbConnection.php(308): CDbConnection->setActive(true)
+#2 C:\Proyectos\Workspace\plavisoft\framework\base\CModule.php(387): CDbConnection->init()
+#3 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(450): CModule->getComponent('db')
+#4 C:\Proyectos\Workspace\plavisoft\framework\db\ar\CActiveRecord.php(634): CApplication->getDb()
+#5 C:\Proyectos\Workspace\plavisoft\framework\db\ar\CActiveRecord.php(1428): CActiveRecord->getDbConnection()
+#6 C:\Proyectos\Workspace\plavisoft\framework\db\ar\CActiveRecord.php(1484): CActiveRecord->getTableAlias(true)
+#7 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(179): CActiveRecord->findByPk('37')
+#8 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(54): PagoController->loadModel('37')
+#9 [internal function]: PagoController->actionView('37')
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#14 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#15 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#16 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#17 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#18 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#19 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#20 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('view')
+#21 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/view')
+#22 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#23 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#24 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/view&id=37
+HTTP_REFERER=http://localhost/plavisoft/index.php?r=imputacion/verImputacion&id=83
+---
+2014/10/04 00:01:19 [error] [exception.CException] exception 'CException' with message 'La propiedad "Cheque"."FechaVencimiento" no se encuentra definida.' in C:\Proyectos\Workspace\plavisoft\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\framework\db\ar\CActiveRecord.php(145): CComponent->__get('FechaVencimient...')
+#1 C:\Proyectos\Workspace\plavisoft\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('FechaVencimient...')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(Cheque), 'FechaVencimient...')
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(Cheque), 'FechaVencimient...', Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\zii\widgets\jui\CJuiDatePicker.php(84): CHtml::activeTextField(Object(Cheque), 'FechaVencimient...', Array)
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(173): CJuiDatePicker->run()
+#6 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\views\pago\saldar.php(168): CBaseController->widget('zii.widgets.jui...', Array)
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(126): require('C:\Proyectos\Wo...')
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\Proyectos\Wo...', Array, true)
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(869): CBaseController->renderFile('C:\Proyectos\Wo...', Array, true)
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(782): CController->renderPartial('saldar', Array, true)
+#11 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(358): CController->render('saldar', Array)
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(49): PagoController->actionSaldar()
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#14 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#15 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#16 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#17 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#18 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#19 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#20 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#21 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('saldar')
+#22 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/saldar')
+#23 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#24 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#25 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/saldar&cuota_id=86
+---
+2014/10/04 00:07:07 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'Usted no se encuentra autorizado a realizar esta acción.' in C:\Proyectos\Workspace\plavisoft\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(CWebUser), 'Usted no se enc...')
+#1 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('imputacion/prin...')
+#9 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/plavisoft/index.php?r=imputacion/print&id=83
+---
+2014/10/04 00:07:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\ImputacionController.php:211
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\ImputacionController.php(231): ImputacionController->loadModel('83')
+#1 [internal function]: ImputacionController->actionPrint('83')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(ImputacionController), Array)
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(ImputacionController), Object(ReflectionMethod), Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('imputacion/prin...')
+#14 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plavisoft/index.php?r=imputacion/print&id=83
+---
+2014/10/04 00:08:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\ImputacionController.php:211
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\ImputacionController.php(231): ImputacionController->loadModel('83')
+#1 [internal function]: ImputacionController->actionPrint('83')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(ImputacionController), Array)
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(ImputacionController), Object(ReflectionMethod), Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('imputacion/prin...')
+#14 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plavisoft/index.php?r=imputacion/print&id=83
+---
+2014/10/04 00:08:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\ImputacionController.php:211
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\ImputacionController.php(231): ImputacionController->loadModel('83')
+#1 [internal function]: ImputacionController->actionPrint('83')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(ImputacionController), Array)
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(ImputacionController), Object(ReflectionMethod), Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('imputacion/prin...')
+#14 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plavisoft/index.php?r=imputacion/print&id=83
+---
+2014/10/04 00:10:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php:181
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(441): PagoController->loadModel('83')
+#1 [internal function]: PagoController->actionPrint('83')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/print')
+#14 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/print&id=83
+---
+2014/10/04 00:11:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php:181
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(441): PagoController->loadModel('83')
+#1 [internal function]: PagoController->actionPrint('83')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/print')
+#14 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/print&id=83
+---
+2014/10/04 00:11:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php:181
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(441): PagoController->loadModel('83')
+#1 [internal function]: PagoController->actionPrint('83')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/print')
+#14 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/print&id=83
+---
+2014/10/04 00:13:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php:181
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(441): PagoController->loadModel('83')
+#1 [internal function]: PagoController->actionPrint('83')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/print')
+#14 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/print&id=83
+---
+2014/10/04 00:14:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php:181
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(441): PagoController->loadModel('83')
+#1 [internal function]: PagoController->actionPrint('83')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/print')
+#14 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/print&id=83
+---
+2014/10/04 00:14:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The requested page does not exist.' in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php:181
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(441): PagoController->loadModel('83')
+#1 [internal function]: PagoController->actionPrint('83')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/print')
+#14 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#15 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/print&id=83
+---
+2014/10/04 00:15:33 [error] [exception.CException] exception 'CException' with message 'La propiedad "Pago"."suscripcion" no se encuentra definida.' in C:\Proyectos\Workspace\plavisoft\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\framework\db\ar\CActiveRecord.php(145): CComponent->__get('suscripcion')
+#1 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(450): CActiveRecord->__get('suscripcion')
+#2 [internal function]: PagoController->actionPrint('50')
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#14 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/print')
+#15 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/print&id=50
+---
+2014/10/04 00:15:50 [error] [exception.CException] exception 'CException' with message 'La propiedad "Pago"."suscripcion" no se encuentra definida.' in C:\Proyectos\Workspace\plavisoft\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\framework\db\ar\CActiveRecord.php(145): CComponent->__get('suscripcion')
+#1 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\views\pago\print.php(66): CActiveRecord->__get('suscripcion')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(126): require('C:\Proyectos\Wo...')
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\Proyectos\Wo...', Array, true)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(869): CBaseController->renderFile('C:\Proyectos\Wo...', Array, true)
+#5 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(450): CController->renderPartial('print', Array, true)
+#6 [internal function]: PagoController->actionPrint('50')
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#16 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#18 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/print')
+#19 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/print&id=50
+---
+2014/10/04 00:15:58 [error] [exception.CException] exception 'CException' with message 'La propiedad "Pago"."suscripcion" no se encuentra definida.' in C:\Proyectos\Workspace\plavisoft\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\framework\db\ar\CActiveRecord.php(145): CComponent->__get('suscripcion')
+#1 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\views\pago\print.php(66): CActiveRecord->__get('suscripcion')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(126): require('C:\Proyectos\Wo...')
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\Proyectos\Wo...', Array, true)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(869): CBaseController->renderFile('C:\Proyectos\Wo...', Array, true)
+#5 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(450): CController->renderPartial('print', Array, true)
+#6 [internal function]: PagoController->actionPrint('50')
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#16 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#18 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/print')
+#19 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/print&id=50
+---
+2014/10/04 00:16:29 [error] [exception.CException] exception 'CException' with message 'La propiedad "Pago"."valorLetras" no se encuentra definida.' in C:\Proyectos\Workspace\plavisoft\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\framework\db\ar\CActiveRecord.php(145): CComponent->__get('valorLetras')
+#1 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\views\pago\print.php(97): CActiveRecord->__get('valorLetras')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(126): require('C:\Proyectos\Wo...')
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\Proyectos\Wo...', Array, true)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(869): CBaseController->renderFile('C:\Proyectos\Wo...', Array, true)
+#5 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(450): CController->renderPartial('print', Array, true)
+#6 [internal function]: PagoController->actionPrint('50')
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#16 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#18 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/print')
+#19 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/print&id=50
+---
+2014/10/05 15:57:40 [error] [exception.CException] exception 'CException' with message 'La propiedad "Pago"."valorLetras" no se encuentra definida.' in C:\Proyectos\Workspace\plavisoft\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\framework\db\ar\CActiveRecord.php(145): CComponent->__get('valorLetras')
+#1 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\views\pago\print.php(97): CActiveRecord->__get('valorLetras')
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(126): require('C:\Proyectos\Wo...')
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\Proyectos\Wo...', Array, true)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(869): CBaseController->renderFile('C:\Proyectos\Wo...', Array, true)
+#5 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(450): CController->renderPartial('print', Array, true)
+#6 [internal function]: PagoController->actionPrint('50')
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#16 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#18 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/print')
+#19 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#20 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#21 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/print&id=50
+---
+2014/10/05 15:58:57 [error] [exception.CException] exception 'CException' with message 'La propiedad "Pago"."suscripcion" no se encuentra definida.' in C:\Proyectos\Workspace\plavisoft\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\framework\db\ar\CActiveRecord.php(145): CComponent->__get('suscripcion')
+#1 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(451): CActiveRecord->__get('suscripcion')
+#2 [internal function]: PagoController->actionPrint('50')
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#14 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/print')
+#15 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/print&id=50
+---
+2014/10/05 15:59:26 [error] [exception.CException] exception 'CException' with message 'La propiedad "Pago"."nro_cuota" no se encuentra definida.' in C:\Proyectos\Workspace\plavisoft\framework\base\CComponent.php:130
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\framework\db\ar\CActiveRecord.php(145): CComponent->__get('nro_cuota')
+#1 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\PagoController.php(451): CActiveRecord->__get('nro_cuota')
+#2 [internal function]: PagoController->actionPrint('50')
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PagoController), Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PagoController), Object(ReflectionMethod), Array)
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('print')
+#14 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('pago/print')
+#15 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/plavisoft/index.php?r=pago/print&id=50
 ---

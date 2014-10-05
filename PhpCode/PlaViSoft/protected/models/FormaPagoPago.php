@@ -62,6 +62,7 @@ class FormaPagoPago extends CActiveRecord
 			'pago_id' => 'Pago',
 			'valor' => 'Valor',
                         'valorStr' => 'Valor',
+                        'nroDepositoStr'=> 'Nro. Deposito',
 		);
 	}
 
@@ -107,6 +108,15 @@ class FormaPagoPago extends CActiveRecord
         public function getValorStr(){
                 return "$ ".Yii::app() -> format -> number($this -> valor);
         }
+        
+        
+        public function getNroDepositoStr(){
+            $pago = Pago::model()->findByPk($this->pago_id);
+            if($pago)
+                return $pago->NroDeposito;
+            return "";
+        }
+        
 
         
 }
@@ -151,4 +161,5 @@ class FormaPagoDeposito extends FormaPagoEspecifico
     public static function getIDType(){
         return self::ID_DEPOSITO;
     }    
+    
 }
