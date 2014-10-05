@@ -89,10 +89,10 @@ class PagoController extends Controller
                 
                 $valor = Yii::app()->format->unformatNumber($_POST['valor']);
                 $resto = 0;
-                $suscripcion = Persona::model()->findByPk($_POST['suscripcion_id']);
+                $suscripcion = Suscripcion::model()->findByPk($_POST['suscripcion_id']);
                 
                 $criteria = new CDbCriteria;
-                    $criteria->compare('persona_id', $suscripcion->persona_id);
+                    $criteria->compare('suscripcion_id', $suscripcion->id);
                     $criteria->compare('saldada', 'No');
                     $criteria->order = 'nro_cuota';
                 $aux = Cuota::model()->findAll($criteria);
@@ -117,14 +117,20 @@ class PagoController extends Controller
                         is_array($aux)&&
                         (count($aux)>0)    
                     ){
-                        $cuotas[] = $aux[0];
-                        $c = $aux[0];
-                        $valor = $valor - $c->valor;
+                        $salir = FALSE;
+                        for($i=0; ($i<count($aux))&&!$salir; $i++){
+                            $c = $aux[ $i ];
+                            if($resto >= $c->valor){
+                                $cuotas[] = $c;
+                                $resto = $resto - $c->valor;
+                            }//if
+                            else{
+                                $salir = TRUE;
+                            }
+                        }//for
                     }
-                }
-                
-                
-            }
+                }//if resto
+            }//if parametros $_POST
             
             $html = $this->renderPartial(
                     'listarCuotas',

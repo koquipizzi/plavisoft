@@ -71,7 +71,6 @@ $this->menu=array(
     }
     
     function valorChange(){
-        debugger;
         var valor = $('#valor').val();
         var suscripcion_id = $('#suscripcion_id').val();
         jQuery.ajax({
@@ -217,7 +216,7 @@ $this->menu=array(
 			<?php echo $form->labelEx($forma_pago_pago,'forma_pago_id'); ?>
 		</div>
 		<div class="controls">            
-                        <?php echo $form->checkBoxList(
+                        <?php echo $form->checkBoxListRow(
                                 $forma_pago_pago,
                                 'forma_pago_id', 
                                 CHtml::listData(FormaPago::model()->findAll(), 'id', 'Descripcion'), 
