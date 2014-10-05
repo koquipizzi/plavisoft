@@ -10,11 +10,13 @@
         </tr>
     </thead>        
     <tbody>
-        <?php foreach($cuotas as $i => $cuota){ ?>
+        <?php 
+            foreach($cuotas as $i => $cuota){ 
+        ?>
             <tr>        
-                <td><?php echo $cuota->cuotaStr; ?></td>
-                <td><?php echo $cuota->valorStr; ?></td>            
-                <td><?php echo $cuota->valorStr; ?></td>                        
+                <td><?php echo $cuota->cuota->cuotaStr; ?></td>
+                <td><?php echo $cuota->cuota->valorStr; ?></td>            
+                <td><?php echo $cuota->valorImputado; ?></td>                        
             </tr>
         <?php } ?>        
     </tbody>

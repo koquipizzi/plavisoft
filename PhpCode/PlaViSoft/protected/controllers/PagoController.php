@@ -103,9 +103,12 @@ class PagoController extends Controller
                     is_array($aux)&&
                     (count($aux)>0)    
                 ){
-                    $cuotas[] = $aux[0];
                     $c = $aux[0];
                     $resto = $valor - $c->valor;
+                    $cuotas[] = array(
+                        'cuota' => $aux[0],
+                        'valorImputado' => $c->valor,
+                    );                    
                 }
 
                 // Toma el resto de las cuotas
@@ -120,13 +123,25 @@ class PagoController extends Controller
                         $salir = FALSE;
                         for($i=0; ($i<count($aux))&&!$salir; $i++){
                             $c = $aux[ $i ];
-                            if($resto >= $c->valor){
-                                $cuotas[] = $c;
-                                $resto = $resto - $c->valor;
+                            
+                            $valorCuota = $c->valor - $c->valorImputado;
+                            $valorReal = $resto - $valorCuota;
+                            $valorImputado = $valorCuota;
+                                    
+                            if($valorReal>0){
+                                //valorImputado es el valor de cuota ya asignado
+                                $resto = $valorReal;
                             }//if
                             else{
+                                $valorImputado = $resto;
                                 $salir = TRUE;
                             }
+                            
+                            $cuotas[] = array(
+                                'cuota' => $c,
+                                'valorImputado' => $valorImputado,
+                            );
+                            
                         }//for
                     }
                 }//if resto
