@@ -163,5 +163,19 @@ class Cuota extends ActiveRecord
         public function getCuotaStr(){
             return $this->mes->mes." - ".$this->anio;
         }
+
+        public function getValorImputado(){
+            $imputaciones = $this->imputacions;
+            $r = 0;
+            foreach ($imputaciones as $key => $imputacion) {
+                $r = $r + $imputacion->valor;
+            }
+            return $r;
+        }
+
+        public function getValorImputadoStr(){
+            return '$ '.Yii::app() -> format -> number($this->getValorImputado());
+        }
+        
         
 }

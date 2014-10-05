@@ -84,12 +84,15 @@ class PagoController extends Controller
             $valor = 0;
             $cuotas = NULL;
             
-            if(array_key_exists('valor', $_POST)&&array_key_exists('persona_id', $_POST)){
-                $valor = Yii::app()->format->unformatNumber($_POST['valor']);
+            if(array_key_exists('valor', $_POST)&&array_key_exists('suscripcion_id', $_POST)){
                 $cuotas = array();
                 
+                $valor = Yii::app()->format->unformatNumber($_POST['valor']);
+                $resto = 0;
+                $suscripcion = Suscripcion::model()->findByPk($_POST['suscripcion_id']);
+                
                 $criteria = new CDbCriteria;
-                    $criteria->compare('persona_id', $_POST['persona_id']);
+                    $criteria->compare('suscripcion_id', $suscripcion->id);
                     $criteria->compare('saldada', 'No');
                     $criteria->order = 'nro_cuota';
                 $aux = Cuota::model()->findAll($criteria);
@@ -102,11 +105,11 @@ class PagoController extends Controller
                 ){
                     $cuotas[] = $aux[0];
                     $c = $aux[0];
-                    $valor = $valor - $c->valor;
+                    $resto = $valor - $c->valor;
                 }
 
                 // Toma el resto de las cuotas
-                if($valor > 0){
+                if($resto > 0){
                     $criteria->order = 'nro_cuota DESC';
                     $aux = Cuota::model()->findAll($criteria);
                     if (
@@ -114,14 +117,20 @@ class PagoController extends Controller
                         is_array($aux)&&
                         (count($aux)>0)    
                     ){
-                        $cuotas[] = $aux[0];
-                        $c = $aux[0];
-                        $valor = $valor - $c->valor;
+                        $salir = FALSE;
+                        for($i=0; ($i<count($aux))&&!$salir; $i++){
+                            $c = $aux[ $i ];
+                            if($resto >= $c->valor){
+                                $cuotas[] = $c;
+                                $resto = $resto - $c->valor;
+                            }//if
+                            else{
+                                $salir = TRUE;
+                            }
+                        }//for
                     }
-                }
-                
-                
-            }
+                }//if resto
+            }//if parametros $_POST
             
             $html = $this->renderPartial(
                     'listarCuotas',

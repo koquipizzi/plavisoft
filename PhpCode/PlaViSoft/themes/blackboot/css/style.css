@@ -87,9 +87,16 @@ width: 160px;
 padding: 5px;
 text-align: right;
 }
-form label[for^=FormaPagoPago_forma_pago_id]{
-/*padding-left: 5px;
-text-align: left;*/
+
+label.checkbox{
+padding-left: 20px;
+text-align: left;
+width: 80px;
+}
+
+#FormaPagoPago_forma_pago_id{
+padding-left: 5px;
+text-align: left;
 }
 form div {
 display:block;

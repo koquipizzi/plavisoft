@@ -72,7 +72,7 @@ $this->menu=array(
     
     function valorChange(){
         var valor = $('#valor').val();
-        var persona_id = $('#persona_id').val();
+        var suscripcion_id = $('#suscripcion_id').val();
         jQuery.ajax({
             'type':'POST',
             'success':function( data ) {
@@ -81,9 +81,9 @@ $this->menu=array(
             },
             'data':{
                 'valor':valor,
-                'persona_id':persona_id
+                'suscripcion_id':suscripcion_id
             },
-            'url':'/index.php?r=Pago/listarCuotas',
+            'url':'/index.php?r=Pago/valorChange',
             'cache':false
         });
     }
@@ -212,11 +212,11 @@ $this->menu=array(
         </div>    
 
         <div class="control-group">
-                <div class="control-label">
+                <!--div class="control-label">
 			<?php echo $form->labelEx($forma_pago_pago,'forma_pago_id'); ?>
-		</div>
-		<div class="controls">            
-                        <?php echo $form->checkBoxList(
+		</div-->
+		<div class="controls_2">            
+                        <?php echo $form->checkBoxListRow(
                                 $forma_pago_pago,
                                 'forma_pago_id', 
                                 CHtml::listData(FormaPago::model()->findAll(), 'id', 'Descripcion'), 

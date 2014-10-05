@@ -3111,6 +3111,7 @@ REQUEST_URI=/index.php?r=suscripcion/admin
 in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/suscripcion/admin.php (46)
 in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/SuscripcionController.php (254)
 in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php (13)
+<<<<<<< HEAD
 2014/10/05 21:08:49 [error] [exception.CException] exception 'CException' with message 'La propiedad "Cheque"."FechaVencimiento" no se encuentra definida.' in C:\Proyectos\Workspace\plavisoft\framework\base\CComponent.php:130
 Stack trace:
 #0 C:\Proyectos\Workspace\plavisoft\framework\db\ar\CActiveRecord.php(145): CComponent->__get('FechaVencimient...')
@@ -3265,4 +3266,63 @@ Stack trace:
 #25 {main}
 REQUEST_URI=/plavisoft/index.php?r=pago/create&suscripcion_id=34
 HTTP_REFERER=http://localhost/plavisoft/index.php?r=suscripcion/admin
+=======
+2014/10/05 16:01:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'El sistema no ha podido encontrar la acción "listarCuotas" solicitada.' in /home/diego/Proyectos/plavisoft/framework/web/CController.php:483
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/web/CController.php(270): CController->missingAction('listarCuotas')
+#1 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('listarCuotas')
+#2 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('Pago/listarCuot...')
+#3 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=Pago/listarCuotas
+HTTP_REFERER=http://plavisoft/index.php?r=pago/create&suscripcion_id=34
+---
+2014/10/05 16:46:37 [error] [exception.CException] exception 'CException' with message 'La propiedad "Persona"."persona_id" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('persona_id')
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php(95): CActiveRecord->__get('persona_id')
+#2 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): PagoController->actionValorChange()
+#3 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#10 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('valorChange')
+#12 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('Pago/valorChang...')
+#13 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#14 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/index.php?r=Pago/valorChange
+HTTP_REFERER=http://plavisoft/index.php?r=pago/create&suscripcion_id=34
+---
+2014/10/05 16:47:48 [error] [system.db.CDbCommand] CDbCommand::fetchAll() falló: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'persona_id' in 'where clause'. La sentencia SQL ejecutada fue: SELECT * FROM `cuota` `t` WHERE (persona_id=:ycp0) AND (saldada=:ycp1) ORDER BY nro_cuota.
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php (98)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php (13)
+2014/10/05 16:47:48 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falló al ejecutar la sentencia SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'persona_id' in 'where clause'. The SQL statement executed was: SELECT * FROM `cuota` `t` WHERE (persona_id=:ycp0) AND (saldada=:ycp1) ORDER BY nro_cuota' in /home/diego/Proyectos/plavisoft/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(1351): CDbCommand->queryAll()
+#2 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(1470): CActiveRecord->query(Object(CDbCriteria), true)
+#3 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php(98): CActiveRecord->findAll(Object(CDbCriteria))
+#4 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): PagoController->actionValorChange()
+#5 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#6 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#12 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('valorChange')
+#14 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('Pago/valorChang...')
+#15 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/index.php?r=Pago/valorChange
+HTTP_REFERER=http://plavisoft/index.php?r=pago/create&suscripcion_id=34
+>>>>>>> a288c03524dcfa0038b05c4e911a6b441223bac0
 ---
