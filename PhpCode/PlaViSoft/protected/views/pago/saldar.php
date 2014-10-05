@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Cuota</h1>
+<h1>Creación de Cuota</h1>
 
 <script>
     function formaPagoChange(check){

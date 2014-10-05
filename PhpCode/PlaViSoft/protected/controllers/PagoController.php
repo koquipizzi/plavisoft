@@ -28,7 +28,7 @@ class PagoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','agregarCheque', 'borrarCheque'),
+				'actions'=>array('index','view','agregarCheque', 'borrarCheque', 'valorChange'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -79,28 +79,130 @@ class PagoController extends Controller
                         )),
 		));
 	}
+        
+        public function actionValorChange(){
+            $valor = 0;
+            $cuotas = NULL;
+            
+            if(array_key_exists('valor', $_POST)&&array_key_exists('persona_id', $_POST)){
+                $valor = Yii::app()->format->unformatNumber($_POST['valor']);
+                $cuotas = array();
+                
+                $criteria = new CDbCriteria;
+                    $criteria->compare('persona_id', $_POST['persona_id']);
+                    $criteria->compare('saldada', 'No');
+                    $criteria->order = 'nro_cuota';
+                $aux = Cuota::model()->findAll($criteria);
+                
+                // Toma la primer cuota
+                if (
+                    isset($aux)&&
+                    is_array($aux)&&
+                    (count($aux)>0)    
+                ){
+                    $cuotas[] = $aux[0];
+                    $c = $aux[0];
+                    $valor = $valor - $c->valor;
+                }
+
+                // Toma el resto de las cuotas
+                if($valor > 0){
+                    $criteria->order = 'nro_cuota DESC';
+                    $aux = Cuota::model()->findAll($criteria);
+                    if (
+                        isset($aux)&&
+                        is_array($aux)&&
+                        (count($aux)>0)    
+                    ){
+                        $cuotas[] = $aux[0];
+                        $c = $aux[0];
+                        $valor = $valor - $c->valor;
+                    }
+                }
+                
+                
+            }
+            
+            $html = $this->renderPartial(
+                    'listarCuotas',
+                    array(
+                        'cuotas'=>$cuotas,
+                        'valor'=>$valor,
+                    ),
+                    true
+            );            
+            
+            echo json_encode(
+                    array(
+                        'html'=>$html,
+                    )
+            );
+            Yii::app()->end();            
+            
+        }
 
 	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 * La creaciono de todo Pago requiere el ID_SUSCRIPCION
 	 */
 	public function actionCreate()
 	{
-		$model=new Pago;
+		$pago=new Pago;
+                $imputacion = new Imputacion;
+                $forma_pago_pago = new FormaPagoPago;
+                $forma_pago_contado = new FormaPagoContado;
+                $forma_pago_cheque = new FormaPagoCheque;
+                $forma_pago_deposito = new FormaPagoDeposito;
+                $cheque = new Cheque;
+                $suscripcion = NULL;
+                $persona = NULL;                
+                
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Pago']))
+		if(isset($_REQUEST['Pago']))
 		{
-			$model->attributes=$_POST['Pago'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                    $pago->attributes=$_REQUEST['Pago'];
+                    if($pago->save())
+                        $this->redirect(array('view','id'=>$pago->id));
 		}
 
+                // Toma el ID de la cuota a ser saldada
+                $cuota = NULL;
+                if (array_key_exists('cuota_id',$_REQUEST)&& isset($_REQUEST['cuota_id'])) { 
+                    $cuota = Cuota::model()->findByPk($_REQUEST['cuota_id']);
+                    if (!isset($cuota)){
+                        Yii::log('No se encuentra Cuota a Saldar','warning');
+                        throw new CHttpException(null,'No se encuentra Cuota a Saldar');
+                    }
+                    $pago->FechaPago = date('d/m/Y');
+                    $persona = $cuota->suscripcion->persona;
+                    $suscripcion = $cuota->suscripcion;
+                }  
+                else if(array_key_exists('suscripcion_id', $_REQUEST)&& isset($_REQUEST['suscripcion_id'])){
+                    $suscripcion = Suscripcion::model()->findByPk($_REQUEST['suscripcion_id']);
+                    if(!isset($suscripcion)||(is_array($suscripcion)&&(count($suscripcion)==0))){
+                        Yii::log('No existen suscripciones','warning');
+                        throw new CHttpException(null,'No existen suscripciones');
+                    }
+                    $persona = $suscripcion->persona;
+                    if(!isset($persona)){
+                        Yii::log('Intenta crear un pago con una persona que no existe','warning');
+                        throw new CHttpException(null,'Intenta crear un pago con una persona que no existe');
+                    }
+                }
+                
 		$this->render('create',array(
-			'model'=>$model,
-		));
+			'pago'=>$pago,
+                        'persona'=>$persona,                    
+                        'cuota'=>$cuota,
+                        'imputacion'=>$imputacion,
+                        'suscripcion'=>$suscripcion,
+                        'forma_pago_pago'=>$forma_pago_pago,
+                        'forma_pago_contado'=>$forma_pago_contado,
+                        'forma_pago_cheque'=>$forma_pago_cheque,
+                        'cheque'=>$cheque,
+                        'forma_pago_deposito'=>$forma_pago_deposito,
+		));                
 	}
 
 	/**
@@ -201,8 +303,6 @@ class PagoController extends Controller
          * Saldar Cuota Permite Acentar un Pago minimo para una cuota determinada
          * 
          */
-        
-        
         public function copyChequeRuntime($cheques_agregados, $pago_id){
             $total = 0;
             
@@ -246,6 +346,7 @@ class PagoController extends Controller
                 $forma_pago_cheque = new FormaPagoCheque;
                 $forma_pago_deposito = new FormaPagoDeposito;
                 $cheque = new Cheque;
+                
                 
                 if(isset($_POST['Pago'])){
                     
@@ -304,6 +405,7 @@ class PagoController extends Controller
                                             $forma_pago_deposito->pago_id = $pago->id;
                                             $forma_pago_deposito->save();
                                         }
+                                        
                                     }
                                 }// if Forma de Pago
                             }

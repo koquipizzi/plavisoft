@@ -32,16 +32,13 @@ $('.search-form form').submit(function(){
         echo "No existen suscripciones registradas";
     }
     else{
-        $this->widget('application.extensions.tablesorter.Sorter', array(
+        $this->widget('application.extensions.tablesorter.SorterSuscripcion', array(
                   'data'=>$records,
                   'columns'=>array(
                        'persona.Apellido',
                        'persona.Nombre',
                        'financiacion.Descripcion',
                        'estadoAdjudicacion.Descripcion',	
-                /*	array(
-                                'class'=>'bootstrap.widgets.TbButtonColumn',
-                        ),*/
                 ),
         ));         
     }

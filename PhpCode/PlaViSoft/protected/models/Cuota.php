@@ -159,5 +159,9 @@ class Cuota extends ActiveRecord
             return $this->suscripcion->persona->Apellido.", ".$this->suscripcion->persona->Nombre;
         }
         
+
+        public function getCuotaStr(){
+            return $this->mes->mes." - ".$this->anio;
+        }
         
 }
