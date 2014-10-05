@@ -212,10 +212,10 @@ $this->menu=array(
         </div>    
 
         <div class="control-group">
-                <div class="control-label">
+                <!--div class="control-label">
 			<?php echo $form->labelEx($forma_pago_pago,'forma_pago_id'); ?>
-		</div>
-		<div class="controls">            
+		</div-->
+		<div class="controls_2">            
                         <?php echo $form->checkBoxListRow(
                                 $forma_pago_pago,
                                 'forma_pago_id', 
