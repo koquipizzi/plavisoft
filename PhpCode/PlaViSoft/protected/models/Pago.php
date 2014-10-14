@@ -145,6 +145,7 @@ class Pago extends ActiveRecord
 	{
 		$fecha=DateTime::createFromFormat('d/m/Y',$this->FechaPago);
 		$this->FechaPago=$fecha->format('y-m-d');		 
+                
 		parent::beforeSave();
                 
 		return true;

@@ -91,10 +91,6 @@ Select * from plavisoft.cheque_runtime;
 Select * from plavisoft.imputacion;
 
 
-
-
-
-
 delete from plavisoft.cheque_runtime where id>0;
 delete from plavisoft.imputacion where pago_id>0;
 delete from plavisoft.cheque where id>0;
@@ -103,6 +99,7 @@ delete from plavisoft.forma_pago_pago where pago_id>0;
 delete from plavisoft.pago where id>0;
 
 Select SUM(valor) From imputacion group by cuota_id ;
+Select * From imputacion;
 select * from plavisoft.forma_pago_pago;
 Select * from plavisoft.Log;
 
@@ -114,7 +111,12 @@ SELECT SUM(valor) as total FROM `imputacion` WHERE cuota_id=10;
 
 Select * from plavisoft.cuota order by nro_cuota;
 
+Select * from plavisoft.pago;
+delete from plavisoft.pago where id>0;
+delete from plavisoft.imputacion;
+delete from plavisoft.forma_pago_pago;
+delete from plavisoft.cheque;
 Select * from plavisoft.pago p join plavisoft.cheque c on p.id = c.pago_id;
-
+update plavisoft.cuota set saldada = 'No' ;
 
 Select now();

@@ -31,7 +31,7 @@
 		
 		<?php 
 				if(isset($this->susc)) 		
-		 			$this->widget('stats', array(
+		 			$this->widget('Stats', array(
 		 			'item'=>$this->susc,
 		 			'htmlOptions'=>array('class'=>'white'),
 					)); 

@@ -71,10 +71,15 @@ $this->menu=array(
     }
     
     function valorChange(){
-        var valor = $('#valor').val();
+        var valor = $('#valorPago').val();
+        if(valor==0 || valor == ''){
+            alert('Debe ingresar un valor a ser calculado');
+            return;
+        }
         var suscripcion_id = $('#suscripcion_id').val();
         jQuery.ajax({
             'type':'POST',
+            'async':false,
             'success':function( data ) {
                 data = jQuery.parseJSON( data );
                 $("#div_cuotas").html(data.html);
@@ -84,6 +89,28 @@ $this->menu=array(
                 'suscripcion_id':suscripcion_id
             },
             'url':'/index.php?r=Pago/valorChange',
+            'cache':false
+        });
+    }
+    
+    function nro_formularioChange(){
+        var talonario = $('#talonario').val();
+        var nro_formulario = $('#nro_formulario').val();
+        if(nro_formulario== ''){
+            return;
+        }
+        jQuery.ajax({
+            'type':'POST',
+            'async':false,
+            'success':function( data ) {
+                data = jQuery.parseJSON( data );
+                $("#div_formulario_ok").html(data.html);
+            },
+            'data':{
+                'talonario':talonario,
+                'nro_formulario':nro_formulario
+            },
+            'url':'/index.php?r=Pago/nro_formularioChange',
             'cache':false
         });
     }
@@ -122,30 +149,31 @@ $this->menu=array(
 	<?php echo $form->errorSummary($pago); ?>
         
         <!-- **************************************** PERSONA ****************************************** -->
-        <?php 
-            if(isset($persona)){
-                echo '<div class="sectionFix">';
-                echo "Persona: <b>".$persona->nombreCompleto."</b>";
-                echo '</div>';
-            }
-            else{
-                echo "Error, se debe determinar la suscripción";
-            }
-        ?>
+        <div class="sectionFix">        
+            <?php 
+                if(isset($persona)){
+                    echo "Persona: <b>".$persona->nombreCompleto."</b>";
+                    echo $form->hiddenField($pago, 'persona_id', array('hidden'=>true,'value'=>$persona->id));
+                }
+                else{
+                    echo "Error, se debe determinar la suscripción";
+                }
+            ?>
+        </div>            
+        <!-- *************************************** SUSCRIPCION *************************************** -->      
+        <div class="sectionFix">
+            <?php 
+                if(isset($suscripcion)){
+                    echo $form->hiddenField($suscripcion, 'suscripcion_id', array('id'=>'suscripcion_id','value'=>$suscripcion->id));                  
+                    echo "Suscripción: <b>".$suscripcion->descripcionStr."</b>";
+                }
+                else{
+                    echo "Error, se debe determinar la suscripción";
+                }
+            ?>
+        </div>
         
-        <!-- *************************************** SUSCRIPCION *************************************** -->        
-	<?php 
-            if(isset($suscripcion)){
-                echo '<div class="sectionFix">';
-                echo $form->hiddenField($suscripcion, 'suscripcion_id', array('id'=>'suscripcion_id','value'=>$suscripcion->id));                  
-                echo "Suscripción: <b>".$suscripcion->descripcionStr."</b>";
-                echo '</div>';
-            }
-            else{
-                echo "Error, se debe determinar la suscripción";
-            }
-        ?>
-        
+        <!-- ***************************************** IMPORTE ***************************************** --> 
 	<?php 
             // Importe
             if(isset($cuota)){
@@ -165,56 +193,84 @@ $this->menu=array(
                 echo $form->textFieldRow(
                         $pago,'valor',
                         array(
-                            'id'=>'valor',
+                            'id'=>'valorPago',
                             'class'=>'span5',
                             'maxlength'=>10,
                             'onChange'=>'js:valorChange();',
                         )
                 ); 
-                echo "Las cuotas a Saldar son mostradas";
+                $this->widget('bootstrap.widgets.TbButton', array(
+                    'buttonType'=>'link',
+                    'type'=>'info',
+                    'label'=>'Calcular Cuotas a Saldar',
+                    'url'=>'#',
+                    'htmlOptions' => array(
+                        'onClick'=>'js:valorChange();',
+                    ),
+                ));                 
                 echo '<div id="div_cuotas"></div>';
                 echo '</div>';
             }
         ?>
        
+        <!-- ******************************** Talonario y Formulario *********************************** --> 
+        <div class="sectionEditable">
+            <?php 
+                echo $form->textFieldRow(
+                        $pago,'talonario',
+                        array(
+                            'id'=>'talonario',
+                            'class'=>'span5',
+                            'maxlength'=>10
+                        )
+                ); 
+                echo $form->textFieldRow(
+                        $pago,'nro_formulario',
+                        array(
+                            'id'=>'nro_formulario',
+                            'class'=>'span5',
+                            'maxlength'=>10,
+                            'onkeyup'=>'js:nro_formularioChange();',
+                        )
+                ); 
+                echo '<div id="div_formulario_ok"></div>';
+            ?>
+        </div>
+        
+        <!-- ******************************** Fecha de Pago y Descripcion *********************************** --> 
+        <div class="sectionEditable">
+            <div class="control-group">
+                <div class="control-label">
+                        <?php echo $form->labelEx($pago,'Fecha Pago'); ?>
+                </div>
+                <div class="controls">
+                    <?php 
+                            $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+                                'model' => $pago,
+                                'attribute' => 'FechaPago',
+                                'name'=>'Fecha Pago',
+                                'language' => 'es',
+                                // additional javascript options for the date picker plugin
+                                'options'=>array(
+                                    'showAnim'=>'fold',
+                                    'dateFormat'=>'dd/mm/yy',
+                                ),
+                                'htmlOptions'=>array(
+                                    'style'=>'height:20px;'
+                                ),				
+                            ));
+                    ?>
+                </div>
+            </div>
 
-        <?php 
-            echo $form->textFieldRow($pago,'talonario',array('class'=>'span5','maxlength'=>10)); 
-            echo $form->textFieldRow($pago,'nro_formulario',array('class'=>'span5','maxlength'=>10)); 
-        ?>
-
-	<div class="control-group">
-		<div class="control-label">
-			<?php echo $form->labelEx($pago,'Fecha Pago'); ?>
-		</div>
-		<div class="controls">
-		<?php 
-			$this->widget('zii.widgets.jui.CJuiDatePicker',array(
-                            'model' => $pago,
-                            'attribute' => 'FechaPago',
-                            'name'=>'Fecha Pago',
-                            'language' => 'es',
-                            // additional javascript options for the date picker plugin
-			    'options'=>array(
-			        'showAnim'=>'fold',
-			        'dateFormat'=>'dd/mm/yy',
-			    ),
-			    'htmlOptions'=>array(
-			        'style'=>'height:20px;'
-			    ),				
-			));
-		?>
-		</div>
-	</div>
-
+            <div class="control-group">
+                    <?php echo $form->textAreaRow($pago,'Descripcion',array('class'=>'span5','col'=>3)); ?>
+            </div>    
+        </div>
+        
+        <!-- ******************************** Forma de Pago *********************************** -->         
         <div class="control-group">
-                <?php echo $form->textAreaRow($pago,'Descripcion',array('class'=>'span5','col'=>3)); ?>
-        </div>    
 
-        <div class="control-group">
-                <!--div class="control-label">
-			<?php echo $form->labelEx($forma_pago_pago,'forma_pago_id'); ?>
-		</div-->
 		<div class="controls_2">            
                         <?php echo $form->checkBoxListRow(
                                 $forma_pago_pago,
@@ -228,115 +284,123 @@ $this->menu=array(
 		</div>                    
         </div>    
 
-	<div id='valor_div' class="control-group" style="display: none;" >
-       		<?php 
-                    echo "<h3>Contado</h3>";
-                    echo $form->hiddenField($forma_pago_contado, 'forma_pago_id', array('hidden'=>true,'value'=>$forma_pago_contado->forma_pago_id));  
-                    echo $form->textFieldRow(
-                        $forma_pago_contado,
-                        'valor',
-                        array('class'=>'span5','maxlength'=>45)
-                    );
-                ?>
-	</div>
+        <!-- ******************************** Contado *********************************** -->   
+        <div id='valor_div' class="control-group" style="display: none;" >
+            <div class="sectionEditable">            
+                    <?php 
+                        echo "<h3>Contado</h3>";
+                        echo $form->hiddenField($forma_pago_contado, 'forma_pago_id', array('hidden'=>true,'value'=>$forma_pago_contado->forma_pago_id));  
+                        echo $form->textFieldRow(
+                            $forma_pago_contado,
+                            'valor',
+                            array('class'=>'span5','maxlength'=>45)
+                        );
+                    ?>
+            </div>
+        </div>    
 
-	<div id='cheque_div' class="control-group" style="display: none;" >
-                <h3>Cheque</h3>
-       		<?php 
-                    echo $form->hiddenField($forma_pago_cheque, 'forma_pago_id', array('hidden'=>true,'value'=>$forma_pago_cheque->forma_pago_id));
+        <!-- ******************************** Cheque *********************************** -->  
+        <div id='cheque_div' class="control-group" style="display: none;" >
+            <div class="sectionEditable">            
+                    <h3>Cheque</h3>
+                    <?php 
+                        echo $form->hiddenField($forma_pago_cheque, 'forma_pago_id', array('hidden'=>true,'value'=>$forma_pago_cheque->forma_pago_id));
 
-                    echo $form->textFieldRow($cheque,'Nro_cheque',array('id'=>'Nro_cheque','size'=>45,'maxlength'=>45));
-                    echo $form->error($cheque,'Nro_cheque');
-                ?>
-                <div class="control-group">
-                    <div class="control-label">
-                        <?php echo $form->labelEx($cheque,'FechaVencimiento'); ?>
-                    </div>
-                    <div class="controls">
-                        <?php 
-                            $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-                                'model' => $cheque,
-                                'attribute' => 'FechaVencimiento',
-                                'name'=>'Fecha Vencimiento',
-                                'language' => 'es',
-                                // additional javascript options for the date picker plugin
-                                'options'=>array(
-                                    'showAnim'=>'fold',
-                                    'dateFormat'=>'dd/mm/yy',
-                                ),
-                                'htmlOptions'=>array(
-                                    'style'=>'height:20px;'
-                                ),				
-                            ));
-                        ?>
-                    </div>
-                </div>                
-                <?php
-
-                    echo $form->textFieldRow($cheque,'Cta_cte',array('id'=>'Cta_cte', 'size'=>45,'maxlength'=>45));
-                    echo $form->error($cheque,'Cta_cte');
-
-                    echo $form->textFieldRow($cheque,'valor',array('id'=>'valor', 'size'=>15,'maxlength'=>15));
-                    echo $form->error($cheque,'valor');
-
-                    echo $form->textFieldRow($cheque,'NombreTitular',array('id'=>'NombreTitular', 'size'=>60,'maxlength'=>100)); 
-                    echo $form->error($cheque,'NombreTitular'); 
-
-                ?>
-                <div class="control-group">
+                        echo $form->textFieldRow($cheque,'Nro_cheque',array('id'=>'Nro_cheque','size'=>45,'maxlength'=>45));
+                        echo $form->error($cheque,'Nro_cheque');
+                    ?>
+                    <div class="control-group">
                         <div class="control-label">
-                                <?php echo $form->labelEx($cheque,'banco_id'); ?>
+                            <?php echo $form->labelEx($cheque,'FechaVencimiento'); ?>
                         </div>
                         <div class="controls">
-                                <?php
-                                    echo CHtml::activeDropDownList($cheque,'banco_id', CHtml::listData(Banco::model()->findAll(), 'id', 'Banco'),array('id'=>'banco_id'));
-                                    echo $form->error($cheque,'banco_id'); 
-                                ?>                            
+                            <?php 
+                                $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+                                    'model' => $cheque,
+                                    'attribute' => 'FechaVencimiento',
+                                    'name'=>'FechaVencimiento',
+                                    'language' => 'es',
+                                    // additional javascript options for the date picker plugin
+                                    'options'=>array(
+                                        'showAnim'=>'fold',
+                                        'dateFormat'=>'dd/mm/yy',
+                                    ),
+                                    'htmlOptions'=>array(
+                                        'style'=>'height:20px;'
+                                    ),				
+                                ));
+                            ?>
                         </div>
-                 </div>
-                
-                <?php 
-                    $this->widget('bootstrap.widgets.TbButton', array(
-                        'buttonType'=>'ajaxButton',
-                        'type'=>'primary',
-                        'label'=>'Agregar Cheque',
-                        'url'=>$this->createUrl('Pago/agregarCheque'),
-                        'ajaxOptions'=>array(
-                            'type' => 'POST',
-                            'success' => 'function( data ) {
-                                data = jQuery.parseJSON( data );
-                                
-                                $("#agregarChequesDiv").html(data.html);
-                                $("#cheques_agregados").val(data.cheques_agregados);
-                                
-                                $("#Nro_cheque").val("");
-                                $("#Cta_cte").val("");
-                                $("#valor").val("");
-                                $("#NombreTitular").val("")
-                                $("#banco_id").val("");
-                                $("#FechaVencimiento").val("");
-                              }'
-                            ,
-                            'data' => array( 
-                                'Nro_cheque' => 'js:$("#Nro_cheque").val()',
-                                'Cta_cte' => 'js:$("#Cta_cte").val()',    
-                                'valor' => 'js:$("#valor").val()',    
-                                'NombreTitular' => 'js:$("#NombreTitular").val()',    
-                                'banco_id' => 'js:$("#banco_id").val()',  
-                                'cheques_agregados' => 'js:$("#cheques_agregados").val()',  
-                                'FechaVencimiento' => 'js:$("#FechaVencimiento").val()',  
-                            )
-                        ),            
-                    ));                 
-                ?>
-                <input type="hidden" id="cheques_agregados" name="cheques_agregados" value="">
-                <div id='agregarChequesDiv'>
-                    
-                </div>
-	</div>
+                    </div>                
+                    <?php
 
-	<div id='deposito_div' class="control-group" style="display: none;" >
-       		<?php 
+                        echo $form->textFieldRow($cheque,'Cta_cte',array('id'=>'Cta_cte', 'size'=>45,'maxlength'=>45));
+                        echo $form->error($cheque,'Cta_cte');
+
+                        echo $form->textFieldRow($cheque,'valor',array('id'=>'valor', 'size'=>15,'maxlength'=>15));
+                        echo $form->error($cheque,'valor');
+
+                        echo $form->textFieldRow($cheque,'NombreTitular',array('id'=>'NombreTitular', 'size'=>60,'maxlength'=>100)); 
+                        echo $form->error($cheque,'NombreTitular'); 
+
+                    ?>
+                    <div class="control-group">
+                            <div class="control-label">
+                                    <?php echo $form->labelEx($cheque,'banco_id'); ?>
+                            </div>
+                            <div class="controls">
+                                    <?php
+                                        echo CHtml::activeDropDownList($cheque,'banco_id', CHtml::listData(Banco::model()->findAll(), 'id', 'Banco'),array('id'=>'banco_id'));
+                                        echo $form->error($cheque,'banco_id'); 
+                                    ?>                            
+                            </div>
+                     </div>
+
+                    <?php 
+                        $this->widget('bootstrap.widgets.TbButton', array(
+                            'buttonType'=>'ajaxButton',
+                            'type'=>'primary',
+                            'label'=>'Agregar Cheque',
+                            'url'=>$this->createUrl('Pago/agregarCheque'),
+                            'ajaxOptions'=>array(
+                                'type' => 'POST',
+                                'success' => 'function( data ) {
+                                    data = jQuery.parseJSON( data );
+
+                                    $("#agregarChequesDiv").html(data.html);
+                                    $("#cheques_agregados").val(data.cheques_agregados);
+
+                                    $("#Nro_cheque").val("");
+                                    $("#Cta_cte").val("");
+                                    $("#valor").val("");
+                                    $("#NombreTitular").val("")
+                                    $("#banco_id").val("");
+                                    $("#FechaVencimiento").val("");
+                                  }'
+                                ,
+                                'data' => array( 
+                                    'Nro_cheque' => 'js:$("#Nro_cheque").val()',
+                                    'Cta_cte' => 'js:$("#Cta_cte").val()',    
+                                    'valor' => 'js:$("#valor").val()',    
+                                    'NombreTitular' => 'js:$("#NombreTitular").val()',    
+                                    'banco_id' => 'js:$("#banco_id").val()',  
+                                    'cheques_agregados' => 'js:$("#cheques_agregados").val()',  
+                                    'FechaVencimiento' => 'js:$("#FechaVencimiento").val()',  
+                                )
+                            ),            
+                        ));                 
+                    ?>
+                    <input type="hidden" id="cheques_agregados" name="cheques_agregados" value="">
+                    <div id='agregarChequesDiv'>
+
+                    </div>
+            </div>
+        </div>
+
+        <!-- ******************************** Deposito *********************************** -->          
+        <div id='deposito_div' class="control-group" style="display: none;" >
+            <div class="sectionEditable">
+                <?php 
                     echo "<h3>Deposito</h3>";
                     echo $form->hiddenField($forma_pago_deposito, 'forma_pago_id', array('hidden'=>true,'value'=>$forma_pago_deposito->forma_pago_id));  
                     echo $form->textFieldRow(
@@ -348,9 +412,12 @@ $this->menu=array(
                         $pago,
                         'NroDeposito',
                         array('class'=>'span5','maxlength'=>45)
-                    );?>
-	</div>
+                    );
+                ?>
+            </div>
+        </div>
 
+        <!-- ******************************** Botones *********************************** -->          
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',

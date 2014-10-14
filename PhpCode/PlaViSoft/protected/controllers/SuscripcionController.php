@@ -149,7 +149,7 @@ class SuscripcionController extends Controller
                                 }
                                 
                                 // Saldada
-                                $cuota->saldada = 'No';
+                                $cuota->saldada = Cuota::NO_SALDADA;
 
                                 if(!$cuota->save()){
                                     Yii::log($cuota->getErrors(),'error');
