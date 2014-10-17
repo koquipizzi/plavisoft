@@ -31,7 +31,7 @@ $('.search-form form').submit(function(){
 	  'columns'=>array(
 		//'id',
 		'Nombre',
-		'Valor',
+		'valor',
 		'Descripcion',
 		'MtrosCubiertos',
 		'MtrosDescubiertos',

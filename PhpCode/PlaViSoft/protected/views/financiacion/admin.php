@@ -23,22 +23,32 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Administrar Financiaciones</h1>
+<h1>Financiaciones</h1>
 
 
-<?php	$this->widget('application.extensions.tablesorter.Sorter', array(
+<?php	$this->widget('application.extensions.tablesorter.SorterFinanciacion', array(
 	  'data'=>$records,
 	  'columns'=>array(
-		'id',
-		'Descripcion',
-		'tipoVivienda.Descripcion',
-		'Tipo_Financiacion',
-		'cant_cuotas',
-                /*
-		'posicion',
-		*/
-	/*	array(
-			'class'=>'bootstrap.widgets.TbButtonColumn',
-		),*/
+                array(
+                    'header' => 'Financiación ',
+                    'value' => 'Descripcion',
+                ),                
+                array(
+                    'header' => 'Tipo de Vivienda',
+                    'value' => 'tipoVivienda.Nombre',
+                ),                
+                array(
+                    'header' => 'Tipo Persona',
+                    'value' => 'tipoPersona.Descripcion',
+                ),                
+                array(
+                    'header' => 'N° de Cuotas',
+                    'value' => 'cant_cuotas',
+                ),                
+                array(
+                    'header' => 'N° Asociados',
+                    'value' => 'cantAsociados',
+                ),                
+              
 	),
 )); ?>

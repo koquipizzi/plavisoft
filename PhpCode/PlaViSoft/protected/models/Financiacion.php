@@ -10,10 +10,11 @@
  * @property integer $Tipo_Financiacion
  * @property integer $cant_cuotas
  * @property integer $posicion
+ * @property integer $tipo_persona_id
  *
  * The followings are the available model relations:
+ * @property TipoPersona $tipoPersona
  * @property TipoVivienda $tipoVivienda
- * @property Pago[] $pagos
  * @property Suscripcion[] $suscripcions
  * @property TipoCuota[] $tipoCuotas
  */
@@ -36,11 +37,11 @@ class Financiacion extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('tipo_vivienda_id, Tipo_Financiacion', 'required'),
-			array('tipo_vivienda_id, Tipo_Financiacion, cant_cuotas, posicion', 'numerical', 'integerOnly'=>true),
+			array('tipo_vivienda_id, Tipo_Financiacion, cant_cuotas, posicion, tipo_persona_id', 'numerical', 'integerOnly'=>true),
 			array('Descripcion', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, Descripcion, tipo_vivienda_id, Tipo_Financiacion, cant_cuotas, posicion', 'safe', 'on'=>'search'),
+			array('id, Descripcion, tipo_vivienda_id, Tipo_Financiacion, cant_cuotas, posicion, tipo_persona_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,8 +53,8 @@ class Financiacion extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'tipoPersona' => array(self::BELONGS_TO, 'TipoPersona', 'tipo_persona_id'),
 			'tipoVivienda' => array(self::BELONGS_TO, 'TipoVivienda', 'tipo_vivienda_id'),
-			'pagos' => array(self::HAS_MANY, 'Pago', 'financiacion_id'),
 			'suscripcions' => array(self::HAS_MANY, 'Suscripcion', 'financiacion_id'),
 			'tipoCuotas' => array(self::HAS_MANY, 'TipoCuota', 'financiacion_id'),
 		);
@@ -71,6 +72,7 @@ class Financiacion extends CActiveRecord
 			'Tipo_Financiacion' => 'Tipo Financiacion',
 			'cant_cuotas' => 'Cant Cuotas',
 			'posicion' => 'Posicion',
+			'tipo_persona_id' => 'Tipo Persona',
 		);
 	}
 
@@ -98,6 +100,7 @@ class Financiacion extends CActiveRecord
 		$criteria->compare('Tipo_Financiacion',$this->Tipo_Financiacion);
 		$criteria->compare('cant_cuotas',$this->cant_cuotas);
 		$criteria->compare('posicion',$this->posicion);
+		$criteria->compare('tipo_persona_id',$this->tipo_persona_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -115,7 +118,6 @@ class Financiacion extends CActiveRecord
 		return parent::model($className);
 	}
         
-        
         public function getFinanciacionByPersona($persona_id){
             $sql = 
                 'SELECT * 
@@ -131,4 +133,22 @@ class Financiacion extends CActiveRecord
                 )';
             return Financiacion::model()->findAllBySql($sql,array(':persona_id'=>$persona_id));
         }
+        
+        public function getCantAsociados(){
+            $sql = 
+                'SELECT count(*) as cantidad
+                FROM suscripcion s
+                WHERE 
+                    s.financiacion_id = :financiacion_id';
+
+            $command = Yii::app()->db->createCommand($sql);
+            $command->bindValue(':financiacion_id',$this->id);
+            $result = $command->queryAll();
+            
+            if(is_array($result)&&  array_key_exists(0, $result)&&  array_key_exists('cantidad', $result[0]))
+                return $result[0]['cantidad'];
+            return 0;
+        }
+        
+        
 }

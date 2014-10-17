@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'tipo_vivienda':
  * @property integer $id
  * @property string $Descripcion
- * @property integer $Valor
+ * @property string $valor
  * @property string $Nombre
  * @property integer $MtrosCubiertos
  * @property integer $MtrosDescubiertos
@@ -18,7 +18,7 @@
  * The followings are the available model relations:
  * @property Financiacion[] $financiacions
  */
-class TipoVivienda extends ActiveRecord
+class TipoVivienda extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -33,16 +33,16 @@ class TipoVivienda extends ActiveRecord
 	 */
 	public function rules()
 	{
-                // NOTE: you should only define rules for those attributes that
-                // will receive user inputs.
-                return array(
-                        array('MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle', 'numerical', 'integerOnly'=>true),
-                        array('Valor', 'length', 'max'=>20),
-                        array('Descripcion, Nombre, Fotos', 'length', 'max'=>45),
-                        // The following rule is used by search().
-                        // @todo Please remove those attributes that should not be searched.
-                        array('id, Descripcion, Valor, Nombre, MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle, Fotos', 'safe', 'on'=>'search'),
-                );
+		// NOTE: you should only define rules for those attributes that
+		// will receive user inputs.
+		return array(
+			array('MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle', 'numerical', 'integerOnly'=>true),
+			array('Descripcion, Nombre, Fotos', 'length', 'max'=>45),
+			array('valor', 'length', 'max'=>15),
+			// The following rule is used by search().
+			// @todo Please remove those attributes that should not be searched.
+			array('id, Descripcion, valor, Nombre, MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle, Fotos', 'safe', 'on'=>'search'),
+		);
 	}
 
 	/**
@@ -65,7 +65,7 @@ class TipoVivienda extends ActiveRecord
 		return array(
 			'id' => 'ID',
 			'Descripcion' => 'Descripcion',
-			'Valor' => 'Valor',
+			'valor' => 'Valor',
 			'Nombre' => 'Nombre',
 			'MtrosCubiertos' => 'Mtros Cubiertos',
 			'MtrosDescubiertos' => 'Mtros Descubiertos',
@@ -96,7 +96,7 @@ class TipoVivienda extends ActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('Descripcion',$this->Descripcion,true);
-		$criteria->compare('Valor',$this->Valor);
+		$criteria->compare('valor',$this->valor,true);
 		$criteria->compare('Nombre',$this->Nombre,true);
 		$criteria->compare('MtrosCubiertos',$this->MtrosCubiertos);
 		$criteria->compare('MtrosDescubiertos',$this->MtrosDescubiertos);
@@ -120,12 +120,4 @@ class TipoVivienda extends ActiveRecord
 	{
 		return parent::model($className);
 	}
-        
-        
-	public function afterFind()
-	{
-		$this->Valor = Yii::app() -> format -> number($this -> Valor);
-		
-		return parent::afterFind();
-	}        
 }
