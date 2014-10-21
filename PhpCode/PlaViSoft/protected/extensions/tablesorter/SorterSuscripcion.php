@@ -13,6 +13,7 @@ class SorterSuscripcion extends Sorter
             $delete_url='"'.Yii::app()->createAbsoluteUrl($class.'/delete',array('id'=>$data->id)).'"';
             $del_data='"'.$data->id.'"';            
             $asentar_pago_url='"'.Yii::app()->createAbsoluteUrl('pago/create',array('suscripcion_id'=>$data->id)).'"';
+            $ver_cuotas_url='"'.Yii::app()->createAbsoluteUrl('cuota/admin',array('suscripcion_id'=>$data->id)).'"';
             //View, Edit, Delete Icons (bootstrap)
             $r = "
                 <td>  
@@ -20,6 +21,7 @@ class SorterSuscripcion extends Sorter
                     <a class='btn btn-small' href='".$edit_url."'><i class='icon-edit'></i></a>&nbsp; 
                     <a class='btn btn-small' href='javascript:void(0);' onclick='del_data(".$delete_url.");'><i class='icon-trash'></i></a>&nbsp; 
                     <a class='btn btn-small' href=".$asentar_pago_url."><i class='icon-shopping-cart'></i></a>                       
+                    <a class='btn btn-small' href=".$ver_cuotas_url."><i class='icon-eye-open'></i></a>                        
                 </td>
             ";
             

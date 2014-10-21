@@ -159,4 +159,54 @@ class Suscripcion extends CActiveRecord
         public function getDescripcionStr(){
             return $this->financiacion->Descripcion;
         }
+        
+        public function getTotalDeuda() {
+            $r = "";
+            $sql = 
+                "SELECT sum(c.adeudado) as adeudado
+                FROM (
+                        SELECT c.id, c.suscripcion_id, (c.valor - SUM(IFNULL(i.valor,0))) as adeudado FROM cuota c
+                        LEFT JOIN imputacion i ON c.id = i.cuota_id
+                        GROUP BY c.id, c.suscripcion_id, c.valor
+                ) as c
+                WHERE 
+                    c.suscripcion_id = :suscripcion_id";
+
+            $command = Yii::app()->db->createCommand($sql);
+            $command->bindValue(':suscripcion_id',$this->id);
+            $result = $command->queryAll();
+            
+            if(is_array($result)&&  array_key_exists(0, $result)&&  array_key_exists('adeudado', $result[0]))
+                $r = $result[0]['adeudado'];
+            if ($r)
+                return '$ '.Yii::app()->format->number($r);
+            return '';
+        }
+        
+        public function getTotalPagado() {
+            $r = 0;
+            $sql = '
+                SELECT sum(p.valor) as pagado
+                FROM pago p 
+                WHERE
+                    EXISTS (
+                        SELECT 1 
+                        FROM imputacion i 
+                        JOIN cuota c ON i.cuota_id = c.id
+                        WHERE 
+                            p.id = i.pago_id AND
+                            c.suscripcion_id = :suscripcion_id
+                    )';
+
+            $command = Yii::app()->db->createCommand($sql);
+            $command->bindValue(':suscripcion_id',$this->id);
+            $result = $command->queryAll();
+            
+            if(is_array($result)&&  array_key_exists(0, $result)&&  array_key_exists('pagado', $result[0]))
+                $r = $result[0]['pagado'];
+            if ($r)
+                return '$ '.Yii::app()->format->number($r);
+            return '';
+        }
+        
 }

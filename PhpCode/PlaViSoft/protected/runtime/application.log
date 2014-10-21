@@ -4485,3 +4485,303 @@ Stack trace:
 REQUEST_URI=/index.php?r=financiacion/admin
 HTTP_REFERER=http://plavisoft/index.php?r=financiacion/admin
 ---
+2014/10/18 00:23:17 [error] [exception.CException] exception 'CException' with message 'La propiedad "Suscripcion"."suscripcion_id" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('suscripcion_id')
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/models/Suscripcion.php(190): CActiveRecord->__get('suscripcion_id')
+#2 /home/diego/Proyectos/plavisoft/framework/base/CComponent.php(111): Suscripcion->getTotalPagado()
+#3 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('totalPagado')
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(192): CActiveRecord->__get('totalPagado')
+#5 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(113): Sorter->print_row(Object(Suscripcion), 'Suscripcion')
+#6 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#7 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#8 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/suscripcion/admin.php(50): CBaseController->widget('application.ext...', Array)
+#9 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#10 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#11 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#12 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('admin', Array, true)
+#13 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/SuscripcionController.php(255): CController->render('admin', Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): SuscripcionController->actionAdmin()
+#15 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#17 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#18 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#19 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#20 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#21 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#22 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#23 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('admin')
+#24 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('suscripcion/adm...')
+#25 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#26 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#27 {main}
+REQUEST_URI=/index.php?r=suscripcion/admin
+HTTP_REFERER=http://plavisoft/index.php?r=cuota/admin&suscripcion_id=34
+---
+2014/10/18 00:23:31 [error] [system.db.CDbCommand] CDbCommand::fetchAll() falló: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'valor' in field list is ambiguous. La sentencia SQL ejecutada fue: SELECT sum(valor) as pagado
+                FROM pago p 
+                JOIN imputacion i ON p.id = i.pago_id
+                WHERE 
+                    i.suscripcion_id = :suscripcion_id.
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/models/Suscripcion.php (191)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php (192)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php (113)
+2014/10/18 00:23:31 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falló al ejecutar la sentencia SQL: SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'valor' in field list is ambiguous. The SQL statement executed was: SELECT sum(valor) as pagado
+                FROM pago p 
+                JOIN imputacion i ON p.id = i.pago_id
+                WHERE 
+                    i.suscripcion_id = :suscripcion_id' in /home/diego/Proyectos/plavisoft/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/models/Suscripcion.php(191): CDbCommand->queryAll()
+#2 /home/diego/Proyectos/plavisoft/framework/base/CComponent.php(111): Suscripcion->getTotalPagado()
+#3 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('totalPagado')
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(192): CActiveRecord->__get('totalPagado')
+#5 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(113): Sorter->print_row(Object(Suscripcion), 'Suscripcion')
+#6 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#7 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#8 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/suscripcion/admin.php(50): CBaseController->widget('application.ext...', Array)
+#9 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#10 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#11 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#12 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('admin', Array, true)
+#13 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/SuscripcionController.php(255): CController->render('admin', Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): SuscripcionController->actionAdmin()
+#15 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#17 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#18 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#19 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#20 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#21 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#22 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#23 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('admin')
+#24 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('suscripcion/adm...')
+#25 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#26 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#27 {main}
+REQUEST_URI=/index.php?r=suscripcion/admin
+HTTP_REFERER=http://plavisoft/index.php?r=cuota/admin&suscripcion_id=34
+---
+2014/10/18 00:23:43 [error] [system.db.CDbCommand] CDbCommand::fetchAll() falló: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.suscripcion_id' in 'where clause'. La sentencia SQL ejecutada fue: SELECT sum(p.valor) as pagado
+                FROM pago p 
+                JOIN imputacion i ON p.id = i.pago_id
+                WHERE 
+                    i.suscripcion_id = :suscripcion_id.
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/models/Suscripcion.php (191)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php (192)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php (113)
+2014/10/18 00:23:43 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falló al ejecutar la sentencia SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'i.suscripcion_id' in 'where clause'. The SQL statement executed was: SELECT sum(p.valor) as pagado
+                FROM pago p 
+                JOIN imputacion i ON p.id = i.pago_id
+                WHERE 
+                    i.suscripcion_id = :suscripcion_id' in /home/diego/Proyectos/plavisoft/framework/db/CDbCommand.php:543
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/models/Suscripcion.php(191): CDbCommand->queryAll()
+#2 /home/diego/Proyectos/plavisoft/framework/base/CComponent.php(111): Suscripcion->getTotalPagado()
+#3 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('totalPagado')
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(192): CActiveRecord->__get('totalPagado')
+#5 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(113): Sorter->print_row(Object(Suscripcion), 'Suscripcion')
+#6 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#7 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#8 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/suscripcion/admin.php(50): CBaseController->widget('application.ext...', Array)
+#9 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#10 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#11 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#12 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('admin', Array, true)
+#13 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/SuscripcionController.php(255): CController->render('admin', Array)
+#14 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): SuscripcionController->actionAdmin()
+#15 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#16 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#17 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#18 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#19 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#20 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#21 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#22 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#23 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('admin')
+#24 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('suscripcion/adm...')
+#25 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#26 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#27 {main}
+REQUEST_URI=/index.php?r=suscripcion/admin
+HTTP_REFERER=http://plavisoft/index.php?r=cuota/admin&suscripcion_id=34
+---
+2014/10/20 17:55:20 [warning] [application] No existe financiación disponible para la persona
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/SuscripcionController.php (178)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php (13)
+2014/10/20 17:55:20 [error] [exception.CHttpException.] exception 'CHttpException' with message 'No existe financiación disponible para la persona' in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/SuscripcionController.php:179
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): SuscripcionController->actionCreate()
+#1 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#2 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#3 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#4 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('create')
+#10 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('suscripcion/cre...')
+#11 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#12 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/index.php?r=suscripcion/create&idpersona=7
+HTTP_REFERER=http://plavisoft/index.php?r=Persona/view&id=7
+---
+2014/10/21 08:32:08 [error] [php] Undefined variable: key (/home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/pago/print.php:60)
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): PagoController->renderFile()
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php(725): PagoController->renderPartial()
+#2 unknown(0): PagoController->actionPrint()
+#3 /home/diego/Proyectos/plavisoft/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#4 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): PagoController->runAction()
+#7 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#9 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): PagoController->filterAccessControl()
+#10 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#11 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#12 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): PagoController->runActionWithFilters()
+#13 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): PagoController->run()
+#14 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#15 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=pago/print&id=11
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/pago/print.php (60)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php (725)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php (13)
+2014/10/21 09:04:57 [error] [php] Undefined variable: financiacion (/home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/suscripcion/_form.php:65)
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): SuscripcionController->renderFile()
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/suscripcion/update.php(18): SuscripcionController->renderPartial()
+#2 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require()
+#3 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): SuscripcionController->renderInternal()
+#4 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): SuscripcionController->renderFile()
+#5 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): SuscripcionController->renderPartial()
+#6 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/SuscripcionController.php(213): SuscripcionController->render()
+#7 unknown(0): SuscripcionController->actionUpdate()
+#8 /home/diego/Proyectos/plavisoft/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#9 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams()
+#11 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): SuscripcionController->runAction()
+#12 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#13 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#14 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): SuscripcionController->filterAccessControl()
+#15 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#16 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#17 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): SuscripcionController->runActionWithFilters()
+#18 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): SuscripcionController->run()
+#19 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#20 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#21 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=Suscripcion/update&id=46
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/suscripcion/_form.php (65)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/suscripcion/update.php (18)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/SuscripcionController.php (213)
+2014/10/21 09:19:56 [error] [exception.CException] exception 'CException' with message 'La propiedad "Cuota"."cuota" no se encuentra definida.' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:130
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('cuota')
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/models/Cuota.php(183): CActiveRecord->__get('cuota')
+#2 /home/diego/Proyectos/plavisoft/framework/base/CComponent.php(111): Cuota->getEstadoStr()
+#3 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('estadoStr')
+#4 /home/diego/Proyectos/plavisoft/framework/base/CComponent.php(264): CActiveRecord->__get('estadoStr')
+#5 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(227): CComponent->__call('estadoStr', Array)
+#6 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/models/Imputacion.php(125): CActiveRecord->__call('estadoStr', Array)
+#7 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/models/Imputacion.php(125): Cuota->estadoStr()
+#8 /home/diego/Proyectos/plavisoft/framework/base/CComponent.php(111): Imputacion->getCuota_field()
+#9 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('cuota_field')
+#10 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(192): CActiveRecord->__get('cuota_field')
+#11 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(113): Sorter->print_row(Object(Imputacion), 'Imputacion')
+#12 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#13 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#14 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/imputacion/verImputacion.php(44): CBaseController->widget('application.ext...', Array)
+#15 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#16 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#17 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#18 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('verImputacion', Array, true)
+#19 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/ImputacionController.php(196): CController->render('verImputacion', Array)
+#20 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): ImputacionController->actionVerImputacion()
+#21 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#22 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#24 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#28 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('verImputacion')
+#30 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('imputacion/verI...')
+#31 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#32 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/index.php?r=imputacion/verImputacion&id=152
+---
+2014/10/21 09:20:24 [error] [exception.CException] exception 'CException' with message 'Cuota y sus behaviors no tienen un método o closure llamado "estadoStr".' in /home/diego/Proyectos/plavisoft/framework/base/CComponent.php:266
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(227): CComponent->__call('estadoStr', Array)
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/models/Imputacion.php(125): CActiveRecord->__call('estadoStr', Array)
+#2 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/models/Imputacion.php(125): Cuota->estadoStr()
+#3 /home/diego/Proyectos/plavisoft/framework/base/CComponent.php(111): Imputacion->getCuota_field()
+#4 /home/diego/Proyectos/plavisoft/framework/db/ar/CActiveRecord.php(145): CComponent->__get('cuota_field')
+#5 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(192): CActiveRecord->__get('cuota_field')
+#6 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(113): Sorter->print_row(Object(Imputacion), 'Imputacion')
+#7 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/extensions/tablesorter/Sorter.php(129): Sorter->genTable()
+#8 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(173): Sorter->run()
+#9 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/imputacion/verImputacion.php(44): CBaseController->widget('application.ext...', Array)
+#10 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(126): require('/home/diego/Pro...')
+#11 /home/diego/Proyectos/plavisoft/framework/web/CBaseController.php(95): CBaseController->renderInternal('/home/diego/Pro...', Array, true)
+#12 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): CBaseController->renderFile('/home/diego/Pro...', Array, true)
+#13 /home/diego/Proyectos/plavisoft/framework/web/CController.php(782): CController->renderPartial('verImputacion', Array, true)
+#14 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/ImputacionController.php(196): CController->render('verImputacion', Array)
+#15 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(49): ImputacionController->actionVerImputacion()
+#16 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#17 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#18 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#19 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#20 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#21 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#22 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#23 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#24 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('verImputacion')
+#25 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('imputacion/verI...')
+#26 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#27 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#28 {main}
+REQUEST_URI=/index.php?r=imputacion/verImputacion&id=152
+---
+2014/10/21 12:39:27 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /home/diego/Proyectos/plavisoft/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): CController->run('')
+#2 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=gii
+---
+2014/10/21 15:05:55 [error] [php] Undefined variable: key (/home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/pago/print.php:60)
+Stack trace:
+#0 /home/diego/Proyectos/plavisoft/framework/web/CController.php(869): PagoController->renderFile()
+#1 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php(729): PagoController->renderPartial()
+#2 unknown(0): PagoController->actionPrint()
+#3 /home/diego/Proyectos/plavisoft/framework/web/actions/CAction.php(108): ReflectionMethod->invokeArgs()
+#4 /home/diego/Proyectos/plavisoft/framework/web/actions/CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#5 /home/diego/Proyectos/plavisoft/framework/web/CController.php(308): CInlineAction->runWithParams()
+#6 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(133): PagoController->runAction()
+#7 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#8 /home/diego/Proyectos/plavisoft/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#9 /home/diego/Proyectos/plavisoft/framework/web/filters/CInlineFilter.php(58): PagoController->filterAccessControl()
+#10 /home/diego/Proyectos/plavisoft/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#11 /home/diego/Proyectos/plavisoft/framework/web/CController.php(291): CFilterChain->run()
+#12 /home/diego/Proyectos/plavisoft/framework/web/CController.php(265): PagoController->runActionWithFilters()
+#13 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(282): PagoController->run()
+#14 /home/diego/Proyectos/plavisoft/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#15 /home/diego/Proyectos/plavisoft/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#16 /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php(13): CWebApplication->run()
+REQUEST_URI=/index.php?r=pago/print&id=14
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/views/pago/print.php (60)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/protected/controllers/PagoController.php (729)
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php (13)

@@ -120,3 +120,22 @@ Select * from plavisoft.pago p join plavisoft.cheque c on p.id = c.pago_id;
 update plavisoft.cuota set saldada = 'No' ;
 
 Select now();
+
+Select 
+ cs.id,
+ cs.suscripcion_id,
+ cs.valor,
+ cs.totalSaldado,
+ cs.valor - cs.totalSaldado as saldo
+From (
+	Select 
+	 c.id,
+	 c.suscripcion_id,
+	 c.valor,
+	 sum(IFNULL(i.valor,0))	as totalSaldado
+	From plavisoft.cuota c
+	left join plavisoft.imputacion i on c.id = i.cuota_id
+	Group by c.id, c.suscripcion_id, c.valor
+) as cs; 
+
+

@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Administrar Suscripciones</h1>
+<h1>Suscripciones</h1>
 
 
 <?php	
@@ -33,13 +33,22 @@ $('.search-form form').submit(function(){
     }
     else{
         $this->widget('application.extensions.tablesorter.SorterSuscripcion', array(
-                  'data'=>$records,
-                  'columns'=>array(
-                       'persona.Apellido',
-                       'persona.Nombre',
-                       'financiacion.Descripcion',
-                       'estadoAdjudicacion.Descripcion',	
-                ),
+            'data'=>$records,
+            'columns'=>array(
+                'persona.nombreCompleto',
+                'financiacion.Descripcion',
+                'estadoAdjudicacion.Descripcion',	
+                array(
+                    'header' => 'Pagado',
+                    'value' => 'totalPagado',
+                    'style'=>'text-align: right;',
+                ),                
+                array(
+                    'header' => 'Adeudado',
+                    'value' => 'totalDeuda',
+                    'style'=>'text-align: right;',
+                ),                
+            ),
         ));         
     }
 ?>

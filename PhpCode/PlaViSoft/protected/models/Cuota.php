@@ -23,6 +23,8 @@ class Cuota extends ActiveRecord
         
         const SALDADA = "Si";
         const NO_SALDADA = "No";
+        const PARCIAL_SALDADA = "Pr";
+        
 	/**
 	 * @return string the associated database table name
 	 */
@@ -175,6 +177,22 @@ class Cuota extends ActiveRecord
 
         public function getValorImputadoStr(){
             return '$ '.Yii::app() -> format -> number($this->getValorImputado());
+        }
+        
+        public function getEstadoStr(){
+            $r = "";
+            
+            if($this->saldada==self::SALDADA){
+                $r .= 'Cancelada';
+            }
+            else if($this->saldada==self::PARCIAL_SALDADA){
+                $r .= 'Cancelación Parcial';
+            }            
+            else {
+                $r .= 'No Cancelada';
+            }
+            
+            return $r;
         }
         
         

@@ -122,9 +122,11 @@ class Imputacion extends ActiveRecord
         }
         
         public function getCuota_field(){
+            $r = $this->cuota->cuotaStr . " (" . $this->cuota->estadoStr . ")";
+            
             return 
                 '<a href="index.php?r=cuota/view&id='.$this->cuota->id.'">'.
-                $this->cuota->mes->mes." - ".$this->cuota->anio." (".($this->cuota->saldada=='Si'?'Saldada':'No Saldada').") ".
+                    $r .
                 '</a>';
         }
 
