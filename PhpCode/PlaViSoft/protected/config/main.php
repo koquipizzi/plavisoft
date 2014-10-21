@@ -117,7 +117,7 @@ return array(
             'connectionString' => 'mysql:host=localhost;dbname=plavisoft',
             'emulatePrepare' => true,
             'username' => 'root',
-            'password' => 'mysqlpass',
+            'password' => '',
             'charset' => 'utf8',
         ),
         // uncomment the following to use a MySQL database
