@@ -75,7 +75,7 @@ table td,table th{
 
 <table width=700>
 <tr class="grey size">
-    <th colspan=12><?=$key ?></th>
+    <th colspan=12></th>
 </tr>
 <thead>
 	<tr>
