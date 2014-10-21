@@ -1,21 +1,18 @@
 <?php
-/* @var $this ChequeController */
-/* @var $model Cheque */
-
 $this->breadcrumbs=array(
 	'Cheques'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Actualizar',
 );
 
 $this->menu=array(
-	array('label'=>'List Cheque', 'url'=>array('index')),
-	array('label'=>'Create Cheque', 'url'=>array('create')),
-	array('label'=>'View Cheque', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Cheque', 'url'=>array('admin')),
+	array('label'=>'Listar Cheque','url'=>array('index')),
+	array('label'=>'Nueva Cheque','url'=>array('create')),
+	array('label'=>'Ver Cheque','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Administrar Cheque','url'=>array('admin')),
 );
 ?>
 
 <h1>Update Cheque <?php echo $model->id; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>

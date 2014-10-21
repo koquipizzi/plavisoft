@@ -1,64 +1,39 @@
-<?php
-/* @var $this ChequeController */
-/* @var $model Cheque */
-/* @var $form CActiveForm */
-?>
-
-<div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'cheque-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
+	'type'=>'horizontal',
+	'htmlOptions'=>array('class'=>'well'),
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="help-block">Los campos con <span class="required">*</span> son requeridos.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'Nro_cheque'); ?>
-		<?php echo $form->textField($model,'Nro_cheque',array('size'=>45,'maxlength'=>45)); ?>
-		<?php echo $form->error($model,'Nro_cheque'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'Nro_cheque',array('class'=>'span5','maxlength'=>45)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'Cta_cte'); ?>
-		<?php echo $form->textField($model,'Cta_cte',array('size'=>45,'maxlength'=>45)); ?>
-		<?php echo $form->error($model,'Cta_cte'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'Cta_cte',array('class'=>'span5','maxlength'=>45)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'valor'); ?>
-		<?php echo $form->textField($model,'valor',array('size'=>15,'maxlength'=>15)); ?>
-		<?php echo $form->error($model,'valor'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'valor',array('class'=>'span5','maxlength'=>15)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'pago_id'); ?>
-		<?php echo $form->textField($model,'pago_id'); ?>
-		<?php echo $form->error($model,'pago_id'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'pago_id',array('class'=>'span5')); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'NombreTitular'); ?>
-		<?php echo $form->textField($model,'NombreTitular',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'NombreTitular'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'NombreTitular',array('class'=>'span5','maxlength'=>100)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'banco_id'); ?>
-		<?php echo $form->textField($model,'banco_id'); ?>
-		<?php echo $form->error($model,'banco_id'); ?>
-	</div>
+	<?php echo $form->textFieldRow($model,'banco_id',array('class'=>'span5')); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<?php echo $form->datepickerRow($model,'FechaVencimiento',array('options'=>array(),'htmlOptions'=>array('class'=>'span5')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Cliquee en Mes/Año para seleccionar mes o año diferente.')); ?>
+
+	<div class="form-actions">
+		<?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType'=>'submit',
+			'type'=>'primary',
+			'label'=>$model->isNewRecord ? 'Crear' : 'Guardar',
+		)); ?>
+		<?php $this->widget('bootstrap.widgets.TbButton', array(
+			'buttonType'=>'reset',
+			'type'=>'primary',
+			'label'=>'Limpiar',
+		)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- form -->

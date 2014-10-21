@@ -4512,3 +4512,70 @@ Stack trace:
 REQUEST_URI=/plavisoft/index.php?r=persona/admin
 HTTP_REFERER=http://localhost/plavisoft/index.php?r=site/login
 ---
+2014/10/21 20:09:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to find the code you requested.' in C:\Proyectos\Workspace\plavisoft\framework\gii\CCodeGenerator.php:90
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(49): CCodeGenerator->actionCode()
+#1 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('code')
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('gii/bootstrap/c...')
+#6 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#7 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/plavisoft/index.php?r=gii/bootstrap/code&id=4
+HTTP_REFERER=http://localhost/plavisoft/index.php?r=gii/bootstrap/index
+---
+2014/10/21 20:12:18 [error] [php] Invalid argument supplied for foreach() (C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\extensions\tablesorter\Sorter.php:111)
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\views\cheque\admin.php(46): ChequeController->widget()
+#1 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(126): require()
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(95): ChequeController->renderInternal()
+#3 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(869): ChequeController->renderFile()
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(782): ChequeController->renderPartial()
+#5 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\ChequeController.php(148): ChequeController->render()
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(49): ChequeController->actionAdmin()
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams()
+#8 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): ChequeController->runAction()
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): ChequeController->filterAccessControl()
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#14 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): ChequeController->runActionWithFilters()
+#15 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): ChequeController->run()
+#16 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#17 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#18 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CWebApplication->run()
+REQUEST_URI=/plavisoft/index.php?r=cheque/admin
+in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\extensions\tablesorter\Sorter.php (111)
+in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\extensions\tablesorter\Sorter.php (129)
+in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\views\cheque\admin.php (46)
+2014/10/21 20:16:15 [error] [php] include(SorterCheque.php): failed to open stream: No such file or directory (C:\Proyectos\Workspace\plavisoft\framework\YiiBase.php:427)
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\framework\web\CWidgetFactory.php(147): spl_autoload_call()
+#1 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(146): CWidgetFactory->createWidget()
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(172): ChequeController->createWidget()
+#3 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\views\cheque\admin.php(46): ChequeController->widget()
+#4 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(126): require()
+#5 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(95): ChequeController->renderInternal()
+#6 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(869): ChequeController->renderFile()
+#7 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(782): ChequeController->renderPartial()
+#8 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\ChequeController.php(152): ChequeController->render()
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(49): ChequeController->actionAdmin()
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): ChequeController->runAction()
+#12 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): ChequeController->filterAccessControl()
+#15 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#17 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): ChequeController->runActionWithFilters()
+#18 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): ChequeController->run()
+#19 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CWebApplication->run()
+REQUEST_URI=/plavisoft/index.php?r=cheque/admin
+in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\views\cheque\admin.php (46)
+in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\ChequeController.php (152)
+in C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php (13)
