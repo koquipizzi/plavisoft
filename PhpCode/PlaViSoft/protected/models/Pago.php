@@ -62,7 +62,7 @@ class Pago extends ActiveRecord
 		return array(
 			'cheques' => array(self::HAS_MANY, 'Cheque', 'pago_id'),
 			'formaPagos' => array(self::MANY_MANY, 'FormaPago', 'forma_pago_pago(pago_id, forma_pago_id)'),
-			'imputacion' => array(self::HAS_ONE, 'Imputacion', 'pago_id'),
+			'imputacion' => array(self::HAS_MANY, 'Imputacion', 'pago_id'),
 			'persona' => array(self::BELONGS_TO, 'Persona', 'persona_id'),
 		);
 	}

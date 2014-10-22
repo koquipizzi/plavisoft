@@ -151,7 +151,11 @@ class CuotaController extends Controller
                 throw new CHttpException(null,'Listado de cuotas sin suscripcion_id');
             }
             
-	    $records=Cuota::model()->getCuotaBySuscripcion($suscripcion->id);
+            $criteria = new CDbCriteria;
+            $criteria->addSearchCondition('suscripcion_id', $suscripcion->id);
+            $records=CuotaSaldo::model()->findAll($criteria);
+            
+	    //$records=CuotaSaldo::model()->getCuotaBySuscripcion($suscripcion->id);
 		$this->susc = $suscripcion->id;
 	    $this->render('admin',array(
 	        'records'=>$records,

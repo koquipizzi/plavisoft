@@ -70,18 +70,19 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 			)
 		); 
 		
-		   echo "<span style='margin-left:20px;float:right;'>";		
-		
-		$this->widget(
-			'bootstrap.widgets.TbButton',
-			array(
-			'url'=>'index.php?r=adelanto/create&idpersona='.$model->id,
-			'type' => 'info',
-			'label' => 'Registrar Adelanto'
-			)
-		); 
-		
-		echo "</span><br><br>";
+//		echo "<span style='margin-left:20px;float:right;'>";		
+//		
+//		$this->widget(
+//			'bootstrap.widgets.TbButton',
+//			array(
+//			'url'=>'index.php?r=adelanto/create&idpersona='.$model->id,
+//			'type' => 'info',
+//			'label' => 'Registrar Adelanto'
+//			)
+//		); 
+//		
+//		echo "</span><br><br>";
+                echo "<br><br>";
 
                 foreach($model->suscripcions as $susc) {
 

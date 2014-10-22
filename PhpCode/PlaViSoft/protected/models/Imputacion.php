@@ -50,7 +50,7 @@ class Imputacion extends ActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'pago' => array(self::BELONGS_TO, 'Pago', 'pago_id'),
-			'cuota' => array(self::BELONGS_TO, 'Cuota', 'cuota_id'),
+			'cuota' => array(self::BELONGS_TO, 'Cuota', 'cuota_id'),                    
 		);
 	}
 

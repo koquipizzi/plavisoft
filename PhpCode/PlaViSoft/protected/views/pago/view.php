@@ -69,6 +69,17 @@ $this->menu=array(
             ),
         ));        
     }    
+    
+    echo " ";
+    $this->widget(
+            'bootstrap.widgets.TbButton',
+            array(
+            'url'=>'index.php?r=cuota/admin&suscripcion_id='.$model->imputacion[0]->cuota->suscripcion_id,
+            'type' => 'info',
+            'label' => 'Suscripción'
+            )
+    ); 
+    
 
  ?>
 

@@ -28,8 +28,20 @@ $this->breadcrumbs=array(
                 'value'=>'valorStr',
                 'style'=>'text-align: right;',
             ),
-            'mes.mes',
-            'anio',
+            array(
+                'header'=>'Cancelado',
+                'value'=>'canceladoStr',
+                'style'=>'text-align: right;',
+            ),
+            array(
+                'header'=>'Saldo',
+                'value'=>'saldoStr',
+                'style'=>'text-align: right; font-weight: bold;',
+            ),
+            array(
+                'header'=>'Periodo',
+                'value'=>'cuotaStr',
+            ),
             array(
                 'header'=>'Estado',
                 'value'=>'estadoStr',
