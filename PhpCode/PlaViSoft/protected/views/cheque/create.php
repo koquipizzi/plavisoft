@@ -1,18 +1,15 @@
 <?php
-/* @var $this ChequeController */
-/* @var $model Cheque */
-
 $this->breadcrumbs=array(
 	'Cheques'=>array('index'),
-	'Create',
+	'Nuevo',
 );
 
 $this->menu=array(
-	array('label'=>'List Cheque', 'url'=>array('index')),
-	array('label'=>'Manage Cheque', 'url'=>array('admin')),
+	//array('label'=>'Listar Cheque','url'=>array('index')),
+	array('label'=>'Administrar Cheques','url'=>array('admin')),
 );
 ?>
 
-<h1>Create Cheque</h1>
+<h1>Nuevo Cheque</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

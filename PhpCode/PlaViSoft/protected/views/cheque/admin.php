@@ -1,15 +1,12 @@
 <?php
-/* @var $this ChequeController */
-/* @var $model Cheque */
-
 $this->breadcrumbs=array(
 	'Cheques'=>array('index'),
-	'Manage',
+	'Administrar',
 );
 
 $this->menu=array(
-	array('label'=>'List Cheque', 'url'=>array('index')),
-	array('label'=>'Create Cheque', 'url'=>array('create')),
+//	array('label'=>'Listar Cheque','url'=>array('index')),
+	array('label'=>'Nuevo Cheque','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +15,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#cheque-grid').yiiGridView('update', {
+	$.fn.yiiGridView.update('cheque-grid', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -26,25 +23,32 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Cheques</h1>
-
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'cheque-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
+<h1>Administrar Cheques
+<div style="float:right;">
+<?php             
+	$this->widget(
+                  'bootstrap.widgets.TbButton',
+                            array(
+                            'url'=>'index.php?r=cheque/admin',
+                            'type' => 'info',
+                            'label' => 'Listar Todos'
+                            )
+                    ); 
+	echo "<span>_</span>";
+		$this->widget(
+                  'bootstrap.widgets.TbButton',
+                            array(
+                            'url'=>'index.php?r=cheque/admin&tipo=0',
+                            'type' => 'info',
+                            'label' => 'Listar sin Entregar'
+                            )
+                    ); 
+     
+?></div>
+</h1>
+<?php	$this->widget('application.extensions.tablesorter.SorterCheque', array(
+	  'data'=>$records,
+	  'columns'=>array(
 		'id',
 		'Nro_cheque',
 		'Cta_cte',
@@ -53,9 +57,13 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'NombreTitular',
 		/*
 		'banco_id',
+		'FechaVencimiento',
+		'dadoA',
+		'dadoFecha',
+		'descripcion',
 		*/
-		array(
-			'class'=>'CButtonColumn',
-		),
+	/*	array(
+			'class'=>'bootstrap.widgets.TbButtonColumn',
+		),*/
 	),
 )); ?>

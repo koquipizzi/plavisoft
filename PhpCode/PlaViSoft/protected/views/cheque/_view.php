@@ -1,12 +1,7 @@
-<?php
-/* @var $this ChequeController */
-/* @var $data Cheque */
-?>
-
 <div class="view">
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
+	<?php echo CHtml::link(CHtml::encode($data->id),array('view','id'=>$data->id)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('Nro_cheque')); ?>:</b>
@@ -33,5 +28,23 @@
 	<?php echo CHtml::encode($data->banco_id); ?>
 	<br />
 
+	<?php /*
+	<b><?php echo CHtml::encode($data->getAttributeLabel('FechaVencimiento')); ?>:</b>
+	<?php echo CHtml::encode($data->FechaVencimiento); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('dadoA')); ?>:</b>
+	<?php echo CHtml::encode($data->dadoA); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('dadoFecha')); ?>:</b>
+	<?php echo CHtml::encode($data->dadoFecha); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('descripcion')); ?>:</b>
+	<?php echo CHtml::encode($data->descripcion); ?>
+	<br />
+
+	*/ ?>
 
 </div>
