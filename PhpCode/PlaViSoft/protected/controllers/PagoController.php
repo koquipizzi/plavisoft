@@ -229,6 +229,9 @@ class PagoController extends Controller
 	 */
 	public function actionCreate()
 	{
+error_reporting(E_ALL);
+ini_set("display_errors", 1); 
+                    
 		$pago=new Pago;
                 $imputacion = new Imputacion;
                 $forma_pago_pago = new FormaPagoPago;
@@ -274,6 +277,10 @@ class PagoController extends Controller
                                     
                                     if ($cuota->valor == $cuota->valorAsignado){
                                         $cuota->saldada = Cuota::SALDADA;
+                                        $cuota->save();
+                                    }
+                                    else{
+                                        $cuota->saldada = Cuota::PARCIAL_SALDADA;
                                         $cuota->save();
                                     }
                                 }

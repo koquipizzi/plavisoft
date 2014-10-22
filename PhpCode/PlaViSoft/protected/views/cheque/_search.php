@@ -19,6 +19,12 @@
 
 	<?php echo $form->datepickerRow($model,'FechaVencimiento',array('options'=>array(),'htmlOptions'=>array('class'=>'span5')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Click on Month/Year at top to select a different year or type in (mm/dd/yyyy).')); ?>
 
+	<?php echo $form->textFieldRow($model,'dadoA',array('class'=>'span5','maxlength'=>255)); ?>
+
+	<?php echo $form->datepickerRow($model,'dadoFecha',array('options'=>array(),'htmlOptions'=>array('class'=>'span5')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Click on Month/Year at top to select a different year or type in (mm/dd/yyyy).')); ?>
+
+	<?php echo $form->textFieldRow($model,'descripcion',array('class'=>'span5','maxlength'=>255)); ?>
+
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',

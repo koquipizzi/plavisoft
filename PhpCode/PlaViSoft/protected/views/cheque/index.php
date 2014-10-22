@@ -4,8 +4,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Nueva Cheque','url'=>array('create')),
-	array('label'=>'Administrar Cheque','url'=>array('admin')),
+	array('label'=>'Nuevo Cheque','url'=>array('create')),
+	array('label'=>'Administrar Cheques','url'=>array('admin')),
 );
 ?>
 

@@ -30,6 +30,9 @@ $this->breadcrumbs=array(
             ),
             'mes.mes',
             'anio',
-            'saldada',
+            array(
+                'header'=>'Estado',
+                'value'=>'estadoStr',
+            ),
 	),
 )); ?>

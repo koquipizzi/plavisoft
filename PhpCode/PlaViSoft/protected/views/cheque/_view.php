@@ -33,6 +33,18 @@
 	<?php echo CHtml::encode($data->FechaVencimiento); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('dadoA')); ?>:</b>
+	<?php echo CHtml::encode($data->dadoA); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('dadoFecha')); ?>:</b>
+	<?php echo CHtml::encode($data->dadoFecha); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('descripcion')); ?>:</b>
+	<?php echo CHtml::encode($data->descripcion); ?>
+	<br />
+
 	*/ ?>
 
 </div>

@@ -5,8 +5,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Cheque','url'=>array('index')),
-	array('label'=>'Nueva Cheque','url'=>array('create')),
+//	array('label'=>'Listar Cheque','url'=>array('index')),
+	array('label'=>'Nuevo Cheque','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -23,9 +23,29 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Administrar Cheques</h1>
-
-
+<h1>Administrar Cheques
+<div style="float:right;">
+<?php             
+	$this->widget(
+                  'bootstrap.widgets.TbButton',
+                            array(
+                            'url'=>'index.php?r=cheque/admin',
+                            'type' => 'info',
+                            'label' => 'Listar Todos'
+                            )
+                    ); 
+	echo "<span>_</span>";
+		$this->widget(
+                  'bootstrap.widgets.TbButton',
+                            array(
+                            'url'=>'index.php?r=cheque/admin&tipo=0',
+                            'type' => 'info',
+                            'label' => 'Listar sin Entregar'
+                            )
+                    ); 
+     
+?></div>
+</h1>
 <?php	$this->widget('application.extensions.tablesorter.SorterCheque', array(
 	  'data'=>$records,
 	  'columns'=>array(
@@ -38,6 +58,9 @@ $('.search-form form').submit(function(){
 		/*
 		'banco_id',
 		'FechaVencimiento',
+		'dadoA',
+		'dadoFecha',
+		'descripcion',
 		*/
 	/*	array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',

@@ -16,7 +16,7 @@ class SorterCheque extends Sorter
             $r = "
                 <td>  
                     <a class='btn btn-small' href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
-                    <a class='btn btn-small' href='".$edit_url."'><i class='icon-edit'></i></a>&nbsp; 
+                    <a class='btn btn-small' href='".$edit_url."'><i class='icon-check'></i></a>&nbsp; 
                     <a class='btn btn-small' href='javascript:void(0);' onclick='del_data(".$delete_url.");'><i class='icon-trash'></i></a>
                 </td>
             ";

@@ -136,7 +136,7 @@ class ChequeController extends Controller
 	/**
 	 * Manages all models.
 	 */
-	public function actionAdmin()
+	public function actionAdmin($tipo=null)
 	{
 		/*$model=new Cheque('search');
 		$model->unsetAttributes();  // clear any default values
@@ -146,10 +146,23 @@ class ChequeController extends Controller
 		$this->render('admin',array(
 			'model'=>$model,
 		));*/
-		$records=Cheque::model()->findAll();
-	    $this->render('admin',array(
-	        'records'=>$records,
-	    )); 
+		if (isset($tipo)){
+			if ($tipo == 1){
+				echo "1"; die();
+			}
+			else {
+			$records=Cheque::model()->findAll();
+		    $this->render('admin',array(
+		        'records'=>$records,
+		    )); 
+			}
+		} else
+		{
+			$records=Cheque::model()->findAll();
+		    $this->render('admin',array(
+		        'records'=>$records,
+		    )); 
+		}
 	}
 
 	/**
