@@ -353,7 +353,7 @@ ini_set("display_errors", 1);
                 // Toma el ID de la cuota a ser saldada
                 $cuota = NULL;
                 $pago->FechaPago = date('d/m/Y');
-                if (array_key_exists('cuota_id',$_REQUEST)&& isset($_REQUEST['cuota_id'])) { 
+                if (array_key_exists('cuota_id',$_REQUEST) && isset($_REQUEST['cuota_id'])) { 
                     $cuota = Cuota::model()->findByPk($_REQUEST['cuota_id']);
                     if (!isset($cuota)){
                         Yii::log('No se encuentra Cuota a Saldar','warning');

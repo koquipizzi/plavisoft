@@ -4,66 +4,53 @@ $this->breadcrumbs=array(
 	'Administrar',
 );
 
-$this->menu=array(
-//	array('label'=>'Listar Cheque','url'=>array('index')),
-	array('label'=>'Nuevo Cheque','url'=>array('create')),
-);
-
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('cheque-grid', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
 ?>
 
-<h1>Administrar Cheques
+<h1>Cheques
 <div style="float:right;">
-<?php             
-	$this->widget(
-                  'bootstrap.widgets.TbButton',
-                            array(
-                            'url'=>'index.php?r=cheque/admin',
-                            'type' => 'info',
-                            'label' => 'Listar Todos'
-                            )
-                    ); 
-	echo "<span>_</span>";
-		$this->widget(
-                  'bootstrap.widgets.TbButton',
-                            array(
-                            'url'=>'index.php?r=cheque/admin&tipo=0',
-                            'type' => 'info',
-                            'label' => 'Listar sin Entregar'
-                            )
-                    ); 
-     
+<?php                 
+    $this->widget('bootstrap.widgets.TbButtonGroup', array(
+        'type' => 'primary',
+        'toggle' => 'radio', // 'checkbox' or 'radio'
+        'buttons' => array(
+            array('label'=>'Listar Todos', 'url'=>'index.php?r=cheque/admin', 'active'=>$activo[0]),
+            array('label'=>'Listar sin Entregar', 'url'=>'index.php?r=cheque/admin&tipo=0', 'active'=>$activo[1]),
+            array('label'=>'Listar Entregados', 'url'=>'index.php?r=cheque/admin&tipo=1', 'active'=>$activo[2]),
+        ),
+    ));    
 ?></div>
 </h1>
-<?php	$this->widget('application.extensions.tablesorter.SorterCheque', array(
-	  'data'=>$records,
-	  'columns'=>array(
-		'id',
-		'Nro_cheque',
-		'Cta_cte',
-		'valor',
-		'pago_id',
-		'NombreTitular',
-		/*
-		'banco_id',
-		'FechaVencimiento',
-		'dadoA',
-		'dadoFecha',
-		'descripcion',
-		*/
-	/*	array(
-			'class'=>'bootstrap.widgets.TbButtonColumn',
-		),*/
-	),
-)); ?>
+<?php	
+
+    if(count($records)==0){
+        echo "No existen cheques registrados";
+    }
+    else{
+        $this->widget('application.extensions.tablesorter.SorterCheque', array(
+            'data'=>$records,
+            'columns'=>array(
+                array(
+                    'header' => 'Nro. Cheque',
+                    'value' => 'Nro_cheque',
+                ),                
+                array(
+                    'header' => 'Cta. Cte.',
+                    'value' => 'Cta_cte',
+                ),                
+                array(
+                    'header' => 'Pagado',
+                    'value' => 'valorStr',
+                    'style'=>'text-align: right;',
+                ),                
+                array(
+                    'header' => 'Fecha Vto',
+                    'value' => 'FechaVencimiento',
+                ),                
+                array(
+                    'header' => 'Banco',
+                    'value' => 'banco.Banco',
+                ),                
+            ),
+        )); 
+    }    
+?>

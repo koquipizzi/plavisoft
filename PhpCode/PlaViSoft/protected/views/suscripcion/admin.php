@@ -35,7 +35,10 @@ $('.search-form form').submit(function(){
         $this->widget('application.extensions.tablesorter.SorterSuscripcion', array(
             'data'=>$records,
             'columns'=>array(
-                'persona.nombreCompleto',
+                array(
+                    'header' => 'Nombre',
+                    'value' => 'persona.nombreCompleto',
+                ),                
                 'financiacion.Descripcion',
                 'estadoAdjudicacion.Descripcion',	
                 array(
@@ -49,6 +52,14 @@ $('.search-form form').submit(function(){
                     'style'=>'text-align: right;',
                 ),                
             ),
+            'filters'=>array(
+                '',
+                'filter-select', 
+                'filter-select', 
+                '', 
+                '', 
+            ),
+            
         ));         
     }
 ?>

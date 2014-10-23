@@ -97,6 +97,10 @@ class ChequeController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+                if(!is_null($model->dadoFecha)){
+                    $model->dadoFecha = date('d/m/Y');
+                }
+                    
 		$this->render('update',array(
 			'model'=>$model,
 		));
@@ -138,31 +142,29 @@ class ChequeController extends Controller
 	 */
 	public function actionAdmin($tipo=null)
 	{
-		/*$model=new Cheque('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Cheque']))
-			$model->attributes=$_GET['Cheque'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));*/
-		if (isset($tipo)){
-			if ($tipo == 1){
-				echo "1"; die();
-			}
-			else {
-			$records=Cheque::model()->findAll();
-		    $this->render('admin',array(
-		        'records'=>$records,
-		    )); 
-			}
-		} else
-		{
-			$records=Cheque::model()->findAll();
-		    $this->render('admin',array(
-		        'records'=>$records,
-		    )); 
-		}
+                $activo = array(FALSE,FALSE,FALSE);
+                
+                if (isset($tipo)&&($tipo == 0)){
+                    $criteria = new CDbCriteria;
+                    $criteria->condition = "dadoFecha is null"; 
+                    $records=Cheque::model()->findAll($criteria);
+                    $activo[1] = TRUE;
+                }else    
+                if (isset($tipo)&&($tipo == 1)){
+                    $criteria = new CDbCriteria;
+                    $criteria->condition = "dadoFecha is not null"; 
+                    $records=Cheque::model()->findAll($criteria);
+                    $activo[2] = TRUE;
+                }else{    
+                    $records=Cheque::model()->findAll();
+                    $activo[0] = TRUE;
+                }
+                    
+			
+                $this->render('admin',array(
+                    'records'=>$records,
+                    'activo'=>$activo,
+                )); 
 	}
 
 	/**

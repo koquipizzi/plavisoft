@@ -14,6 +14,7 @@
  * @property integer $CantPisos
  * @property integer $SobreCalle
  * @property string $Fotos
+ * @property integer $cantidad
  *
  * The followings are the available model relations:
  * @property Financiacion[] $financiacions
@@ -36,12 +37,12 @@ class TipoVivienda extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle', 'numerical', 'integerOnly'=>true),
+			array('MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle, cantidad', 'numerical', 'integerOnly'=>true),
 			array('Descripcion, Nombre, Fotos', 'length', 'max'=>45),
 			array('valor', 'length', 'max'=>15),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, Descripcion, valor, Nombre, MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle, Fotos', 'safe', 'on'=>'search'),
+			array('id, Descripcion, valor, Nombre, MtrosCubiertos, MtrosDescubiertos, CantHabitaciones, CantPisos, SobreCalle, Fotos, cantidad', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,6 +74,7 @@ class TipoVivienda extends CActiveRecord
 			'CantPisos' => 'Cant Pisos',
 			'SobreCalle' => 'Sobre Calle',
 			'Fotos' => 'Fotos',
+			'cantidad' => 'Cantidad',
 		);
 	}
 
@@ -104,6 +106,7 @@ class TipoVivienda extends CActiveRecord
 		$criteria->compare('CantPisos',$this->CantPisos);
 		$criteria->compare('SobreCalle',$this->SobreCalle);
 		$criteria->compare('Fotos',$this->Fotos,true);
+		$criteria->compare('cantidad',$this->cantidad);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

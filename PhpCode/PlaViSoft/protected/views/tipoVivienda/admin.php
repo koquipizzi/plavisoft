@@ -4,23 +4,6 @@ $this->breadcrumbs=array(
 	'Administrar',
 );
 
-$this->menu=array(
-//	array('label'=>'Listar Tipo Vivienda','url'=>array('index')),
-	array('label'=>'Nuevo Tipo de Vivienda','url'=>array('create')),
-);
-
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('tipo-vivienda-grid', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
 ?>
 
 <h1>Administrar Tipos de Viviendas</h1>
@@ -32,9 +15,8 @@ $('.search-form form').submit(function(){
 		//'id',
 		'Nombre',
 		'valor',
-		'Descripcion',
-		'MtrosCubiertos',
-		'MtrosDescubiertos',
+                'cantidad',
+                'Descripcion',
 		/*
 		'CantHabitaciones',
 		'CantPisos',

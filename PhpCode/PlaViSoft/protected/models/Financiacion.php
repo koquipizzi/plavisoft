@@ -138,11 +138,14 @@ class Financiacion extends CActiveRecord
             $sql = 
                 'SELECT count(*) as cantidad
                 FROM suscripcion s
+                Join persona p on s.persona_id = p.id
                 WHERE 
-                    s.financiacion_id = :financiacion_id';
+                    s.financiacion_id = :financiacion_id
+                    and p.tipo_persona_id = :tipo_persona_id';
 
             $command = Yii::app()->db->createCommand($sql);
             $command->bindValue(':financiacion_id',$this->id);
+            $command->bindValue(':tipo_persona_id',$this->tipo_persona_id);
             $result = $command->queryAll();
             
             if(is_array($result)&&  array_key_exists(0, $result)&&  array_key_exists('cantidad', $result[0]))

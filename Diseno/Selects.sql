@@ -138,4 +138,16 @@ From (
 	Group by c.id, c.suscripcion_id, c.valor
 ) as cs; 
 
+Select * from plavisoft.tipo_vivienda;
+update plavisoft.tipo_vivienda
+set Descripcion = 'Monoambiente. 1 Dormitorio'
+where id = 3;
+
+Select * from plavisoft.financiacion;
+update plavisoft.financiacion 
+Set descripcion = 'C' 
+where id = 11;
+
+insert into plavisoft.financiacion(descripcion, tipo_vivienda_id, tipo_persona_id, cant_cuotas, posicion)
+values('C', 3, 2, 24, 2);
 

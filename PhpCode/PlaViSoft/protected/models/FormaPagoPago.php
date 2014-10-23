@@ -138,9 +138,7 @@ abstract class FormaPagoEspecifico extends FormaPagoPago
         }
         return false;
     }
-    
 }
-
 
 class FormaPagoContado extends FormaPagoEspecifico
 {
@@ -161,5 +159,4 @@ class FormaPagoDeposito extends FormaPagoEspecifico
     public static function getIDType(){
         return self::ID_DEPOSITO;
     }    
-    
 }

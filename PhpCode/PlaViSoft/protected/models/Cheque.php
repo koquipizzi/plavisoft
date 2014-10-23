@@ -132,27 +132,36 @@ class Cheque extends CActiveRecord
 	
 	
 	        
-    public function getValorStr(){
+        public function getValorStr(){
             return "$ ".Yii::app()->format->number($this->valor);
         }
         
 	public function afterFind()
 	{
-        $this->dadoFecha = Yii::app()->format->date($this->dadoFecha);
+                if(!is_null($this->dadoFecha)){
+                    $this->dadoFecha = Yii::app()->format->date($this->dadoFecha);
+                }
 		$this->FechaVencimiento = Yii::app()->format->date($this->FechaVencimiento);
 		return parent::afterFind();
 	}       
         
 	public function beforeSave()
 	{
-		$fecha = DateTime::createFromFormat('d/m/Y',$this->FechaVencimiento);
-		$this->FechaVencimiento = $fecha->format('y-m-d');		 
-		$fechaDado = DateTime::createFromFormat('d/m/Y',$this->dadoFecha);
-		$this->dadoFecha = $fechaDado->format('y-m-d');		
+                if (!is_null($this->FechaVencimiento)){
+                    $fecha = DateTime::createFromFormat('d/m/Y',$this->FechaVencimiento);
+                    $this->FechaVencimiento = $fecha?$fecha->format('y-m-d'):NULL;		 
+                }
+
+                if (!is_null($this->dadoFecha)){
+                    $fechaDado = DateTime::createFromFormat('d/m/Y',$this->dadoFecha);
+                    $this->dadoFecha = $fecha?$fechaDado->format('y-m-d'):NULL;
+                }
 		
 		parent::beforeSave();
                 
 		return true;
 	}
+        
+        
        
 }

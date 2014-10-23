@@ -18,5 +18,18 @@ class SorterVivienda extends Sorter
             return $r;
         }
         
+        
+        public function footer(){
+            $r =  ' 
+                <tfoot>\n
+                    <tr>
+                        <th colspan="7" class="pager form-horizontal">
+                        </th>
+                    </tr>
+                </tfoot>\n';
+            return $r;
+        }
+        
+        
 }
 ?>
