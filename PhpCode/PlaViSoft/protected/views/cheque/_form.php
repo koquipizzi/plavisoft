@@ -38,7 +38,7 @@
 
 	<?php  echo $form->datepickerRow($model,'FechaVencimiento',array('options'=>array(),'htmlOptions'=>array('class'=>'span5','disabled'=>'true')),array('prepend'=>'<i class="icon-calendar"></i>')); ?>
 
-	<?php echo $form->textFieldRow($model,'dadoA',array('class'=>'span5','maxlength'=>255)); ?>
+	<?php echo $form->textFieldRow($model,'dadoA',array('class'=>'span5','maxlength'=>255,'required'=>'true')); ?>
 
 	<?php echo $form->datepickerRow($model,'dadoFecha',array('options'=>array('format' => 'dd/mm/yyyy'),'htmlOptions'=>array('class'=>'span5', 'required'=>'true')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Cliquee en Mes/Año para seleccionar uno diferente.')); ?>
 
