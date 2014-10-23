@@ -4854,3 +4854,42 @@ Stack trace:
 #12 {main}
 REQUEST_URI=/plavisoft/index.php?r=cheque/admin
 ---
+2014/10/23 14:23:35 [error] [exception.CException] exception 'CException' with message 'La propiedad "TbDatePicker"."required" no se encuentra definida.' in C:\Proyectos\Workspace\plavisoft\framework\base\CComponent.php:173
+Stack trace:
+#0 C:\Proyectos\Workspace\plavisoft\framework\web\CWidgetFactory.php(161): CComponent->__set('required', 'true')
+#1 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(146): CWidgetFactory->createWidget(Object(ChequeController), 'bootstrap.widge...', Array)
+#2 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(166): CBaseController->createWidget('bootstrap.widge...', Array)
+#3 [internal function]: CBaseController->widget('bootstrap.widge...', Array, true)
+#4 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\extensions\bootstrap\widgets\TbActiveForm.php(1188): call_user_func_array(Array, Array)
+#5 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\extensions\bootstrap\widgets\TbActiveForm.php(1106): TbActiveForm->horizontalFieldRow(Array, Object(Cheque), 'dadoFecha', Array)
+#6 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\extensions\bootstrap\widgets\TbActiveForm.php(1084): TbActiveForm->customFieldRowInternal(Array, Object(Cheque), 'dadoFecha', Array)
+#7 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\extensions\bootstrap\widgets\TbActiveForm.php(741): TbActiveForm->widgetRowInternal('bootstrap.widge...', Object(Cheque), 'dadoFecha', Array, Array)
+#8 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\views\cheque\_form.php(43): TbActiveForm->datePickerRow(Object(Cheque), 'dadoFecha', Array, Array)
+#9 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(126): require('C:\Proyectos\Wo...')
+#10 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\Proyectos\Wo...', Array, true)
+#11 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(869): CBaseController->renderFile('C:\Proyectos\Wo...', Array, true)
+#12 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\views\cheque\update.php(18): CController->renderPartial('_form', Array)
+#13 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(126): require('C:\Proyectos\Wo...')
+#14 C:\Proyectos\Workspace\plavisoft\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\Proyectos\Wo...', Array, true)
+#15 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(869): CBaseController->renderFile('C:\Proyectos\Wo...', Array, true)
+#16 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(782): CController->renderPartial('update', Array, true)
+#17 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\protected\controllers\ChequeController.php(102): CController->render('update', Array)
+#18 [internal function]: ChequeController->actionUpdate('3')
+#19 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(ChequeController), Array)
+#20 C:\Proyectos\Workspace\plavisoft\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(ChequeController), Object(ReflectionMethod), Array)
+#21 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#22 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#23 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#24 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#25 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#26 C:\Proyectos\Workspace\plavisoft\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#27 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(291): CFilterChain->run()
+#28 C:\Proyectos\Workspace\plavisoft\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#29 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(282): CController->run('update')
+#30 C:\Proyectos\Workspace\plavisoft\framework\web\CWebApplication.php(141): CWebApplication->runController('Cheque/update')
+#31 C:\Proyectos\Workspace\plavisoft\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#32 C:\Proyectos\Workspace\plavisoft\PhpCode\PlaViSoft\index.php(13): CApplication->run()
+#33 {main}
+REQUEST_URI=/plavisoft/index.php?r=Cheque/update&id=3
+HTTP_REFERER=http://localhost/plavisoft/index.php?r=cheque/admin
+---

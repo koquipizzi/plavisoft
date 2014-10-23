@@ -40,7 +40,7 @@
 
 	<?php echo $form->textFieldRow($model,'dadoA',array('class'=>'span5','maxlength'=>255)); ?>
 
-	<?php echo $form->datepickerRow($model,'dadoFecha',array('options'=>array('format' => 'dd/mm/yyyy'),'htmlOptions'=>array('class'=>'span5')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Cliquee en Mes/Año para seleccionar uno diferente.')); ?>
+	<?php echo $form->datepickerRow($model,'dadoFecha',array('options'=>array('format' => 'dd/mm/yyyy'),'htmlOptions'=>array('class'=>'span5', 'required'=>'true')),array('prepend'=>'<i class="icon-calendar"></i>','append'=>'Cliquee en Mes/Año para seleccionar uno diferente.')); ?>
 
 	<?php echo $form->textFieldRow($model,'descripcion',array('class'=>'span5','maxlength'=>255)); ?>
 
