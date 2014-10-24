@@ -1,13 +1,3 @@
-<?php
-$this->breadcrumbs=array(
-	'Cheques',
-);
-
-$this->menu=array(
-	array('label'=>'Nuevo Cheque','url'=>array('create')),
-	array('label'=>'Administrar Cheques','url'=>array('admin')),
-);
-?>
 
 <h1>PlaViSoft - Plan de Vivienda de SICHOCA</h1>
 <?php	
