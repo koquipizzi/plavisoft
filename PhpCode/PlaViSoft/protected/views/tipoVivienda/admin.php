@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Tipo Viviendas'=>array('index'),
+//	'Tipo Viviendas'=>array('index'),
 	'Administrar',
 );
 

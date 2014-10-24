@@ -26,21 +26,56 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Pagos</h1>
+<h1>Listado de Pagos</h1>
+<?php	
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+    if(count($records)==0){
+        echo "No existen pagos registrados";
+    }
+    else{
+        $this->widget('application.extensions.tablesorter.SorterPago', array(
+            'data'=>$records,
+            'columns'=>array(
+                array(
+                    'header' => 'Fecha Pago ',
+                    'value' => 'FechaPago',
+                ),                
+               array(
+                    'header' => 'Valor',
+                    'value' => 'valor',
+                ), 
+                array(
+                    'header' => 'Talonario',
+                    'value' => 'nroPagoStr',
+                ),  
+            
+        /*                array(
+                    'header' => 'Pagado',
+                    'value' => 'valorStr',
+                    'style'=>'text-align: right;',
+                ),                
+                array(
+                    'header' => 'Fecha Vto',
+                    'value' => 'FechaVencimiento',
+                ),                
+                array(
+                    'header' => 'Banco',
+                    'value' => 'banco.Banco',
+                ),   */             
+            ),
+            'filters'=>array(
+                '',
+                '',
+                '', 
+                '', 
+                'filter-select', 
+            ),
+            
+        )); 
+    }    
+?>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php /*$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'pago-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
@@ -56,8 +91,11 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'talonario',
 		'nro_formulario',
 		*/
-		array(
+	/*	array(
 			'class'=>'CButtonColumn',
 		),
 	),
-)); ?>
+)); 
+	 * 
+	 * /
+	 */?>
