@@ -4,10 +4,6 @@ $this->breadcrumbs=array(
 	'Nueva',
 );
 
-$this->menu=array(
-	array('label'=>'Listar Suscripcion','url'=>array('index')),
-	array('label'=>'Administrar Suscripcion','url'=>array('admin')),
-);
 ?>
 
 <h1>Nueva Suscripcion

@@ -1,4 +1,29 @@
-<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+<?php 
+
+    Yii::app()->clientScript->registerScript('AjaxRequest', "
+        function AjaxNroChange(){
+            jQuery.ajax({
+                'type':'POST',
+                'async':false,
+                'success':function( data ) {
+                    data = jQuery.parseJSON( data );
+                    jQuery('#div_nro_suscripcion').html(data.html);
+                    if(data.error==true){
+                        jQuery('#nro_suscripcion').focus();                            
+                    }    
+                },
+                'data':{
+                    'numero':jQuery('#nro_suscripcion').val(),
+                    'financiacion':jQuery('#financiacion_id').val(),
+                },
+                'url':'/index.php?r=Suscripcion/numeroChange',
+                'cache':false
+            });
+        }
+    ");                    
+
+
+    $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'suscripcion-form',
 	'type'=>'horizontal',
 	'htmlOptions'=>array('class'=>'well'),
@@ -61,8 +86,15 @@
                         $model,
                         'financiacion_id', 
                         CHtml::listData($financiacion, 'id', 'Descripcion'), 
-                        array('empty' => '--- Elegir Financiación ---')
-                    )
+                        array('empty' => '--- Elegir Financiación ---','id'=>'financiacion_id')
+                    );
+                    
+                    Yii::app()->clientScript->registerScript('financiacion_id', "
+                        jQuery('#financiacion_id').change(function(){
+                            AjaxNroChange();
+                        });
+                    ");                    
+                    
                 ?>	
 	 	</div>
 	 </div>
@@ -73,17 +105,24 @@
 		</div>
 		<div class="controls">
 		<?php	 
-                    echo $form->textField($model,'numero');
+                    echo $form->textField($model,'numero',array('id'=>'nro_suscripcion'));
+                    Yii::app()->clientScript->registerScript('nro_suscripcion', "
+                        jQuery('#nro_suscripcion').keyup(function(event){
+                            AjaxNroChange();
+                        });
+                    ");                    
                 ?>	
 	 	</div>
+                <div id="div_nro_suscripcion"></div>            
 	 </div>
+
 
 	<div class="control-group">
 		<div class="control-label">
                     <?php echo 'Mes'; ?>
 		</div>
 		<div class="controls">
-                    <?php echo CHtml::activeDropDownList($model,'mes', CHtml::listData(Mes::model()->findAll(), 'id', 'mes'), array('empty' => '--- Elegir Mes de Inicio de Suscripción ---')); ?>	
+                    <?php echo CHtml::activeDropDownList($model,'mes', CHtml::listData(Mes::model()->findAll(), 'id', 'mes')); ?>	
 	 	</div>
 	 </div>
 
@@ -92,7 +131,7 @@
                     <?php echo 'Año'; ?>
 		</div>
 		<div class="controls">
-                    <?php echo CHtml::activeDropDownList($model,'anio', CHtml::listData($anio, 'id', 'Anio'), array('empty' => '--- Elegir Año de Inicio de Suscripción ---')); ?>	
+                    <?php echo CHtml::activeDropDownList($model,'anio', CHtml::listData($anio, 'id', 'Anio')); ?>	
 	 	</div>
 	 </div>
 

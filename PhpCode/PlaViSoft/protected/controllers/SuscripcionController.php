@@ -27,7 +27,7 @@ class SuscripcionController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','numeroChange'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -183,6 +183,8 @@ class SuscripcionController extends Controller
                     }
                     $suscripcion->FechaAlta = date('d/m/Y');
                     $suscripcion->estado_adjudicacion_id = EstadoAdjudicacion::NO_ADJUDICADO;
+                    $suscripcion->mes = 1;
+                    $suscripcion->anio = 2014;
                     $anio = array(
                                 array('id' => 2013,'Anio' => 2013),
                                 array('id' => 2014,'Anio' => 2014),
@@ -316,4 +318,42 @@ class SuscripcionController extends Controller
 		}		
 		return $total;
 	}
+        
+        public function actionNumeroChange(){
+
+            $html = "";
+            $esta = FALSE;
+            
+            if(array_key_exists('numero', $_POST)&&array_key_exists('financiacion', $_POST)){
+                
+                $nro = trim($_POST['numero']);
+                $financiacion = trim($_POST['financiacion']);
+                
+                $esta = TRUE;
+                if($nro!=''){
+                    $criteria = new CDbCriteria;
+                        $criteria->compare('numero', $nro);
+                        $criteria->compare('financiacion_id', $financiacion);
+                    $aux = Suscripcion::model()->findAll($criteria);
+                    $esta = (isset($aux)&&is_array($aux)&&(count($aux)>0));
+                }
+            
+                $html = $this->renderPartial(
+                        'numeroChange',
+                        array(
+                            'esta'=>$esta,
+                        ),
+                        true
+                );
+            }
+            
+            echo json_encode(
+                    array(
+                        'html'=>$html,
+                        'error'=>$esta,
+                    )
+            );
+            Yii::app()->end();            
+                        
+        }
 }

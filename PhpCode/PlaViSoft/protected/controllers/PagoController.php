@@ -229,9 +229,9 @@ class PagoController extends Controller
 	 */
 	public function actionCreate()
 	{
-error_reporting(E_ALL);
-ini_set("display_errors", 1); 
-                    
+//error_reporting(E_ALL);
+//ini_set("display_errors", 1); 
+//                    
 		$pago=new Pago;
                 $imputacion = new Imputacion;
                 $forma_pago_pago = new FormaPagoPago;
