@@ -6,8 +6,8 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1>Cheques
-<div style="float:right;">
+<h1>Cheques</h1>
+<div style="float: right; position: relative; margin-top: -65px;">
 <?php                 
     $this->widget('bootstrap.widgets.TbButtonGroup', array(
         'type' => 'primary',
