@@ -16,16 +16,12 @@ $this->breadcrumbs=array(
             'data'=>$records,
             'columns'=>array(
                 array(
-                    'header' => 'Nombre',
+                    'header' => 'Persona',
                     'value' => 'persona.nombreCompleto',
                 ),                
                 array(
-                    'header' => 'Tipo',
-                    'value' => 'financiacion.Descripcion',
-                ),                
-                array(
-                    'header' => 'Nro',
-                    'value' => 'numero',
+                    'header' => 'Nombre',
+                    'value' => 'nombreStr',
                 ),                
                 array(
                     'header' => 'Estado',
@@ -46,7 +42,6 @@ $this->breadcrumbs=array(
             ),
             'filters'=>array(
                 '',
-                'filter-select', 
                 '', 
                 'filter-select', 
                 '', 

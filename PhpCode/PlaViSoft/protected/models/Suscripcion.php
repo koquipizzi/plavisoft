@@ -171,6 +171,10 @@ class Suscripcion extends CActiveRecord
             return $this->financiacion->Descripcion;
         }
         
+        public function getNombreStr(){
+            return $this->descripcionStr." - ".$this->numero;
+        }
+        
         public function getTotalDeuda() {
             $r = "";
             $sql = 
@@ -219,6 +223,7 @@ class Suscripcion extends CActiveRecord
                 return '$ '.Yii::app()->format->number($r);
             return '';
         }
+
         
         
 }

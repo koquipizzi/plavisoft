@@ -4,12 +4,19 @@ $this->breadcrumbs=array(
 	'Manage',
 );
 
+
+
+
 ?>
 
 <h1>Listado de Cuotas
 
 <span style="float:right;">
-	<a href="/plavisoft/index.php?r=suscripcion/view&amp;id=<?php echo $_GET["suscripcion_id"]?>" title="Ver Estado" class="btn btn-small"><i class="icon-info-sign"></i></a>
+        <?php $this->widget('bootstrap.widgets.TbButton', array(
+                'type'=>'info',
+                'label'=>'Crear Pago',
+                'url'=>Yii::app()->createAbsoluteUrl('pago/create',array('suscripcion_id'=>$suscripcion->id)),
+        )); ?>        
 </span>
 </h1>
 
@@ -47,4 +54,13 @@ $this->breadcrumbs=array(
                 'value'=>'estadoStr',
             ),
 	),
+        'filters'=>array(
+            '',
+            '',
+            '', 
+            '',
+            '',            
+            'filter-select', 
+        ),
+        
 )); ?>
