@@ -71,9 +71,10 @@ class SuscripcionController extends Controller
 	public function actionCreate()
 	{
 		$suscripcion=new Suscripcion;
+                $anio = array();
                 
                 $persona = null;
-                if (array_key_exists('idpersona',$_GET)&& isset($_GET['idpersona'])) { 
+                if (array_key_exists('idpersona',$_GET) && isset($_GET['idpersona'])) { 
                     $persona = Persona::model()->findByPk($_GET['idpersona']);
                     if (isset($persona)) 
                         $suscripcion->persona_id = $persona->id;                            
@@ -94,6 +95,8 @@ class SuscripcionController extends Controller
 		if(isset($_POST['Suscripcion']))
 		{
                     $suscripcion->attributes = $_POST['Suscripcion'];
+                        $suscripcion->mes = $_POST['Suscripcion']['mes'];
+                        $suscripcion->anio = $_POST['Suscripcion']['anio'];
                     $suscripcion->estado_adjudicacion_id = EstadoAdjudicacion::NO_ADJUDICADO; 
                     
                     $persona = Persona::model()->findByPk($suscripcion->persona_id);
@@ -124,8 +127,8 @@ class SuscripcionController extends Controller
                                 throw new CHttpException(null, "Error al guardar Suscripción");
                             }
                             
-                            $mes = 1;
-                            $anio = 2014;
+                            $mes = $suscripcion->mes;
+                            $anio = $suscripcion->anio;
                             
                             for($i=1;$i<=$financiacion->cant_cuotas;$i++){
                                 $cuota = new Cuota();
@@ -180,12 +183,20 @@ class SuscripcionController extends Controller
                     }
                     $suscripcion->FechaAlta = date('d/m/Y');
                     $suscripcion->estado_adjudicacion_id = EstadoAdjudicacion::NO_ADJUDICADO;
+                    $anio = array(
+                                array('id' => 2013,'Anio' => 2013),
+                                array('id' => 2014,'Anio' => 2014),
+                                array('id' => 2015,'Anio' => 2015),
+                                array('id' => 2016,'Anio' => 2016),
+                                array('id' => 2017,'Anio' => 2017),
+                            );
                 }
 
 		$this->render('create',array(
 			'model'=>$suscripcion,
                         'persona'=>$persona,
                         'financiacion'=>$financiacion,
+                        'anio'=>$anio,
 		));
 	}
 

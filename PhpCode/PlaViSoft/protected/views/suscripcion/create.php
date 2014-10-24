@@ -17,4 +17,4 @@ $this->menu=array(
         }
     ?></h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model,'persona'=>$persona,'financiacion'=>$financiacion,)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model,'persona'=>$persona,'financiacion'=>$financiacion,'anio'=>$anio)); ?>

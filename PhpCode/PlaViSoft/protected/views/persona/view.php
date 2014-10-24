@@ -89,9 +89,9 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
                     $this->widget(
                             'bootstrap.widgets.TbButton',
                             array(
-                            'url'=>'index.php?r=cuota/admin&suscripcion_id='.$susc->id,
-                            'type' => 'primary',
-                            'label' => 'Suscripcion: '.$susc->financiacion->Descripcion
+                                'url'=>'index.php?r=cuota/admin&suscripcion_id='.$susc->id,
+                                'type' => 'primary',
+                                'label' => 'Suscripcion: '.$susc->financiacion->Descripcion."-".$susc->numero
                             )
                     ); 
 

@@ -5,8 +5,6 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 	
-	<p class="help-block">Los campos con <span class="required">*</span> son requeridos.</p>
-
 	<?php echo $form->errorSummary($model); ?>
         
 	<?php 
@@ -68,10 +66,39 @@
                 ?>	
 	 	</div>
 	 </div>
-	
-	<?php echo $form->textAreaRow($model,'Nota',array('class'=>'span5','col'=>3)); ?>
+
+	<div class="control-group">
+		<div class="control-label">
+			<?php echo $form->labelEx($model,'numero'); ?>
+		</div>
+		<div class="controls">
+		<?php	 
+                    echo $form->textField($model,'numero');
+                ?>	
+	 	</div>
+	 </div>
+
+	<div class="control-group">
+		<div class="control-label">
+                    <?php echo 'Mes'; ?>
+		</div>
+		<div class="controls">
+                    <?php echo CHtml::activeDropDownList($model,'mes', CHtml::listData(Mes::model()->findAll(), 'id', 'mes'), array('empty' => '--- Elegir Mes de Inicio de Suscripción ---')); ?>	
+	 	</div>
+	 </div>
+
+	<div class="control-group">
+		<div class="control-label">
+                    <?php echo 'Año'; ?>
+		</div>
+		<div class="controls">
+                    <?php echo CHtml::activeDropDownList($model,'anio', CHtml::listData($anio, 'id', 'Anio'), array('empty' => '--- Elegir Año de Inicio de Suscripción ---')); ?>	
+	 	</div>
+	 </div>
 
 
+        <?php echo $form->textAreaRow($model,'Nota',array('class'=>'span5','col'=>3)); ?>                    
+	 
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',

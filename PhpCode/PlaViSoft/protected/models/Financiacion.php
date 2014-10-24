@@ -118,7 +118,7 @@ class Financiacion extends CActiveRecord
 		return parent::model($className);
 	}
         
-        public function getFinanciacionByPersona($persona_id){
+        public function getFinanciacionByPersonaNoCargadas($persona_id){
             $sql = 
                 'SELECT * 
                 FROM financiacion f
@@ -133,6 +133,19 @@ class Financiacion extends CActiveRecord
                 )';
             return Financiacion::model()->findAllBySql($sql,array(':persona_id'=>$persona_id));
         }
+        
+        public function getFinanciacionByPersona($persona_id){
+            $sql = 
+                'SELECT * 
+                FROM financiacion f
+                WHERE 
+                EXISTS(
+                        Select 1 from persona p 
+                        where p.id = :persona_id and f.tipo_persona_id = p.tipo_persona_id  
+                )';
+            return Financiacion::model()->findAllBySql($sql,array(':persona_id'=>$persona_id));
+        }
+        
         
         public function getCantAsociados(){
             $sql = 

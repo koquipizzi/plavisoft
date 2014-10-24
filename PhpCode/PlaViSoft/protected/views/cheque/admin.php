@@ -51,6 +51,14 @@ $this->breadcrumbs=array(
                     'value' => 'banco.Banco',
                 ),                
             ),
+            'filters'=>array(
+                '',
+                '',
+                '', 
+                '', 
+                'filter-select', 
+            ),
+            
         )); 
     }    
 ?>

@@ -12,15 +12,22 @@
  * @property integer $financiacion_id
  * @property string $Nota
  * @property integer $estado_adjudicacion_id
+ * @property string $fecha_creacion
+ * @property integer $numero
  *
  * The followings are the available model relations:
- * @property Pago[] $pagos
- * @property Persona $persona
- * @property Financiacion $financiacion
+ * @property Cuota[] $cuotas
  * @property EstadoAdjudicacion $estadoAdjudicacion
+ * @property Financiacion $financiacion
+ * @property Persona $persona
  */
 class Suscripcion extends CActiveRecord
 {
+    
+        public $mes;
+        
+        public $anio;
+        
 	/**
 	 * @return string the associated database table name
 	 */
@@ -38,12 +45,12 @@ class Suscripcion extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('persona_id, financiacion_id, estado_adjudicacion_id', 'required'),
-			array('Activo, persona_id, Borrado, financiacion_id, estado_adjudicacion_id', 'numerical', 'integerOnly'=>true),
+			array('Activo, persona_id, Borrado, financiacion_id, estado_adjudicacion_id, numero', 'numerical', 'integerOnly'=>true),
 			array('Nota', 'length', 'max'=>255),
-			array('FechaAlta', 'safe'),
+			array('FechaAlta, fecha_creacion', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, FechaAlta, Activo, persona_id, Borrado, financiacion_id, Nota, estado_adjudicacion_id', 'safe', 'on'=>'search'),
+			array('id, FechaAlta, Activo, persona_id, Borrado, financiacion_id, Nota, estado_adjudicacion_id, fecha_creacion, numero', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,10 +62,10 @@ class Suscripcion extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			//'pagos' => array(self::HAS_MANY, 'Pago', 'suscripcion_id'),
-			'persona' => array(self::BELONGS_TO, 'Persona', 'persona_id'),
-			'financiacion' => array(self::BELONGS_TO, 'Financiacion', 'financiacion_id'),
+			'cuotas' => array(self::HAS_MANY, 'Cuota', 'suscripcion_id'),
 			'estadoAdjudicacion' => array(self::BELONGS_TO, 'EstadoAdjudicacion', 'estado_adjudicacion_id'),
+			'financiacion' => array(self::BELONGS_TO, 'Financiacion', 'financiacion_id'),
+			'persona' => array(self::BELONGS_TO, 'Persona', 'persona_id'),
 		);
 	}
 
@@ -76,6 +83,8 @@ class Suscripcion extends CActiveRecord
 			'financiacion_id' => 'Financiacion',
 			'Nota' => 'Nota',
 			'estado_adjudicacion_id' => 'Estado Adjudicacion',
+			'fecha_creacion' => 'Fecha Creacion',
+			'numero' => 'Numero',
 		);
 	}
 
@@ -105,6 +114,8 @@ class Suscripcion extends CActiveRecord
 		$criteria->compare('financiacion_id',$this->financiacion_id);
 		$criteria->compare('Nota',$this->Nota,true);
 		$criteria->compare('estado_adjudicacion_id',$this->estado_adjudicacion_id);
+		$criteria->compare('fecha_creacion',$this->fecha_creacion,true);
+		$criteria->compare('numero',$this->numero);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -121,7 +132,7 @@ class Suscripcion extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-	
+        
 	
 	public function beforeSave()
 	{
@@ -208,5 +219,6 @@ class Suscripcion extends CActiveRecord
                 return '$ '.Yii::app()->format->number($r);
             return '';
         }
+        
         
 }

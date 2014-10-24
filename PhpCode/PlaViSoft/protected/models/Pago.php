@@ -154,6 +154,11 @@ class Pago extends ActiveRecord
         public function getPersonaStr(){
             return $this->persona->Apellido.", ".$this->persona->Nombre;
         }
+        
+        
+        public function getNroPagoStr(){
+            return $this->talonario."-".$this->nro_formulario;
+        }
   
         
 }

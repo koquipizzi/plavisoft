@@ -1,9 +1,5 @@
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id),array('view','id'=>$data->id)); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('Nro_cheque')); ?>:</b>
 	<?php echo CHtml::encode($data->Nro_cheque); ?>
 	<br />
@@ -25,7 +21,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('banco_id')); ?>:</b>
-	<?php echo CHtml::encode($data->banco_id); ?>
+	<?php echo CHtml::encode($data->banco->Banco); ?>
 	<br />
 
 	<?php /*

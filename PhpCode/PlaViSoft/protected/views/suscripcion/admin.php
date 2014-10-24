@@ -3,24 +3,6 @@ $this->breadcrumbs=array(
 	'Suscripciones'=>array('index'),
 	'Administrar',
 );
-
-$this->menu=array(
-//	array('label'=>'Listar Suscripcion','url'=>array('index')),
-	array('label'=>'Nueva Suscripcion','url'=>array('create')),
-);
-
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('suscripcion-grid', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
 ?>
 
 <h1>Suscripciones</h1>
@@ -39,8 +21,20 @@ $('.search-form form').submit(function(){
                     'header' => 'Nombre',
                     'value' => 'persona.nombreCompleto',
                 ),                
-                'financiacion.Descripcion',
-                'estadoAdjudicacion.Descripcion',	
+                array(
+                    'header' => 'Tipo',
+                    'value' => 'financiacion.Descripcion',
+                ),                
+                array(
+                    'header' => 'Nro',
+                    'value' => 'numero',
+                ),                
+                array(
+                    'header' => 'Estado',
+                    'value' => 'estadoAdjudicacion.Descripcion',
+                ),                
+                
+                	
                 array(
                     'header' => 'Pagado',
                     'value' => 'totalPagado',
@@ -55,6 +49,7 @@ $('.search-form form').submit(function(){
             'filters'=>array(
                 '',
                 'filter-select', 
+                '', 
                 'filter-select', 
                 '', 
                 '', 

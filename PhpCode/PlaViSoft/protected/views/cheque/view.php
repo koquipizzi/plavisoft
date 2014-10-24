@@ -18,16 +18,16 @@ $this->menu=array(
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
 		'Nro_cheque',
 		'Cta_cte',
-		'valor',
-		'pago_id',
+		'valorStr',
 		'NombreTitular',
-		'banco_id',
+		'banco.Banco',
 		'FechaVencimiento',
 		'dadoA',
 		'dadoFecha',
 		'descripcion',
+		'pago.FechaPago',
+		'pago.NroPagoStr',            
 	),
 )); ?>
