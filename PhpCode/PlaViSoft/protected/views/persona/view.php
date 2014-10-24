@@ -9,7 +9,7 @@ $this->menu=array(
 		array('label'=>'Nueva Persona','url'=>array('create')),
 	//array('label'=>'Update Persona','url'=>array('update','id'=>$model->id)),
 	//array('label'=>'Delete Persona','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Administrar Persona','url'=>array('admin')),
+	array('label'=>'Administrar Personas','url'=>array('admin')),
 );
 ?>
 

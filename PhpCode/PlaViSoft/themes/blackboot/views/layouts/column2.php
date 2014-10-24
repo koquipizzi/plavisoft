@@ -10,7 +10,7 @@
         //array('label'=>'ANOTHER LIST HEADER'),
         array('label'=>'Personas', 'icon'=>'user', 'url'=>'index.php?r=persona/admin'),
         array('label'=>'Financiaciones', 'icon'=>'cog', 'url'=>'index.php?r=financiacion/admin'),
-        array('label'=>'Cheques', 'icon'=>'cog', 'url'=>'index.php?r=cheque/admin'),
+        array('label'=>'Cheques', 'icon'=>'barcode', 'url'=>'index.php?r=cheque/admin'),
        // array('label'=>'Adelantos', 'icon'=>'road', 'url'=>'index.php?r=adelanto/admin'),
      //   array('label'=>'Tipos de Cuotas', 'icon'=>'th-list', 'url'=>'index.php?r=tipocuota/admin'),
         array('label'=>'Ayuda', 'icon'=>'flag', 'url'=>'#'),
@@ -28,12 +28,19 @@
 			));
 			$this->endWidget();
 		?>
-		<br>
-		
-		<?php 
-				if(isset($this->susc)) 		
+
+		<?php //var_dump($this->id);
+				if(isset($this->susc) and ($this->id === "suscripcion")) 		
 		 			$this->widget('Stats', array(
 		 			'item'=>$this->susc,
+		 			'htmlOptions'=>array('class'=>'white'),
+					)); 
+		 ?>
+		 
+		 <?php 
+				if(isset($this->id) and ($this->id === "reportes")) 		
+		 			$this->widget('StatsTotal', array(
+		 			'item'=>$this,
 		 			'htmlOptions'=>array('class'=>'white'),
 					)); 
 		 ?>

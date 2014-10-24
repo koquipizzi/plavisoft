@@ -2,14 +2,13 @@
 /* @var $this ImputacionController */
 /* @var $model Imputacion */
 
-$this->breadcrumbs=array(
-	'Imputacions'=>array('index'),
-	'Manage',
-);
-
 $this->menu=array(
 	array('label'=>'Listar Imputaciones', 'url'=>array('index')),
 	//array('label'=>'Create Imputacion', 'url'=>array('create')),
+);
+
+$this->menu=array(
+	array('label'=>'Suscripción', 'url'=>array('cuota/admin&suscripcion_id='.$susc)),
 );
 
 ?>

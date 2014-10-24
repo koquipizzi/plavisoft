@@ -52,7 +52,7 @@
 						'htmlOptions'       => array( 'class' => 'nav' ),
 						'activeCssClass'    => 'active',
 						'items'=>array(
-							array('label'=>'Inicio', 'url'=>array('/site/index')),
+							array('label'=>'Inicio', 'url'=>array('/reportes')),
 							array('label'=>'Personas', 'url'=>array('/persona/admin')),
                                                         array('label'=>'Suscripción', 'url'=>array('/suscripcion/admin')),
                                                         array('label'=>'Financiación', 'url'=>array('/financiacion/admin')),

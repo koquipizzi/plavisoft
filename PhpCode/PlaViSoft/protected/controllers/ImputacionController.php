@@ -184,15 +184,16 @@ class ImputacionController extends Controller
                 $criteria->addSearchCondition('cuota_id', $cuota_id);
                 $imputaciones = Imputacion::model()->findAll($criteria);            
                 
-//                var_dump($cuota_id);
-//                die();
+				$modeloCuota=Cuota::model()->findByPk($cuota_id);
+                $susc_id= $modeloCuota->suscripcion->id;
+               
 //		$model=new Imputacion('search');
 //		$model->unsetAttributes();  // clear any default values
 //		if(isset($_GET['Imputacion']))
 //			$model->attributes=$_GET['Imputacion'];
 
 		$this->render('verImputacion',array(
-			'imputaciones'=>$imputaciones,
+			'imputaciones'=>$imputaciones, 'susc'=>$susc_id
 		));
 	}
 

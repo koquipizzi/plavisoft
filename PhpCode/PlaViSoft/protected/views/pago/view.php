@@ -8,10 +8,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Pagos', 'url'=>array('index')),
-	array('label'=>'Crear Nuevo Pago', 'url'=>array('create')),
-	array('label'=>'Borrar Pago', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Esta seguro en borrar este pago?')),
-);
+	array('label'=>'Listar Pagos', 'url'=>array('admin')),
+//	array('label'=>'Crear Nuevo Pago', 'url'=>array('create')),
+//	array('label'=>'Borrar Pago', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Esta seguro en borrar este pago?')),
+); 
 ?>
 
 <h1>Pago: <?php echo $model->talonario." - ".$model->nro_formulario; ?></h1>

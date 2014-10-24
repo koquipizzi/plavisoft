@@ -6,8 +6,6 @@ $this->breadcrumbs=array(
 ?>
 
 <h1>Suscripciones</h1>
-
-
 <?php	
 
     if(count($records)==0){

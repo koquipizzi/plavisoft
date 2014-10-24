@@ -9,13 +9,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Cuota', 'url'=>array('index')),
-	array('label'=>'Create Cuota', 'url'=>array('create')),
-	array('label'=>'View Cuota', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Cuota', 'url'=>array('admin')),
+	array('label'=>'Suscripción', 'url'=>array('cuota/admin&suscripcion_id='.$model->suscripcion->id)),
 );
 ?>
 
-<h1>Update Cuota <?php echo $model->id; ?></h1>
+<h1>Actualizar Cuota <?php echo $model->id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
