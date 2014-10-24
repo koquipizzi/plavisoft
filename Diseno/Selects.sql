@@ -151,3 +151,4 @@ where id = 11;
 insert into plavisoft.financiacion(descripcion, tipo_vivienda_id, tipo_persona_id, cant_cuotas, posicion)
 values('C', 3, 2, 24, 2);
 
+Select * from plavisoft.cheque;
