@@ -65,7 +65,7 @@ $this->menu=array(
                 'id':id,
                 'cheques_agregados':$("#cheques_agregados").val()
             },
-            'url':'/index.php?r=Pago/borrarCheque',
+            'url':'<?php echo Yii::app()->createAbsoluteUrl('Pago/borrarCheque')?>',
             'cache':false
         });
     }
@@ -88,7 +88,7 @@ $this->menu=array(
                 'valor':valor,
                 'suscripcion_id':suscripcion_id
             },
-            'url':'/index.php?r=Pago/valorChange',
+            'url':'<?php echo Yii::app()->createAbsoluteUrl('Pago/valorChange')?>',
             'cache':false
         });
     }
@@ -110,7 +110,7 @@ $this->menu=array(
                 'talonario':talonario,
                 'nro_formulario':nro_formulario
             },
-            'url':'/index.php?r=Pago/nro_formularioChange',
+            'url':'<?php echo Yii::app()->createAbsoluteUrl('Pago/nro_formularioChange')?>',
             'cache':false
         });
     }
