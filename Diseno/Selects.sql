@@ -152,3 +152,24 @@ insert into plavisoft.financiacion(descripcion, tipo_vivienda_id, tipo_persona_i
 values('C', 3, 2, 24, 2);
 
 Select * from plavisoft.cheque;
+
+
+
+
+Select extract(MONTH From current_date());
+
+Select 
+	c.mes_id, 
+	c.anio, 
+	c.saldada,
+	count(c.mes_id) as cantidad_cuotas, 
+	sum(c.valor) as total_valor
+	sum(c.saldo) as total_saldo
+From plavisoft.view_cuota_saldo c
+where
+	c.anio <= Year(current_date())
+	and c.mes_id < Month(current_date())
+Group by c.anio, c.mes_id, c.saldada
+Order By anio, mes_id;
+
+Select Month(current_date());

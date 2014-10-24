@@ -354,6 +354,7 @@ class SuscripcionController extends Controller
                     )
             );
             Yii::app()->end();            
-                        
         }
+        
+       
 }
