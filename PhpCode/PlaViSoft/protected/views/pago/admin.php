@@ -8,8 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Pago', 'url'=>array('index')),
-	array('label'=>'Create Pago', 'url'=>array('create')),
+	array('label'=>'Ir a Suscripción', 'url'=>array('index')),
+//	array('label'=>'Create Pago', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -24,6 +24,18 @@ $('.search-form form').submit(function(){
 	return false;
 });
 ");
+?>
+
+<?php
+/**
+ * Personalizando Menu de Creacion de Pago, Si la persona del pago esta seteado entonces actualiza menú
+ */
+$url = 'admin';
+$label = 'Ver Suscripciones';
+
+$this->menu=array(
+	array('label'=>$label, 'url'=>array("Persona/view&id=".$persona_id)),
+);
 ?>
 
 <h1>Listado de Pagos</h1>

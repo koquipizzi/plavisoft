@@ -452,8 +452,10 @@ class PagoController extends Controller
 	//		'model'=>$model,
 	//	));
 		$records=Pago::model()->findAll();
+				
+		$persona = $_GET['persona_id'];
 	    $this->render('admin',array(
-	        'records'=>$records,
+	        'records'=>$records,'persona_id'=>$persona
 	    )); 
 	 
 	}

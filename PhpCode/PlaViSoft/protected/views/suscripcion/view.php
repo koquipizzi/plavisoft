@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Suscripcions'=>array('index'),
+	'Suscripciones'=>array('index'),
 	$model->id,
 );
 
 $this->menu=array(
 	//array('label'=>'List Suscripcion','url'=>array('index')),
-	array('label'=>'Crear Suscripción','url'=>array('create')),
+//	array('label'=>'Crear Suscripción','url'=>array('create')),
 //	array('label'=>'Update Suscripcion','url'=>array('update','id'=>$model->id)),
 //	array('label'=>'Delete Suscripcion','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Administrar Suscripciones','url'=>array('admin')),
