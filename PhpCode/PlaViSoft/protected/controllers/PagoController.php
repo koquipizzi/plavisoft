@@ -443,14 +443,19 @@ class PagoController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Pago('search');
+	/*	$model=new Pago('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Pago']))
 			$model->attributes=$_GET['Pago'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
+*/
+	//	$this->render('admin',array(
+	//		'model'=>$model,
+	//	));
+		$records=Pago::model()->findAll();
+	    $this->render('admin',array(
+	        'records'=>$records,
+	    )); 
+	 
 	}
 
 	/**

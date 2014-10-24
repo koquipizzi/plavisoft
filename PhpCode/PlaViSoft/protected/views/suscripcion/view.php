@@ -18,11 +18,10 @@ $this->menu=array(
 
 <?php
 	//var_dump($records); //die();
-	echo "<strong>TOTAL: ".$total;
+	echo "<strong>TOTAL: ".$total."</strong><br />";
 	$resto = $total - $pagos;
-	echo " - <span style:'color:green;'>CANCELADO: ".$pagos."</span>";
-	echo " - <span style:'color:red;'>RESTANTE: ".$resto."</span></strong>";
-	
+	echo "<strong>CANCELADO: ".$pagos."</strong><br />";
+	echo "<strong>RESTANTE: ".$resto."</strong><br />";
 	
 $this->widget('ext.highcharts.HighchartsWidget', array(
    'options' => array(
@@ -36,8 +35,8 @@ $this->widget('ext.highcharts.HighchartsWidget', array(
                 'series' => array(array(
                         'type' => 'pie', 'name' => 'Total',
                         'data' => array(
-                                array('RESTO: $'.$resto, $resto),
-                                array('CANCELADO: $'.$pagos, $pagos)
+                               array('RESTO', $resto),
+                                array('CANCELADO', $pagos)
                         )
                 ))
         )
