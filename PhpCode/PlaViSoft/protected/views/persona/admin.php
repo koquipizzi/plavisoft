@@ -5,22 +5,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Persona','url'=>array('index')),
 	array('label'=>'Nueva Persona','url'=>array('create')),
 );
 
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('persona-grid', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
 ?>
 
 <h1>Personas - Socios y Adherentes</h1>
@@ -35,29 +22,14 @@ $('.search-form form').submit(function(){
                     'header' => 'Tipo',
                     'value' => 'tipoPersona.Descripcion',
                 ),                
-		'Apellido',
-		'Nombre',	
+		'nombreCompleto',
                 'Telefono',
 		'TelefonoCelular',
 		'DNI',
-              
-		/*
-		'IngresosMensuales',
-		'CantHijos',
-		'FechaAlta',
-		'Borrado',
-		'Socio',
-		'Nota',
-		'IdSocio',
-		*/
-	/*	array(
-			'class'=>'bootstrap.widgets.TbButtonColumn',
-		),*/
 	),
         
         'filters'=>array(
             'filter-select', // filter as select box
-            '',
             '',
             '',
             '', 

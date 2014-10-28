@@ -72,11 +72,13 @@ $this->menu=array(
     
     function valorChange(){
         var valor = $('#valorPago').val();
+        
         if(valor==0 || valor == ''){
             alert('Debe ingresar un valor a ser calculado');
             return;
         }
         var suscripcion_id = $('#suscripcion_id').val();
+        var tipo_imputacion = $('#imputar_saldo_cuota_siguiente').val();
         jQuery.ajax({
             'type':'POST',
             'async':false,
@@ -86,7 +88,8 @@ $this->menu=array(
             },
             'data':{
                 'valor':valor,
-                'suscripcion_id':suscripcion_id
+                'suscripcion_id':suscripcion_id,
+                'tipo_imputacion':tipo_imputacion
             },
             'url':'<?php echo Yii::app()->createAbsoluteUrl('Pago/valorChange')?>',
             'cache':false
@@ -165,7 +168,7 @@ $this->menu=array(
             <?php 
                 if(isset($suscripcion)){
                     echo $form->hiddenField($suscripcion, 'suscripcion_id', array('id'=>'suscripcion_id','value'=>$suscripcion->id));                  
-                    echo "Suscripción: <b>".$suscripcion->descripcionStr."</b>";
+                    echo "Suscripción: <b>".$suscripcion->nombreStr."</b>";
                 }
                 else{
                     echo "Error, se debe determinar la suscripción";
@@ -183,58 +186,108 @@ $this->menu=array(
                 echo $form->hiddenField($pago, 'ImporteLetras', array('hidden'=>true,'value'=>$cuota->valorLetras));
                 echo $form->hiddenField($imputacion, 'valor', array('hidden'=>true,'value'=>$cuota->valor));  
                 
-                echo "Suscripción: ".$cuota->suscripcion->descripcionStr."<br>";
                 echo "Cuota: ".$cuota->cuotaStr."<br>";
                 echo "Valor: ".$cuota->valorStr;
                 echo '</div>';
             }
             else{
-                echo '<div class="sectionEditable">';
-                echo $form->textFieldRow(
-                        $pago,'valor',
-                        array(
-                            'id'=>'valorPago',
-                            'class'=>'span5',
-                            'maxlength'=>10,
-                            'onChange'=>'js:valorChange();',
-                        )
-                ); 
-                $this->widget('bootstrap.widgets.TbButton', array(
-                    'buttonType'=>'link',
-                    'type'=>'info',
-                    'label'=>'Calcular Cuotas a Saldar',
-                    'url'=>'#',
-                    'htmlOptions' => array(
-                        'onClick'=>'js:valorChange();',
-                    ),
-                ));                 
-                echo '<div id="div_cuotas"></div>';
-                echo '</div>';
+        ?>
+                <div class="sectionEditable">
+                    <div class="control-group">
+                        <div class="control-label">
+                                <?php echo $form->labelEx($pago,'valor'); ?>
+                        </div>
+                        <div class="controls">
+        <?php
+                        echo $form->textField(
+                                $pago,'valor',
+                                array(
+                                    'id'=>'valorPago',
+                                    
+                                    'maxlength'=>10,
+                                    'onChange'=>'js:valorChange();',
+                                )
+                        );
+        ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+        <?php
+                        echo CHtml::activeDropDownList(
+                                $pago, 'imputar_saldo_cuota_siguiente', 
+                                CHtml::listData(
+                                    array(
+                                        array('id'=>1,'Descripcion'=>'Asignar Saldo a Ultima Cuota'),
+                                        array('id'=>2,'Descripcion'=>'Asignar Saldo a Próxima Cuota'),
+                                    ), 
+                                    'id', 'Descripcion'
+                                ),
+                                array(
+                                    'id'=>'imputar_saldo_cuota_siguiente',
+                                    'onChange'=>'js:valorChange();',
+                                )
+                        );
+        ?>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+        <?php
+                        $this->widget('bootstrap.widgets.TbButton', array(
+                            'buttonType'=>'link',
+                            'type'=>'info',
+                            'label'=>'Calcular Cuotas a Saldar',
+                            'url'=>'#',
+                            'htmlOptions' => array(
+                                'onClick'=>'js:valorChange();',
+                            ),
+                        ));                 
+        ?>
+                        <div id="div_cuotas"></div>                            
+                        </div>                        
+                    </div>                                                                        
+                </div>                                                
+        <?php
             }
         ?>
        
         <!-- ******************************** Talonario y Formulario *********************************** --> 
         <div class="sectionEditable">
-            <?php 
-                echo $form->textFieldRow(
-                        $pago,'talonario',
-                        array(
-                            'id'=>'talonario',
-                            'class'=>'span5',
-                            'maxlength'=>10
-                        )
-                ); 
-                echo $form->textFieldRow(
-                        $pago,'nro_formulario',
-                        array(
-                            'id'=>'nro_formulario',
-                            'class'=>'span5',
-                            'maxlength'=>10,
-                            'onkeyup'=>'js:nro_formularioChange();',
-                        )
-                ); 
-                echo '<div id="div_formulario_ok"></div>';
-            ?>
+            <div class="control-group">
+                <div class="control-label">
+                        <?php echo $form->labelEx($pago,'talonario'); ?>
+                </div>
+                <div class="controls">
+                    <?php	 
+                        echo $form->textField(
+                                $pago,'talonario',
+                                array(
+                                    'id'=>'talonario',
+                                    'maxlength'=>10
+                                )
+                        ); 
+                    ?>	
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="control-label">
+                        <?php echo $form->labelEx($pago,'nro_formulario'); ?>
+                </div>
+                <div class="controls">
+                    <?php 
+                        echo $form->textField(
+                                $pago,'nro_formulario',
+                                array(
+                                    'id'=>'nro_formulario',
+                                    'maxlength'=>10,
+                                    'onkeyup'=>'js:nro_formularioChange();',
+                                )
+                        ); 
+                    ?>
+                </div>
+                <div id="div_formulario_ok"></div>                                    
+            </div>
         </div>
         
         <!-- ******************************** Fecha de Pago y Descripcion *********************************** --> 
@@ -270,7 +323,6 @@ $this->menu=array(
         
         <!-- ******************************** Forma de Pago *********************************** -->         
         <div class="control-group">
-
 		<div class="controls_2">            
                         <?php echo $form->checkBoxListRow(
                                 $forma_pago_pago,

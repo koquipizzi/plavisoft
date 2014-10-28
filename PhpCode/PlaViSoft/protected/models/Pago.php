@@ -22,6 +22,8 @@
  */
 class Pago extends ActiveRecord
 {
+        public $imputar_saldo_cuota_siguiente = 1;
+    
 	/**
 	 * @return string the associated database table name
 	 */
@@ -80,8 +82,8 @@ class Pago extends ActiveRecord
 			'Descripcion' => 'Descripcion',
 			'NroDeposito' => 'Nro Deposito',
 			'persona_id' => 'Persona',
-			'talonario' => 'Talonario',
-			'nro_formulario' => 'Nro Formulario',
+			'talonario' => 'Nro. Talonario',
+			'nro_formulario' => 'Nro. Formulario',
                         'valorStr' => 'Valor',
                         'personaStr' => 'Persona',
 		);

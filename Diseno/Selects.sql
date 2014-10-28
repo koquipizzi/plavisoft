@@ -163,7 +163,8 @@ Select
 	c.anio, 
 	c.saldada,
 	count(c.mes_id) as cantidad_cuotas, 
-	sum(c.valor) as total_valor
+	sum(c.valor) as total_valor,
+	sum(c.totalSaldado) as total_saldado,
 	sum(c.saldo) as total_saldo
 From plavisoft.view_cuota_saldo c
 where
@@ -172,4 +173,3 @@ where
 Group by c.anio, c.mes_id, c.saldada
 Order By anio, mes_id;
 
-Select Month(current_date());
