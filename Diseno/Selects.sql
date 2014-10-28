@@ -173,3 +173,4 @@ where
 Group by c.anio, c.mes_id, c.saldada
 Order By anio, mes_id;
 
+Select id, max(convert(nro_formulario,UNSIGNED INTEGER)) as nro from plavisoft.pago;

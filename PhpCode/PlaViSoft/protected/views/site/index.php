@@ -23,7 +23,7 @@ should you have any questions.</p-->
     'heading'=>'PlaViSoft',
 )); ?>
  
-    <p>Bienvenidos al Sistema de Gestión de Viviendas Online de ADAMUCHOTA TANDIL.</p>
+    <p>Bienvenidos al Sistema de Gestión de Viviendas Online.</p>
     <p><?php $this->widget('bootstrap.widgets.TbButton', array(
     	'url'=>'index.php?r=site/login',
         'type'=>'primary',
