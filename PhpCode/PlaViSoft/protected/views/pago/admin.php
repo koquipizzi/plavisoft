@@ -54,7 +54,7 @@ $this->menu=array(
                 ),                
                array(
                     'header' => 'Valor',
-                    'value' => 'valor',
+                    'value' => 'valorStr',
                 ), 
                 array(
                     'header' => 'Talonario',
