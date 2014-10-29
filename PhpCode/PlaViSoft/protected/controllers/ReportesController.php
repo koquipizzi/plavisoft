@@ -31,12 +31,8 @@ class ReportesController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','admin','delete'),
 				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -149,18 +145,19 @@ class ReportesController extends Controller
 			'model'=>$model,
 		));*/
 		if (isset($tipo)){
-			if ($tipo == 1){
-				echo "1"; die();
-			}
-			else {
-			$records=Cheque::model()->findAll();
-		    $this->render('admin',array(
-		        'records'=>$records,
-		    )); 
-			}
-		} else
+                    if ($tipo == 1){
+                            echo "1"; die();
+                    }
+                    else {
+                        $records=Cheque::model()->findAll();
+                        $this->render('admin',array(
+                            'records'=>$records,
+                        )); 
+                    }
+		} 
+                else
 		{
-			$records=Cheque::model()->findAll();
+                    $records=Cheque::model()->findAll();
 		    $this->render('admin',array(
 		        'records'=>$records,
 		    )); 

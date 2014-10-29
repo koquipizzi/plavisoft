@@ -32,13 +32,13 @@ class PagoController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','admin','delete','print'),
 				'users'=>array('@'),
 			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete','saldar','print'),
-				'users'=>array('admin'),
-			),
+//			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+//				'actions'=>array('saldar'),
+//				'users'=>array('admin'),
+//			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
