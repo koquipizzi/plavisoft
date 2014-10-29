@@ -465,11 +465,11 @@ class PagoController extends Controller
                     throw new CHttpException(null,"Suscripción no valida");
                 }
                 elseif(array_key_exists('suscripcion_id', $_GET) && isset($_GET['suscripcion_id'])){
-                    hacer join con imputacion
-                    $criteria = new CDbCriteria;
-                    $criteria->addSearchCondition('persona_id', $_GET['persona_id']);
-                    $criteria->order = 'FechaPago asc';
-                    $records=Pago::model()->findAll($criteria);            
+//                    hacer join con imputacion
+//                    $criteria = new CDbCriteria;
+//                    $criteria->addSearchCondition('persona_id', $_GET['persona_id']);
+//                    $criteria->order = 'FechaPago asc';
+//                    $records=Pago::model()->findAll($criteria);            
                 }
 
                 else
