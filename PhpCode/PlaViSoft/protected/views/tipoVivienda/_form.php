@@ -11,7 +11,7 @@
 
 	<?php echo $form->textFieldRow($model,'Descripcion',array('class'=>'span5','maxlength'=>45)); ?>
 
-	<?php echo $form->textFieldRow($model,'Valor',array('class'=>'span5')); ?>
+	<?php echo $form->textFieldRow($model,'valor',array('class'=>'span5')); ?>
 
 	<?php echo $form->textFieldRow($model,'Nombre',array('class'=>'span5','maxlength'=>45)); ?>
 

@@ -171,22 +171,30 @@ class ImputacionController extends Controller
 	 */
 	public function actionVerImputacion()
 	{       
-                if(!array_key_exists('id', $_GET) || !isset($_GET['id'])){
+                $susc_id = NULL;
+                // Lista 1-N Imputaciones del pago
+                if(array_key_exists('pago_id', $_GET) && !isset($_GET['pago_id'])){
+                    throw new CHttpException(null,"Valor Pago Nulo");
+                }
+                elseif(array_key_exists('pago_id', $_GET) && isset($_GET['pago_id'])){
+                    $criteria = new CDbCriteria;
+                    $criteria->addSearchCondition('pago_id', $_GET['pago_id']);
+                    $imputaciones = Imputacion::model()->findAll($criteria);            
+                }
+                // Lista 1-N Imputaciones de la cuota
+                elseif(array_key_exists('cuota_id', $_GET) && !isset($_GET['cuota_id'])){
                     throw new CHttpException(null,"No se ha determinado Cuota");
                 }
-                $cuota_id = $_GET['id'];
-                
-                $criteria = new CDbCriteria;
-                $criteria->addSearchCondition('cuota_id', $cuota_id);
-                $imputaciones = Imputacion::model()->findAll($criteria);            
-                
-				$modeloCuota=Cuota::model()->findByPk($cuota_id);
-                $susc_id= $modeloCuota->suscripcion->id;
-               
-//		$model=new Imputacion('search');
-//		$model->unsetAttributes();  // clear any default values
-//		if(isset($_GET['Imputacion']))
-//			$model->attributes=$_GET['Imputacion'];
+                elseif(array_key_exists('cuota_id', $_GET) && isset($_GET['cuota_id'])){
+                    $cuota_id = $_GET['id'];
+
+                    $criteria = new CDbCriteria;
+                    $criteria->addSearchCondition('cuota_id', $cuota_id);
+                    $imputaciones = Imputacion::model()->findAll($criteria);            
+
+                    $modeloCuota=Cuota::model()->findByPk($cuota_id);
+                    $susc_id= $modeloCuota->suscripcion->id;
+                }
 
 		$this->render('verImputacion',array(
 			'imputaciones'=>$imputaciones, 'susc'=>$susc_id

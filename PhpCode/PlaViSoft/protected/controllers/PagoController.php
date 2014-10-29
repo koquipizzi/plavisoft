@@ -451,12 +451,34 @@ class PagoController extends Controller
 	//	$this->render('admin',array(
 	//		'model'=>$model,
 	//	));
-		$records=Pago::model()->findAll();
+                // Lista 1-N Imputaciones del pago
+                if(array_key_exists('persona_id', $_GET) && !isset($_GET['persona_id'])){
+                    throw new CHttpException(null,"Persona no valida");
+                }
+                elseif(array_key_exists('persona_id', $_GET) && isset($_GET['persona_id'])){
+                    $criteria = new CDbCriteria;
+                    $criteria->addSearchCondition('persona_id', $_GET['persona_id']);
+                    $criteria->order = 'FechaPago asc';
+                    $records=Pago::model()->findAll($criteria);            
+                }
+                elseif(array_key_exists('suscripcion_id', $_GET) && !isset($_GET['suscripcion_id'])){
+                    throw new CHttpException(null,"Suscripción no valida");
+                }
+                elseif(array_key_exists('suscripcion_id', $_GET) && isset($_GET['suscripcion_id'])){
+                    hacer join con imputacion
+                    $criteria = new CDbCriteria;
+                    $criteria->addSearchCondition('persona_id', $_GET['persona_id']);
+                    $criteria->order = 'FechaPago asc';
+                    $records=Pago::model()->findAll($criteria);            
+                }
+
+                else
+                    $records=Pago::model()->findAll();
 				
-		$persona = $_GET['persona_id'];
-	    $this->render('admin',array(
-	        'records'=>$records,'persona_id'=>$persona
-	    )); 
+                $persona = $_GET['persona_id'];
+                $this->render('admin',array(
+                    'records'=>$records,'persona_id'=>$persona
+                )); 
 	 
 	}
 

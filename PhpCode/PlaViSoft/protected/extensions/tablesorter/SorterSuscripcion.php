@@ -14,7 +14,7 @@ class SorterSuscripcion extends Sorter
             $del_data='"'.$data->id.'"';            
             $asentar_pago_url='"'.Yii::app()->createAbsoluteUrl('pago/create',array('suscripcion_id'=>$data->id)).'"';
             $ver_cuotas_url  ='"'.Yii::app()->createAbsoluteUrl('cuota/admin',array('suscripcion_id'=>$data->id)).'"';
-            $ver_pagos_url   ='"'.Yii::app()->createAbsoluteUrl('pago/admin' ,array('persona_id'=>$data->persona_id)).'"';            
+            $ver_pagos_url   ='"'.Yii::app()->createAbsoluteUrl('pago/admin' ,array('suscripcion_id'=>$data->id)).'"';            
             //View, Edit, Delete Icons (bootstrap)
             $r = "
                 <td>  

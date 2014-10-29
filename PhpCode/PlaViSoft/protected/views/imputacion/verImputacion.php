@@ -2,15 +2,11 @@
 /* @var $this ImputacionController */
 /* @var $model Imputacion */
 
-$this->menu=array(
-	array('label'=>'Listar Imputaciones', 'url'=>array('index')),
-	//array('label'=>'Create Imputacion', 'url'=>array('create')),
-);
-
-$this->menu=array(
-	array('label'=>'Suscripción', 'url'=>array('cuota/admin&suscripcion_id='.$susc)),
-);
-
+if(isset($susc)){
+    $this->menu=array(
+            array('label'=>'Suscripción', 'url'=>array('cuota/admin&suscripcion_id='.$susc)),
+    );
+}
 ?>
 
 <h1>Imputaciones</h1>

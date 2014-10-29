@@ -11,7 +11,7 @@ class SorterCuota extends Sorter
             $edit_url=Yii::app()->createAbsoluteUrl('Cuota/update',array('id'=>$data->id));
             //$asentar_pago_url=Yii::app()->createAbsoluteUrl('pago/saldar',array('cuota_id'=>$data->id));
             $asentar_pago_url=Yii::app()->createAbsoluteUrl('pago/create',array('cuota_id'=>$data->id));
-            $ver_imputacion_url=Yii::app()->createAbsoluteUrl('imputacion/verImputacion',array('id'=>$data->id));    
+            $ver_imputacion_url=Yii::app()->createAbsoluteUrl('imputacion/verImputacion',array('cuota_id'=>$data->id));    
             //View, Edit, Delete Icons (bootstrap)
             $r = "
                 <td>  
