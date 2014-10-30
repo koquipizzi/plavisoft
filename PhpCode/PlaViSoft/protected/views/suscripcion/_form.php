@@ -16,7 +16,7 @@
                     'numero':jQuery('#nro_suscripcion').val(),
                     'financiacion':jQuery('#financiacion_id').val(),
                 },
-                'url':'/index.php?r=Suscripcion/numeroChange',
+                'url':'".Yii::app()->createAbsoluteUrl('Suscripcion/numeroChange')."',
                 'cache':false
             });
         }

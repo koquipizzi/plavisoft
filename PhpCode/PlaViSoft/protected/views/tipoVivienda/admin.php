@@ -14,7 +14,7 @@ $this->breadcrumbs=array(
 	  'columns'=>array(
 		//'id',
 		'Nombre',
-		'valor',
+		'valorStr',
                 'cantidad',
                 'Descripcion',
 		/*
