@@ -163,7 +163,8 @@ class Persona extends CActiveRecord
 	}
         
         public function getNombreCompleto(){
-            return $this->Apellido.(!isset($this->Nombre)||(trim($this->Nombre)=="")?", ".$this->Nombre:"");
+            $nombre = (!isset($this->Nombre)||(trim($this->Nombre)=="")?"":", ".$this->Nombre);
+            return $this->Apellido.$nombre;
         }
         
         public function getSuscripcionesCantidad(){
