@@ -19,10 +19,11 @@
  * @property string $Nota
  * @property integer $IdSocio
  * @property integer $tipo_persona_id
- *
- * The followings are the available model relations:
- * @property TipoPersona $tipoPersona
- * @property Suscripcion[] $suscripcions
+ * @property string $Apellido2
+ * @property string $Nombre2
+ * @property string $CUIT1
+ * @property string $CUIT2
+ * @property string $DNI2
  */
 class Persona extends CActiveRecord
 {
@@ -42,18 +43,18 @@ class Persona extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('tipo_persona_id', 'required'),
+			array('Telefono, TelefonoCelular, tipo_persona_id', 'required'),
 			array('IngresosMensuales, CantHijos, IdSocio, tipo_persona_id', 'numerical', 'integerOnly'=>true),
-			array('Apellido, Domicilio', 'length', 'max'=>100),
-			array('Nombre, Mail, Borrado, Telefono, TelefonoCelular', 'length', 'max'=>45),
-			array('DNI', 'length', 'max'=>10),
+			array('Apellido, Domicilio, Apellido2', 'length', 'max'=>100),
+			array('Nombre, Mail, Borrado, Nombre2, CUIT2', 'length', 'max'=>45),
+			array('DNI, DNI2', 'length', 'max'=>10),
+			array('Telefono, TelefonoCelular', 'length', 'max'=>50),
 			array('Nota', 'length', 'max'=>255),
-			array('FechaAlta','default',
-              'value'=>new CDbExpression('NOW()'),
-              'setOnEmpty'=>false,'on'=>'insert'),
+			array('CUIT1', 'length', 'max'=>15),
+			array('FechaAlta','default', 'value'=>new CDbExpression('NOW()'), 'setOnEmpty'=>false,'on'=>'insert'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, Apellido, Nombre, Domicilio, DNI, Mail, Telefono, TelefonoCelular, IngresosMensuales, CantHijos, FechaAlta, Borrado, Nota, IdSocio, tipo_persona_id', 'safe', 'on'=>'search'),
+			array('id, Apellido, Nombre, Domicilio, DNI, Mail, Telefono, TelefonoCelular, IngresosMensuales, CantHijos, FechaAlta, Borrado, Nota, IdSocio, tipo_persona_id, Apellido2, Nombre2, CUIT1, CUIT2, DNI2', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -91,6 +92,11 @@ class Persona extends CActiveRecord
 			'Nota' => 'Nota',
 			'IdSocio' => 'Id Socio',
 			'tipo_persona_id' => 'Tipo Persona',
+			'Apellido2' => 'Apellido Cotitular',
+			'Nombre2' => 'Nombre Cotitular',
+			'CUIT1' => 'CUIT',
+			'CUIT2' => 'CUIT Cotitular',
+			'DNI2' => 'Dni Cotitular',
 		);
 	}
 
@@ -120,13 +126,18 @@ class Persona extends CActiveRecord
 		$criteria->compare('Mail',$this->Mail,true);
 		$criteria->compare('Telefono',$this->Telefono,true);
 		$criteria->compare('TelefonoCelular',$this->TelefonoCelular,true);
-		$criteria->compare('IngresosMensuales',$this->IngresosMensules);
+		$criteria->compare('IngresosMensuales',$this->IngresosMensuales);
 		$criteria->compare('CantHijos',$this->CantHijos);
 		$criteria->compare('FechaAlta',$this->FechaAlta,true);
 		$criteria->compare('Borrado',$this->Borrado,true);
 		$criteria->compare('Nota',$this->Nota,true);
 		$criteria->compare('IdSocio',$this->IdSocio);
 		$criteria->compare('tipo_persona_id',$this->tipo_persona_id);
+		$criteria->compare('Apellido2',$this->Apellido2,true);
+		$criteria->compare('Nombre2',$this->Nombre2,true);
+		$criteria->compare('CUIT1',$this->CUIT1,true);
+		$criteria->compare('CUIT2',$this->CUIT2,true);
+		$criteria->compare('DNI2',$this->DNI2,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -147,7 +158,7 @@ class Persona extends CActiveRecord
 	public function getNombreDNI()
 	{
             return $this->Apellido.", ".$this->Nombre.($this->DNI!=NULL?" (DNI: ".$this->DNI.")":"");
-	} 
+}
 	
 	public function getValoresNulos($valor)
 	{
@@ -165,6 +176,11 @@ class Persona extends CActiveRecord
         public function getNombreCompleto(){
             $nombre = (!isset($this->Nombre)||(trim($this->Nombre)=="")?"":", ".$this->Nombre);
             return $this->Apellido.$nombre;
+        }
+
+        public function getNombreCompletoCotitular(){
+            $nombre = (!isset($this->Nombre2)||(trim($this->Nombre2)=="")?"":", ".$this->Nombre2);
+            return $this->Apellido2.$nombre;
         }
         
         public function getSuscripcionesCantidad(){

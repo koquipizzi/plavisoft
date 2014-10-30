@@ -16,9 +16,19 @@ $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 
 	<?php echo $form->textFieldRow($model,'Nombre',array('class'=>'span5','maxlength'=>45)); ?>
 
-	<?php echo $form->textFieldRow($model,'Domicilio',array('class'=>'span5','maxlength'=>100)); ?>
-
 	<?php echo $form->textFieldRow($model,'DNI',array('class'=>'span5','maxlength'=>10)); ?>
+        
+	<?php echo $form->textFieldRow($model,'CUIT1',array('class'=>'span5','maxlength'=>15)); ?>        
+        
+	<?php echo $form->textFieldRow($model,'Apellido2',array('class'=>'span5','maxlength'=>100)); ?>
+
+	<?php echo $form->textFieldRow($model,'Nombre2',array('class'=>'span5','maxlength'=>45)); ?>
+        
+	<?php echo $form->textFieldRow($model,'DNI2',array('class'=>'span5','maxlength'=>10)); ?>        
+        
+	<?php echo $form->textFieldRow($model,'CUIT2',array('class'=>'span5','maxlength'=>15)); ?>                
+
+	<?php echo $form->textFieldRow($model,'Domicilio',array('class'=>'span5','maxlength'=>100)); ?>
 
 	<?php echo $form->textFieldRow($model,'Mail',array('class'=>'span5','maxlength'=>45, 'prepend'=>'@')); ?>
 	

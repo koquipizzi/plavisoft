@@ -21,27 +21,29 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 	'data'=>$model,
 	'attributes'=>array(
 		/*'id',*/
-		'Apellido',
-		'Nombre',
-		'Domicilio',
-		'DNI',
-		'Mail',
+		'NombreCompleto',
+		'CUIT1',
+		'DNI',            
 		array(
-                            'name' => 'CantHijos',
-                            'value' => $model->getValoresNulos($model->CantHijos),
-               		),
+                        'name' => 'Nombre Cotitular',
+                        'value' => $model->getValoresNulos($model->NombreCompletoCotitular),
+                ),
+		'CUIT2',
+		'DNI2',            
+		'Domicilio',
+		'Mail',
 		/*'Borrado',*/
 		array(
-                            'name' => 'FechaAlta',
-                            'value' => Yii::app()->dateFormatter->format("dd-MM-yyyy", strtotime('$data->FechaAlta')),
+                        'name' => 'FechaAlta',
+                        'value' => Yii::app()->dateFormatter->format("dd-MM-yyyy", strtotime('$data->FechaAlta')),
                     ),
                 array(
-                            'name' => 'IngresosMensuales',
-                            'value' => $model->getValoresNulos($model->IngresosMensuales),
+                        'name' => 'IngresosMensuales',
+                        'value' => $model->getValoresNulos($model->IngresosMensuales),
                     ),
                 array( 
-                            'name' => 'tipo_persona_id',
-                            'value' => $model->tipoPersona->Descripcion//$model->getTipoPersona($model->tipo_persona_id),
+                        'name' => 'tipo_persona_id',
+                        'value' => $model->tipoPersona->Descripcion//$model->getTipoPersona($model->tipo_persona_id),
                     ),
                 array(
                     'name'=>'IdSocio',
