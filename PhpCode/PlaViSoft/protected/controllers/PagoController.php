@@ -118,7 +118,12 @@ class PagoController extends Controller
         }
         
         
-        private function calcularCuotas($valor, $suscripcion_id){
+        private function calcularCuotas($valor, $suscripcion_id, $idTipoCalculoCuota = PagoCalculoCuota::TIPO_DEFAUT){
+            
+                $calculo = PagoCalculoCuota::getTipoCalculo($idTipoCalculoCuota);
+                $cuotas = $calculo->calcularCuotas();
+                var_dump($cuotas);
+                die();
             
                 $resto = 0;
                 $cuotas = array();                
@@ -182,12 +187,17 @@ class PagoController extends Controller
             $valor = 0;
             $cuotas = NULL;
             
-            if(array_key_exists('valor', $_POST)&&array_key_exists('suscripcion_id', $_POST)){
+            if(
+                    array_key_exists('valor', $_POST)&&
+                    array_key_exists('suscripcion_id', $_POST)&&
+                    array_key_exists('idTipoCalculoCuota', $_POST)
+            ){
                 
                 $valor = Yii::app()->format->unformatNumber($_POST['valor']);
                 $suscripcion_id = $_POST['suscripcion_id'];
+                $idTipoCalculoCuota = $_POST['idTipoCalculoCuota'];
                 
-                $cuotas = $this->calcularCuotas($valor, $suscripcion_id);
+                $cuotas = $this->calcularCuotas($valor, $suscripcion_id, $idTipoCalculoCuota);
                 
             }//if parametros $_POST                
             
@@ -238,6 +248,7 @@ ini_set("display_errors", 1);
                 $forma_pago_contado = new FormaPagoContado;
                 $forma_pago_cheque = new FormaPagoCheque;
                 $forma_pago_deposito = new FormaPagoDeposito;
+                $tipoCalculo = new PagoCalculoCuota;
                 $cheque = new Cheque;
                 $suscripcion = NULL;
                 $persona = NULL;                
@@ -398,6 +409,7 @@ ini_set("display_errors", 1);
                         'cheque'=>$cheque,
                         'forma_pago_deposito'=>$forma_pago_deposito,
                         'ultimoPago'=>$ultimoPago,
+                        'tipoCalculo' => $tipoCalculo,
 		));                
 	}
 

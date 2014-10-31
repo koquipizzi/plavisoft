@@ -25,7 +25,7 @@
 					        'plotBackgroundColor' => '#ffffff',
 					        'plotBorderWidth' => null,
 					        'plotShadow' => false,
-					        'width' => 250,
+					        'width' => 150,
 					      ),
 		                'series' => array(array(
 		                        'type' => 'pie', 'name' => 'Total',
