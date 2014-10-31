@@ -455,17 +455,9 @@ ini_set("display_errors", 1);
 	 */
 	public function actionAdmin()
 	{
-	/*	$model=new Pago('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Pago']))
-			$model->attributes=$_GET['Pago'];
-*/
-	//	$this->render('admin',array(
-	//		'model'=>$model,
-	//	));
-                // Lista 1-N Imputaciones del pago
                 $persona = NULL;
                 $records = array();
+                $suscripcion = NULL;
                 
                 if(array_key_exists('persona_id', $_GET) && !isset($_GET['persona_id'])){
                     throw new CHttpException(null,"Persona no valida");
@@ -481,11 +473,18 @@ ini_set("display_errors", 1);
                     throw new CHttpException(null,"Suscripción no valida");
                 }
                 elseif(array_key_exists('suscripcion_id', $_GET) && isset($_GET['suscripcion_id'])){
-//                    hacer join con imputacion
-//                    $criteria = new CDbCriteria;
-//                    $criteria->addSearchCondition('persona_id', $_GET['persona_id']);
-//                    $criteria->order = 'FechaPago asc';
-//                    $records=Pago::model()->findAll($criteria);            
+                    $suscripcion = $_GET['suscripcion_id'];
+                    $imputacionTable = Imputacion::model()->tableName();
+                    $cuotaTable = Cuota::model()->tableName();
+                            
+                    $criteria = new CDbCriteria;
+                        $criteria->join = " 
+                            join ".$imputacionTable." i on i.pago_id = t.id 
+                            join ".$cuotaTable." c on c.id = i.cuota_id 
+                        ";
+                        $criteria->addSearchCondition('c.suscripcion_id', $_GET['suscripcion_id']);
+                    
+                    $records=Pago::model()->findAll($criteria);            
                 }
 
                 else
@@ -493,7 +492,9 @@ ini_set("display_errors", 1);
 				
                 
                 $this->render('admin',array(
-                    'records'=>$records,'persona_id'=>$persona
+                    'records'=>$records,
+                    'persona_id'=>$persona, 
+                    'suscripcion_id'=>$suscripcion
                 )); 
 	 
 	}

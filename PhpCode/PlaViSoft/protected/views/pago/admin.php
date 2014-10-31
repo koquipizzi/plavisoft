@@ -7,23 +7,6 @@ $this->breadcrumbs=array(
 	'Manage',
 );
 
-$this->menu=array(
-	array('label'=>'Ir a Suscripción', 'url'=>array('index')),
-//	array('label'=>'Create Pago', 'url'=>array('create')),
-);
-
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#pago-grid').yiiGridView('update', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
 ?>
 
 <?php
@@ -38,6 +21,11 @@ if(isset($persona_id)){
             array('label'=>$label, 'url'=>array("Persona/view&id=".$persona_id)),
     );
 }
+elseif(isset($suscripcion_id)){
+    $this->menu=array(
+            array('label'=>'Ir a Suscripción', 'url'=>array("cuota/admin&suscripcion_id=".$suscripcion_id)),
+    );
+} 
 ?>
 
 <h1>Listado de Pagos</h1>

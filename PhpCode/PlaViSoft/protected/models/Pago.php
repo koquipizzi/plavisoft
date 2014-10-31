@@ -167,6 +167,10 @@ class Pago extends ActiveRecord
         public function getNroPagoStr(){
             return $this->talonario."-".$this->nro_formulario;
         }
+        
+        public function getCuotasSuscripcion(){
+            
+        }
   
         
 }
