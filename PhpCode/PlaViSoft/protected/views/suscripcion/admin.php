@@ -27,8 +27,6 @@ $this->breadcrumbs=array(
                     'header' => 'Estado',
                     'value' => 'estadoAdjudicacion.Descripcion',
                 ),                
-                
-                	
                 array(
                     'header' => 'Pagado',
                     'value' => 'totalPagado',

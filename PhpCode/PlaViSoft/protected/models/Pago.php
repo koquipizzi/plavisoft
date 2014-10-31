@@ -13,11 +13,13 @@
  * @property integer $persona_id
  * @property string $talonario
  * @property string $nro_formulario
+ * @property string $FechaAlta
+ * @property integer $Borrado
  *
  * The followings are the available model relations:
  * @property Cheque[] $cheques
  * @property FormaPago[] $formaPagos
- * @property Imputacion $imputacion
+ * @property Imputacion[] $imputacions
  * @property Persona $persona
  */
 class Pago extends ActiveRecord
@@ -41,16 +43,16 @@ class Pago extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('ImporteLetras, persona_id', 'required'),
-			array('persona_id', 'numerical', 'integerOnly'=>true),
+			array('persona_id, Borrado', 'numerical', 'integerOnly'=>true),
 			array('valor', 'length', 'max'=>15),
 			array('ImporteLetras, Descripcion', 'length', 'max'=>255),
 			array('NroDeposito', 'length', 'max'=>20),
 			array('talonario', 'length', 'max'=>4),
 			array('nro_formulario', 'length', 'max'=>8),
-			array('FechaPago', 'safe'),
+			array('FechaPago, FechaAlta', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, FechaPago, valor, ImporteLetras, Descripcion, NroDeposito, persona_id, talonario, nro_formulario', 'safe', 'on'=>'search'),
+			array('id, FechaPago, valor, ImporteLetras, Descripcion, NroDeposito, persona_id, talonario, nro_formulario, FechaAlta, Borrado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -86,6 +88,8 @@ class Pago extends ActiveRecord
 			'nro_formulario' => 'Nro. Formulario',
                         'valorStr' => 'Valor',
                         'personaStr' => 'Persona',
+			'FechaAlta' => 'Fecha Alta',
+			'Borrado' => 'Borrado',
 		);
 	}
 
@@ -116,6 +120,8 @@ class Pago extends ActiveRecord
 		$criteria->compare('persona_id',$this->persona_id);
 		$criteria->compare('talonario',$this->talonario,true);
 		$criteria->compare('nro_formulario',$this->nro_formulario,true);
+		$criteria->compare('FechaAlta',$this->FechaAlta,true);
+		$criteria->compare('Borrado',$this->Borrado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -137,7 +143,7 @@ class Pago extends ActiveRecord
 	{
                 $this->FechaPago = Yii::app()->format->date($this->FechaPago);
 		return parent::afterFind();
-	}       
+}
         
         public function getValorStr(){
                 return "$ ".Yii::app() -> format -> number($this -> valor);

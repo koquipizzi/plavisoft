@@ -33,14 +33,15 @@ $('.search-form form').submit(function(){
 $url = 'admin';
 $label = 'Ver Suscripciones';
 
-$this->menu=array(
-	array('label'=>$label, 'url'=>array("Persona/view&id=".$persona_id)),
-);
+if(isset($persona_id)){
+    $this->menu=array(
+            array('label'=>$label, 'url'=>array("Persona/view&id=".$persona_id)),
+    );
+}
 ?>
 
 <h1>Listado de Pagos</h1>
 <?php	
-
     if(count($records)==0){
         echo "No existen pagos registrados";
     }

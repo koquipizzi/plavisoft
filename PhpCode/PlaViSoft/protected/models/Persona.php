@@ -15,7 +15,7 @@
  * @property integer $IngresosMensuales
  * @property integer $CantHijos
  * @property string $FechaAlta
- * @property string $Borrado
+ * @property integer $Borrado
  * @property string $Nota
  * @property integer $IdSocio
  * @property integer $tipo_persona_id
@@ -44,9 +44,9 @@ class Persona extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('Telefono, TelefonoCelular, tipo_persona_id', 'required'),
-			array('IngresosMensuales, CantHijos, IdSocio, tipo_persona_id', 'numerical', 'integerOnly'=>true),
+			array('Borrado, IngresosMensuales, CantHijos, IdSocio, tipo_persona_id', 'numerical', 'integerOnly'=>true),
 			array('Apellido, Domicilio, Apellido2', 'length', 'max'=>100),
-			array('Nombre, Mail, Borrado, Nombre2, CUIT2', 'length', 'max'=>45),
+			array('Nombre, Mail, Nombre2, CUIT2', 'length', 'max'=>45),
 			array('DNI, DNI2', 'length', 'max'=>10),
 			array('Telefono, TelefonoCelular', 'length', 'max'=>50),
 			array('Nota', 'length', 'max'=>255),
@@ -68,6 +68,7 @@ class Persona extends CActiveRecord
 		return array(
 			'tipoPersona' => array(self::BELONGS_TO, 'TipoPersona', 'tipo_persona_id'),
 			'suscripcions' => array(self::HAS_MANY, 'Suscripcion', 'persona_id'),
+                        'pagos' => array(self::HAS_MANY, 'Pago', 'persona_id'),
 		);
 	}
 
@@ -129,7 +130,7 @@ class Persona extends CActiveRecord
 		$criteria->compare('IngresosMensuales',$this->IngresosMensuales);
 		$criteria->compare('CantHijos',$this->CantHijos);
 		$criteria->compare('FechaAlta',$this->FechaAlta,true);
-		$criteria->compare('Borrado',$this->Borrado,true);
+		$criteria->compare('Borrado',$this->Borrado);
 		$criteria->compare('Nota',$this->Nota,true);
 		$criteria->compare('IdSocio',$this->IdSocio);
 		$criteria->compare('tipo_persona_id',$this->tipo_persona_id);
@@ -186,5 +187,16 @@ class Persona extends CActiveRecord
         public function getSuscripcionesCantidad(){
             return count($this->suscripcions);
         }
+        
+        public function getExistePagos() {
+            $r = FALSE;
+            $result = $this->pagos;
+
+            if(is_array($result)&&(count($result)>0))
+                $r = TRUE;
+
+            return $r;
+        }
+        
 	
 }

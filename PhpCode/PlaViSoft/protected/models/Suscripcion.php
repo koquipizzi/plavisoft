@@ -223,6 +223,28 @@ class Suscripcion extends CActiveRecord
                 return '$ '.Yii::app()->format->number($r);
             return '';
         }
+        
+        public function getExistePagos() {
+            $r = FALSE;
+            $sql = '
+                SELECT 1 as existe
+                FROM imputacion i 
+                JOIN cuota c ON i.cuota_id = c.id
+                WHERE 
+                    c.suscripcion_id = :suscripcion_id
+                LIMIT 1    
+            ';
+
+            $command = Yii::app()->db->createCommand($sql);
+            $command->bindValue(':suscripcion_id',$this->id);
+            $result = $command->queryAll();
+
+            if(is_array($result)&&  array_key_exists(0, $result)&&  array_key_exists('existe', $result[0]))
+                $r = $result[0]['existe'] == 1;
+
+            return $r;
+        }
+        
 
         
         

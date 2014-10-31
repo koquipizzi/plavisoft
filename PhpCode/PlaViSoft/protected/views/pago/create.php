@@ -254,6 +254,22 @@ $this->menu=array(
        
         <!-- ******************************** Talonario y Formulario *********************************** --> 
         <div class="sectionEditable">
+            <?php
+    //var_dump($ultimoPago);
+    //die();
+                if( isset($ultimoPago) && $ultimoPago){
+            ?>
+            <div>
+                <div>
+                    Ultimo Pago Cargado<br>
+                    Número: <?php echo $ultimoPago->nroPagoStr ?><br>
+                    Persona: <?php echo $ultimoPago->persona->nombreCompleto ?>
+                </div>
+            </div>    
+            <?php        
+                }
+            ?>
+
             <div class="control-group">
                 <div class="control-label">
                         <?php echo $form->labelEx($pago,'talonario'); ?>
@@ -289,6 +305,7 @@ $this->menu=array(
                 <div id="div_formulario_ok"></div>                                    
             </div>
         </div>
+        
         
         <!-- ******************************** Fecha de Pago y Descripcion *********************************** --> 
         <div class="sectionEditable">

@@ -229,9 +229,9 @@ class PagoController extends Controller
 	 */
 	public function actionCreate()
 	{
-//error_reporting(E_ALL);
-//ini_set("display_errors", 1); 
-//                    
+error_reporting(E_ALL);
+ini_set("display_errors", 1); 
+                    
 		$pago=new Pago;
                 $imputacion = new Imputacion;
                 $forma_pago_pago = new FormaPagoPago;
@@ -374,6 +374,17 @@ class PagoController extends Controller
                         throw new CHttpException(null,'Intenta crear un pago con una persona que no existe');
                     }
                 }
+                $criteria = new CDbCriteria;
+                    $criteria->order = 'FechaAlta desc';
+                    $criteria->limit = 1;
+                $ultimoPago = Pago::model()->findAll($criteria);
+                if(count($ultimoPago) == 0){
+                    $ultimoPago = NULL;
+                }
+                else{
+                    $ultimoPago = $ultimoPago[0];
+                }
+
                 
 		$this->render('create',array(
 			'pago'=>$pago,
@@ -386,6 +397,7 @@ class PagoController extends Controller
                         'forma_pago_cheque'=>$forma_pago_cheque,
                         'cheque'=>$cheque,
                         'forma_pago_deposito'=>$forma_pago_deposito,
+                        'ultimoPago'=>$ultimoPago,
 		));                
 	}
 
@@ -452,14 +464,18 @@ class PagoController extends Controller
 	//		'model'=>$model,
 	//	));
                 // Lista 1-N Imputaciones del pago
+                $persona = NULL;
+                $records = array();
+                
                 if(array_key_exists('persona_id', $_GET) && !isset($_GET['persona_id'])){
                     throw new CHttpException(null,"Persona no valida");
                 }
                 elseif(array_key_exists('persona_id', $_GET) && isset($_GET['persona_id'])){
+                    $persona = $_GET['persona_id'];
                     $criteria = new CDbCriteria;
                     $criteria->addSearchCondition('persona_id', $_GET['persona_id']);
                     $criteria->order = 'FechaPago asc';
-                    $records=Pago::model()->findAll($criteria);            
+                    $records=Pago::model()->findAll($criteria); 
                 }
                 elseif(array_key_exists('suscripcion_id', $_GET) && !isset($_GET['suscripcion_id'])){
                     throw new CHttpException(null,"Suscripción no valida");
@@ -475,7 +491,7 @@ class PagoController extends Controller
                 else
                     $records=Pago::model()->findAll();
 				
-                $persona = $_GET['persona_id'];
+                
                 $this->render('admin',array(
                     'records'=>$records,'persona_id'=>$persona
                 )); 

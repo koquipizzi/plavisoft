@@ -186,7 +186,7 @@ class ImputacionController extends Controller
                     throw new CHttpException(null,"No se ha determinado Cuota");
                 }
                 elseif(array_key_exists('cuota_id', $_GET) && isset($_GET['cuota_id'])){
-                    $cuota_id = $_GET['id'];
+                    $cuota_id = $_GET['cuota_id'];
 
                     $criteria = new CDbCriteria;
                     $criteria->addSearchCondition('cuota_id', $cuota_id);
