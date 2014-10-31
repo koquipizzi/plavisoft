@@ -74,11 +74,11 @@ $this->menu=array(
         var valor = $('#valorPago').val();
         
         if(valor==0 || valor == ''){
-            alert('Debe ingresar un valor a ser calculado');
+            $("#div_cuotas").html('Debe ingresar un valor a ser calculado');
             return;
         }
         var suscripcion_id = $('#suscripcion_id').val();
-        var tipo_imputacion = $('#imputar_saldo_cuota_siguiente').val();
+        var tipo_imputacion = $('#idTipoCalculoCuota').val();
         jQuery.ajax({
             'type':'POST',
             'async':false,
@@ -89,7 +89,7 @@ $this->menu=array(
             'data':{
                 'valor':valor,
                 'suscripcion_id':suscripcion_id,
-                'tipo_imputacion':tipo_imputacion
+                'idTipoCalculoCuota':tipo_imputacion
             },
             'url':'<?php echo Yii::app()->createAbsoluteUrl('Pago/valorChange')?>',
             'cache':false
@@ -212,20 +212,18 @@ $this->menu=array(
                         </div>
                     </div>
                     <div class="control-group">
+                        <div class="control-label">
+                                <?php echo $form->labelEx($tipoCalculo, 'idTipo'); ?>
+                        </div>
                         <div class="controls">
         <?php
                         echo CHtml::activeDropDownList(
-                                $pago, 'imputar_saldo_cuota_siguiente', 
-                                CHtml::listData(
-                                    array(
-                                        array('id'=>1,'Descripcion'=>'Asignar Saldo a Ultima Cuota'),
-                                        array('id'=>2,'Descripcion'=>'Asignar Saldo a Próxima Cuota'),
-                                    ), 
-                                    'id', 'Descripcion'
-                                ),
+                                $tipoCalculo, 'idTipo', 
+                                CHtml::listData(PagoCalculoCuota::getValues(),'id', 'Descripcion'),
                                 array(
-                                    'id'=>'imputar_saldo_cuota_siguiente',
+                                    'id'=>'idTipoCalculoCuota',
                                     'onChange'=>'js:valorChange();',
+                                    'style'=>'width:430px',
                                 )
                         );
         ?>
@@ -298,6 +296,7 @@ $this->menu=array(
                                     'id'=>'nro_formulario',
                                     'maxlength'=>10,
                                     'onkeyup'=>'js:nro_formularioChange();',
+                                    'onChange'=>'js:nro_formularioChange();',
                                 )
                         ); 
                     ?>
