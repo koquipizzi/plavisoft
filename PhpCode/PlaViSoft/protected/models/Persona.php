@@ -179,11 +179,23 @@ class Persona extends CActiveRecord
             return $this->Apellido.$nombre;
         }
 
+        public function getNombreCompletoDNI(){
+            $nombre = $this->getNombreCompleto();
+            $dni = (!isset($this->DNI)||(trim($this->DNI)=="")?"":" (".$this->DNI.")");
+            return $nombre.$dni;
+        }
+
         public function getNombreCompletoCotitular(){
             $nombre = (!isset($this->Nombre2)||(trim($this->Nombre2)=="")?"":", ".$this->Nombre2);
             return $this->Apellido2.$nombre;
         }
-        
+
+        public function getNombreCompletoCotitularDNI(){
+            $nombre = $this->getNombreCompletoCotitular();
+            $dni = (!isset($this->DNI2)||(trim($this->DNI2)=="")?"":" (".$this->DNI2.")");
+            return $nombre.$dni;
+        }
+
         public function getSuscripcionesCantidad(){
             return count($this->suscripcions);
         }

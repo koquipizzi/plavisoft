@@ -79,7 +79,7 @@ table td,table th{
 </tr>
 <thead>
 	<tr>
-		<td width="480" height="40" rowspan="4"><?php echo strtoupper(CHtml::encode($persona->Apellido)).", ". strtoupper(CHtml::encode($persona->Nombre));	 ?></td>
+		<td width="480" height="40" rowspan="4"><?php echo strtoupper(CHtml::encode($persona->getNombreCompletoDNI())); ?></td>
 	</tr>
 	<tr>
 		<td width="80" height="20">Susc</td>
@@ -104,12 +104,12 @@ table td,table th{
 <thead>
 	<tr>
 		<td width="80" height="20"></td>
-		<td width="520" height="20"><?php echo strtoupper(CHtml::encode($persona->Apellido)).", ". strtoupper(CHtml::encode($persona->Nombre));	 ?></td>
+		<td width="520" height="20"><?php echo strtoupper(CHtml::encode($persona->getNombreCompletoDNI())); ?></td>
 		<td width="100" height="20"></td>
 	</tr>
 	<tr>
 		<td width="80" height="20"></td>
-		<td width="520" height="20"></td>
+		<td width="520" height="20"><?php echo strtoupper(CHtml::encode($persona->getNombreCompletoCotitularDNI())); ?></td>
 		<td width="100" height="20"></td>
 	</tr>
 </thead>

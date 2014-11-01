@@ -158,6 +158,8 @@ Select * from plavisoft.cheque;
 
 Select extract(MONTH From current_date());
 
+Select * from plavisoft.view_cuota_saldo;
+
 Select 
 	c.mes_id, 
 	c.anio, 

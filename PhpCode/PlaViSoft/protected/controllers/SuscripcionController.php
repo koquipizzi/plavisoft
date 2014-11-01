@@ -31,7 +31,7 @@ class SuscripcionController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','admin','delete'),
+				'actions'=>array('create','update','admin','delete','print'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -352,5 +352,31 @@ class SuscripcionController extends Controller
             Yii::app()->end();            
         }
         
+	   		   	
+	public function actionPrint($id) 
+	{ 
+error_reporting(E_ALL);
+ini_set("display_errors", 1); 
+ini_set('max_execution_time', 300);
+            $suscripcion = $this->loadModel($id);
+            $valorInicial = $suscripcion->financiacion->tipoVivienda->valor;            
+            $criteria = new CDbCriteria;
+            $criteria->addSearchCondition('suscripcion_id', $id);
+            $cuotasSaldo = CuotaSaldo::model()->findAll($criteria);
+                   
+		
+	    $html2pdf = Yii::app()->ePdf->HTML2PDF('P', 'A4', 'es');
+//$stylesheet = file_get_contents('css/print.css'); /// here call you external css file 
+//$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/print.css');
+	    $html2pdf->WriteHTML($this->renderPartial(
+                'printReporte', 
+                array(
+                    'suscripcion'=>$suscripcion, 
+                    'cuotasSaldo'=>$cuotasSaldo,
+                    'valor'=>$valorInicial,
+                ), true)
+            );
+	    $html2pdf->Output($suscripcion->persona->Apellido."-".'-Formuario:'.$suscripcion->id.'.pdf');
+	}  
        
 }
