@@ -25,6 +25,12 @@ class CuotaSaldo extends CActiveRecord
 	{
 		return 'view_cuota_saldo';
 	}
+        
+	public function primaryKey()
+	{
+		return 'id';
+	}
+        
 
 	/**
 	 * @return array validation rules for model attributes.

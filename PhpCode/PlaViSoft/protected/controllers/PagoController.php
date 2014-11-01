@@ -119,66 +119,8 @@ class PagoController extends Controller
         
         
         private function calcularCuotas($valor, $suscripcion_id, $idTipoCalculoCuota = PagoCalculoCuota::TIPO_DEFAUT){
-            
-                $calculo = PagoCalculoCuota::getTipoCalculo($idTipoCalculoCuota);
-                $cuotas = $calculo->calcularCuotas();
-                var_dump($cuotas);
-                die();
-            
-                $resto = 0;
-                $cuotas = array();                
-                $suscripcion = Suscripcion::model()->findByPk($suscripcion_id);
-                if(!isset($suscripcion)){
-                    throw new CHttpException(null,'No se encuentra Suscripcion al saldar cuota');
-                } 
-                
-                $criteria = new CDbCriteria;
-                    $criteria->compare('suscripcion_id', $suscripcion->id);
-                    $criteria->compare('saldada', Cuota::NO_SALDADA);
-                    $criteria->order = 'nro_cuota';
-                $aux = CuotaCalculada::model()->findAll($criteria);
-                
-                // Toma la primer cuota
-                if (isset($aux)&&is_array($aux)&&(count($aux)>0)){
-                    $c = $aux[0];
-                    $resto = $valor - $c->valor;
-                    $c->valorAsignado = $c->valor;
-                    $cuotas[] = $c;
-                }
-                else{
-                    throw new CHttpException(null,'No se encuentra Cuota a Saldar');
-                } 
-
-                // Toma el resto de las cuotas
-                if($resto > 0){
-                    $criteria->order = 'nro_cuota DESC';
-                    $aux = CuotaCalculada::model()->findAll($criteria);
-                    if (isset($aux)&&is_array($aux)&&(count($aux)>0)){
-                        $salir = FALSE;
-                        for($i=0; ($i<count($aux))&&!$salir; $i++){
-                            $c = $aux[ $i ];
-                            
-                            $valorCuota = $c->valor - $c->valorImputado;
-                            $valorReal = $resto - $valorCuota;
-                            $valorImputado = $valorCuota;
-                                    
-                            if($valorReal>0){
-                                //valorImputado es el valor de cuota ya asignado
-                                $resto = $valorReal;
-                                $c->valorAsignado = $valorCuota;
-                            }//if
-                            else{
-                                $valorImputado = $resto;
-                                $c->valorAsignado = $resto;
-                                $salir = TRUE;
-                            }
-                            
-                            $cuotas[] = $c;
-                   
-                        }//for
-                    }
-                }//if resto
-            
+            $calculo = PagoCalculoCuota::getTipoCalculo($idTipoCalculoCuota);
+            $cuotas = $calculo->calcularCuotas($suscripcion_id, $valor);
             return $cuotas;
         }
         
@@ -262,8 +204,7 @@ ini_set("display_errors", 1);
                     $suscripcion_id = NULL;
                     try{
                             $this->salvarPago($pago, $_POST['Pago']);
-
-                            if(array_key_exists('Imputacion', $_POST)){
+                            if(array_key_exists('Imputacion', $_POST)) {
                                 $imputacion->attributes = $_POST['Imputacion'];
                                 $imputacion->pago_id = $pago->id;
                                 $imputacion->valor = Yii::app()->format->unformatNumber($_POST['Imputacion']['valor']);
@@ -273,24 +214,26 @@ ini_set("display_errors", 1);
                                 $cuota->save();
                                 $suscripcion_id = $cuota->suscripcion_id;
                             }
-                            else{
+                            else {
                                 
                                 //$valor = Yii::app()->format->unformatNumber($_POST['valor']);
                                 $suscripcion_id = $_POST['Suscripcion']['suscripcion_id'];
-                                $cuotas = $this->calcularCuotas($pago->valor, $suscripcion_id);
+                                $idTipoPagoCalculoCuota = $_REQUEST['PagoCalculoCuota']['idTipo'];
+                                $cuotas = $this->calcularCuotas($pago->valor, $suscripcion_id, $idTipoPagoCalculoCuota);
                                 
-                                foreach($cuotas as $i => $cuota){
+                                foreach($cuotas as $i => $cuotaCalculada) {
+                                    $cuota = Cuota::model()->findByPk($cuotaCalculada->id);
                                     $imputacion = new Imputacion;
                                         $imputacion->cuota_id = $cuota->id;
                                         $imputacion->pago_id = $pago->id;
-                                        $imputacion->valor = $cuota->valorAsignado;
+                                        $imputacion->valor = $cuotaCalculada->valorAsignado;
                                     $imputacion->save();
                                     
-                                    if ($cuota->valor == $cuota->valorAsignado){
+                                    if ($cuotaCalculada->saldo == $cuotaCalculada->valorAsignado) {
                                         $cuota->saldada = Cuota::SALDADA;
                                         $cuota->save();
                                     }
-                                    else{
+                                    else {
                                         $cuota->saldada = Cuota::PARCIAL_SALDADA;
                                         $cuota->save();
                                     }
@@ -366,6 +309,8 @@ ini_set("display_errors", 1);
                 $pago->FechaPago = date('d/m/Y');
                 if (array_key_exists('cuota_id',$_REQUEST) && isset($_REQUEST['cuota_id'])) { 
                     $cuota = Cuota::model()->findByPk($_REQUEST['cuota_id']);
+                    $cuotaSaldo = CuotaSaldo::model()->findByPk($_REQUEST['cuota_id']);
+                    $cuota->valor = $cuotaSaldo->saldo;
                     if (!isset($cuota)){
                         Yii::log('No se encuentra Cuota a Saldar','warning');
                         throw new CHttpException(null,'No se encuentra Cuota a Saldar');

@@ -5,7 +5,7 @@
  * asignado al crear pagos.
  */
 
-class CuotaCalculada extends Cuota{
+class CuotaCalculada extends CuotaSaldo{
         
         public $valorAsignado = 0;
         
