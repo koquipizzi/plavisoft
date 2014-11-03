@@ -36,15 +36,15 @@ $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	
 	<?php echo $form->textFieldRow($model,'TelefonoCelular',array('class'=>'span5','maxlength'=>45, 'prepend'=>'@')); ?>
 
-	<?php echo $form->textFieldRow($model,'IngresosMensuales',array('class'=>'span5', 'prepend'=>'$')); ?>
-
 	<?php echo $form->textFieldRow($model,'CantHijos',array('class'=>'span5')); ?>
 
 	<?php //echo $form->textFieldRow($model,'FechaAlta',array('class'=>'span5')); ?>
 
 	<?php //echo $form->textFieldRow($model,'Borrado',array('class'=>'span5','maxlength'=>45)); ?>
 
-	
+        <?php 
+            if($model->isNewRecord){
+        ?>
 	<div class="control-group">
 		<div class="control-label">
 			<?php echo $form->labelEx($model,'tipo_persona_id'); ?>
@@ -52,13 +52,32 @@ $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 		<div class="controls">
 			
 		<?php	
-				if ($model->isNewRecord)				
-					echo CHtml::activeDropDownList($model,'tipo_persona_id', CHtml::listData(TipoPersona::model()->findAll(), 'id', 'Descripcion'), array('empty' => '--- Elegir Tipo ---'));
-				else {echo CHtml::activeDropDownList($model,'tipo_persona_id', CHtml::listData(TipoPersona::model()->findAll(), 'id', 'Descripcion'), array('empty' => '--- Elegir Tipo ---', 'selected'=>$model->tipo_persona_id));
-				}
+//				if ($model->isNewRecord)				
+                                    echo CHtml::activeDropDownList($model,'tipo_persona_id', CHtml::listData(TipoPersona::model()->findAll(), 'id', 'Descripcion'), array('empty' => '--- Elegir Tipo ---'));
+//				else {
+//                                    echo CHtml::activeDropDownList($model,'tipo_persona_id', CHtml::listData(TipoPersona::model()->findAll(), 'id', 'Descripcion'), array('empty' => '--- Elegir Tipo ---', 'selected'=>$model->tipo_persona_id));
+//				}
 	 ?>	
 	 	</div>
 	 </div>
+        <?php
+            }
+            else{
+        ?>
+        <div class="control-group" >
+		<div class="control-label">
+			<?php echo $form->labelEx($model,'tipoPersonaStr'); ?>
+		</div>
+		<div class="controls"  style="margin-top: 9px;" >
+		<?php	
+                    echo $model->tipoPersonaStr;
+                ?>	
+	 	</div>
+            
+	 </div>
+        <?php
+            }
+        ?>
 
 	<?php echo $form->textFieldRow($model,'IdSocio',array('class'=>'span5')); ?>
 	

@@ -98,6 +98,7 @@ class Persona extends CActiveRecord
 			'CUIT1' => 'CUIT',
 			'CUIT2' => 'CUIT Cotitular',
 			'DNI2' => 'Dni Cotitular',
+                        'tipoPersonaStr' => 'Tipo de Persona',
 		);
 	}
 
@@ -208,6 +209,10 @@ class Persona extends CActiveRecord
                 $r = TRUE;
 
             return $r;
+        }
+        
+        public function getTipoPersonaStr() {
+            return $this->tipoPersona->Descripcion;
         }
         
 	
