@@ -15,20 +15,20 @@ class SorterCuota extends Sorter
             //View, Edit, Delete Icons (bootstrap)
             $r = "
                 <td>  
-                    <a class='btn btn-small' title='Ver Cuota' href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
+                    <a class='btn btn-small' title='Ver Cuota' data-toggle='tooltip' href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
             ";
             if($data->saldada==Cuota::NO_SALDADA){
                 $r .= "
-                    <a class='btn btn-small' title='Modificar Cuota' href='".$edit_url."'><i class='icon-edit'></i></a>&nbsp; 
+                    <a class='btn btn-small' title='Modificar Cuota' data-toggle='tooltip' href='".$edit_url."'><i class='icon-edit'></i></a>&nbsp; 
                 ";                
             }
             if(($data->saldada==Cuota::NO_SALDADA)||($data->saldada==Cuota::PARCIAL_SALDADA)){
                 $r .= "
-                    <a class='btn btn-small' title='Saldar Cuota' href='".$asentar_pago_url."'><i class='icon-shopping-cart'></i></a>
+                    <a class='btn btn-small' title='Saldar Cuota' data-toggle='tooltip' href='".$asentar_pago_url."'><i class='icon-shopping-cart'></i></a>
                 ";                
             }
             if(($data->saldada==Cuota::SALDADA)||($data->saldada==Cuota::PARCIAL_SALDADA)){
-                $r .= "<a class='btn btn-small' title='Ver Imputación' href='".$ver_imputacion_url."'><i class='icon-retweet'></i></a>";                
+                $r .= "<a class='btn btn-small' title='Ver Imputación' data-toggle='tooltip' href='".$ver_imputacion_url."'><i class='icon-retweet'></i></a>";                
             }
             $r .= "
                 </td>

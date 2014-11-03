@@ -13,8 +13,8 @@ class SorterImputacion extends Sorter
 		//	var_dump($data->pago_id); die();
             $r = "
                 <td>  
-                    <a class='btn btn-small' href='javascript:void(0);' onclick='del_data(".$delete_url.");'><i class='icon-trash'></i></a>
-                    <a class='btn btn-small' href='".$ver_imprimir_url."'><i class='icon-print'></i></a>
+                    <a class='btn btn-small' href='javascript:void(0);' data-toggle='tooltip' title='Eliminar' onclick='del_data(".$delete_url.");'><i class='icon-trash'></i></a>
+                    <a class='btn btn-small'  target='_blank' data-toggle='tooltip' title='Imprimir'  href='".$ver_imprimir_url."'><i class='icon-print'></i></a>
                 </td>
             ";
             

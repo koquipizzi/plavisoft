@@ -11,7 +11,7 @@ class SorterVivienda extends Sorter
             $view_url=Yii::app()->createAbsoluteUrl($class.'/view',array('id'=>$data->id));
             $r = "
                 <td>  
-                    <a class='btn btn-small' href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
+                    <a class='btn btn-small' href='".$view_url."' data-toggle='tooltip' title='Ver Detalles'  ><i class='icon-search'></i></a>&nbsp; 
                 </td>
             ";
             

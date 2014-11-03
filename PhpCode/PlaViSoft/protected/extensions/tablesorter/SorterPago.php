@@ -14,13 +14,17 @@ class SorterPago extends Sorter
             //View, Edit, Delete Icons (bootstrap)
             $r = "
                 <td>  
-                    <a class='btn btn-small' href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
-                    <a class='btn btn-small' title='Ver Imputación' href='".$ver_imputacion_url."'><i class='icon-retweet'></i></a>
-                    <a class='btn btn-small' title='Imprimir'       href='".$ver_imprimir_url."'>  <i class='icon-print'></i></a>    
+                    <a class='btn btn-small' data-toggle='tooltip' title='Ver Detalles'  href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
+                    <a class='btn btn-small' data-toggle='tooltip' title='Ver Imputación' href='".$ver_imputacion_url."'><i class='icon-retweet'></i></a>
+                    <a class='btn btn-small' title='Imprimir' data-toggle='tooltip' target='_blank'  href='".$ver_imprimir_url."'>  <i class='icon-print'></i></a>
+                        
                 </td>
             ";
-            
+			
+  
             return $r;
+			
+			
         }
         
 }

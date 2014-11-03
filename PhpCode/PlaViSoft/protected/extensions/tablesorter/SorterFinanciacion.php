@@ -12,7 +12,7 @@ class SorterFinanciacion extends Sorter
             //View, Edit, Delete Icons (bootstrap)
             $r = "
                 <td>  
-                    <a class='btn btn-small' href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
+                    <a class='btn btn-small'  data-toggle='tooltip' title='Ver Financiación'  href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
                 </td>
             ";
             

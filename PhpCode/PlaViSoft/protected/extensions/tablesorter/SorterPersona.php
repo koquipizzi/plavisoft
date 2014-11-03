@@ -15,13 +15,13 @@ class SorterPersona extends Sorter
             //View, Edit, Delete Icons (bootstrap)
             $r = "
                 <td>  
-                    <a class='btn btn-small' href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
-                    <a class='btn btn-small' href='".$edit_url."'><i class='icon-edit'></i></a>&nbsp; 
-                    <a class='btn btn-small' href='javascript:void(0);' onclick='del_data(".$delete_url.");'><i class='icon-trash'></i></a>
+                    <a class='btn btn-small' data-toggle='tooltip' title='Ver Persona' href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
+                    <a class='btn btn-small' data-toggle='tooltip' title='Modificar' href='".$edit_url."'><i class='icon-edit'></i></a>&nbsp; 
+                    <a class='btn btn-small' data-toggle='tooltip' title='Eliminar' href='javascript:void(0);' onclick='del_data(".$delete_url.");'><i class='icon-trash'></i></a>
             ";
             if($data->existePagos == TRUE){
                 $ver_pagos_url='"'.Yii::app()->createAbsoluteUrl('pago/admin' ,array('persona_id'=>$data->id)).'"';                        
-                $r .= "<a class='btn btn-small' title='Pagos' href=".$ver_pagos_url."><i class='icon-thumbs-up'></i></a>";
+                $r .= "<a class='btn btn-small' title='Pagos'  data-toggle='tooltip' title='Ver Pagos'   href=".$ver_pagos_url."><i class='icon-thumbs-up'></i></a>";
             }
             $r .= " 
                 </td>

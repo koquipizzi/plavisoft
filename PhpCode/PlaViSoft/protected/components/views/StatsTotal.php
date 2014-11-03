@@ -12,11 +12,23 @@
 
 	//	echo "<strong>TOTAL: ".$total."\n";
 		$resto = $total - $pagos;
-	//	echo " <br><span style:'color:green;'>CANCELADO: ".$pagos."</span><br>";
-//		echo "<span style:'color:red;'>RESTANTE: ".$resto."</span></strong>";
+ $perc =intval(($pagos/$total)*100); //echo intval$perc;
+ echo "<strong>PORC. TOTAL: ".$perc."\n";
+ $this->widget(
+                                'bootstrap.widgets.TbProgress',
+                                array(
+                                    'type' => 'success', 
+                                    'percent' => $perc,
+                                    'htmlOptions' => array(
+                                        'data-toggle' => 'tooltip',
+                                        'title' => 'Aproximadamente: '. intval($perc).'%'
+                                    )                                
+                                )
+                            )
 		
-?>		
+?>	
 </div>		
+
 <?php		
 		$this->widget('ext.highcharts.HighchartsWidget', array(
 		   'options' => array(
@@ -43,13 +55,7 @@
 		
 		));
 	
+	
+	
 
 ?>
-<?php
-
-		echo "<strong>TOTAL: ".$total."\n";
-		$resto = $total - $pagos;
-		echo " <br><span style:'color:green;'>CANCELADO: ".$pagos."</span><br>";
-		echo "<span style:'color:red;'>RESTANTE: ".$resto."</span></strong>";
-		
-?>	

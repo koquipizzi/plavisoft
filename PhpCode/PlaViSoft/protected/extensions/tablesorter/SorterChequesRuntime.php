@@ -27,7 +27,7 @@ class SorterChequesRuntime extends Sorter
             $del_data='"'.$data->id.'"';
             $r = "
                 <td>  
-                    <a class='btn btn-small' href='javascript:void(0);' onclick='borrarCheque(".$data->id.");'><i class='icon-trash'></i></a>
+                    <a class='btn btn-small' href='javascript:void(0);' data-toggle='tooltip' title='Borrar Cheque' onclick='borrarCheque(".$data->id.");'><i class='icon-trash'></i></a>
                 </td>
             ";
             

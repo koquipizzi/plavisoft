@@ -18,14 +18,14 @@ class SorterSuscripcion extends Sorter
             //View, Edit, Delete Icons (bootstrap)
             $r = "
                 <td>  
-                    <a class='btn btn-small' href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
-                    <a class='btn btn-small' title='Imprimir'       href='".$ver_imprimir_url."'>  <i class='icon-print'></i></a>                            
-                    <a class='btn btn-small' href=".$asentar_pago_url."><i class='icon-shopping-cart'></i></a>                       
-                    <a class='btn btn-small' href=".$ver_cuotas_url."><i class='icon-eye-open'></i></a>
+                    <a class='btn btn-small' data-toggle='tooltip' title='Ver Detalles' href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
+                    <a class='btn btn-small' title='Imprimir' data-toggle='tooltip' title='Imprimir'  href='".$ver_imprimir_url."'>  <i class='icon-print'></i></a>                            
+                    <a class='btn btn-small'  data-toggle='tooltip' title='Asentar Pago' href=".$asentar_pago_url."><i class='icon-shopping-cart'></i></a>                       
+                    <a class='btn btn-small'  data-toggle='tooltip' title='Ver Cuotas' href=".$ver_cuotas_url."><i class='icon-eye-open'></i></a>
             ";
             if($data->existePagos == TRUE){
                 $ver_pagos_url = '"'.Yii::app()->createAbsoluteUrl('pago/admin' ,array('suscripcion_id'=>$data->id)).'"';                            
-                $r .= "<a class='btn btn-small' href=".$ver_pagos_url."><i class='icon-thumbs-up'></i></a>";
+                $r .= "<a class='btn btn-small' data-toggle='tooltip' title='Ver Pagos' href=".$ver_pagos_url."><i class='icon-thumbs-up'></i></a>";
             }
             $r .= " 
                 </td>

@@ -7,9 +7,7 @@ $this->breadcrumbs=array(
 	'Manage',
 );
 
-?>
 
-<?php
 if(isset($persona_id)){
     $this->menu=array(
             array('label'=>'Ver Suscripciones', 'url'=>array("Persona/view&id=".$persona_id)),
@@ -20,7 +18,6 @@ elseif(isset($suscripcion_id)){
             array('label'=>'Ir a Suscripción', 'url'=>array("cuota/admin&suscripcion_id=".$suscripcion_id)),
     );
 } 
-
     if(count($records)==0){
         echo "<h1>Listado de Pagos</h1>";        
         echo "No existen pagos registrados";

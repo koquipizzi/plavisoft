@@ -4,6 +4,7 @@
 // Yii::setPathOfAlias('local','path/to/local-folder');
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
+//Yii::setPathOfAlias('booster', dirname(__FILE__) . '/../components/booster');
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__) . '/../extensions/bootstrap');
 Yii::setPathOfAlias('highcharts', dirname(__FILE__) . '/../extensions/highcharts');
 return array(
@@ -44,6 +45,10 @@ return array(
         'nombre2text' => array(
             'class'=>'application.extensions.number_text.NumberToText',
         ),
+        
+	/*'booster' => array(
+   		 'class' => 'booster.components.Booster',
+		),*/
         // formateo de numeros reales
         'format' => array(
             'class'=>'application.components.Formatter',
@@ -117,7 +122,7 @@ return array(
             'connectionString' => 'mysql:host=localhost;dbname=plavisoft',
             'emulatePrepare' => true,
             'username' => 'root',
-            'password' => 'mysqlpass',
+            'password' => '',
             'charset' => 'utf8',
         ),
         // uncomment the following to use a MySQL database
