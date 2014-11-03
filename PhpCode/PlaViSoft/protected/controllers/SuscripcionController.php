@@ -362,7 +362,7 @@ ini_set('max_execution_time', 300);
             $valor = $suscripcion->financiacion->tipoVivienda->valor;            
             $criteria = new CDbCriteria;
             $criteria->addSearchCondition('suscripcion_id', $id);
-            $criteria->limit = 100;
+//            $criteria->limit = 100;
             $cuotasSaldo = CuotaSaldo::model()->findAll($criteria);
                    
 		
