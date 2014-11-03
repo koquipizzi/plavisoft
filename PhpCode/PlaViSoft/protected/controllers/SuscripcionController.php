@@ -357,12 +357,13 @@ class SuscripcionController extends Controller
 	{ 
 error_reporting(E_ALL);
 ini_set("display_errors", 1); 
-ini_set('max_execution_time', 300);
+            ini_set('max_execution_time', 300);
+
             $suscripcion = $this->loadModel($id);
             $valor = $suscripcion->financiacion->tipoVivienda->valor;            
             $criteria = new CDbCriteria;
             $criteria->addSearchCondition('suscripcion_id', $id);
-            $criteria->limit = 100;
+//            $criteria->limit = 100;
             $cuotasSaldo = CuotaSaldo::model()->findAll($criteria);
                    
 		
@@ -378,6 +379,7 @@ ini_set('max_execution_time', 300);
                     'valor'=>$valor,
                 ), true)
             );
+            
 	    $html2pdf->Output($suscripcion->persona->Apellido."-".'-Formuario:'.$suscripcion->id.'.pdf');
             
             

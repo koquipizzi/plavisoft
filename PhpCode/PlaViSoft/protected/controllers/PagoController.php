@@ -413,6 +413,7 @@ class PagoController extends Controller
                 $persona = NULL;
                 $records = array();
                 $suscripcion = NULL;
+                $vista = 'admin';
                 
                 if(array_key_exists('persona_id', $_GET) && !isset($_GET['persona_id'])){
                     throw new CHttpException(null,"Persona no valida");
@@ -421,8 +422,9 @@ class PagoController extends Controller
                     $persona = $_GET['persona_id'];
                     $criteria = new CDbCriteria;
                     $criteria->addSearchCondition('persona_id', $_GET['persona_id']);
-                    $criteria->order = 'FechaPago asc';
+                    $criteria->order = 'FechaPago desc';
                     $records=Pago::model()->findAll($criteria); 
+                    $vista = 'adminPersona';
                 }
                 elseif(array_key_exists('suscripcion_id', $_GET) && !isset($_GET['suscripcion_id'])){
                     throw new CHttpException(null,"Suscripción no valida");
@@ -441,12 +443,16 @@ class PagoController extends Controller
                     
                     $records=Pago::model()->findAll($criteria);            
                 }
-
-                else
-                    $records=Pago::model()->findAll();
+                else {
+                    $criteria = new CDbCriteria;
+                    $criteria->order = 'FechaPago desc';
+                    $records=Pago::model()->findAll($criteria); 
+                    $vista = 'adminGeneral';
+                }
+                    
 				
                 
-                $this->render('admin',array(
+                $this->render($vista,array(
                     'records'=>$records,
                     'persona_id'=>$persona, 
                     'suscripcion_id'=>$suscripcion

@@ -168,8 +168,11 @@ class Pago extends ActiveRecord
             return $this->talonario."-".$this->nro_formulario;
         }
         
-        public function getCuotasSuscripcion(){
-            
+        public function getCuotasNombreSuscripcion(){
+            if(count($this->imputacion)>0) {
+                return $this->imputacion[0]->cuota->suscripcion->nombreStr;
+            }
+            return "";
         }
   
         
