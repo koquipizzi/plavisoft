@@ -359,24 +359,92 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1); 
 ini_set('max_execution_time', 300);
             $suscripcion = $this->loadModel($id);
-            $valorInicial = $suscripcion->financiacion->tipoVivienda->valor;            
+            $valor = $suscripcion->financiacion->tipoVivienda->valor;            
             $criteria = new CDbCriteria;
             $criteria->addSearchCondition('suscripcion_id', $id);
+            $criteria->limit = 100;
             $cuotasSaldo = CuotaSaldo::model()->findAll($criteria);
                    
 		
-	    $html2pdf = Yii::app()->ePdf->HTML2PDF('P', 'A4', 'es');
-//$stylesheet = file_get_contents('css/print.css'); /// here call you external css file 
-//$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/print.css');
+	    $html2pdf = Yii::app()->ePdf->HTML2PDF('P', 'A4', 'es', true, 'UTF-8', array(15, 5, 15, 5));
+            
+////$stylesheet = file_get_contents('css/print.css'); /// here call you external css file 
+////$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/print.css');
 	    $html2pdf->WriteHTML($this->renderPartial(
                 'printReporte', 
                 array(
                     'suscripcion'=>$suscripcion, 
                     'cuotasSaldo'=>$cuotasSaldo,
-                    'valor'=>$valorInicial,
+                    'valor'=>$valor,
                 ), true)
             );
 	    $html2pdf->Output($suscripcion->persona->Apellido."-".'-Formuario:'.$suscripcion->id.'.pdf');
+            
+            
+//	    $mpdf = Yii::app()->ePdf->mpdf('utf-8','A4','','',15,15,35,25,9,9,'P');
+//            $mpdf->useOnlyCoreFonts = true;
+//	    $mpdf->WriteHTML($this->renderPartial(
+//                'printReporte', 
+//                array(
+//                    'suscripcion'=>$suscripcion, 
+//                    'cuotasSaldo'=>$cuotasSaldo,
+//                    'valor'=>$valorInicial,
+//                ), true)
+//            );
+//	    $mpdf->Output($suscripcion->persona->Apellido."-".'-Formuario:'.$suscripcion->id.'.pdf');
+//            exit();
+            
+//	    $html2pdf = Yii::app()->ePdf->HTML2PDF('P', 'A4', 'es');
+//            $html2pdf->setDefaultFont('Arial');
+//            
+//            // Encabezado
+//            $r = 
+//                '<table width=700>
+//                    <tr class="grey size">
+//                        <th colspan=12></th>
+//                    </tr>
+//                    <thead>
+//                            <tr>
+//                                    <td width="70" height="20">Nro. Cuota</td>
+//                                    <td width="200" height="20">Cuota</td>
+//                                    <td width="80" height="20" align="right" >Importe</td>
+//                                    <td width="150" height="20" style="padding-left:15px;" >Cancelado</td>
+//                                    <td width="80" height="20" align="right" >Saldo</td>
+//                            </tr>
+//                    </thead>';
+//            
+//            foreach ($cuotasSaldo as $cuota) {
+//                $r .=
+//                    '<tbody>
+//                            <tr>
+//                                    <td width="70"  height="20">'.$cuota->nro_cuota.'</td>
+//                                    <td width="200" height="20">'.$cuota->cuotaStr.'</td>
+//                                    <td width="100" height="20" align="right" >'.$cuota->valorStr.'</td>
+//                                    <td width="150" height="20" style="padding-left:15px;" >'.$cuota->estadoStr.'</td>
+//                                    <td width="80" height="20" align="right" >$ '.Yii::app() -> format -> number($valor).'</td>
+//                            </tr>
+//                    </tbody>'
+//                ;                
+//                $valor = $valor - $cuota->totalSaldado;
+//            }
+//            
+//            $r .= '
+//                </table>
+//                <page>
+//                  <page_footer>
+//                    [[page_cu]]/[[page_nb]]
+//                  </page_footer>
+//                </page>                
+//            ';
+//            
+//            $html2pdf->WriteHTML($r);
+//            
+//	    $html2pdf->Output(
+//                    $suscripcion->persona->Apellido."-".'-Formuario:'.$suscripcion->id.'.pdf',
+//                    EYiiPdf::OUTPUT_TO_BROWSER
+//            );
+//            exit();
+            
 	}  
        
 }
