@@ -28,6 +28,8 @@ elseif(isset($suscripcion_id)){
 } 
 ?>
 
+
+
 <h1>Listado de Pagos</h1>
 <?php	
     if(count($records)==0){

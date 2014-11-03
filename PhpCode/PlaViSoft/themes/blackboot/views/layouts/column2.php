@@ -12,7 +12,7 @@
         array('label'=>'Financiaciones', 'icon'=>'cog', 'url'=>'index.php?r=financiacion/admin'),
         array('label'=>'Cheques', 'icon'=>'barcode', 'url'=>'index.php?r=cheque/admin'),
        // array('label'=>'Adelantos', 'icon'=>'road', 'url'=>'index.php?r=adelanto/admin'),
-     //   array('label'=>'Tipos de Cuotas', 'icon'=>'th-list', 'url'=>'index.php?r=tipocuota/admin'),
+        array('label'=>'Pagos', 'icon'=>'th-list', 'url'=>'index.php?r=pago/admin'),
         array('label'=>'Ayuda', 'icon'=>'flag', 'url'=>'#'),
     ),
 )); ?>
