@@ -52,13 +52,14 @@
 						'htmlOptions'       => array( 'class' => 'nav' ),
 						'activeCssClass'    => 'active',
 						'items'=>array(
-							array('label'=>'Inicio', 'url'=>array('/reportes')),
-							array('label'=>'Personas', 'url'=>array('/persona/admin')),
-                                                        array('label'=>'Suscripción', 'url'=>array('/suscripcion/admin')),
-                                                        array('label'=>'Financiación', 'url'=>array('/financiacion/admin')),
-                                                        array('label'=>'Viviendas', 'url'=>array('/tipoVivienda/admin')),
-                            array('label'=>'Pagos', 'url'=>array('/pago/admin')),                      
-							array('label'=>'Acceso', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+							array('label'=>'Inicio',        'url'=>array('/reportes'),              'visible'=>!Yii::app()->user->isGuest),
+							array('label'=>'Personas',      'url'=>array('/persona/admin'),         'visible'=>!Yii::app()->user->isGuest),
+                                                        array('label'=>'Suscripción',   'url'=>array('/suscripcion/admin'),     'visible'=>!Yii::app()->user->isGuest),
+                                                        array('label'=>'Financiación',  'url'=>array('/financiacion/admin'),    'visible'=>!Yii::app()->user->isGuest),
+                                                        array('label'=>'Viviendas',     'url'=>array('/tipoVivienda/admin'),    'visible'=>!Yii::app()->user->isGuest),                      
+                                                        array('label'=>'Pagos',         'url'=>array('/pago/admin'),    'visible'=>!Yii::app()->user->isGuest),                      
+                                                        array('label'=>'Gastos',        'url'=>array('/gasto/admin'),   'visible'=>!Yii::app()->user->isGuest),                      
+							array('label'=>'Acceso',        'url'=>array('/site/login'),    'visible'=>Yii::app()->user->isGuest),
 							array('label'=>'Salir ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 						),
 					));   

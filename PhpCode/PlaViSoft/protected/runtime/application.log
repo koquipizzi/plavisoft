@@ -322,3 +322,5 @@ Stack trace:
 REQUEST_URI=/index.php?r=persona/admin
 HTTP_REFERER=http://plavisoft/index.php?r=reportes
 ---
+2014/11/03 21:41:18 [error] [system.db.CDbCommand] CDbCommand::fetchAll() falló: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'plavisoft.gastos_categorias' doesn't exist. La sentencia SQL ejecutada fue: SHOW FULL COLUMNS FROM `gastos_categorias`.
+in /home/diego/Proyectos/plavisoft/PhpCode/PlaViSoft/index.php (13)

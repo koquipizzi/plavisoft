@@ -46,19 +46,14 @@ $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
             if($model->isNewRecord){
         ?>
 	<div class="control-group">
-		<div class="control-label">
-			<?php echo $form->labelEx($model,'tipo_persona_id'); ?>
-		</div>
-		<div class="controls">
-			
-		<?php	
-//				if ($model->isNewRecord)				
-                                    echo CHtml::activeDropDownList($model,'tipo_persona_id', CHtml::listData(TipoPersona::model()->findAll(), 'id', 'Descripcion'), array('empty' => '--- Elegir Tipo ---'));
-//				else {
-//                                    echo CHtml::activeDropDownList($model,'tipo_persona_id', CHtml::listData(TipoPersona::model()->findAll(), 'id', 'Descripcion'), array('empty' => '--- Elegir Tipo ---', 'selected'=>$model->tipo_persona_id));
-//				}
-	 ?>	
-	 	</div>
+            <div class="control-label">
+                <?php echo $form->labelEx($model,'tipo_persona_id'); ?>
+            </div>
+            <div class="controls">
+                <?php	
+                    echo CHtml::activeDropDownList($model,'tipo_persona_id', CHtml::listData(TipoPersona::model()->findAll(), 'id', 'Descripcion'), array('empty' => '--- Elegir Tipo ---'));
+                ?>	
+            </div>
 	 </div>
         <?php
             }
