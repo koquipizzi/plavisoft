@@ -62,10 +62,11 @@ class Gasto extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'descripcion' => 'Descripcion',
-			'valor' => 'Valor',
+			'valor' => 'Importe',
 			'fecha' => 'Fecha',
 			'borrado' => 'Borrado',
 			'fecha_borrado' => 'Fecha Borrado',
+                        'valorStr' => 'Importe',
 		);
 	}
 
@@ -109,4 +110,27 @@ class Gasto extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+	public function beforeSave()
+	{
+		$fecha=DateTime::createFromFormat('d/m/Y',$this->fecha);
+		$this->fecha=$fecha->format('y-m-d');		 
+                
+		parent::beforeSave();
+                
+		return true;
+	}
+        
+        
+	public function afterFind()
+	{
+                $this->fecha = Yii::app()->format->date($this->fecha);
+		return parent::afterFind();
+        }
+        
+        public function getValorStr(){
+                return "$ ".Yii::app() -> format -> number($this -> valor);
+        }
+
+        
 }

@@ -73,6 +73,8 @@ class GastoController extends Controller
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
+                
+                $model->fecha = date('d/m/Y');
 
 		$this->render('create',array(
 			'model'=>$model,
@@ -128,20 +130,15 @@ class GastoController extends Controller
 		));
 	}
 
-	/**
-	 * Manages all models.
-	 */
+       
 	public function actionAdmin()
 	{
-		$model=new Gasto('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Gasto']))
-			$model->attributes=$_GET['Gasto'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
+	    $gastos=Gasto::model()->findAll();
+	    $this->render('admin',array(
+	        'gastos'=>$gastos,
+	    )); 
 	}
+        
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.

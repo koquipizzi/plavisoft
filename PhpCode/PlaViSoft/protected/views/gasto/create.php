@@ -8,11 +8,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Gasto', 'url'=>array('index')),
-	array('label'=>'Manage Gasto', 'url'=>array('admin')),
+	array('label'=>'Listar Gastos', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Gasto</h1>
+<h1>Nuevo Gasto</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

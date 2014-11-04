@@ -8,11 +8,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Gasto', 'url'=>array('index')),
-	array('label'=>'Create Gasto', 'url'=>array('create')),
-	array('label'=>'Update Gasto', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Gasto', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Gasto', 'url'=>array('admin')),
+	array('label'=>'Nuevo Gasto', 'url'=>array('create')),
+	array('label'=>'Modificar Gasto', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Borrar Gasto', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Listar Gasto', 'url'=>array('admin')),
 );
 ?>
 
@@ -21,11 +20,8 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
+		'fecha',            
 		'descripcion',
-		'valor',
-		'fecha',
-		'borrado',
-		'fecha_borrado',
+		'valorStr',
 	),
 )); ?>
