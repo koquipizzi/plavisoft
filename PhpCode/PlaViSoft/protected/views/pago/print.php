@@ -16,12 +16,12 @@ h1{
     width: 700px;
     
 }
-table{
+table td{
     margin: auto;     
     border-spacing: 100px 50px;
+    border:#000000 1px solid;
 }
-table td,table th{
-   
+table td,table th{   
     border-collapse: collapse;
     
 }
@@ -79,13 +79,17 @@ table td,table th{
 </tr>
 <thead>
 	<tr>
-		<td width="480" height="40" rowspan="4"><?php echo strtoupper(CHtml::encode($persona->getNombreCompletoDNI())); ?></td>
+		<td width="520" height="40" rowspan="4" align="center"><?php echo strtoupper(CHtml::encode($persona->getNombreCompletoDNI())); ?>
+			<?php if ($persona->getNombreCompletoCotitularDNI() !== "")
+					echo ",<br>". strtoupper(CHtml::encode($persona->getNombreCompletoCotitularDNI())); 
+				?>
+			</td>
 	</tr>
 	<tr>
 		<td width="80" height="20">Susc</td>
 	</tr>
 	<tr>
-		<td width="80" height="20"><?php //echo $model->suscripcion->id; ?></td>
+		<td width="80" height="20" align="center"><?php echo $model->cuotasNombreSuscripcion; ?></td>
 	</tr>
 	<tr>
 		<td width="80" height="20">CUIT</td>
@@ -103,21 +107,21 @@ table td,table th{
 </tr>
 <thead>
 	<tr>
-		<td width="80" height="20"></td>
-		<td width="520" height="20"><?php echo strtoupper(CHtml::encode($persona->getNombreCompletoDNI())); ?></td>
+		<td width="150" height="20"></td>
+		<td width="450" height="20"><?php echo strtoupper(CHtml::encode($persona->getNombreCompleto())); ?></td>
 		<td width="100" height="20"></td>
 	</tr>
 	<tr>
-		<td width="80" height="20"></td>
-		<td width="520" height="20"><?php echo strtoupper(CHtml::encode($persona->getNombreCompletoCotitularDNI())); ?></td>
+		<td width="150" height="20"></td>
+		<td width="450" height="20">PAGO CUOTA CIRCULO DE VIVIENDAS<?php //echo strtoupper(CHtml::encode($persona->getNombreCompletoCotitularDNI())); ?></td>
 		<td width="100" height="20"></td>
 	</tr>
 </thead>
 <tbody>
 	<tr>
-		<td width="80" height="20"></td>
-		<td width="520" height="20"><?php echo $model->ImporteLetras; ?></td>
-		<td width="100" height="20" align="left"><?php echo " ($ ".$model->valor. ") "; ?></td>
+		<td width="150" height="20"></td>
+		<td width="450" height="20"><?php echo $model->ImporteLetras; ?></td>
+		<td width="100" height="20" align="left"><?php echo " $ ".$model->valor. " "; ?></td>
 	</tr>
 </tbody>
 </table>
