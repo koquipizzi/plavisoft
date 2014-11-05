@@ -1,134 +1,63 @@
-<?php
-$this->breadcrumbs=array(
-	'Personas',
-);
-
-$this->menu=array(
-	array('label'=>'Nueva Persona','url'=>array('create')),
-	array('label'=>'Administrar Persona','url'=>array('admin')),
-);
-?>
-<?php // var_dump($model->imputacions); die();?>
 <style type="text/css">
-h1{
-    color:red;
-    text-align: center;
-    width: 700px;
-    
-}
-table td{
-    margin: auto;     
-    border-spacing: 100px 50px;
-    border:#000000 1px solid;
-}
-table td,table th{   
-    border-collapse: collapse;
-    
-}
-
-.fecha {
-	margin: 60px;	
 
 
+table tbody tr{
+    font-size:11pt;
 }
-
-#formulario {
-	display:inline;
-	background: #ccc;
-	width:100%;
-	height: 300px;
-
-}
-#formulario .left{
-	width: 40%;
-	background: #DD1144;
-	float:left;display:inline;
-	margin-left: 40px;
-}
-
-#formulario .right{
-	width: 50%;
-	background: #003399;
-	float: right;display:inline;
-	padding-top:200px;
+body
+{
+  margin: 0mm 0mm 0mm 0mm;
 }
 
 </style>
 
-<table width=700>
-<tr class="grey size">
-    <th colspan=12></th>
-</tr>
-<thead>
-    <tr>
-        <th width="320" height="150"> </th>
-        <th width="50" height="150"></th>
-        <th width="150" height="150" align="right"></th>
-        <th width="150" height="150" align="right"><span class="fecha" ><?php echo $model->FechaPago; ?></span></th>
-        <th width="30" height="150" align="right"></th>
-    </tr>
-</thead>
-<tbody>
-</tbody>
-</table>
+<body>
 
-
-<table width=700>
-<tr class="grey size">
-    <th colspan=12></th>
-</tr>
-<thead>
+<table style="border: solid 1px #FFFFFF; background: #FFFFFF; width: 100%; text-align: center">
 	<tr>
-		<td width="520" height="40" rowspan="4" align="center"><?php echo strtoupper(CHtml::encode($persona->getNombreCompletoDNI())); ?>
+	<th style="border: solid 1px #FFFFFF;width: 50%; height: 90px;"></th>
+	<td style="border: solid 1px #FFFFFF;width: 50%; height: 90px; text-align: right"><?php echo $model->getNroPagoStr() ?></td>
+	</tr>
+	<tr>
+	<td style="border: solid 1px #FFFFFF;width: 50%"></td>
+	<th style="border: solid 1px #FFFFFF;width: 50%; text-align: right"><?php echo $model->FechaPago; ?></th>
+	</tr>
+	<tr>
+	<th style="border: solid 1px #FFFFFF;width: 50%;  height: 60px;"></th>
+	<td style="border: solid 1px #FFFFFF;width: 50%"></td>
+	</tr>
+	
+</table>
+<table style="border: solid 1px #FFFFFF; background: #FFFFFF; width: 100%; text-align: center">
+	<tr>
+		<td style="border: solid 1px #FFFFFF;width: 70%;"></td>
+	<td style="border: solid 1px #FFFFFF;width: 10%;text-align: left;"></td>
+	<td style="border: solid 1px #FFFFFF;width: 20%; text-align: right; vertical-align: bottom;"></td>
+	</tr>
+	<tr>
+	<td style="border: solid 1px #FFFFFF;width: 70%; height: 70px;text-align: left; "><?php echo strtoupper(CHtml::encode($persona->getNombreCompletoDNI())); ?>
 			<?php if ($persona->getNombreCompletoCotitularDNI() !== "")
 					echo ",<br>". strtoupper(CHtml::encode($persona->getNombreCompletoCotitularDNI())); 
-				?>
-			</td>
+				?></td>
+	<td style="border: solid 1px #FFFFFF;width: 10%; height: 70px;text-align: left;"><?php echo $model->cuotasNombreSuscripcion; ?></td>
+	<td style="border: solid 1px #FFFFFF;width: 20%; height: 70px; text-align: right; vertical-align: bottom;"><?php echo $persona->DNI; ?></td>
 	</tr>
-	<tr>
-		<td width="80" height="20">Susc</td>
-	</tr>
-	<tr>
-		<td width="80" height="20" align="center"><?php echo $model->cuotasNombreSuscripcion; ?></td>
-	</tr>
-	<tr>
-		<td width="80" height="20">CUIT</td>
-		<td width="140" height="20" align="center"><?php echo $persona->DNI; ?></td>
-	</tr>
-</thead>
-<tbody>
-</tbody>
 </table>
-
-
-<table width=700>
-<tr class="grey size">
-    <th colspan=12></th>
-</tr>
-<thead>
+<table style="border: solid 1px #FFFFFF; background: #FFFFFF; width: 100%; text-align: center">
 	<tr>
-		<td width="150" height="20"></td>
-		<td width="450" height="20"><?php echo strtoupper(CHtml::encode($persona->getNombreCompleto())); ?></td>
-		<td width="100" height="20"></td>
+	<td style="border: solid 1px #FFFFFF;width: 20%; height: 15px;text-align: left; "></td>
+	<td style="border: solid 1px #FFFFFF;width: 80%; height: 15px;text-align: left; vertical-align: bottom;"><?php echo strtoupper(CHtml::encode($persona->getNombreCompleto())); ?></td>
 	</tr>
-	<tr>
-		<td width="150" height="20"></td>
-		<td width="450" height="20">PAGO CUOTA CIRCULO DE VIVIENDAS<?php //echo strtoupper(CHtml::encode($persona->getNombreCompletoCotitularDNI())); ?></td>
-		<td width="100" height="20"></td>
+		<tr>
+	<td style="border: solid 1px #FFFFFF;width: 20%; height: 15px;text-align: left; "></td>
+	<td style="border: solid 1px #FFFFFF;width: 80%; height: 15px;text-align: left; vertical-align: bottom;">PAGO CUOTA CIRCULO DE VIVIENDAS</td>
 	</tr>
-</thead>
-<tbody>
-	<tr>
-		<td width="150" height="20"></td>
-		<td width="450" height="20"><?php echo $model->ImporteLetras; ?></td>
-		<td width="100" height="20" align="left"><?php echo " $ ".$model->valor. " "; ?></td>
-	</tr>
-</tbody>
 </table>
-<!--div id="formulario">
-	<div class="left"> left</div>
-	<div class="right"> right</div>
+<table style="border: solid 1px #FFFFFF; background: #FFFFFF; width: 100%; text-align: center">
+	<tr>
+	<td style="border: solid 1px #FFFFFF;width: 15%; height: 60px;text-align: left; "></td>
+	<td style="border: solid 1px #FFFFFF;width: 45%; height: 60px;text-align: left; "><?php echo $model->ImporteLetras; ?></td>
+	<td style="border: solid 1px #FFFFFF;width: 40%; height: 60px;text-align: right; "><?php echo " $ ".$model->valor. " "; ?></td>
+	</tr>
 
-</div-->
-
-
+</table>
