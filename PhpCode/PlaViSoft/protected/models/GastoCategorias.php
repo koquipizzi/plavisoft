@@ -58,7 +58,7 @@ class GastoCategorias extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'descripcion' => 'Descripcion',
+			'descripcion' => 'Categoría',
 			'borrado' => 'Borrado',
 			'fecha_borrado' => 'Fecha Borrado',
 		);

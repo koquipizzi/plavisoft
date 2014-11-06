@@ -71,8 +71,11 @@ class Sorter extends CWidget
 			 function del_data(url,data) {
 				var result = confirm("¿Está seguro de querer borrar el registro?");
 				if (result==true) {
-					$.post( url );
-					location.reload();
+					$.post( url , { id : data }).
+                                            done(function( data ) {
+                                                //alert( data );
+                                                location.reload();
+                                            });
 				}	
 			 }
 			 </script>';
@@ -141,7 +144,7 @@ class Sorter extends CWidget
                 <td>  
                     <a class='btn btn-small' href='".$view_url."'><i class='icon-search'></i></a>&nbsp; 
                     <a class='btn btn-small' href='".$edit_url."'><i class='icon-edit'></i></a>&nbsp; 
-                    <a class='btn btn-small' href='javascript:void(0);' onclick='del_data(".$delete_url.");'><i class='icon-trash'></i></a>
+                    <a class='btn btn-small' href='javascript:void(0);' onclick='del_data(".$delete_url.",".$del_data.");'><i class='icon-trash'></i></a>
                 </td>
             ";
             

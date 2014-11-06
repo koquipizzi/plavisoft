@@ -28,16 +28,12 @@ class GastoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','ajaxCategoriaChange', 'ajaxCategoriaDelete'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','admin','delete'),
 				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -63,6 +59,7 @@ class GastoController extends Controller
 	public function actionCreate()
 	{
 		$model=new Gasto;
+                $gastoCategoria=new GastoCategorias;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -75,13 +72,117 @@ class GastoController extends Controller
 		}
                 
                 $model->fecha = date('d/m/Y');
+                
 
 		$this->render('create',array(
 			'model'=>$model,
+                        'gastoCategoria'=>$gastoCategoria,
 		));
 	}
+        
+        public function actionAjaxCategoriaChange() {
+            
+            if(
+                (!array_key_exists('id', $_REQUEST) ||  is_null($_REQUEST['id']))
+                ||
+                (!array_key_exists('categorias_ids', $_REQUEST) ||  is_null($_REQUEST['categorias_ids']))
+            ) {
+                throw new Exception('Error en Requerimiento Ajax AjaxCategoriaChange');
+            }
+            
+            $id = $_REQUEST['id'];
+            $categorias_ids = $_REQUEST['categorias_ids'];
+            $cat_array = explode('#', $categorias_ids);
+            $encontrado = array_search($id,$cat_array);
+            
+            if(!is_null($encontrado)&&($encontrado !== FALSE)) {
+                echo json_encode(
+                        array(
+                            'html'=>'<div>La categoría ya esta agregada</div>',
+                            'error'=>TRUE,
+                            'categorias_ids'=>$categorias_ids,
+                        )
+                );
+                Yii::app()->end();
+            }
+            // Agrego el ID
+            $cat_array[] = $id;
+            
+            $criteria = new CDbCriteria;
+            $criteria->addInCondition('id', $cat_array);
+            $categorias = GastoCategorias::model()->findAll($criteria);
 
-	/**
+            $html = $this->renderPartial(
+                    'ajaxCategoriaChange',
+                    array(
+                        'categorias'=>$categorias,
+                        'borrarEnabled'=>TRUE,
+                    ),
+                    true
+            );
+            
+            echo json_encode(
+                    array(
+                        'html'=>$html,
+                        'error'=>FALSE,
+                        'categorias_ids'=>implode('#',$cat_array),
+                    )
+            );
+            Yii::app()->end();                        
+        }
+
+        public function actionAjaxCategoriaDelete() {
+            
+            if(
+                (!array_key_exists('id', $_REQUEST) ||  is_null($_REQUEST['id']))
+                ||
+                (!array_key_exists('categorias_ids', $_REQUEST) ||  is_null($_REQUEST['categorias_ids']))
+            ) {
+                throw new Exception('Error en Requerimiento Ajax AjaxCategoriaDelete');
+            }
+            
+            $id = $_REQUEST['id'];
+            $categorias_ids = $_REQUEST['categorias_ids'];
+            $cat_array = explode('#', $categorias_ids);
+            $encontrado = array_search($id,$cat_array);
+            
+            if(is_null($encontrado)||($encontrado == FALSE)) {
+                echo json_encode(
+                        array(
+                            'html'=>'<div>La categoría NO esta agregada</div>',
+                            'error'=>TRUE,
+                            'categorias_ids'=>$categorias_ids,
+                        )
+                );
+                Yii::app()->end();
+            }
+            // Elimina el ID
+            unset($cat_array[$encontrado]);
+            
+            $criteria = new CDbCriteria;
+            $criteria->addInCondition('id', $cat_array);
+            $categorias = GastoCategorias::model()->findAll($criteria);
+
+            $html = $this->renderPartial(
+                    'ajaxCategoriaChange',
+                    array(
+                        'categorias'=>$categorias,
+                        'borrarEnabled'=>TRUE,
+                    ),
+                    true
+            );
+            
+            echo json_encode(
+                    array(
+                        'html'=>$html,
+                        'error'=>FALSE,
+                        'categorias_ids'=>implode('#',$cat_array),
+                    )
+            );
+            Yii::app()->end();                        
+        }
+
+        /**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
@@ -111,6 +212,7 @@ class GastoController extends Controller
 	 * @param integer $id the ID of the model to be deleted
 	 */
 	public function actionDelete($id)
+        //public function actionDelete()
 	{
 		$this->loadModel($id)->delete();
 

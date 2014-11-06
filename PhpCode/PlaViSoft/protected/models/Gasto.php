@@ -8,6 +8,8 @@
  * @property string $descripcion
  * @property string $valor
  * @property string $fecha
+ * @property string $nroFormulario
+ * @property string $nota
  * @property integer $borrado
  * @property string $fecha_borrado
  *
@@ -35,10 +37,12 @@ class Gasto extends CActiveRecord
 			array('borrado', 'numerical', 'integerOnly'=>true),
 			array('descripcion', 'length', 'max'=>150),
 			array('valor', 'length', 'max'=>15),
+			array('nroFormulario', 'length', 'max'=>45),
+			array('nota', 'length', 'max'=>255),
 			array('fecha, fecha_borrado', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, descripcion, valor, fecha, borrado, fecha_borrado', 'safe', 'on'=>'search'),
+			array('id, descripcion, valor, fecha, nroFormulario, nota, borrado, fecha_borrado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,11 +66,13 @@ class Gasto extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'descripcion' => 'Descripcion',
-			'valor' => 'Importe',
+			'valor' => 'Valor',
 			'fecha' => 'Fecha',
+			'nroFormulario' => 'Nro Formulario',
+			'nota' => 'Nota',
 			'borrado' => 'Borrado',
 			'fecha_borrado' => 'Fecha Borrado',
-                        'valorStr' => 'Importe',
+                        'valorStr' => 'Valor',
 		);
 	}
 
@@ -92,6 +98,8 @@ class Gasto extends CActiveRecord
 		$criteria->compare('descripcion',$this->descripcion,true);
 		$criteria->compare('valor',$this->valor,true);
 		$criteria->compare('fecha',$this->fecha,true);
+		$criteria->compare('nroFormulario',$this->nroFormulario,true);
+		$criteria->compare('nota',$this->nota,true);
 		$criteria->compare('borrado',$this->borrado);
 		$criteria->compare('fecha_borrado',$this->fecha_borrado,true);
 

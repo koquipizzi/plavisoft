@@ -50,7 +50,7 @@ class GastoCategoriasGasto extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'gasto_categorias_id' => 'Gasto Categorias',
+			'gasto_categorias_id' => 'Gasto Categorías',
 			'gasto_id' => 'Gasto',
 		);
 	}
@@ -91,4 +91,6 @@ class GastoCategoriasGasto extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        
 }
