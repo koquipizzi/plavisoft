@@ -287,7 +287,13 @@ class GastoController extends Controller
 	public function actionDelete($id)
         //public function actionDelete()
 	{
-		$this->loadModel($id)->delete();
+                $gasto = $this->loadModel($id);
+                
+                $criteria = new CDbCriteria;
+                $criteria->addCondition('gasto_id', $gasto->id);
+                GastoCategoriasGasto::model()->deleteAll($criteria);
+                
+                $gasto->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
