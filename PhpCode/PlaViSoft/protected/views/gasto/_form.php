@@ -6,7 +6,7 @@
 
     Yii::app()->clientScript->registerScript('AjaxRequest', "
         function AjaxCategoriaChange(){
-            jQuery('#div_error_categorias_grid').html('');
+            jQuery('#div_error_categorias_grid').html(' ');
             jQuery.ajax({
                 'type':'POST',
                 'async':false,
@@ -33,7 +33,7 @@
     ",CClientScript::POS_HEAD);               
 
     Yii::app()->clientScript->registerScript('AjaxRequestDelete', "
-        jQuery('#div_error_categorias_grid').html('');
+        jQuery('#div_error_categorias_grid').html(' ');
         function AjaxCategoriaDelete(id){
             jQuery.ajax({
                 'type':'POST',
@@ -156,7 +156,7 @@
 		</div>
 		<div class="controls">
 		<?php	 
-                    echo CHtml::hiddenField('categorias_ids', '', array ( 'id'=>'categorias_ids' ));
+                    echo CHtml::hiddenField('categorias_ids', $categorias_ids, array ( 'id'=>'categorias_ids' ));
                     
                     echo CHtml::activeDropDownList(
                         $gastoCategoria,
@@ -173,8 +173,18 @@
                 ?>	
 	 	</div>
                 <div id="div_error_categorias_grid"></div>
-                <div id="div_categorias_grid"></div>
-	 </div>    
+        </div>    
+        <div id="div_categorias_grid">
+            <?php
+                $this->renderPartial(
+                    'ajaxCategoriaChange',
+                    array(
+                        'categorias'=>$categorias,
+                        'borrarEnabled'=>TRUE,
+                    )
+                );
+            ?>
+        </div>
         <!-- ******************************** Botones *********************************** -->          
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(

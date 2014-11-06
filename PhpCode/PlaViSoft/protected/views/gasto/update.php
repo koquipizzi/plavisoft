@@ -13,8 +13,14 @@ $this->menu=array(
 	array('label'=>'Ver Gasto', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Listar Gastos', 'url'=>array('admin')),
 );
+
 ?>
 
 <h1>Modificar Gasto</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array(
+    'model'=>$model,
+    'gastoCategoria'=>$gastoCategoria,
+    'categorias_ids'=>$categorias_ids,
+    'categorias'=>$categorias,
+)); ?>

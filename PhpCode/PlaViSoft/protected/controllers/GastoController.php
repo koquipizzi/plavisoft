@@ -58,7 +58,7 @@ class GastoController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Gasto;
+		$gasto=new Gasto;
                 $gastoCategoria=new GastoCategorias;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -66,17 +66,43 @@ class GastoController extends Controller
 
 		if(isset($_POST['Gasto']))
 		{
-			$model->attributes=$_POST['Gasto'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			$gasto->attributes=$_POST['Gasto'];
+                        $categorias_ids = $_POST['categorias_ids'];
+                        
+                        $transaction = Yii::app()->db->beginTransaction();
+                        try{
+                                if($gasto->save()) {
+                                    $cat_array = explode('#', $categorias_ids);
+                                    foreach($cat_array as $id){
+                                        $aux = new GastoCategoriasGasto();
+                                        $aux->gasto_categorias_id = $id;
+                                        $aux->gasto_id = $gasto->id;
+                                        $aux->save();
+                                    }
+                                }
+                                else {
+                                    throw new Exception('Error al Guardar Gasto');
+                                }
+                                $transaction->commit();
+                                $this->redirect(array('view','id'=>$gasto->id));
+                        }
+                        catch(CDbException $e){
+                                $transaction->rollBack();
+                                throw new CHttpException(null,$e->errorInfo[2]);
+                        }
+                        catch(Exception $e){
+                                $transaction->rollBack();
+                                throw new CHttpException(null,"catch transaction, ".$e->getMessage());
+                        }                        
 		}
                 
-                $model->fecha = date('d/m/Y');
-                
+                $gasto->fecha = date('d/m/Y');
 
 		$this->render('create',array(
-			'model'=>$model,
+			'model'=>$gasto,
                         'gastoCategoria'=>$gastoCategoria,
+                        'categorias_ids'=>"",
+                        'categorias'=>array(),
 		));
 	}
         
@@ -189,21 +215,61 @@ class GastoController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
+		$gasto=$this->loadModel($id);
+                $gastoCategoria=new GastoCategorias;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Gasto']))
 		{
-			$model->attributes=$_POST['Gasto'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                    $gasto->attributes=$_POST['Gasto'];
+                    $categorias_ids = $_POST['categorias_ids'];
+
+                    $transaction = Yii::app()->db->beginTransaction();
+                    try{
+                            if($gasto->save()) {
+                                $criteria = new CDbCriteria;
+                                $criteria->addCondition('gasto_id', $gasto->id);
+                                GastoCategoriasGasto::model()->deleteAll($criteria);
+                                
+                                $cat_array = explode('#', $categorias_ids);
+                                foreach($cat_array as $id){
+                                    $aux = new GastoCategoriasGasto();
+                                    $aux->gasto_categorias_id = $id;
+                                    $aux->gasto_id = $gasto->id;
+                                    $aux->save();
+                                }
+                            }
+                            else {
+                                throw new Exception('Error al Guardar Gasto');
+                            }
+                            $transaction->commit();
+                            $this->redirect(array('view','id'=>$gasto->id));
+                    }
+                    catch(CDbException $e){
+                            $transaction->rollBack();
+                            throw new CHttpException(null,$e->errorInfo[2]);
+                    }
+                    catch(Exception $e){
+                            $transaction->rollBack();
+                            throw new CHttpException(null,"catch transaction, ".$e->getMessage());
+                    }                     
 		}
+                
+                $cat_array = array();
+                $categorias = $gasto->gastoCategoriases;
+                foreach($categorias as $categoria) {
+                    $cat_array[] = $categoria->id;
+                }
 
 		$this->render('update',array(
-			'model'=>$model,
+			'model'=>$gasto,
+                        'gastoCategoria'=>$gastoCategoria,
+                        'categorias_ids'=>'#'.implode('#',$cat_array),
+                        'categorias'=>$categorias,
 		));
+                
 	}
 
 	/**
