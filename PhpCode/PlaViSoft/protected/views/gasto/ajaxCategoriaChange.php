@@ -1,13 +1,20 @@
 <?php
+    if(!isset($tituloEnabled))
+        $tituloEnabled = TRUE;
+    
     if(count($categorias)>0){
 ?>
 <table>
+<?php
+    if($tituloEnabled){
+?>
     <thead>
         <tr>
             <td>Categoría</td>
             <td> </td>
         </tr>
     </thead>    
+<?php } ?>    
     <tbody>
 <?php
         foreach ($categorias as $categoria){

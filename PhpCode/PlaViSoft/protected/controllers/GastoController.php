@@ -47,8 +47,15 @@ class GastoController extends Controller
 	 */
 	public function actionView($id)
 	{
+                $gasto = $this->loadModel($id);
+                
+                $criteria = new CDbCriteria;
+                $criteria->join = ' JOIN plavisoft.gasto_categorias_gasto cg ON t.id = cg.gasto_categorias_id ';
+                $criteria->addCondition('cg.gasto_id',$gasto->id);
+                $categorias = GastoCategorias::model()->findAll($criteria);
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$gasto,
+                        'categorias'=>$categorias
 		));
 	}
 

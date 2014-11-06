@@ -27,3 +27,17 @@ $this->menu=array(
                 'nota',           
 	),
 )); ?>
+
+
+<h4>Categorías</h4>
+<?php 
+    $this->renderPartial(
+        'ajaxCategoriaChange',
+        array(
+            'categorias'=>$categorias,
+            'borrarEnabled'=>FALSE,
+            'tituloEnabled'=>FALSE,
+        )
+    );
+?>
+

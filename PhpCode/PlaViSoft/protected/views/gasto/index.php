@@ -15,6 +15,6 @@ $this->menu=array(
 <h1>Gastos</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
+	'dataProvider'=>$categoriaDataProvider,
 	'itemView'=>'_view',
 )); ?>
