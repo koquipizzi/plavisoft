@@ -28,7 +28,7 @@ class PagoController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','agregarCheque', 'borrarCheque', 'valorChange', 'nro_formularioChange'),
+				'actions'=>array('index','view','agregarCheque', 'borrarCheque', 'valorChange', 'nro_formularioChange', 'getComboItemsImputacionManual', 'imputacionManual', 'borrarImputacionManual'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -117,17 +117,194 @@ class PagoController extends Controller
             
         }
         
+        public function actionBorrarImputacionManual() {
+            
+            $msj = "";
+            $html = "";
+            $comboBox = "";
+            $error = FALSE;
+            
+            if(
+                    array_key_exists('valorPago', $_POST)&&
+                    array_key_exists('suscripcion_id', $_POST)&&
+                    array_key_exists('imputaciones_ids', $_POST)&&                    
+                    array_key_exists('cuota_id', $_POST)
+            ){
+                $cuota_id = $_POST['cuota_id'];
+                $imputaciones_ids = $_POST['imputaciones_ids'];
+                $suscripcion_id = $_POST['suscripcion_id'];
+                $valorPago = $_POST['valorPago'];
+
+                $calculo = PagoCalculoCuota::getTipoCalculo(3);
+                $calculo->setImputationsIDs($imputaciones_ids);
+                $calculo->borraImputation($cuota_id);
+                $totalImputado = $calculo->getTotalImputation();
+
+                $imputaciones_ids = $calculo->getImputationsIDs();
+
+                $html = $this->renderPartial(
+                    'listarCuotasImputacionManual',
+                    array(
+                        'cuotas'=>$calculo->calcularCuotas($suscripcion_id, $valorPago),
+                        'valor'=>'$ '.Yii::app() -> format -> number($valorPago),
+                        'totalImputado'=>'$ '.Yii::app() -> format -> number($totalImputado),
+                        'saldoAImputar'=>'$ '.Yii::app() -> format -> number($valorPago-$totalImputado),
+                        'msj'=>$msj,
+                    ),
+                    true
+                );            
+                $comboBox = $this->renderPartial(
+                    'comboItemsImputacionManual',
+                    array(
+                        'cuotas'=>$calculo->calcularCuotasPosibles($suscripcion_id),
+                    ),
+                    true
+                );
+            }
+            else {
+                $msj = "Error en los parámetros del requerimiento";
+                $error = TRUE;
+            }
+            
+            echo json_encode(
+                    array(
+                        'html'=>$html,
+                        'error'=>$error,
+                        'imputaciones_ids'=>$imputaciones_ids,
+                        'comboBox'=>$comboBox,
+                        'msj'=>$msj,
+                    )
+            );
+            Yii::app()->end();                        
+        }
         
-        private function calcularCuotas($valor, $suscripcion_id, $idTipoCalculoCuota = PagoCalculoCuota::TIPO_DEFAUT){
-            $calculo = PagoCalculoCuota::getTipoCalculo($idTipoCalculoCuota);
-            $cuotas = $calculo->calcularCuotas($suscripcion_id, $valor);
-            return $cuotas;
+        
+        
+        
+        
+        public function actionImputacionManual() {
+            
+            $msj = "";
+            $html = "";
+            $comboBox = "";
+            $error = FALSE;
+            
+            if(
+                    array_key_exists('valorPago', $_POST)&&
+                    array_key_exists('suscripcion_id', $_POST)&&
+                    array_key_exists('imputaciones_ids', $_POST)&&                    
+                    array_key_exists('cuota_id', $_POST)&&
+                    array_key_exists('valorImputacion', $_POST)
+            ){
+                $cuota_id = $_POST['cuota_id'];
+                $valorImputacion = $_POST['valorImputacion'];
+                $valorPago = $_POST['valorPago'];
+                $imputaciones_ids = $_POST['imputaciones_ids'];
+                $suscripcion_id = $_POST['suscripcion_id'];
+
+                $calculo = PagoCalculoCuota::getTipoCalculo(3);
+                $calculo->setImputationsIDs($imputaciones_ids);
+
+                $imputacion = new ImputacionRuntime();
+                $imputacion->valor = 0;
+                $totalImputado = 0;
+                
+                foreach ($calculo->getImputacionesRuntime() as $aux){
+                    $totalImputado = $totalImputado + $aux->valor;
+                    if($aux->cuota_id == $cuota_id){
+                        $imputacion = $aux;
+                    }
+                }
+
+                if(($totalImputado + $valorImputacion)<=$valorPago){
+                    $imputacion->valor = $imputacion->valor + $valorImputacion;
+                    $totalImputado = $totalImputado + $valorImputacion;
+                    $imputacion->cuota_id = $cuota_id;
+                    $imputacion->save();
+                    $calculo->imputar($imputacion);
+
+                    $imputaciones_ids = $calculo->getImputationsIDs();
+                }
+                else {
+                    $msj = "El total del importe imputado es mayor al importe del Pago";
+                    $error = TRUE;
+                }
+                $html = $this->renderPartial(
+                    'listarCuotasImputacionManual',
+                    array(
+                        'cuotas'=>$calculo->calcularCuotas($suscripcion_id, $valorPago),
+                        'valor'=>'$ '.Yii::app() -> format -> number($valorPago),
+                        'totalImputado'=>'$ '.Yii::app() -> format -> number($totalImputado),
+                        'saldoAImputar'=>'$ '.Yii::app() -> format -> number($valorPago-$totalImputado),
+                        'msj'=>$msj,
+                    ),
+                    true
+                );            
+                $comboBox = $this->renderPartial(
+                    'comboItemsImputacionManual',
+                    array(
+                        'cuotas'=>$calculo->calcularCuotasPosibles($suscripcion_id),
+                    ),
+                    true
+                );
+            }
+            else {
+                $msj = "Error en los parámetros del requerimiento";
+                $error = TRUE;
+            }
+            
+            echo json_encode(
+                    array(
+                        'html'=>$html,
+                        'error'=>$error,
+                        'imputaciones_ids'=>$imputaciones_ids,
+                        'comboBox'=>$comboBox,
+                        'msj'=>$msj,
+                    )
+            );
+            Yii::app()->end();                        
+        }
+        
+        public function actionGetComboItemsImputacionManual(){
+            $suscripcion_id = 0;
+            $imputaciones_ids="";
+            
+            if(
+                    array_key_exists('suscripcion_id', $_POST)&&
+                    array_key_exists('imputaciones_ids', $_POST)
+            ){
+                $suscripcion_id = $_POST['suscripcion_id'];
+                $calculo = PagoCalculoCuota::getTipoCalculo(3);
+                
+                $imputaciones_ids = $_POST['imputaciones_ids'];
+                $calculo->setImputationsIDs($imputaciones_ids);
+            }//if parametros $_POST   
+            
+            $html = $this->renderPartial(
+                'comboItemsImputacionManual',
+                array(
+                    'cuotas'=>$calculo->calcularCuotasPosibles($suscripcion_id),
+                ),
+                true
+            );            
+            
+            echo json_encode(
+                    array(
+                        'html'=>$html,
+                    )
+            );
+            Yii::app()->end();            
+
+            
         }
         
         
         public function actionValorChange(){
             $valor = 0;
             $cuotas = NULL;
+            $imputaciones_ids="";
+            $vista = 'listarCuotas';
+            $params = NULL;
             
             if(
                     array_key_exists('valor', $_POST)&&
@@ -137,28 +314,52 @@ class PagoController extends Controller
                 
                 $valor = Yii::app()->format->unformatNumber($_POST['valor']);
                 $suscripcion_id = $_POST['suscripcion_id'];
-                $idTipoCalculoCuota = $_POST['idTipoCalculoCuota'];
+                $idTipoCalculoCuota = isset($_POST['idTipoCalculoCuota'])?$_POST['idTipoCalculoCuota']:PagoCalculoCuota::TIPO_DEFAULT;
+                $calculo = PagoCalculoCuota::getTipoCalculo($idTipoCalculoCuota);
                 
-                $cuotas = $this->calcularCuotas($valor, $suscripcion_id, $idTipoCalculoCuota);
+                if($calculo->isManualImputation() && array_key_exists('imputaciones_ids', $_POST)) {
+                    // Manual Imputation
+                    $imputaciones_ids = $_POST['imputaciones_ids'];
+                    $calculo->setImputationsIDs($imputaciones_ids);
+                    $vista = 'listarCuotasImputacionManual';
+                    $totalImputado = $calculo->getTotalImputation();
+                    $params = 
+                        array(
+                            'cuotas'=>$calculo->calcularCuotas($suscripcion_id, $valor),
+                            'valor'=>'$ '.Yii::app() -> format -> number($valor),
+                            'totalImputado'=>'$ '.Yii::app() -> format -> number($totalImputado),
+                            'saldoAImputar'=>'$ '.Yii::app() -> format -> number($valor-$totalImputado),
+                            'msj'=>'',
+                        );
+                    
+                }
+
                 
-            }//if parametros $_POST                
+                
+            }//if parametros $_POST   
+            
+            if(!isset($params)){
+                $params = 
+                    array(
+                        'cuotas'=>$calculo->calcularCuotas($suscripcion_id, $valor),
+                        'valor'=>'$ '.Yii::app() -> format -> number($valor),
+                    );
+            }
             
             $html = $this->renderPartial(
-                    'listarCuotas',
-                    array(
-                        'cuotas'=>$cuotas,
-                        'valor'=>'$ '.Yii::app() -> format -> number($valor),
-                    ),
-                    true
+                $vista,
+                $params,
+                true
             );            
             
             echo json_encode(
                     array(
                         'html'=>$html,
+                        'imputaciones_ids'=>$imputaciones_ids
                     )
             );
             Yii::app()->end();            
-            
+
         }
         
         public function salvarPago($pago,$param){
@@ -191,7 +392,8 @@ class PagoController extends Controller
                 $tipoCalculo = new PagoCalculoCuota;
                 $cheque = new Cheque;
                 $suscripcion = NULL;
-                $persona = NULL;                
+                $persona = NULL;        
+                $imputacion_runtime = new ImputacionRuntime();
                 
 
 		// Uncomment the following line if AJAX validation is needed
@@ -214,11 +416,17 @@ class PagoController extends Controller
                             }
                             else {
                                 
-                                //$valor = Yii::app()->format->unformatNumber($_POST['valor']);
+                                $valor = Yii::app()->format->unformatNumber($pago->valor);
                                 $suscripcion_id = $_POST['Suscripcion']['suscripcion_id'];
-                                $idTipoPagoCalculoCuota = $_REQUEST['PagoCalculoCuota']['idTipo'];
-                                $cuotas = $this->calcularCuotas($pago->valor, $suscripcion_id, $idTipoPagoCalculoCuota);
-                                
+                                $idTipoCalculoCuota = $_REQUEST['PagoCalculoCuota']['idTipo'];
+                                $calculo = PagoCalculoCuota::getTipoCalculo($idTipoCalculoCuota);   
+                
+                                if($calculo->isManualImputation() && array_key_exists('imputaciones_ids', $_REQUEST)) {
+                                    $imputaciones_ids = $_REQUEST['imputaciones_ids'];
+                                    $calculo->setImputationsIDs($imputaciones_ids);
+                                }
+                                $cuotas = $calculo->calcularCuotas($suscripcion_id, $valor);
+
                                 foreach($cuotas as $i => $cuotaCalculada) {
                                     $cuota = Cuota::model()->findByPk($cuotaCalculada->id);
                                     $imputacion = new Imputacion;
@@ -227,14 +435,13 @@ class PagoController extends Controller
                                         $imputacion->valor = $cuotaCalculada->valorAsignado;
                                     $imputacion->save();
                                     
-                                    if ($cuotaCalculada->saldo == $cuotaCalculada->valorAsignado) {
+                                    if ($cuotaCalculada->saldo == 0) {
                                         $cuota->saldada = Cuota::SALDADA;
-                                        $cuota->save();
                                     }
-                                    else {
+                                    elseif(($cuotaCalculada->saldo > 0)&&($cuotaCalculada->saldo < $cuotaCalculada->valor)){
                                         $cuota->saldada = Cuota::PARCIAL_SALDADA;
-                                        $cuota->save();
                                     }
+                                    $cuota->save();
                                 }
                                 
                             }
@@ -353,6 +560,7 @@ class PagoController extends Controller
                         'forma_pago_deposito'=>$forma_pago_deposito,
                         'ultimoPago'=>$ultimoPago,
                         'tipoCalculo' => $tipoCalculo,
+                        'imputacion_runtime'=>$imputacion_runtime,
 		));                
 	}
 

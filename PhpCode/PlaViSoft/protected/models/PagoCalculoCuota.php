@@ -38,6 +38,10 @@ abstract class CalculoCuota {
         return $resto;
     }
     
+    public function isManualImputation(){
+        return FALSE;
+    }
+    
     public function calcularCuotas($suscripcion_id, $valor = 0) {
         
         $cuotas = array();                
@@ -75,7 +79,7 @@ abstract class CalculoCuota {
         }//if resto
 
         return $cuotas;        
-    }    
+    }
 }
 
 class VigenteUtimasCalculoCuota extends CalculoCuota {
@@ -100,7 +104,7 @@ class SaldoSiguienteCalculoCuota extends VigenteUtimasCalculoCuota {
 }
 
 class VigenteSiguientesCalculoCuota extends CalculoCuota {
-    
+
     protected function getCuotaSaldo($cuotasDisponibes) {
         return array_shift($cuotasDisponibes);
     }
@@ -111,13 +115,147 @@ class VigenteSiguientesCalculoCuota extends CalculoCuota {
 
 }
 
+class ImputarCuotaManualmente extends CalculoCuota {
+    
+    private $imputaciones_ids = NULL;
+    
+    private $array_imputaciones_ids = array();
+    
+    public function setImputationsIDs($imputaciones_ids) {
+        $this->imputaciones_ids = $imputaciones_ids;
+        $this->array_imputaciones_ids = explode('#', $imputaciones_ids);
+    }
+    
+    public function getImputationsIDs() {
+        return $this->imputaciones_ids;
+    }
+
+    public function getImputacionesRuntime() {
+        $criteria = new CDbCriteria;
+        $criteria->addInCondition('id', $this->array_imputaciones_ids);
+        return ImputacionRuntime::model()->findAll($criteria);
+    }
+    
+    public function imputar($imputacion) {
+        $encontrado = array_search($imputacion->id,$this->array_imputaciones_ids);
+        if(is_null($encontrado)||($encontrado == FALSE)) {
+            $this->array_imputaciones_ids[] = $imputacion->id;
+            $this->imputaciones_ids = implode('#', $this->array_imputaciones_ids);
+        }
+    }
+    
+    private function cuotaImputadaRuntime($cuota, $imputacionesRuntime){
+        foreach ($imputacionesRuntime as $imputacion) {
+            if($cuota->id == $imputacion->cuota_id)
+                return $imputacion;
+        }
+        return FALSE;
+    }
+    
+//    protected function obtenerCuotasDisponibles($suscripcion_id) {
+//        $cuotasDisponibes = parent::obtenerCuotasDisponibles($suscripcion_id);
+//        $imputacionesRuntime = $this->getImputacionesRuntime();
+//        
+//        $r = array();
+//        
+//        foreach ($cuotasDisponibes as $cuota){
+//            $imputacion = $this->cuotaImputadaRuntime($cuota, $imputacionesRuntime);
+//            if ($imputacion){
+//                $cuota->totalSaldado = $cuota->totalSaldado + $imputacion->valor;
+//                $cuota->saldo = $cuota->saldo - $cuota->totalSaldado;
+//            }
+//            $r[] = $cuota;
+//        }
+//        return $r;      
+//    }
+    
+
+    protected function getCuotaSaldo($cuotasDisponibes) {
+        return NULL;
+    }
+    
+    protected function getCuotasCancelar($cuotasDisponibes) {
+        return NULL;
+    }    
+    
+    public function calcularCuotas($suscripcion_id, $valor = 0) {
+        $cuotasDisponibes = $this->obtenerCuotasDisponibles($suscripcion_id);
+        $imputacionesRuntime = $this->getImputacionesRuntime();
+        
+        $r = array();
+        
+        foreach ($cuotasDisponibes as $cuota){
+            $imputacion = $this->cuotaImputadaRuntime($cuota, $imputacionesRuntime);
+            if ($imputacion){
+                $cuota->totalSaldado = $cuota->totalSaldado + $imputacion->valor;
+                $cuota->saldo = $cuota->valor - $cuota->totalSaldado;
+                $cuota->valorAsignado = $imputacion->valor;
+                $r[] = $cuota;
+            }
+        }
+        return $r;      
+    }    
+    
+    public function isManualImputation(){
+        return TRUE;
+    }
+    
+    public function calcularCuotasPosibles($suscripcion_id){
+        $cuotasDisponibes = $this->obtenerCuotasDisponibles($suscripcion_id);
+        $imputacionesRuntime = $this->getImputacionesRuntime();
+        
+        $r = array();
+        
+        foreach ($cuotasDisponibes as $i => $cuota){
+            $imputacion = $this->cuotaImputadaRuntime($cuota, $imputacionesRuntime);
+            if ($imputacion){
+                $cuota->totalSaldado = $cuota->totalSaldado + $imputacion->valor;
+                $cuota->saldo = $cuota->valor - $cuota->totalSaldado;
+                $cuota->valorAsignado = $imputacion->valor;
+                if($cuota->saldo != 0)
+                    $r[] = $cuota;
+            }
+            else
+                $r[] = $cuota;
+        }
+        return $r;      
+    }
+    
+    public function borraImputation($cuota_id) {
+        $imputacionesRuntime = $this->getImputacionesRuntime();
+
+        foreach ($imputacionesRuntime as $imputacion ){
+            if ($imputacion->cuota_id == $cuota_id){
+                $id = $imputacion->id;
+                $imputacion->delete();
+                $encontrado = array_search($id,  $this->array_imputaciones_ids);
+                if(!is_null($encontrado)&&($encontrado != FALSE)) {
+                    unset($this->array_imputaciones_ids[$encontrado]);
+                }
+                return TRUE;
+            }
+        }
+        return FALSE;
+    }
+    
+    public function getTotalImputation() {
+        $imputacionesRuntime = $this->getImputacionesRuntime();
+        $r = 0;
+        foreach ($imputacionesRuntime as $imputacion ){
+            $r += $imputacion->valor;
+        }
+        return $r;
+    }   
+    
+}
+
 
 class PagoCalculoCuota extends CFormModel 
 {
     
-    const TIPO_DEFAUT = 0;
+    const TIPO_DEFAULT = 0;
     
-    public $idTipo = self::TIPO_DEFAUT;
+    public $idTipo = self::TIPO_DEFAULT;
     
     
     public function rules() {
@@ -133,7 +271,6 @@ class PagoCalculoCuota extends CFormModel
             'idTipo' => 'Tipo Cálculo Imputación',
         );
     }
-    
     
     public static function getValues() {
         return array(
@@ -152,10 +289,15 @@ class PagoCalculoCuota extends CFormModel
                 'Descripcion' => 'Asignar Cuota Vigente y siguientes',
                 'class' => 'VigenteSiguientesCalculoCuota',
             ),
+            array(
+                'id' => 3,
+                'Descripcion' => 'Imputar Manualmente',
+                'class' => 'ImputarCuotaManualmente',
+            ),
         );
     }
     
-    public static function getTipoCalculo($idTipoSelect = self::TIPO_DEFAUT) {
+    public static function getTipoCalculo($idTipoSelect = self::TIPO_DEFAULT) {
         $tipo = self::getValues();
         foreach ($tipo as $tipo) {
             if($tipo['id'] == $idTipoSelect) {

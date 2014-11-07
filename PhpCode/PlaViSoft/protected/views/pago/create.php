@@ -69,6 +69,103 @@ $this->menu=array(
             'cache':false
         });
     }
+
+    function borrarImputacionManual(id){
+        var valor = $('#valorPago').val();
+        var suscripcion_id = $('#suscripcion_id').val();        
+        var imputaciones_ids = $('#imputaciones_ids').val();
+    
+        jQuery.ajax({
+            'type':'POST',
+            'async':false,
+            'dataType':'JSON',
+            'success':function( data ) {
+                jQuery("#div_cuotas").html(data.html);
+                jQuery('#imputacionManual_cuota_id').empty().append(data.comboBox);
+                jQuery('#imputaciones_ids').val(data.imputaciones_ids);
+            },
+            'data':{
+                'cuota_id':id,
+                'suscripcion_id':suscripcion_id,
+                'imputaciones_ids':imputaciones_ids,
+                'valorPago':valor,
+            },
+            'url':'<?php echo Yii::app()->createAbsoluteUrl('Pago/borrarImputacionManual')?>',
+            'cache':false
+        });
+    }
+
+
+    function imputacionManualComboChange(){
+        var valor = jQuery('#imputacionManual_cuota_id').find(':selected').data('valor');
+        jQuery('#imputacionManual_valor').val(valor);
+    }
+    
+    function tipoCalculoChange(){
+        var tipo_imputacion = $('#idTipoCalculoCuota').val();
+       
+        //@todo Deberia llamar al servidor para saber si ese tipo es Manual o Automatico
+        if(tipo_imputacion == 3){ 
+            $("#div_imputacion_manual").show();
+            var suscripcion_id = $('#suscripcion_id').val();
+            var imputaciones_ids = $('#imputaciones_ids').val();            
+            
+            jQuery.ajax({
+                'type':'POST',
+                'async':false,
+                'dataType':'JSON',
+                'success':function( data ) {
+                    jQuery('#imputacionManual_cuota_id').empty().append(data.html);
+                },
+                'data':{
+                    'suscripcion_id':suscripcion_id,
+                    'imputaciones_ids':imputaciones_ids
+                },
+                'url':'<?php echo Yii::app()->createAbsoluteUrl('Pago/getComboItemsImputacionManual')?>',
+                'cache':false
+            });
+            $("#div_cuotas").html(' ');
+            imputacionManualComboChange();
+        }
+        else{ 
+            $("#div_imputacion_manual").hide();
+            valorChange();
+        }
+    }
+    
+    function imputacionManual() {
+        var valor = $('#valorPago').val();
+        if(valor==0 || valor == ''){
+            $("#div_cuotas").html('Debe ingresar un valor a ser calculado');
+            return;
+        }
+        
+        var suscripcion_id = $('#suscripcion_id').val();        
+        var imputaciones_ids = $('#imputaciones_ids').val();
+        var cuota_id = $('#imputacionManual_cuota_id').val();
+        var valorImputacion = $('#imputacionManual_valor').val();
+        
+        jQuery.ajax({
+            'type':'POST',
+            'async':false,
+            'dataType':'JSON',
+            'success':function( data ) {
+                jQuery("#div_cuotas").html(data.html);
+                jQuery('#imputacionManual_cuota_id').empty().append(data.comboBox);
+                jQuery('#imputaciones_ids').val(data.imputaciones_ids);
+            },
+            'data':{
+                'valorPago':valor,
+                'suscripcion_id':suscripcion_id,
+                'imputaciones_ids':imputaciones_ids,
+                'cuota_id':cuota_id,
+                'valorImputacion':valorImputacion,
+            },
+            'url':'<?php echo Yii::app()->createAbsoluteUrl('Pago/imputacionManual')?>',
+            'cache':false
+        });        
+        
+    }
     
     function valorChange(){
         var valor = $('#valorPago').val();
@@ -77,19 +174,32 @@ $this->menu=array(
             $("#div_cuotas").html('Debe ingresar un valor a ser calculado');
             return;
         }
+        
         var suscripcion_id = $('#suscripcion_id').val();
         var tipo_imputacion = $('#idTipoCalculoCuota').val();
+        var imputaciones_ids = $('#imputaciones_ids').val();
+        
+        //@todo Deberia llamar al servidor para saber si ese tipo es Manual o Automatico
+        if(tipo_imputacion == 3){ 
+            $("#div_imputacion_manual").show();
+        }
+        else{ 
+            $("#div_imputacion_manual").hide();
+        }
+        
         jQuery.ajax({
             'type':'POST',
             'async':false,
             'success':function( data ) {
                 data = jQuery.parseJSON( data );
                 $("#div_cuotas").html(data.html);
+                $('#imputaciones_ids').val(data.imputaciones_ids);
             },
             'data':{
                 'valor':valor,
                 'suscripcion_id':suscripcion_id,
-                'idTipoCalculoCuota':tipo_imputacion
+                'idTipoCalculoCuota':tipo_imputacion,
+                'imputaciones_ids':imputaciones_ids
             },
             'url':'<?php echo Yii::app()->createAbsoluteUrl('Pago/valorChange')?>',
             'cache':false
@@ -203,7 +313,6 @@ $this->menu=array(
                                 $pago,'valor',
                                 array(
                                     'id'=>'valorPago',
-                                    
                                     'maxlength'=>10,
                                     'onChange'=>'js:valorChange();',
                                 )
@@ -222,7 +331,7 @@ $this->menu=array(
                                 CHtml::listData(PagoCalculoCuota::getValues(),'id', 'Descripcion'),
                                 array(
                                     'id'=>'idTipoCalculoCuota',
-                                    'onChange'=>'js:valorChange();',
+                                    'onChange'=>'js:tipoCalculoChange();',
                                     'style'=>'width:430px',
                                 )
                         );
@@ -241,11 +350,58 @@ $this->menu=array(
                                 'onClick'=>'js:valorChange();',
                             ),
                         ));                 
+                        echo CHtml::hiddenField('imputaciones_ids', '', array ( 'id'=>'imputaciones_ids' ));     
         ?>
-                        <div id="div_cuotas"></div>                            
                         </div>                        
-                    </div>                                                                        
-                </div>                                                
+                    </div>                                                
+
+                    <div id="div_imputacion_manual" style="display: none; margin-top: 15px;" >
+                            <!-- ******************************** Imputacion Manual *********************************** -->          
+                            <div class="control-group">
+                                    <div class="control-label">
+                                            <?php echo $form->labelEx($imputacion_runtime,'cuota_id'); ?>
+                                    </div>
+                                    <div class="controls">
+                                            <?php
+                                                echo CHtml::activeDropDownList(
+                                                        $imputacion_runtime,'cuota_id', 
+                                                        array(),
+                                                        array(
+                                                            'id'=>'imputacionManual_cuota_id',
+                                                            'onChange'=>'js:imputacionManualComboChange()',
+                                                        )
+                                                );
+                                            ?>                            
+                                    </div>
+                            </div>
+
+                            <div class="control-group">
+                                    <?php 
+                                        echo $form->textFieldRow(
+                                            $imputacion_runtime,
+                                            'valor',
+                                            array('class'=>'span5','maxlength'=>45,'id'=>'imputacionManual_valor')
+                                        );
+                                    ?>
+                            </div>
+
+                    <div class="controls">
+                    <?php
+                        $this->widget('bootstrap.widgets.TbButton', array(
+                            'buttonType'=>'link',
+                            'type'=>'info',
+                            'label'=>'Imputar Cuota',
+                            'url'=>'#',
+                            'htmlOptions' => array(
+                                'onClick'=>'js:imputacionManual();',
+                            ),
+                        ));                 
+                    ?>                                
+
+                    </div>
+                </div>  
+                <div id="div_cuotas"></div>                                              
+            </div>                                                
         <?php
             }
         ?>
@@ -253,8 +409,6 @@ $this->menu=array(
         <!-- ******************************** Talonario y Formulario *********************************** --> 
         <div class="sectionEditable">
             <?php
-    //var_dump($ultimoPago);
-    //die();
                 if( isset($ultimoPago) && $ultimoPago){
             ?>
             <div>
