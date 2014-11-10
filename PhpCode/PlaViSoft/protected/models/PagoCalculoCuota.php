@@ -26,16 +26,30 @@ abstract class CalculoCuota {
         throw new CHttpException(null,'No se encuentra Cuota a Saldar');
     }
     
-    private function asignarValorCuota($valor, &$cuota){
+    protected function asignarValorCuota($valor, &$cuota){
+//        $resto = 0;
+//        if ( ($valor - $cuota->saldo) > 0 ) {
+//            $resto = $valor - $cuota->saldo;
+//            $cuota->valorAsignado = $cuota->saldo;
+//        }
+//        else {
+//            $cuota->valorAsignado = $valor;
+//        }
+//        return $resto;
+
         $resto = 0;
+        $importe = $valor;
         if ( ($valor - $cuota->saldo) > 0 ) {
+            $importe = $cuota->saldo;
             $resto = $valor - $cuota->saldo;
-            $cuota->valorAsignado = $cuota->saldo;
         }
-        else {
-            $cuota->valorAsignado = $resto;
-        }
+        
+        $cuota->totalSaldado = $cuota->totalSaldado + $importe;
+        $cuota->saldo = $cuota->valor - $cuota->totalSaldado;
+        $cuota->valorAsignado = $importe;
+        
         return $resto;
+        
     }
     
     public function isManualImputation(){
@@ -121,6 +135,23 @@ class ImputarCuotaManualmente extends CalculoCuota {
     
     private $array_imputaciones_ids = array();
     
+    public function getTotalImputado(){
+        $totalImputado = 0;
+        foreach ($this->getImputacionesRuntime() as $aux){
+            $totalImputado = $totalImputado + $aux->valor;
+        }
+        return $totalImputado;
+    }
+    
+    public function getImputacionPorCuota_id($cuota_id){
+        foreach ($this->getImputacionesRuntime() as $aux){
+            if($aux->cuota_id == $cuota_id){
+                return $aux;
+            }
+        }
+        return NULL;
+    }
+    
     public function setImputationsIDs($imputaciones_ids) {
         $this->imputaciones_ids = $imputaciones_ids;
         $this->array_imputaciones_ids = explode('#', $imputaciones_ids);
@@ -187,9 +218,10 @@ class ImputarCuotaManualmente extends CalculoCuota {
         foreach ($cuotasDisponibes as $cuota){
             $imputacion = $this->cuotaImputadaRuntime($cuota, $imputacionesRuntime);
             if ($imputacion){
-                $cuota->totalSaldado = $cuota->totalSaldado + $imputacion->valor;
-                $cuota->saldo = $cuota->valor - $cuota->totalSaldado;
-                $cuota->valorAsignado = $imputacion->valor;
+                $this->asignarValorCuota($imputacion->valor, $cuota);
+//                $cuota->totalSaldado = $cuota->totalSaldado + $imputacion->valor;
+//                $cuota->saldo = $cuota->valor - $cuota->totalSaldado;
+//                $cuota->valorAsignado = $imputacion->valor;
                 $r[] = $cuota;
             }
         }
@@ -209,9 +241,10 @@ class ImputarCuotaManualmente extends CalculoCuota {
         foreach ($cuotasDisponibes as $i => $cuota){
             $imputacion = $this->cuotaImputadaRuntime($cuota, $imputacionesRuntime);
             if ($imputacion){
-                $cuota->totalSaldado = $cuota->totalSaldado + $imputacion->valor;
-                $cuota->saldo = $cuota->valor - $cuota->totalSaldado;
-                $cuota->valorAsignado = $imputacion->valor;
+                $this->asignarValorCuota($imputacion->valor, $cuota);
+//                $cuota->totalSaldado = $cuota->totalSaldado + $imputacion->valor;
+//                $cuota->saldo = $cuota->valor - $cuota->totalSaldado;
+//                $cuota->valorAsignado = $imputacion->valor;
                 if($cuota->saldo != 0)
                     $r[] = $cuota;
             }

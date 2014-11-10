@@ -202,24 +202,33 @@ class PagoController extends Controller
                 $imputaciones_ids = $_POST['imputaciones_ids'];
                 $suscripcion_id = $_POST['suscripcion_id'];
 
+                $criteria = new CDbCriteria;
+                $criteria->compare('id', $cuota_id);
+                $cuota = CuotaCalculada::model()->findAll($criteria);
+                if(!isset($cuota)||empty($cuota)){
+                    $msj = "La cuota no existe";
+                    $error = TRUE;
+                }
+                else{
+                    if($valorImputacion > $cuota[0]->saldo)
+                        $valorImputacion = $cuota[0]->saldo;
+                }
+
                 $calculo = PagoCalculoCuota::getTipoCalculo(3);
                 $calculo->setImputationsIDs($imputaciones_ids);
 
-                $imputacion = new ImputacionRuntime();
-                $imputacion->valor = 0;
-                $totalImputado = 0;
-                
-                foreach ($calculo->getImputacionesRuntime() as $aux){
-                    $totalImputado = $totalImputado + $aux->valor;
-                    if($aux->cuota_id == $cuota_id){
-                        $imputacion = $aux;
-                    }
+                $imputacion = $calculo->getImputacionPorCuota_id($cuota_id);
+                if(!isset($imputacion)){
+                    $imputacion = new ImputacionRuntime();
+                    $imputacion->valor = 0;
                 }
+                $totalImputado = $calculo->getTotalImputado();
 
                 if(($totalImputado + $valorImputacion)<=$valorPago){
                     $imputacion->valor = $imputacion->valor + $valorImputacion;
                     $totalImputado = $totalImputado + $valorImputacion;
                     $imputacion->cuota_id = $cuota_id;
+                    
                     $imputacion->save();
                     $calculo->imputar($imputacion);
 
