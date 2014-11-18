@@ -50,7 +50,7 @@ body
 	</tr>
 		<tr>
 	<td style="border: solid 1px #FFFFFF;width: 20%; height: 15px;text-align: left; "></td>
-	<td style="border: solid 1px #FFFFFF;width: 80%; height: 15px;text-align: left; vertical-align: bottom;">PAGO CUOTA CIRCULO DE VIVIENDAS</td>
+	<td style="border: solid 1px #FFFFFF;width: 80%; height: 15px;text-align: left; vertical-align: bottom;"><?php echo "Pago de Cuotas: ".$model->descripcionCuotasPagas(); ?></td>
 	</tr>
 </table>
 <table style="border: solid 1px #FFFFFF; background: #FFFFFF; width: 100%; text-align: center">

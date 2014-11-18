@@ -174,6 +174,19 @@ class Pago extends ActiveRecord
             }
             return "";
         }
-  
+
+        
+        public function descripcionCuotasPagas(){
+            $r = '';
+            $imputaciones = $this->imputacion;
+            if(count($imputaciones)>0){
+                $i = array_shift($imputaciones);
+                $r = $i->cuota->nro_cuota;
+            }
+            foreach($imputaciones as $imputacion){
+                $r .= ', '.$imputacion->cuota->nro_cuota;
+            }
+            return $r;
+        }
         
 }
