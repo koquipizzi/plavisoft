@@ -63,7 +63,7 @@
     
     
         <br><br>
-        
+     
         <!-- Tabla de datos -->
         <table width=700>
             <thead>

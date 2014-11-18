@@ -39,7 +39,7 @@ abstract class CalculoCuota {
 
         $resto = 0;
         $importe = $valor;
-        if ( ($valor - $cuota->saldo) > 0 ) {
+        if ( ($valor - $cuota->saldo) >= 0 ) {
             $importe = $cuota->saldo;
             $resto = $valor - $cuota->saldo;
         }
@@ -87,7 +87,7 @@ abstract class CalculoCuota {
             }
             if($resto>0) {
                 $cuotaResto = $this->getCuotaSaldo($cuotasRestantes);
-                $cuotaResto->valorAsignado = $resto;
+                $resto = $this->asignarValorCuota($resto, $cuotaResto);
                 $cuotas[] = $cuotaResto;
             }
         }//if resto
