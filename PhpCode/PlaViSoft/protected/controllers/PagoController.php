@@ -80,7 +80,19 @@ class PagoController extends Controller
 		));
 	}
 
-
+        private function existeNro_Formulario($nro_talonario,$nro_formulario){
+                $esta = FALSE;
+                if($nro_formulario!=''){
+                    $criteria = new CDbCriteria;
+                        $criteria->compare('talonario', $nro_talonario);
+                        $criteria->compare('nro_formulario', $nro_formulario);
+                    $aux = Pago::model()->findAll($criteria);
+                    $esta = (isset($aux)&&is_array($aux)&&(count($aux)>0));
+                }            
+                return $esta;
+        }
+        
+        
         public function actionNro_formularioChange(){
 
             $html = "";
@@ -89,14 +101,7 @@ class PagoController extends Controller
                 $nro_talonario = trim($_POST['talonario']);
                 $nro_formulario = trim($_POST['nro_formulario']);
                 
-                $esta = TRUE;
-                if($nro_formulario!=''){
-                    $criteria = new CDbCriteria;
-                        $criteria->compare('talonario', $nro_talonario);
-                        $criteria->compare('nro_formulario', $nro_formulario);
-                    $aux = Pago::model()->findAll($criteria);
-                    $esta = (isset($aux)&&is_array($aux)&&(count($aux)>0));
-                }
+                $esta = $this->existeNro_Formulario($nro_talonario, $nro_formulario);
             
                 $html = $this->renderPartial(
                         'listarTalonario',
@@ -406,7 +411,8 @@ class PagoController extends Controller
                 
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation();
+                
 		if(isset($_REQUEST['Pago']))
 		{
                     $transaction = Yii::app()->db->beginTransaction();
@@ -507,7 +513,12 @@ class PagoController extends Controller
                             }
 
                             $transaction->commit();
-                            $this->redirect(array('cuota/admin&suscripcion_id='.$suscripcion_id));
+                            //$this->redirect(array('cuota/admin&suscripcion_id='.$suscripcion_id));
+                            echo json_encode(array(
+                                "error"=>FALSE,
+                                "url" => Yii::app()->createAbsoluteUrl('cuota/admin&suscripcion_id='.$suscripcion_id)
+                            ));
+                            Yii::app()->end();
                     }
                     catch(CDbException $e){
                             $transaction->rollBack();
@@ -696,12 +707,59 @@ class PagoController extends Controller
 	 * Performs the AJAX validation.
 	 * @param Pago $model the model to be validated
 	 */
-	protected function performAjaxValidation($model)
+	protected function performAjaxValidation($model=NULL)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='pago-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='saldar-form')
 		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
+                        $error = false;
+                        $mensaje = '';
+                        try{
+                            // Valida que todo el importe este imputado en cuotas
+                            $valorPago = Yii::app()->format->unformatNumber($_REQUEST['Pago']['valor']);
+                            $suscripcion_id = $_REQUEST['Suscripcion']['suscripcion_id'];
+
+                            $idTipoCalculoCuota = $_REQUEST['PagoCalculoCuota']['idTipo'];
+                            $calculo = PagoCalculoCuota::getTipoCalculo($idTipoCalculoCuota);   
+
+                            if($calculo->isManualImputation() && array_key_exists('imputaciones_ids', $_REQUEST)) {
+                                $imputaciones_ids = $_REQUEST['imputaciones_ids'];
+                                $calculo->setImputationsIDs($imputaciones_ids);
+                            }
+                            $cuotas = $calculo->calcularCuotas($suscripcion_id, $valorPago);
+                            $valorImputado = 0;
+                            foreach($cuotas as $i => $cuotaCalculada) {
+                                $valorImputado += $cuotaCalculada->valorAsignado;
+                            }
+
+                            if(($valorPago-$valorImputado)>0){
+                                throw new Exception('Diferencia sin imputar $ '.Yii::app() -> format -> number($valorPago-$valorImputado));
+                            }
+                            
+                            // Valida que el Nro de Formulario este completado
+                            if(trim($_REQUEST['Pago']['nro_formulario']) == ''){
+                                throw new Exception('El Numero de Formulario es Vacio');
+                            }
+                            else{
+                                $nro_talonario = trim($_REQUEST['Pago']['talonario']);
+                                $nro_formulario = trim($_REQUEST['Pago']['nro_formulario']);
+
+                                if($this->existeNro_Formulario($nro_talonario, $nro_formulario)){
+                                    throw new Exception('El Numero de Formulario esta ocupado');
+                                }
+                            }
+                            
+                        } catch (Exception $ex) {
+                            $mensaje = $ex->getMessage();
+                            $error = true;
+                        }
+                        
+                        if($error){
+                            echo json_encode(array(
+                                "error"     =>  $error,
+                                "mensaje"   =>  $mensaje
+                            ));
+                            Yii::app()->end();
+                        }
 		}
 	}
         

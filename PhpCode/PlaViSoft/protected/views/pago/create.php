@@ -21,6 +21,7 @@ if(isset($persona)){
 $this->menu=array(
 	array('label'=>$label, 'url'=>array($url)),
 );
+
 ?>
 
 <div class="form">
@@ -151,6 +152,8 @@ $this->menu=array(
             'dataType':'JSON',
             'success':function( data ) {
                 jQuery("#div_cuotas").html(data.html);
+                if(data.error == true)
+                    jQuery("#imputacionManual_valor").notify(data.msj,{ position:"right" });
                 jQuery('#imputacionManual_cuota_id').empty().append(data.comboBox);
                 jQuery('#imputaciones_ids').val(data.imputaciones_ids);
             },
@@ -227,6 +230,18 @@ $this->menu=array(
             'cache':false
         });
     }
+    
+    function afterValidate(form, data, hasError){
+        if(data.error == true){
+            $('#saldar-form_es_').show();
+            $('#saldar-form_es_ ul').html(data.mensaje);
+            return false;
+        }
+        else if(data.hasOwnProperty('url')){
+            window.location = data.url;
+        }
+        return true;
+    }    
 
 </script>    
 
@@ -246,7 +261,7 @@ $this->menu=array(
         -webkit-border-radius: 10px;
         border-radius: 10px;
         border: 1px solid;        
-        background-color:#ffdddd;
+        background-color:#00DF77;
         padding:10px;
         margin-bottom: 5px;
     }
@@ -256,7 +271,17 @@ $this->menu=array(
 	'id'=>'saldar-form',
 	'type'=>'horizontal',
 	'htmlOptions'=>array('class'=>'well'),
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
+        'clientOptions' => array(
+            'validateOnChange'=> FALSE,
+            'validateOnSubmit' => TRUE,
+            'validateOnType' => FALSE,
+            'afterValidate'=> "js:afterValidate"
+        ),
+        'htmlOptions'=>array(
+            'onsubmit'=>"return false;",      
+            'onkeypress'=>" if(event.keyCode == 13){ alert('ENTER'); } " 
+        ),
 )); ?>
 	
 	<?php echo $form->errorSummary($pago); ?>
@@ -380,7 +405,7 @@ $this->menu=array(
                                         echo $form->textFieldRow(
                                             $imputacion_runtime,
                                             'valor',
-                                            array('class'=>'span5','maxlength'=>45,'id'=>'imputacionManual_valor')
+                                            array('class'=>'span5','maxlength'=>20,'id'=>'imputacionManual_valor')
                                         );
                                     ?>
                             </div>
@@ -448,7 +473,7 @@ $this->menu=array(
                                 $pago,'nro_formulario',
                                 array(
                                     'id'=>'nro_formulario',
-                                    'maxlength'=>10,
+                                    'maxlength'=>20,
                                     'onkeyup'=>'js:nro_formularioChange();',
                                     'onChange'=>'js:nro_formularioChange();',
                                 )
@@ -658,6 +683,36 @@ $this->menu=array(
 </div>
 
 <script>
+                
+//function validate(formData, jqForm, options) { 
+//    debugger;
+//    alert(formData['idTipoCalculoCuota']);
+//    return false;
+//    // formData is an array of objects representing the name and value of each field 
+//    // that will be sent to the server;  it takes the following form: 
+//    // 
+//    // [ 
+//    //     { name:  username, value: valueOfUsernameInput }, 
+//    //     { name:  password, value: valueOfPasswordInput } 
+//    // ] 
+//    // 
+//    // To validate, we can examine the contents of this array to see if the 
+//    // username and password fields have values.  If either value evaluates 
+//    // to false then we return false from this method. 
+//// 
+////    for (var i=0; i < formData.length; i++) { 
+////        if (!formData[i].value) { 
+////            alert('Please enter a value for both Username and Password'); 
+////            return false; 
+////        } 
+////    } 
+////    alert('Both fields contain values.'); 
+//}
+//
+//$('saldar-form').ajaxForm({  
+//    beforeSubmit: validate    
+//});
+
 $( ".sectionFix" ).hover(
     function() {
         $( this ).stop().animate({"opacity": 1});
