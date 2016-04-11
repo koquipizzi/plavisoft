@@ -61,68 +61,75 @@ class Sorter extends CWidget
 	public function genTable()
 	{
 		$datas=$this->data;
-		$object=$datas[0];
-		$class=get_class($object);
-		$count=count($datas);
-		echo "Total: ".$count." resultados encontrados";
-		
-		//delete by using post method
-		echo '<script>
-			 function del_data(url,data) {
-				var result = confirm("¿Está seguro de querer borrar el registro?");
-				if (result==true) {
-					$.post( url , { id : data }).
-                                            done(function( data ) {
-                                                //alert( data );
-                                                location.reload();
-                                            });
-				}	
-			 }
-			 </script>';
-		
-		//Table start
-		echo "<table class='tablesorter-bootstrap'>";
-		//Table head start
-		echo "<thead>";
-		echo "<tr>";
-		$filters=$this->filters;
-		$i=0;
-		foreach($this->columns as $column)
-		{
-			//checking whether the column name is customized
-			if(is_array($column))
-			{
-				$column=$column['header'];	
-			}
-			
-			$find = explode(".", $column);
-			if(count($find)>1) {
-			echo "<th class='".$filters[$i]."'>".ucfirst($find[1])."</th>";	
-			}
-			else
-			echo "<th class='".$filters[$i]."'>".ucfirst($column)."</th>";
-			
-			$i++;
-		}
-		echo "<th class='filter-false'>Acciones</th>";
-		echo "</tr>\n";
-		echo "</thead>\n";
-		//Table head end
-		
-		//Table body start
-		echo "<tbody>\n";
-		foreach($datas as $data)
-		{
-                        $this->print_row($data,$class);
-		}
-		echo "</tbody>\n";
-		//Table body end
-		
-		//Table footer 
-                echo $this->footer();
-		
-		echo "</table>\n";
-		//Table end
+                if(count($datas)>0){
+                    $object=$datas[0];
+                    $class=get_class($object);
+                    $count=count($datas);
+                    echo "Total: ".$count." resultados encontrados";
+
+                    //delete by using post method
+                    echo '<script>
+                             function del_data(url,data) {
+                                    var result = confirm("¿Está seguro de querer borrar el registro?");
+                                    if (result==true) {
+                                            $.post( url , { id : data }).
+                                                done(function( data ) {
+                                                    //alert( data );
+                                                    location.reload();
+                                                });
+                                    }	
+                             }
+                             </script>';
+
+                    //Table start
+                    echo "<table class='tablesorter-bootstrap'>";
+                    //Table head start
+                    echo "<thead>";
+                    echo "<tr>";
+                    $filters=$this->filters;
+                    $i=0;
+                    foreach($this->columns as $column)
+                    {
+                            //checking whether the column name is customized
+                            if(is_array($column))
+                            {
+                                    $column=$column['header'];	
+                            }
+
+                            $find = explode(".", $column);
+                            if(count($find)>1) {
+                            echo "<th class='".$filters[$i]."'>".ucfirst($find[1])."</th>";	
+                            }
+                            else
+                            echo "<th class='".$filters[$i]."'>".ucfirst($column)."</th>";
+
+                            $i++;
+                    }
+                    echo "<th class='filter-false'>Acciones</th>";
+                    echo "</tr>\n";
+                    echo "</thead>\n";
+                    //Table head end
+
+                    //Table body start
+                    echo "<tbody>\n";
+                    foreach($datas as $data)
+                    {
+                            $this->print_row($data,$class);
+                    }
+                    echo "</tbody>\n";
+                    //Table body end
+
+                    //Table footer 
+                    echo $this->footer();
+
+                    echo "</table>\n";
+                    //Table end
+                    
+                }
+                else
+                {
+                    echo '<div style="text-align:center;" >No se han encontrado objetos</div>';
+                }
 	}
 	
 	//Runs after the widget is intialized

@@ -310,7 +310,7 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `tipo_persona`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;f
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipo_persona` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

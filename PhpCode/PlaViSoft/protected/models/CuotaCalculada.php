@@ -26,6 +26,11 @@ class CuotaCalculada extends CuotaSaldo{
         public function getValorAsignadoStr(){
             return '$ '.Yii::app() -> format -> number($this->valorAsignado);
         }
+        
+        public function getDescription(){
+            return $this->nro_cuota." - ".$this->cuotaStr." (".$this->saldoStr.")";
+        }
+          
     
     
 }

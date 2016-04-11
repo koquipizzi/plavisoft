@@ -119,7 +119,7 @@ return array(
          */
         'db' => array(
             //	'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-            'connectionString' => 'mysql:host=localhost;dbname=plavisoft',
+            'connectionString' => 'mysql:host=localhost;dbname=qwaveec1_plavisoft',
             'emulatePrepare' => true,
             'username' => 'root',
             'password' => 'mysqlpass',

@@ -11,7 +11,7 @@ class Formatter extends CFormatter {
      * new: override default value: 2 decimals, a comma (,) before the decimals 
      * and no separator between groups of thousands
      */
-    public $numberFormat = array('decimals' => 2, 'decimalSeparator' => ',', 'thousandSeparator' => '');
+    public $numberFormat = array('decimals' => 2, 'decimalSeparator' => ',', 'thousandSeparator' => '' );
 
     /**
      * Formats the value as a number using PHP number_format() function.
@@ -27,7 +27,7 @@ class Formatter extends CFormatter {
             return '';        // new
         return number_format($value, $this->numberFormat['decimals'], $this->numberFormat['decimalSeparator'], $this->numberFormat['thousandSeparator']);
     }
-
+    
     /*
      * new function unformatNumber():
      * turns the given formatted number (string) into a float

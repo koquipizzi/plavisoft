@@ -29,7 +29,7 @@ class CuotaController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','valorChange'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -148,7 +148,8 @@ class CuotaController extends Controller
             }
             
             $criteria = new CDbCriteria;
-            $criteria->addSearchCondition('suscripcion_id', $suscripcion->id);
+            $criteria->compare('suscripcion_id', $suscripcion->id);
+            $criteria->order = 'nro_cuota';
             $records=CuotaSaldo::model()->findAll($criteria);
             
 	    //$records=CuotaSaldo::model()->getCuotaBySuscripcion($suscripcion->id);
@@ -186,5 +187,39 @@ class CuotaController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        
+        public function actionValorChange(){
+            if(array_key_exists('id', $_POST)&&array_key_exists('valor', $_POST)){
+                
+                $id = trim($_POST['id']);
+                $valor = trim($_POST['valor']);
+                
+                $cuota = $this->loadModel($id);
+                
+                    $cuota->valor = $valor;
+                    if($cuota->save()){
+                        $cuotaCalculada = CuotaCalculada::model()->findByPk($id);
+                        echo json_encode(
+                                array(
+                                    'error'=>false,
+                                    'valor'=>$valor,
+                                    'id'=>$id,
+                                    'msj'=> $cuotaCalculada->getDescription()
+                                )
+                        );
+                        Yii::app()->end();                        
+                    }
+            
+            }
+            
+            echo json_encode(
+                    array(
+                        'error'=>true,
+                        'msj'=>'Error al encontrar Cuota'
+                    )
+            );
+            Yii::app()->end();                        
+        }
 
 }

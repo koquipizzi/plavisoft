@@ -100,6 +100,7 @@ $this->menu=array(
     function imputacionManualComboChange(){
         var valor = jQuery('#imputacionManual_cuota_id').find(':selected').data('valor');
         jQuery('#imputacionManual_valor').val(valor);
+        hideModificarValorCuotaVisible();
     }
     
     function tipoCalculoChange(){
@@ -242,6 +243,56 @@ $this->menu=array(
         }
         return true;
     }    
+    
+    
+    function showModificarValorCuotaVisible(){
+        $('#modificarValorCuotaForm').show(
+            0,
+            function(){
+                var valor = jQuery('#imputacionManual_cuota_id').find(':selected').data('valor');
+                var id = $('#imputacionManual_cuota_id').val();
+                jQuery('#nuevoValorCuota_valor').val(valor);
+                jQuery('#nuevoValorCuota_id').val(id);
+            }
+        );
+    }
+    function hideModificarValorCuotaVisible(){
+        $('#modificarValorCuotaForm').hide(
+            0,
+            function(){
+                jQuery('#nuevoValorCuota_valor').val('');
+                jQuery('#nuevoValorCuota_id').val(0);
+            }
+        );
+    }
+    
+    function modificarValorCuotaSubmit(){
+        var valor = jQuery('#nuevoValorCuota_valor').val();
+        var id = jQuery('#nuevoValorCuota_id').val();
+        if(valor == ''){
+            return;
+        }
+        jQuery.ajax({
+            'type':'POST',
+            'async':false,
+            'success':function( data ) {
+                data = jQuery.parseJSON( data );
+                if(data.error==false){
+                    var o = jQuery('#imputacionManual_cuota_id option[value="'+data.id+'"]');
+                    jQuery(o).data('valor', data.valor);
+                    jQuery(o).attr('data-valor', data.valor);
+                    jQuery(o).html(data.msj);
+                    imputacionManualComboChange();
+                }
+            },
+            'data':{
+                'id':id,
+                'valor':valor
+            },
+            'url':'<?php echo Yii::app()->createAbsoluteUrl('Cuota/valorChange')?>',
+            'cache':false
+        });
+    }    
 
 </script>    
 
@@ -320,6 +371,7 @@ $this->menu=array(
                 echo $form->hiddenField($imputacion, 'cuota_id', array('hidden'=>true,'value'=>$cuota->id));                 
                 echo $form->hiddenField($pago, 'ImporteLetras', array('hidden'=>true,'value'=>$cuota->valorLetras));
                 echo $form->hiddenField($imputacion, 'valor', array('hidden'=>true,'value'=>$cuota->valor));  
+                echo '<input type="hidden" id="PagoCalculoCuota[idTipo]" name="PagoCalculoCuota[idTipo]" value=0>';
                 
                 echo "Cuota: ".$cuota->cuotaStr."<br>";
                 echo "Valor: ".$cuota->valorStr;
@@ -396,10 +448,59 @@ $this->menu=array(
                                                             'onChange'=>'js:imputacionManualComboChange()',
                                                         )
                                                 );
-                                            ?>                            
+                                                $this->widget('bootstrap.widgets.TbButton', array(
+                                                    'buttonType'=>'link',
+                                                    'type'=>'info',
+                                                    'label'=>'Modificar valor de cuota',
+                                                    'url'=>'#',
+                                                    'htmlOptions' => array(
+                                                        'onClick'=>'js:showModificarValorCuotaVisible();',
+                                                    ),
+                                                ));                                                  
+                                            ?>             
                                     </div>
                             </div>
-
+                            
+                            <div style="display: none;" id="modificarValorCuotaForm">
+                                <div class="control-group">
+                                        <?php 
+                                            $cuotaNuevoValor = new Cuota();
+                                            echo $form->textFieldRow(
+                                                $cuotaNuevoValor,
+                                                'valor',
+                                                array(
+                                                    'class'=>'span5','maxlength'=>10,'id'=>'nuevoValorCuota_valor'
+                                                )
+                                            );
+                                            echo $form->hiddenField(
+                                                $cuotaNuevoValor, 
+                                                'id', 
+                                                array('hidden'=>true, 'id'=>'nuevoValorCuota_id')
+                                            );
+                                            
+                                            $this->widget('bootstrap.widgets.TbButton', array(
+                                                'buttonType'=>'link',
+                                                'type'=>'info',
+                                                'label'=>'Guardar',
+                                                'url'=>'#',
+                                                'htmlOptions' => array(
+                                                    'onClick'=>'js:modificarValorCuotaSubmit();',
+                                                ),
+                                            ));                                                                                            
+                                            $this->widget('bootstrap.widgets.TbButton', array(
+                                                'buttonType'=>'link',
+                                                'type'=>'cancel',
+                                                'label'=>'Cancelar',
+                                                'url'=>'#',
+                                                'htmlOptions' => array(
+                                                    'onClick'=>'js:hideModificarValorCuotaVisible();',
+                                                ),
+                                            ));                                                                                            
+                                        ?>
+                                </div>       
+                                
+                            </div>
+                            
                             <div class="control-group">
                                     <?php 
                                         echo $form->textFieldRow(
