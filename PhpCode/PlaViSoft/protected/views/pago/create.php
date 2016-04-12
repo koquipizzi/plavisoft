@@ -157,6 +157,7 @@ $this->menu=array(
                     jQuery("#imputacionManual_valor").notify(data.msj,{ position:"right" });
                 jQuery('#imputacionManual_cuota_id').empty().append(data.comboBox);
                 jQuery('#imputaciones_ids').val(data.imputaciones_ids);
+                imputacionManualComboChange();
             },
             'data':{
                 'valorPago':valor,
