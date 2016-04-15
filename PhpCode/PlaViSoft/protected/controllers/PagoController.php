@@ -61,7 +61,7 @@ class PagoController extends Controller
                 $cheques = NULL;
                 if(isset($formaPagoCheque)){
                     $criteria = new CDbCriteria;
-                    $criteria->addSearchCondition('pago_id', $formaPagoCheque->pago_id);
+                    $criteria->compare('pago_id', $formaPagoCheque->pago_id);
                     $cheques = Cheque::model()->findAll($criteria);
                 }
                 
@@ -614,12 +614,50 @@ class PagoController extends Controller
 	 * @param integer $id the ID of the model to be deleted
 	 */
 	public function actionDelete($id)
-	{
-		$this->loadModel($id)->delete();
+	{   
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            $transaction = Yii::app()->db->beginTransaction();
+            try{
+                    $pago = $this->loadModel($id);
+                    
+                    $imputaciones = $pago->imputacion;
+                    foreach($imputaciones as $imputacion){
+                        $cuota = $imputacion->cuota;
+                        if($cuota){
+                            if(count($cuota->imputacions)>1)
+                                $cuota->saldada = Cuota::PARCIAL_SALDADA;
+                            else
+                                $cuota->saldada = Cuota::NO_SALDADA;
+                            if(!$cuota->save()){
+                                throw new Exception('No se puede guardar Cuota');
+                            }
+                        }
+                        $imputacion->delete();
+                    }
+                    $formaPagoPagos = $pago->formaPagoPago;
+                    if($formaPagoPagos){
+                        foreach ($formaPagoPagos as $formaPagoPago) {
+                            $formaPagoPago->delete();
+                        }
+                    }
+                    $pago->delete();
+
+                    $transaction->commit();
+            }
+            catch(CDbException $e){
+                    $transaction->rollBack();
+                    throw new CHttpException(null,$e->errorInfo[2]);
+            }
+            catch(Exception $e){
+                    $transaction->rollBack();
+                    throw new CHttpException(null,"catch transaction, ".$e->getMessage());
+            }               
+            
+            // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+            if(!isset($_GET['ajax']))
+                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
@@ -649,7 +687,7 @@ class PagoController extends Controller
                 elseif(array_key_exists('persona_id', $_GET) && isset($_GET['persona_id'])){
                     $persona = $_GET['persona_id'];
                     $criteria = new CDbCriteria;
-                    $criteria->addSearchCondition('persona_id', $_GET['persona_id']);
+                    $criteria->compare('persona_id', $_GET['persona_id']);
                     $criteria->order = 'FechaPago desc';
                     $records=Pago::model()->findAll($criteria); 
                     $vista = 'adminPersona';
@@ -667,7 +705,7 @@ class PagoController extends Controller
                             join ".$imputacionTable." i on i.pago_id = t.id 
                             join ".$cuotaTable." c on c.id = i.cuota_id 
                         ";
-                        $criteria->addSearchCondition('c.suscripcion_id', $_GET['suscripcion_id']);
+                        $criteria->compare('c.suscripcion_id', $_GET['suscripcion_id']);
                     
                     $records=Pago::model()->findAll($criteria);            
                 }
@@ -777,7 +815,7 @@ class PagoController extends Controller
                 
                 $criteria = new CDbCriteria;
                 foreach ($cheques_id as $id){
-                    $criteria->addSearchCondition('id', $id, true, 'OR');
+                    $criteria->compare('id', $id, false, 'OR');
                 }
                 $cheques_runtime = ChequeRuntime::model()->findAll($criteria);            
                 

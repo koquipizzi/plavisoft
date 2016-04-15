@@ -49,6 +49,7 @@ class FormaPagoPago extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+                    'pago' => array(self::BELONGS_TO, 'Pago', 'pago_id'),                    
 		);
 	}
 
@@ -123,7 +124,9 @@ class FormaPagoPago extends CActiveRecord
 
 abstract class FormaPagoEspecifico extends FormaPagoPago
 {
-    abstract public static function getIDType();
+    public static function getIDType(){
+        return self::ID_CONTADO;
+    }
     
     public function __construct($scenario='insert') {
         parent::__construct($scenario);
