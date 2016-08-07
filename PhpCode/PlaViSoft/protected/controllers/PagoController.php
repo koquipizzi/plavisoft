@@ -32,7 +32,7 @@ class PagoController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','admin','delete','print'),
+				'actions'=>array('create','update','admin','delete','print', 'printLogo'),
 				'users'=>array('@'),
 			),
 //			array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -1043,10 +1043,17 @@ ini_set("display_errors", 1);
 		$model = $this->loadModel($id);
 		
 	    $html2pdf = Yii::app()->ePdf->HTML2PDF('P', 'A4', 'es');
-		//$stylesheet = file_get_contents('css/print.css'); /// here call you external css file 
-	//	$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/print.css');
-    
 	    $html2pdf->WriteHTML($this->renderPartial('print', array('model'=>$model, 'persona'=>$model->persona), true));
-	    $html2pdf->Output($model->persona->Apellido."-".'-Formuario:'.$model->nro_formulario.'.pdf');
+	    $html2pdf->Output($model->persona->Apellido."-".'Formuario:'.$model->nro_formulario.'.pdf');
 	}  
+        
+        public function actionPrintLogo($id) 
+	{ 
+		$model = $this->loadModel($id);
+		
+	    $html2pdf = Yii::app()->ePdf->HTML2PDF('P', 'A4', 'es');
+	    $html2pdf->WriteHTML($this->renderPartial('print_logo', array('model'=>$model, 'persona'=>$model->persona), true));
+	    $html2pdf->Output($model->persona->Apellido."-".'Formuario:'.$model->nro_formulario.'.pdf');
+	}
 }
+    

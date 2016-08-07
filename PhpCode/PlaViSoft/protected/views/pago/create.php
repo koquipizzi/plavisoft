@@ -313,7 +313,7 @@ $this->menu=array(
         -webkit-border-radius: 10px;
         border-radius: 10px;
         border: 1px solid;        
-        background-color:#00DF77;
+        background-color:RGBA(139, 0, 223, 0.23);
         padding:10px;
         margin-bottom: 5px;
     }
